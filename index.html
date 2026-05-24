@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prof. | Matemáticas para Ingeniería</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c9a84c;
+    --gold-soft: #e8c97a;
+    --teal: #4ecdc4;
+    --rose: #e07a8f;
+    --lavender: #9b8fe8;
+    --text: #e8e6df;
+    --muted: #6b6a63;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Canvas de fórmulas flotantes ── */
+  #canvas-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Grain overlay ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(10,12,16,0.7);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+  }
+
+  .nav-logo span {
+    font-style: italic;
+    color: var(--text);
+    opacity: 0.5;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-soft); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 7rem 3rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.25s ease forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s ease forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    color: #0a0c10;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.55s ease forwards;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+  }
+
+  /* ── DIVISOR ── */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 4rem 3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── GRID DE MATERIAS ── */
+  .materias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 3rem 6rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .materia-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 2.25rem 2rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .materia-card:nth-child(1) { animation-delay: 0.1s; }
+  .materia-card:nth-child(2) { animation-delay: 0.2s; }
+  .materia-card:nth-child(3) { animation-delay: 0.3s; }
+  .materia-card:nth-child(4) { animation-delay: 0.4s; }
+
+  .materia-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 30%, var(--card-glow), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .materia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border-color: var(--card-accent);
+  }
+
+  .materia-card:hover::before { opacity: 0.12; }
+
+  /* Colores por materia */
+  .card-calculo-dif { --card-accent: var(--gold); --card-glow: var(--gold); }
+  .card-calculo-int { --card-accent: var(--teal); --card-glow: var(--teal); }
+  .card-algebra { --card-accent: var(--lavender);--card-glow: var(--lavender); }
+  .card-ecuaciones { --card-accent: var(--rose); --card-glow: var(--rose); }
+
+  .card-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--card-accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    display: block;
+    filter: grayscale(20%);
+  }
+
+  .card-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .card-subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 1.75rem;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--card-accent);
+    color: var(--card-accent);
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-accent);
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .materia-card:hover .card-arrow {
+    background: var(--card-accent);
+    color: var(--bg);
+    transform: rotate(45deg);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+  }
+
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── ANIMACIONES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<div class="wrapper">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      ∂<em></em> Matemáticas <span>· Ing. Eléctrica</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#materias">Materias</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Universidad · Ingeniería Eléctrica</p>
+    <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
+    <p class="hero-desc">
+      Clases universitarias de alto nivel. Fundamentos rigurosos, intuición geométrica
+      y aplicaciones reales para ingeniería eléctrica.
+    </p>
+    <a href="#materias" class="hero-cta">
+      Ver materias &nbsp;→
+    </a>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">4</span>
+      <span class="stat-label">Materias</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">∞</span>
+      <span class="stat-label">Ejercicios</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">Ing.</span>
+      <span class="stat-label">Eléctrica</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">UNI</span>
+      <span class="stat-label">Nivel universitario</span>
+    </div>
+  </div>
+
+  <!-- MATERIAS -->
+  <p class="section-label" id="materias">Selecciona una materia</p>
+
+  <div class="materias-grid">
+
+    <!-- Cálculo Diferencial -->
+    <a href="#calculo-dif" class="materia-card card-calculo-dif">
+      <div class="card-number">01 / MATERIA</div>
+      <span class="card-icon">∂</span>
+      <h2 class="card-title">Cálculo<br>Diferencial</h2>
+      <p class="card-subtitle">Límites, derivadas y sus aplicaciones.<br>La base del análisis moderno.</p>
+      <div>
+        <span class="card-tag">Límites</span>
+        <span class="card-tag">Derivadas</span>
+        <span class="card-tag">Optimización</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Cálculo Integral -->
+    <a href="#calculo-int" class="materia-card card-calculo-int">
+      <div class="card-number">02 / MATERIA</div>
+      <span class="card-icon">∫</span>
+      <h2 class="card-title">Cálculo<br>Integral</h2>
+      <p class="card-subtitle">Integrales, áreas, volúmenes y series.<br>Del teorema fundamental al análisis.</p>
+      <div>
+        <span class="card-tag">Antiderivadas</span>
+        <span class="card-tag">Series</span>
+        <span class="card-tag">Transformadas</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Álgebra Lineal -->
+    <a href="#algebra" class="materia-card card-algebra">
+      <div class="card-number">03 / MATERIA</div>
+      <span class="card-icon">⊗</span>
+      <h2 class="card-title">Álgebra<br>Lineal</h2>
+      <p class="card-subtitle">Vectores, matrices y transformaciones.<br>Esencial para circuitos y señales.</p>
+      <div>
+        <span class="card-tag">Matrices</span>
+        <span class="card-tag">Eigenvalores</span>
+        <span class="card-tag">Espacios</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Ecuaciones Diferenciales -->
+    <a href="#ecuaciones" class="materia-card card-ecuaciones">
+      <div class="card-number">04 / MATERIA</div>
+      <span class="card-icon">≋</span>
+      <h2 class="card-title">Ecuaciones<br>Diferenciales</h2>
+      <p class="card-subtitle">Modelado de sistemas dinámicos.<br>Del circuito RLC a la transferencia de calor.</p>
+      <div>
+        <span class="card-tag">EDO</span>
+        <span class="card-tag">Laplace</span>
+        <span class="card-tag">Sistemas</span>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <p>Matemáticas para Ingeniería Eléctrica &nbsp;·&nbsp; Página en construcción</p>
+    <p style="margin-top:0.5rem; font-size:0.72rem; opacity:0.5;">
+      Más funcionalidades próximamente — sube el PDF con el contenido de las materias para enriquecer esta página.
+    </p>
+  </footer>
+
+</div>
+
+<!-- Canvas con fórmulas flotantes -->
+<script>
+(function() {
+  const canvas = document.getElementById('canvas-bg');
+  const ctx = canvas.getContext('2d');
+
+  const symbols = [
+    '∂f/∂x', '∫₀^∞', '∑ₙ', 'lim→0', 'det(A)', 'λ₁,₂',
+    'e^{iπ}', '∇²φ', 'Ax=b', 'd²y/dx²', '∮ E·dl', 'L{f}',
+    'y″+py′', 'R·C', 'ω₀', 'Z=jωL', '∂²u/∂t²', 'rank(A)',
+    'ker(T)', 'F(s)', '⟨u,v⟩', 'span{v₁}', 'curl F', 'div B=0'
+  ];
+
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function Particle() {
+    this.reset = function() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.18;
+      this.vy = (Math.random() - 0.5) * 0.12;
+      this.alpha = Math.random() * 0.07 + 0.02;
+      this.size = Math.random() * 5 + 10;
+      this.sym = symbols[Math.floor(Math.random() * symbols.length)];
+    };
+    this.reset();
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 38 }, () => new Particle());
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = `300 14px 'JetBrains Mono', monospace`;
+
+    for (const p of particles) {
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = '#c9a84c';
+      ctx.fillText(p.sym, p.x, p.y);
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < -80 || p.x > W + 80 || p.y < -30 || p.y > H + 30) {
+        p.x = Math.random() * W;
+        p.y = Math.random() < 0.5 ? -20 : H + 20;
+      }
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  init();
+  draw();
+})();
+</script>
+
+</body>
+</html>
+
+
