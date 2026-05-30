@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prof. | Matemáticas para Ingeniería</title>
+<title>PNFE | Matemáticas para Ingeniería Eléctrica</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* ── Canvas de fórmulas flotantes ── */
   #canvas-bg {
     position: fixed;
     inset: 0;
@@ -39,7 +38,6 @@
     z-index: 0;
   }
 
-  /* ── Grain overlay ── */
   body::before {
     content: '';
     position: fixed;
@@ -55,7 +53,6 @@
     z-index: 2;
   }
 
-  /* ── NAV ── */
   nav {
     display: flex;
     align-items: center;
@@ -74,7 +71,10 @@
     font-size: 1.25rem;
     letter-spacing: 0.02em;
     color: var(--gold);
+    cursor: pointer;
+    transition: opacity 0.2s;
   }
+  .nav-logo:hover { opacity: 0.8; }
 
   .nav-logo span {
     font-style: italic;
@@ -88,6 +88,7 @@
     display: flex;
     gap: 2rem;
     list-style: none;
+    align-items: center;
   }
 
   .nav-links a {
@@ -97,16 +98,44 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     transition: color 0.2s;
+    cursor: pointer;
   }
-
   .nav-links a:hover { color: var(--gold-soft); }
 
-  /* ── HERO ── */
+  .back-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .back-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
   .hero {
-    padding: 7rem 3rem 5rem;
+    padding: 5rem 3rem 5rem;
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
+  }
+
+  /* Foto de perfil - Opción A */
+  .hero-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s ease forwards;
   }
 
   .hero-eyebrow {
@@ -160,6 +189,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
     opacity: 0;
     animation: fadeUp 0.8s 0.55s ease forwards;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
   }
 
   .hero-cta:hover {
@@ -167,7 +199,6 @@
     box-shadow: 0 8px 32px rgba(201,168,76,0.35);
   }
 
-  /* ── DIVISOR ── */
   .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
@@ -190,7 +221,6 @@
     background: var(--border);
   }
 
-  /* ── GRID DE MATERIAS ── */
   .materias-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -237,7 +267,6 @@
 
   .materia-card:hover::before { opacity: 0.12; }
 
-  /* Colores por materia */
   .card-calculo-dif { --card-accent: var(--gold); --card-glow: var(--gold); }
   .card-calculo-int { --card-accent: var(--teal); --card-glow: var(--teal); }
   .card-algebra { --card-accent: var(--lavender);--card-glow: var(--lavender); }
@@ -312,7 +341,75 @@
     transform: rotate(45deg);
   }
 
-  /* ── STATS BAR ── */
+  .materia-view {
+    display: none;
+    padding: 2rem 3rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeUp 0.4s ease;
+  }
+
+  .materia-view.active {
+    display: block;
+  }
+
+  .materia-header {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .materia-header h2 {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .materia-header p {
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .topic-list {
+    list-style: none;
+    margin: 2rem 0;
+  }
+  .topic-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .topic-list li strong {
+    color: var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+  .topic-list li span {
+    color: var(--text);
+  }
+
+  .resources {
+    background: rgba(78,205,196,0.05);
+    border-left: 3px solid var(--teal);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+  }
+  .resources h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--gold-soft);
+  }
+  .resources p {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
   .stats-bar {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -323,6 +420,7 @@
     max-width: 1100px;
     margin: 0 auto;
   }
+  .hidden-section { display: none; }
 
   .stat-item {
     flex: 1;
@@ -349,32 +447,33 @@
     letter-spacing: 0.1em;
   }
 
-  /* ── FOOTER ── */
   footer {
     text-align: center;
     padding: 3rem;
     color: var(--muted);
     font-size: 0.8rem;
     border-top: 1px solid var(--border);
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
 
   footer a { color: var(--gold); text-decoration: none; }
 
-  /* ── ANIMACIONES ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 4rem 1.5rem 3rem; }
+    .nav-links { gap: 1rem; }
+    .hero { padding: 3rem 1.5rem 3rem; }
+    .hero-photo { width: 100px; height: 100px; }
     .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
     .stats-bar { flex-direction: column; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .materia-view { padding: 1.5rem; }
+    .materia-header h2 { font-size: 2rem; }
+    .topic-list li strong { min-width: 90px; }
   }
 </style>
 </head>
@@ -384,125 +483,277 @@
 
 <div class="wrapper">
 
-  <!-- NAV -->
   <nav>
-    <div class="nav-logo">
-      ∂<em></em> Matemáticas <span>· Ing. Eléctrica</span>
+    <div class="nav-logo" id="logo-home">
+      ∂<em></em> PNF Electricidad <span>· Matemáticas</span>
     </div>
     <ul class="nav-links">
-      <li><a href="#materias">Materias</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><a id="nav-materias">Materias</a></li>
+      <li><a id="nav-contacto">Contacto</a></li>
+      <li><button class="back-btn" id="global-back-btn" style="display: none;">← Regresar</button></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-eyebrow">Universidad · Ingeniería Eléctrica</p>
-    <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
-    <p class="hero-desc">
-      Clases universitarias de alto nivel. Fundamentos rigurosos, intuición geométrica
-      y aplicaciones reales para ingeniería eléctrica.
-    </p>
-    <a href="#materias" class="hero-cta">
-      Ver materias &nbsp;→
-    </a>
-  </section>
+  <div id="home-section">
+    <section class="hero">
+      <!-- Foto de perfil - Opción A -->
+      <!-- 🔽 CAMBIA LA RUTA DE LA IMAGEN POR LA TUYA 🔽 -->
+      <!-- <img src="ruta-de-tu-foto.jpg" alt="Profesor" class="hero-photo"> -->
+      <!-- 🔼 CAMBIA LA RUTA DE LA IMAGEN POR LA TUYA 🔼 -->
+      <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
+      <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
+      <p class="hero-desc">
+        Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales de Matemática I, Matemática II,
+        Álgebra Lineal y Ecuaciones Diferenciales para Ingeniería Eléctrica.
+      </p>
+      <button class="hero-cta" id="hero-cta-btn">
+        Ver materias &nbsp;→
+      </button>
+    </section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item">
-      <span class="stat-number">4</span>
-      <span class="stat-label">Materias</span>
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat-item">
+        <span class="stat-number">4</span>
+        <span class="stat-label">Materias Base</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">PNFE</span>
+        <span class="stat-label">Documento Rector</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">Ing.</span>
+        <span class="stat-label">Eléctrica UNI</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">5</span>
+        <span class="stat-label">Trayectos</span>
+      </div>
     </div>
-    <div class="stat-item">
-      <span class="stat-number">∞</span>
-      <span class="stat-label">Ejercicios</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">Ing.</span>
-      <span class="stat-label">Eléctrica</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-number">UNI</span>
-      <span class="stat-label">Nivel universitario</span>
+
+    <p class="section-label" id="materias-label">Selecciona una materia (Contenido oficial PNFE)</p>
+    <div class="materias-grid" id="materias-grid">
+      <div class="materia-card card-calculo-dif" data-materia="calculo-dif">
+        <div class="card-number">01 / UNIDAD CURRICULAR</div>
+        <span class="card-icon">∂</span>
+        <h2 class="card-title">Matemática I<br>Cálculo Diferencial</h2>
+        <p class="card-subtitle">Límites, derivadas y aplicaciones. Análisis completo de funciones.</p>
+        <div>
+          <span class="card-tag">Límites</span>
+          <span class="card-tag">Derivadas</span>
+          <span class="card-tag">Optimización</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="materia-card card-calculo-int" data-materia="calculo-int">
+        <div class="card-number">02 / UNIDAD CURRICULAR</div>
+        <span class="card-icon">∫</span>
+        <h2 class="card-title">Matemática I<br>Cálculo Integral</h2>
+        <p class="card-subtitle">Integrales, series y aplicaciones geométricas y físicas.</p>
+        <div>
+          <span class="card-tag">Integrales</span>
+          <span class="card-tag">Series</span>
+          <span class="card-tag">Teorema Fundamental</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="materia-card card-algebra" data-materia="algebra">
+        <div class="card-number">03 / UNIDAD CURRICULAR</div>
+        <span class="card-icon">⊗</span>
+        <h2 class="card-title">Estadística, Álgebra Lineal<br>y Geometría Analítica</h2>
+        <p class="card-subtitle">Matrices, espacios vectoriales, transformaciones y probabilidad.</p>
+        <div>
+          <span class="card-tag">Matrices</span>
+          <span class="card-tag">Eigenvalores</span>
+          <span class="card-tag">Vectores</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+
+      <div class="materia-card card-ecuaciones" data-materia="ecuaciones">
+        <div class="card-number">04 / UNIDAD CURRICULAR</div>
+        <span class="card-icon">≋</span>
+        <h2 class="card-title">Matemáticas II<br>Ecuaciones Diferenciales</h2>
+        <p class="card-subtitle">EDO, Transformada de Laplace y Series de Fourier.</p>
+        <div>
+          <span class="card-tag">EDO</span>
+          <span class="card-tag">Laplace</span>
+          <span class="card-tag">Fourier</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
     </div>
   </div>
 
-  <!-- MATERIAS -->
-  <p class="section-label" id="materias">Selecciona una materia</p>
-
-  <div class="materias-grid">
-
-    <!-- Cálculo Diferencial -->
-    <a href="#calculo-dif" class="materia-card card-calculo-dif">
-      <div class="card-number">01 / MATERIA</div>
-      <span class="card-icon">∂</span>
-      <h2 class="card-title">Cálculo<br>Diferencial</h2>
-      <p class="card-subtitle">Límites, derivadas y sus aplicaciones.<br>La base del análisis moderno.</p>
-      <div>
-        <span class="card-tag">Límites</span>
-        <span class="card-tag">Derivadas</span>
-        <span class="card-tag">Optimización</span>
+  <div id="materia-views-container">
+    <!-- VISTA CÁLCULO DIFERENCIAL -->
+    <div id="calculo-dif-view" class="materia-view">
+      <div class="materia-header">
+        <h2>Matemática I: Cálculo Diferencial</h2>
+        <p>Código: 01MAT208 | Trayecto I | 8 UC</p>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
-
-    <!-- Cálculo Integral -->
-    <a href="#calculo-int" class="materia-card card-calculo-int">
-      <div class="card-number">02 / MATERIA</div>
-      <span class="card-icon">∫</span>
-      <h2 class="card-title">Cálculo<br>Integral</h2>
-      <p class="card-subtitle">Integrales, áreas, volúmenes y series.<br>Del teorema fundamental al análisis.</p>
-      <div>
-        <span class="card-tag">Antiderivadas</span>
-        <span class="card-tag">Series</span>
-        <span class="card-tag">Transformadas</span>
+      <ul class="topic-list">
+        <li><strong>Límites y continuidad</strong><span>Límites laterales, propiedades, asíntotas verticales/horizontales/oblicuas. Continuidad y discontinuidades.</span></li>
+        <li><strong>Definición de derivada</strong><span>Interpretación geométrica, fórmulas de derivación, derivadas sucesivas, derivada implícita.</span></li>
+        <li><strong>Aplicaciones de la derivada</strong><span>Máximos y mínimos, criterio de la primera y segunda derivada, concavidad, convexidad, puntos de inflexión.</span></li>
+        <li><strong>Teorema del valor medio</strong><span>Teorema de Lagrange, regla de L'Hôpital para límites indeterminados.</span></li>
+        <li><strong>Razón de cambio y diferenciales</strong><span>Problemas de rapidez de variación, diferenciales y aproximaciones lineales.</span></li>
+        <li><strong>Estudio gráfico completo</strong><span>Análisis de dominio, simetrías, cortes, asíntotas, crecimiento, extremos y curvatura.</span></li>
+      </ul>
+      <div class="resources">
+        <h4>📘 Bibliografía oficial PNFE</h4>
+        <p>Purcell, Varberg, Rigdon. "Cálculo". Editorial Pearson, 9na Edición, 2007.<br>
+        Stewart, James. "Cálculo". Editorial Cengage, 6ta Edición, 2008.<br>
+        Leithold, Louis. "El Cálculo". Editorial Oxford, 7ma Edición, 2010.</p>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
+    </div>
 
-    <!-- Álgebra Lineal -->
-    <a href="#algebra" class="materia-card card-algebra">
-      <div class="card-number">03 / MATERIA</div>
-      <span class="card-icon">⊗</span>
-      <h2 class="card-title">Álgebra<br>Lineal</h2>
-      <p class="card-subtitle">Vectores, matrices y transformaciones.<br>Esencial para circuitos y señales.</p>
-      <div>
-        <span class="card-tag">Matrices</span>
-        <span class="card-tag">Eigenvalores</span>
-        <span class="card-tag">Espacios</span>
+    <!-- VISTA CÁLCULO INTEGRAL -->
+    <div id="calculo-int-view" class="materia-view">
+      <div class="materia-header">
+        <h2>Matemática I: Cálculo Integral</h2>
+        <p>Código: 01MAT208 | Trayecto I | 8 UC</p>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
-
-    <!-- Ecuaciones Diferenciales -->
-    <a href="#ecuaciones" class="materia-card card-ecuaciones">
-      <div class="card-number">04 / MATERIA</div>
-      <span class="card-icon">≋</span>
-      <h2 class="card-title">Ecuaciones<br>Diferenciales</h2>
-      <p class="card-subtitle">Modelado de sistemas dinámicos.<br>Del circuito RLC a la transferencia de calor.</p>
-      <div>
-        <span class="card-tag">EDO</span>
-        <span class="card-tag">Laplace</span>
-        <span class="card-tag">Sistemas</span>
+      <ul class="topic-list">
+        <li><strong>Integral indefinida</strong><span>Definición, propiedades, integrales inmediatas, constante de integración.</span></li>
+        <li><strong>Métodos de integración</strong><span>Sustitución, integración por partes, sustitución trigonométrica, fracciones parciales, integrales de funciones racionales y trigonométricas.</span></li>
+        <li><strong>Integral definida</strong><span>Sumas de Riemann, teorema fundamental del cálculo, propiedades, teorema del valor medio para integrales.</span></li>
+        <li><strong>Integrales impropias</strong><span>Límites infinitos de integración, integrandos no acotados, convergencia.</span></li>
+        <li><strong>Aplicaciones</strong><span>Cálculo de áreas, volúmenes de revolución (discos, arandelas, cascarones), longitud de arco, trabajo mecánico, fuerza sobre superficies planas sumergidas.</span></li>
+        <li><strong>Series infinitas</strong><span>Convergencia y divergencia, series geométricas, pruebas de comparación, integral, razón y raíz. Series alternas, convergencia absoluta y condicional.</span></li>
+        <li><strong>Series de potencia</strong><span>Intervalo de convergencia, series de Taylor y Maclaurin, derivación e integración de series.</span></li>
+      </ul>
+      <div class="resources">
+        <h4>📘 Bibliografía oficial PNFE</h4>
+        <p>Purcell, Varberg, Rigdon. "Cálculo". Editorial Pearson, 9na Edición, 2007.<br>
+        Stewart, James. "Cálculo". Editorial Cengage, 6ta Edición, 2008.<br>
+        James Gllyn. "Matemáticas avanzadas para Ingeniería". Pearson, 2002.</p>
       </div>
-      <div class="card-arrow">→</div>
-    </a>
+    </div>
 
+    <!-- VISTA ÁLGEBRA LINEAL -->
+    <div id="algebra-view" class="materia-view">
+      <div class="materia-header">
+        <h2>Estadística, Álgebra Lineal y Geometría Analítica</h2>
+        <p>Código: 01EAG105 | Trayecto I | 5 UC</p>
+      </div>
+      <ul class="topic-list">
+        <li><strong>Matrices y determinantes</strong><span>Operaciones, tipos de matrices, matriz inversa, rango, método de Gauss-Jordán. Propiedades de los determinantes, menores y cofactores.</span></li>
+        <li><strong>Sistemas de ecuaciones lineales</strong><span>Representación matricial, eliminación de Gauss, regla de Cramer, sistemas homogéneos, consistentes e inconsistentes.</span></li>
+        <li><strong>Vectores en Rⁿ</strong><span>Operaciones, norma, vectores unitarios, producto escalar, producto cruz, aplicaciones geométricas.</span></li>
+        <li><strong>Espacios vectoriales</strong><span>Definición, subespacios, combinación lineal, dependencia e independencia lineal, bases y dimensión. Proceso de ortogonalización de Gram-Schmidt.</span></li>
+        <li><strong>Transformaciones lineales</strong><span>Definición, propiedades, representación matricial, núcleo e imagen.</span></li>
+        <li><strong>Valores y vectores propios</strong><span>Polinomio característico, diagonalización de matrices, aplicaciones en ingeniería eléctrica.</span></li>
+        <li><strong>Estadística y probabilidad</strong><span>Medidas de tendencia central y dispersión, teoría de probabilidad, teorema de Bayes, distribuciones discretas.</span></li>
+      </ul>
+      <div class="resources">
+        <h4>📘 Bibliografía oficial PNFE</h4>
+        <p>Grossman, Stanley I. "Álgebra Lineal". McGraw Hill, 5ta edición, 1996.<br>
+        Noble, Ben y Daniel, J.M. "Álgebra Lineal Aplicada". Prentice Hall, 3ra edición, 1998.<br>
+        Ayres, Frank. "Matrices (teoría y problemas)". McGraw Hill, 1991.</p>
+      </div>
+    </div>
+
+    <!-- VISTA ECUACIONES DIFERENCIALES -->
+    <div id="ecuaciones-view" class="materia-view">
+      <div class="materia-header">
+        <h2>Matemáticas II: Ecuaciones Diferenciales</h2>
+        <p>Código: 01MAT206 | Trayecto II | 6 UC</p>
+      </div>
+      <ul class="topic-list">
+        <li><strong>Ecuaciones diferenciales de primer orden</strong><span>Clasificación, variables separables, exactas, factores integrantes, lineales, Bernoulli, Riccati. Aplicaciones geométricas y físicas.</span></li>
+        <li><strong>Ecuaciones de orden superior</strong><span>Ecuaciones lineales homogéneas con coeficientes constantes, ecuación característica. Método de coeficientes indeterminados y variación de parámetros.</span></li>
+        <li><strong>Transformada de Laplace</strong><span>Definición, funciones de orden exponencial. Transformada de funciones elementales, propiedades. Función escalón de Heaviside, delta de Dirac. Teorema de traslación. Aplicación a PVI.</span></li>
+        <li><strong>Transformada inversa de Laplace</strong><span>Teorema de convolución, fracciones parciales, determinación de transformadas inversas.</span></li>
+        <li><strong>Series de Fourier</strong><span>Funciones periódicas, series trigonométricas de Fourier, coeficientes de Fourier, funciones pares e impares, series de senos y cosenos.</span></li>
+        <li><strong>Ecuaciones diferenciales parciales</strong><span>Introducción, método de separación de variables, aplicaciones a la ecuación de onda y calor.</span></li>
+      </ul>
+      <div class="resources">
+        <h4>📘 Bibliografía oficial PNFE</h4>
+        <p>Purcell, Varberg, Rigdon. "Cálculo". Pearson, 9na Edición, 2007.<br>
+        Stewart, James. "Cálculo". Cengage, 6ta Edición, 2008.<br>
+        Tomeo, Uña y San Martín. "Problemas Resueltos de Cálculo de una Variable". Thomson, 2005.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- FOOTER -->
   <footer id="contacto">
-    <p>Matemáticas para Ingeniería Eléctrica &nbsp;·&nbsp; Página en construcción</p>
+    <p>Programa Nacional de Formación en Electricidad · Matemáticas para Ingeniería Eléctrica</p>
     <p style="margin-top:0.5rem; font-size:0.72rem; opacity:0.5;">
-      Más funcionalidades próximamente — sube el PDF con el contenido de las materias para enriquecer esta página.
+      Contenido basado en el Documento Rector del PNFE (2014-2015) · MPPEU
     </p>
   </footer>
 
 </div>
 
-<!-- Canvas con fórmulas flotantes -->
 <script>
+// ----- Lógica de navegación SPA (home <-> materias)
+const homeSection = document.getElementById('home-section');
+const materiaViews = document.querySelectorAll('.materia-view');
+const materiasGrid = document.getElementById('materias-grid');
+const statsBar = document.getElementById('stats-bar');
+const materiasLabel = document.getElementById('materias-label');
+const backBtn = document.getElementById('global-back-btn');
+const logoHome = document.getElementById('logo-home');
+const navMaterias = document.getElementById('nav-materias');
+const navContacto = document.getElementById('nav-contacto');
+const heroCta = document.getElementById('hero-cta-btn');
+
+function showHome() {
+  homeSection.style.display = 'block';
+  materiaViews.forEach(view => view.classList.remove('active'));
+  backBtn.style.display = 'none';
+  if (materiasGrid) materiasGrid.style.display = 'grid';
+  if (statsBar) statsBar.style.display = 'flex';
+  if (materiasLabel) materiasLabel.style.display = 'flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showMateria(materiaId) {
+  homeSection.style.display = 'none';
+  materiaViews.forEach(view => view.classList.remove('active'));
+  const targetView = document.getElementById(`${materiaId}-view`);
+  if (targetView) {
+    targetView.classList.add('active');
+  }
+  backBtn.style.display = 'inline-block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.materia-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    const materia = card.getAttribute('data-materia');
+    if (materia) showMateria(materia);
+  });
+});
+
+backBtn.addEventListener('click', () => {
+  showHome();
+});
+
+logoHome.addEventListener('click', showHome);
+navMaterias.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (homeSection.style.display === 'none') {
+    showHome();
+  }
+  document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
+});
+navContacto.addEventListener('click', (e) => {
+  e.preventDefault();
+  showHome();
+  document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+});
+heroCta.addEventListener('click', () => {
+  if (homeSection.style.display === 'none') showHome();
+  document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
+});
+
+showHome();
+
+// ----- Canvas con fórmulas flotantes
 (function() {
   const canvas = document.getElementById('canvas-bg');
   const ctx = canvas.getContext('2d');
@@ -568,5 +819,3 @@
 
 </body>
 </html>
-
-
