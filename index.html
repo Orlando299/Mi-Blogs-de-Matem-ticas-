@@ -194,6 +194,11 @@
     transition: 0.2s;
   }
   .tema-links a:hover { background: var(--teal); color: #0a0c10; }
+  .sol-link {
+    color: var(--rose) !important;
+    background: rgba(224,122,143,0.1) !important;
+  }
+  .sol-link:hover { background: var(--rose) !important; color: #0a0c10 !important; }
   .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0.5rem; }
   .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
   .stats-bar {
@@ -235,7 +240,7 @@
       <img src="perfil1.jpg.webp" alt="Profesor" class="hero-photo">
       <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
       <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
-      <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios y pre‑parciales.</p>
+      <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios, pre‑parciales y soluciones protegidas.</p>
       <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
     </section>
     <div class="stats-bar">
@@ -244,7 +249,7 @@
       <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
     </div>
-    <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios y pre‑parciales</p>
+    <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios, pre‑parciales y soluciones (con contraseña)</p>
     <div class="materias-grid">
       <!-- Matemática de Iniciación -->
       <div class="materia-card">
@@ -257,6 +262,7 @@
             <a href="MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
             <a href="MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
             <a href="MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="MatematicaIniciacion/soluciones_factorizacion.html" target="_blank" class="sol-link">🔐 Soluciones</a>
           </div>
         </div>
         <div class="tema-bloque">
@@ -265,11 +271,12 @@
             <a href="MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
             <a href="MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
             <a href="MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="MatematicaIniciacion/soluciones_coordenadas.html" target="_blank" class="sol-link">🔐 Soluciones</a>
           </div>
         </div>
         <div class="card-tags"><span class="card-tag">Factorización</span><span class="card-tag">Coordenadas</span><span class="card-tag">Pendiente</span></div>
       </div>
-      <!-- Otras materias (se irán completando) -->
+      <!-- Otras materias (placeholder) -->
       <div class="materia-card"><div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div><h2 class="card-title">Cálculo Diferencial</h2><p class="card-subtitle">Próximamente...</p></div>
       <div class="materia-card"><div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div><h2 class="card-title">Cálculo Integral</h2><p class="card-subtitle">Próximamente...</p></div>
       <div class="materia-card"><div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div><h2 class="card-title">Álgebra Lineal y Geometría</h2><p class="card-subtitle">Próximamente...</p></div>
