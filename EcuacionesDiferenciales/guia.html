@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ecuaciones Diferenciales - PNF Electricidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>/* mismo estilo */</style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ecuaciones Diferenciales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">PNFE · Código: 01MAT206 · Trayecto II</div>
+    <div class="abstract">EDO de primer orden, lineales de orden superior, Transformada de Laplace y Series de Fourier.</div>
+
+    <h2>Índice</h2>
+    <ul>
+        <li><a href="#sec1">1. EDO de primer orden</a></li>
+        <li><a href="#sec2">2. EDO lineales de orden superior</a></li>
+        <li><a href="#sec3">3. Transformada de Laplace</a></li>
+        <li><a href="#sec4">4. Series de Fourier</a></li>
+    </ul>
+
+    <h2 id="sec1">1. EDO de primer orden</h2>
+    <div class="definicion">Forma general: \(\frac{dy}{dx}=f(x,y)\).</div>
+    <div class="teorema"><strong>Variables separables:</strong> \(M(x)dx+N(y)dy=0\).</div>
+    <div class="teorema"><strong>Ecuaciones lineales:</strong> \(\frac{dy}{dx}+P(x)y=Q(x)\). Factor integrante \(\mu(x)=e^{\int Pdx}\).</div>
+    <div class="ejercicio"><strong>Ejercicio 1.1.</strong> \(\frac{dy}{dx}=\frac{y+1}{x-2}\). <div class="solucion">\(y+1=C(x-2)\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 1.2 (Circuito RL).</strong> \(L\frac{di}{dt}+Ri=V_0\), \(i(0)=0\). <div class="solucion">\(i(t)=\frac{V_0}{R}(1-e^{-Rt/L})\).</div></div>
+
+    <h2 id="sec2">2. EDO lineales de orden superior</h2>
+    <div class="definicion">\(a y''+b y'+c y=0\). Ecuación característica: \(a r^2+b r+c=0\).</div>
+    <div class="teorema">Raíces reales distintas: \(y=C_1 e^{r_1x}+C_2 e^{r_2x}\). Doble: \(y=(C_1+C_2x)e^{rx}\). Complejas \(\alpha\pm\beta i\): \(y=e^{\alpha x}(C_1\cos\beta x+C_2\sin\beta x)\).</div>
+    <div class="ejercicio"><strong>Ejercicio 2.1.</strong> \(y''-3y'+2y=0\). <div class="solucion">\(y=C_1 e^{x}+C_2 e^{2x}\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 2.2 (Circuito RLC).</strong> \(Lq''+Rq'+\frac{1}{C}q=0\), con \(L=1\) H, \(R=4\ \Omega\), \(C=0.2\) F. <div class="solucion">Raíces \(-2\pm j\), \(q(t)=e^{-2t}(C_1\cos t+C_2\sin t)\).</div></div>
+
+    <h2 id="sec3">3. Transformada de Laplace</h2>
+    <div class="definicion">\(\mathcal{L}\{f(t)\}=F(s)=\int_0^\infty e^{-st}f(t)dt\).</div>
+    <div class="teorema">Transformadas básicas: \(\mathcal{L}\{1\}=1/s\), \(\mathcal{L}\{e^{at}\}=1/(s-a)\), \(\mathcal{L}\{\sin(\omega t)\}=\frac{\omega}{s^2+\omega^2}\), \(\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}\).</div>
+    <div class="teorema">Propiedades: \(\mathcal{L}\{f'\}=sF(s)-f(0)\), \(\mathcal{L}\{f''\}=s^2F(s)-sf(0)-f'(0)\).</div>
+    <div class="ejercicio"><strong>Ejercicio 3.1.</strong> Calcula \(\mathcal{L}\{3t^2-2e^{5t}+4\sin(2t)\}\). <div class="solucion">\(\frac{6}{s^3}-\frac{2}{s-5}+\frac{8}{s^2+4}\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 3.2 (PVI).</strong> \(y''+4y=0\), \(y(0)=1,y'(0)=0\). <div class="solucion">\(y(t)=\cos(2t)\).</div></div>
+
+    <h2 id="sec4">4. Series de Fourier</h2>
+    <div class="definicion">Para una función periódica \(f(x)\) de periodo \(2L\):
+    \[
+    f(x)=\frac{a_0}{2}+\sum_{n=1}^\infty\left[a_n\cos\frac{n\pi x}{L}+b_n\sin\frac{n\pi x}{L}\right]
+    \]
+    donde \(a_n=\frac{1}{L}\int_{-L}^{L}f(x)\cos\frac{n\pi x}{L}dx\), etc.
+    </div>
+    <div class="ejercicio"><strong>Ejercicio 4.1.</strong> Serie de Fourier de \(f(x)=x\) en \([-1,1]\). <div class="solucion">Función impar → \(a_n=0\), \(b_n=\frac{2}{n\pi}(-1)^{n+1}\). \(f(x)=\frac{2}{\pi}\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}\sin(n\pi x)\).</div></div>
+    <div class="ejemplo"><strong>Aplicación:</strong> Análisis de formas de onda periódicas no sinusoidales en circuitos.</div>
+
+    <h2>Problemas integradores</h2>
+    <div class="ejercicio"><strong>Problema 1 (Sistema masa-resorte).</strong> \(x''+2x'+10x=0\). Clasifica el amortiguamiento. <div class="solucion">Subamortiguado: raíces \(-1\pm3j\).</div></div>
+    <div class="ejercicio"><strong>Problema 2 (Respuesta a escalón).</strong> Circuito RC: \(RC\frac{dv_c}{dt}+v_c=V_0 u(t)\), \(v_c(0)=0\). Resuelve usando Laplace. <div class="solucion">\(v_c(t)=V_0(1-e^{-t/(RC)})\).</div></div>
+
+    <div class="bibliografia">
+        Purcell, Varberg, Rigdon. <em>Cálculo</em>. Pearson, 2007.<br>
+        Stewart, James. <em>Cálculo</em>. Cengage, 2008.<br>
+        Boyce, DiPrima. <em>Ecuaciones Diferenciales</em>.
+    </div>
+    <div style="text-align:center;">MSc. Orlando Silva · PNF Electricidad</div>
+</div>
+</body>
+</html>
