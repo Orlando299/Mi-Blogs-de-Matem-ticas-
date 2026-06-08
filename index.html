@@ -141,17 +141,17 @@
   .section-label::before, .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .materias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
     padding: 1rem 3rem 6rem;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   .materia-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 1.25rem;
-    padding: 2rem;
+    padding: 1.8rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -167,27 +167,35 @@
   .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
   .card-number { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
   .card-icon { font-size: 2rem; }
-  .card-title { font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0; line-height: 1.2; }
-  .card-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
-  .btn-pdf {
-    background: var(--gold);
-    color: #0a0c10;
-    text-decoration: none;
-    padding: 0.6rem 1rem;
-    border-radius: 40px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: 0.2s;
-    width: 100%;
+  .card-title { font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.2rem; line-height: 1.2; }
+  .card-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+  .tema-bloque {
+    margin: 12px 0;
+    padding: 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
   }
-  .btn-pdf:hover { background: var(--gold-soft); transform: translateY(-2px); }
+  .tema-titulo {
+    font-weight: bold;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
+  .tema-links a {
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 0.75rem;
+    margin-right: 12px;
+    background: rgba(78,205,196,0.1);
+    padding: 3px 8px;
+    border-radius: 20px;
+    transition: 0.2s;
+  }
+  .tema-links a:hover { background: var(--teal); color: #0a0c10; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0.5rem; }
+  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
   .stats-bar {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -205,8 +213,7 @@
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { gap: 1rem; }
-    .hero { padding: 3rem 1.5rem 3rem; }
-    .hero-photo { width: 100px; height: 100px; }
+    .hero { padding: 3rem 1.5rem; }
     .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
     .stats-bar { flex-direction: column; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
@@ -228,7 +235,7 @@
       <img src="perfil1.jpg.webp" alt="Profesor" class="hero-photo">
       <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
       <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
-      <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales de Matemática de Iniciación, Matemática I, Álgebra Lineal y Ecuaciones Diferenciales.</p>
+      <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios y pre‑parciales.</p>
       <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
     </section>
     <div class="stats-bar">
@@ -237,48 +244,41 @@
       <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
     </div>
-    <p class="section-label" id="materias-label">Selecciona una materia y descarga su guía en PDF (estilo LaTeX)</p>
+    <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios y pre‑parciales</p>
     <div class="materias-grid">
+      <!-- Matemática de Iniciación -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">00 · Trayecto Inicial</span><span class="card-icon">🧮</span></div>
         <h2 class="card-title">Matemática de Iniciación</h2>
-        <p class="card-subtitle">Álgebra básica, números complejos, funciones, trigonometría y sistemas de ecuaciones.</p>
-        <div class="card-tags"><span class="card-tag">Factorización</span><span class="card-tag">Números complejos</span><span class="card-tag">Matrices</span></div>
-        <a href="MatematicaIniciacion/guia.html" target="_blank" class="btn-pdf">📄 Ver / Descargar Guía (PDF)</a>
+        <p class="card-subtitle">Fundamentos de álgebra, geometría analítica y números complejos.</p>
+        <div class="tema-bloque">
+          <span class="tema-titulo">📐 Factorización</span>
+          <div class="tema-links">
+            <a href="MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
+            <a href="MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
+            <a href="MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
+          </div>
+        </div>
+        <div class="tema-bloque">
+          <span class="tema-titulo">📌 Sistema de Coordenadas</span>
+          <div class="tema-links">
+            <a href="MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
+            <a href="MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
+            <a href="MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
+          </div>
+        </div>
+        <div class="card-tags"><span class="card-tag">Factorización</span><span class="card-tag">Coordenadas</span><span class="card-tag">Pendiente</span></div>
       </div>
-      <div class="materia-card">
-        <div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div>
-        <h2 class="card-title">Matemática I: Cálculo Diferencial</h2>
-        <p class="card-subtitle">Límites, derivadas, optimización y aplicaciones eléctricas.</p>
-        <div class="card-tags"><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
-        <a href="MatematicaI_Diferencial/guia.html" target="_blank" class="btn-pdf">📄 Ver / Descargar Guía (PDF)</a>
-      </div>
-      <div class="materia-card">
-        <div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div>
-        <h2 class="card-title">Matemática I: Cálculo Integral</h2>
-        <p class="card-subtitle">Integrales, series, energía y valor eficaz.</p>
-        <div class="card-tags"><span class="card-tag">Integrales</span><span class="card-tag">Series</span><span class="card-tag">Teorema Fundamental</span></div>
-        <a href="MatematicaI_Integral/guia.html" target="_blank" class="btn-pdf">📄 Ver / Descargar Guía (PDF)</a>
-      </div>
-      <div class="materia-card">
-        <div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div>
-        <h2 class="card-title">Estadística, Álgebra Lineal y Geometría</h2>
-        <p class="card-subtitle">Matrices, espacios vectoriales, probabilidad y geometría analítica.</p>
-        <div class="card-tags"><span class="card-tag">Matrices</span><span class="card-tag">Eigenvalores</span><span class="card-tag">Probabilidad</span></div>
-        <a href="EstadisticaAlgebraGeometria/guia.html" target="_blank" class="btn-pdf">📄 Ver / Descargar Guía (PDF)</a>
-      </div>
-      <div class="materia-card">
-        <div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div>
-        <h2 class="card-title">Matemáticas II: Ecuaciones Diferenciales</h2>
-        <p class="card-subtitle">EDO, Laplace, Fourier. Aplicaciones a circuitos RLC.</p>
-        <div class="card-tags"><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Fourier</span></div>
-        <a href="EcuacionesDiferenciales/guia.html" target="_blank" class="btn-pdf">📄 Ver / Descargar Guía (PDF)</a>
-      </div>
+      <!-- Otras materias (se irán completando) -->
+      <div class="materia-card"><div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div><h2 class="card-title">Cálculo Diferencial</h2><p class="card-subtitle">Próximamente...</p></div>
+      <div class="materia-card"><div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div><h2 class="card-title">Cálculo Integral</h2><p class="card-subtitle">Próximamente...</p></div>
+      <div class="materia-card"><div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div><h2 class="card-title">Álgebra Lineal y Geometría</h2><p class="card-subtitle">Próximamente...</p></div>
+      <div class="materia-card"><div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div><h2 class="card-title">Ecuaciones Diferenciales</h2><p class="card-subtitle">Próximamente...</p></div>
     </div>
   </div>
   <footer id="contacto">
     <p>Programa Nacional de Formación en Electricidad · Matemáticas para Ingeniería Eléctrica</p>
-    <p style="margin-top:0.5rem; font-size:0.72rem; opacity:0.5;">Contenido basado en el Documento Rector del PNFE (2014-2015) · MPPEU</p>
+    <p style="margin-top:0.5rem; font-size:0.72rem;">MSc. Orlando Silva · Basado en Documento Rector PNFE (2014-2015)</p>
   </footer>
 </div>
 <script>
