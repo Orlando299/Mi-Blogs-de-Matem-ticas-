@@ -2,16 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Pre‑parciales - Sistema de Coordenadas</title>
+    <title>Pre‑parciales de Sistema de Coordenadas</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-    <style>/* mismo estilo */</style>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
+        .pregunta { margin: 15px 0; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
 </head>
 <body>
 <div class="latex-container">
-    <h1>Pre‑parciales de Geometría Analítica</h1>
+    <h1>Pre‑parciales de Sistema de Coordenadas</h1>
     <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones_coordenadas.html">soluciones_coordenadas.html</a> (contraseña requerida).</p>
 
-    <!-- Pre-parcial 1 -->
+    <!-- Pre-parcial 1 (de IMG-20260529-WA0021.jpg) -->
     <div class="examen">
         <h2>Pre‑parcial 1</h2>
         <p><strong>Tema:</strong> Plano cartesiano, ubicación de puntos, perímetro, función afín.</p>
@@ -19,24 +29,55 @@
         <div class="pregunta"><strong>2. (6 puntos)</strong> Calcula el perímetro del triángulo del ejercicio 1 usando la fórmula de distancia entre dos puntos.</div>
         <div class="pregunta"><strong>3. (5 puntos)</strong> Dibuja la recta que pasa por los puntos \(P(1,4)\) y \(Q(3,10)\). Calcula su pendiente.</div>
         <div class="pregunta"><strong>4. (5 puntos)</strong> Encuentra la ecuación de la recta con pendiente \(m=3\) que pasa por el punto \(R(2,5)\).</div>
-        <div class="pregunta"><strong>5. (5 puntos)</strong> Grafica la recta del ejercicio 4 en el mismo plano del ejercicio 1 y verifica si pasa por alguno de los puntos \(A,B\) o \(C\).</div>
+        <div class="pregunta"><strong>5. (5 puntos)</strong> Grafica la recta del ejercicio 4 en el mismo plano del ejercicio 1 y verifica si pasa por alguno de los puntos \(A, B\) o \(C\).</div>
     </div>
 
-    <!-- Pre-parcial 2 -->
+    <!-- Pre-parcial 2 (de IMG-20260529-WA0020.jpg) -->
     <div class="examen">
         <h2>Pre‑parcial 2</h2>
-        <p><strong>Tema:</strong> Figuras geométricas, Pitágoras, función afín.</p>
-        <div class="pregunta"><strong>1. (5 puntos)</strong> Dibuja el rectángulo con vértices \(D(1,1), E(5,1), F(5,4), G(1,4)\).</div>
-        <div class="pregunta"><strong>2. (6 puntos)</strong> Calcula el perímetro del rectángulo usando interpretación geométrica (restando coordenadas) y luego verifica con la fórmula de distancia.</div>
-        <div class="pregunta"><strong>3. (6 puntos)</strong> Dados \(H(2,2)\) e \(I(6,5)\): (a) distancia \(HI\) con Pitágoras, (b) pendiente de la recta \(HI\).</div>
-        <div class="pregunta"><strong>4. (4 puntos)</strong> Ecuación de la recta que pasa por \(H\) e \(I\).</div>
-        <div class="pregunta"><strong>5. (4 puntos)</strong> Grafica la recta del ejercicio 4 y el rectángulo.</div>
+        <p><strong>Tema:</strong> Figuras geométricas en el plano, teorema de Pitágoras, función afín.</p>
+        <div class="pregunta"><strong>1. (5 puntos)</strong> Dibuja el rectángulo con vértices: \(D(1,1), E(5,1), F(5,4), G(1,4)\).</div>
+        <div class="pregunta"><strong>2. (6 puntos)</strong> Calcula el perímetro del rectángulo usando <strong>interpretación geométrica</strong> (sin fórmula de distancia, solo restando coordenadas) y luego verifica con la fórmula de distancia.</div>
+        <div class="pregunta"><strong>3. (6 puntos)</strong> Dados los puntos \(H(2,2)\) e \(I(6,5)\): <br> a) Calcula la distancia \(HI\) usando el teorema de Pitágoras. <br> b) Encuentra la pendiente de la recta que pasa por \(H\) e \(I\).</div>
+        <div class="pregunta"><strong>4. (4 puntos)</strong> Determina la ecuación de la recta que pasa por \(H\) e \(I\).</div>
+        <div class="pregunta"><strong>5. (4 puntos)</strong> Grafica la recta del ejercicio 4 y el rectángulo en un mismo plano.</div>
     </div>
 
-    <!-- Pre-parcial 3, 4 y 5 de manera similar (copiado textual de tus imágenes) -->
-    <!-- ... -->
+    <!-- Pre-parcial 3 (de IMG-20260529-WA0019.jpg) -->
+    <div class="examen">
+        <h2>Pre‑parcial 3</h2>
+        <p><strong>Tema:</strong> Unión de puntos, perímetro con distancia, recta dada pendiente y punto.</p>
+        <div class="pregunta"><strong>1. (4 puntos)</strong> En el plano cartesiano, ubica los puntos: \(J(0,0), K(4,0), L(4,3), M(0,3)\). Une \(J-K-L-M-J\). ¿Qué figura es?</div>
+        <div class="pregunta"><strong>2. (6 puntos)</strong> Calcula el perímetro de la figura usando la fórmula de distancia entre dos puntos. Comprueba que los lados opuestos son iguales.</div>
+        <div class="pregunta"><strong>3. (5 puntos)</strong> Calcula la longitud de la diagonal \(JL\) usando Pitágoras y luego con fórmula de distancia. ¿Coinciden?</div>
+        <div class="pregunta"><strong>4. (5 puntos)</strong> Encuentra la ecuación de la recta con pendiente \(m=-2\) que pasa por el punto \(N(3,4)\).</div>
+        <div class="pregunta"><strong>5. (5 puntos)</strong> Grafica la recta del ejercicio 4 y verifica si corta al rectángulo del ejercicio 1 en algún punto.</div>
+    </div>
 
-    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF (Pre‑parciales)</button>
+    <!-- Pre-parcial 4 (de IMG-20260529-WA0018.jpg) -->
+    <div class="examen">
+        <h2>Pre‑parcial 4</h2>
+        <p><strong>Tema:</strong> Polígonos irregulares, perímetro, función afín a partir de dos puntos.</p>
+        <div class="pregunta"><strong>1. (5 puntos)</strong> Dibuja el polígono con vértices en orden: \(O(1,2), P(4,5), Q(6,3), R(3,0)\).</div>
+        <div class="pregunta"><strong>2. (8 puntos)</strong> Calcula el perímetro del polígono usando la fórmula de distancia entre cada par de puntos consecutivos. (Puedes usar calculadora y dejar raíces cuadradas simplificadas).</div>
+        <div class="pregunta"><strong>3. (4 puntos)</strong> ¿Es un rectángulo? Justifica tu respuesta comparando pendientes de lados opuestos.</div>
+        <div class="pregunta"><strong>4. (4 puntos)</strong> Encuentra la ecuación de la recta que pasa por los puntos \(O\) y \(P\).</div>
+        <div class="pregunta"><strong>5. (4 puntos)</strong> Grafica la recta \(OP\) y el polígono. ¿La recta \(OP\) es un lado del polígono o una diagonal?</div>
+    </div>
+
+    <!-- Pre-parcial 5 (de IMG-20260529-WA0017.jpg) -->
+    <div class="examen">
+        <h2>Pre‑parcial 5</h2>
+        <p><strong>Tema:</strong> Mezcla completa: ubicación, perímetro, Pitágoras, función afín, gráficas.</p>
+        <div class="pregunta"><strong>1. (4 puntos)</strong> Ubica los puntos: \(S(-2,1), T(1,5), U(4,1)\). Une \(S-T-U-S\).</div>
+        <div class="pregunta"><strong>2. (6 puntos)</strong> Clasifica el triángulo (rectángulo, acutángulo, obtusángulo) usando el teorema de Pitágoras para verificar si cumple Pitágoras. Luego calcula su perímetro.</div>
+        <div class="pregunta"><strong>3. (5 puntos)</strong> Dibuja la recta que pasa por \(T\) y \(U\). Encuentra su ecuación y pendiente.</div>
+        <div class="pregunta"><strong>4. (5 puntos)</strong> Dada la recta con pendiente \(m = \frac{1}{2}\) que pasa por \(S\), encuentra su ecuación y gráfica.</div>
+        <div class="pregunta"><strong>5. (5 puntos)</strong> Encuentra el punto de intersección entre la recta del ejercicio 3 y la del ejercicio 4 (resolviendo sistema de ecuaciones). Verifica gráficamente.</div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria_coordenadas.html">← Teoría</a> | <a href="ejercicios_coordenadas.html">📝 Ejercicios</a> | <a href="soluciones_coordenadas.html">🔐 Soluciones</a></div>
 </div>
 </body>
 </html>
