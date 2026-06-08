@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía de Cálculo Integral - PNF Electricidad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            line-height: 1.5;
+            background: white;
+            color: black;
+            padding: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #1a3e6f;
+            margin-top: 1.5em;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.3em;
+        }
+        h1 { text-align: center; border-bottom: none; font-size: 28px; }
+        .portada { text-align: center; margin-bottom: 40px; border-bottom: 1px solid #aaa; padding-bottom: 20px; }
+        .unidad { margin: 30px 0; }
+        .definicion, .teorema, .ejemplo {
+            background: #f5f5f5;
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #1a3e6f;
+        }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula {
+            font-family: monospace;
+            background: #f9f2e0;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .ejercicio {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fef9e6;
+        }
+        .solucion {
+            margin-top: 8px;
+            padding: 8px;
+            background: #e8f0e8;
+            border-left: 3px solid green;
+        }
+        .badge {
+            background: #1a3e6f;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        @media print {
+            body { padding: 20px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="portada">
+    <h1>∫ Matemática I: Cálculo Integral</h1>
+    <p>Programa Nacional de Formación en Electricidad (PNFE)</p>
+    <p>Código: 01MAT208 · Trayecto I</p>
+    <p>Basado en el Documento Rector (Octubre 2014)</p>
+    <p style="margin-top: 20px;"><strong>Integrales, series y aplicaciones en potencia, energía y circuitos</strong></p>
+</div>
+
+<div style="text-align:center; margin: 30px 0;">
+    <span class="badge">Herramienta esencial para el cálculo de energía y valor eficaz</span>
+</div>
+
+<h2>Índice</h2>
+<ul>
+    <li><a href="#unidad1">Unidad 1: Integral indefinida y métodos de integración</a></li>
+    <li><a href="#unidad2">Unidad 2: Integral definida y Teorema Fundamental</a></li>
+    <li><a href="#unidad3">Unidad 3: Aplicaciones (áreas, volúmenes, trabajo, energía)</a></li>
+    <li><a href="#unidad4">Unidad 4: Series infinitas</a></li>
+</ul>
+
+<!-- UNIDAD 1 -->
+<div class="unidad" id="unidad1">
+    <h2>📌 Unidad 1: Integral indefinida y métodos de integración</h2>
+    <div class="definicion">
+        <strong>Integral indefinida:</strong> \(\int f(x)dx = F(x)+C\) donde \(F'(x)=f(x)\).<br>
+        <strong>Integrales inmediatas:</strong> \(\int x^n dx = \frac{x^{n+1}}{n+1}+C\ (n\neq -1)\), \(\int \frac{1}{x}dx = \ln|x|+C\), \(\int e^x dx = e^x+C\), \(\int \sin x\,dx = -\cos x+C\), etc.
+    </div>
+    <div class="teorema">
+        <strong>Métodos de integración:</strong><br>
+        - Sustitución: \(\int f(g(x))g'(x)dx = \int f(u)du\).<br>
+        - Integración por partes: \(\int u\,dv = uv - \int v\,du\).<br>
+        - Fracciones parciales: descomposición de funciones racionales.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.1</strong> – Calcula \(\int (3x^2-4x+2)dx\).<br>
+        <div class="solucion">Solución: \(x^3 - 2x^2 + 2x + C\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.2</strong> – \(\int x e^{x^2}dx\).<br>
+        <div class="solucion">Solución: \(\frac{1}{2}e^{x^2}+C\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.3</strong> – \(\int \ln x\,dx\) (usando partes).<br>
+        <div class="solucion">Solución: \(x\ln x - x + C\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 2 -->
+<div class="unidad" id="unidad2">
+    <h2>📌 Unidad 2: Integral definida y Teorema Fundamental</h2>
+    <div class="definicion">
+        <strong>Integral definida:</strong> \(\int_a^b f(x)dx = \lim_{n\to\infty} \sum_{i=1}^n f(x_i^*)\Delta x\).<br>
+        <strong>Teorema Fundamental del Cálculo:</strong> Si \(F'(x)=f(x)\), entonces \(\int_a^b f(x)dx = F(b)-F(a)\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.1</strong> – Evalúa \(\int_0^2 (x^3-2x)dx\).<br>
+        <div class="solucion">Solución: \(\left[\frac{x^4}{4}-x^2\right]_0^2 = (4-4)-0 = 0\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.2 (Valor eficaz)</strong> – El valor eficaz de una corriente periódica \(i(t)\) es \(I_{rms}=\sqrt{\frac{1}{T}\int_0^T i^2(t)dt}\). Para una senoidal \(i(t)=I_m\sin(\omega t)\), calcula \(I_{rms}\).<br>
+        <div class="solucion">Solución: \(\int_0^T \sin^2(\omega t)dt = \frac{T}{2}\). Entonces \(I_{rms}= \sqrt{\frac{1}{T}\cdot I_m^2 \cdot \frac{T}{2}} = \frac{I_m}{\sqrt{2}}\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 3 -->
+<div class="unidad" id="unidad3">
+    <h2>📌 Unidad 3: Aplicaciones de la integral</h2>
+    <div class="teorema">
+        <strong>Área entre curvas:</strong> \(A = \int_a^b |f(x)-g(x)|dx\).<br>
+        <strong>Volumen de sólido de revolución (método del disco):</strong> \(V = \pi \int_a^b [R(x)]^2 dx\).<br>
+        <strong>Trabajo:</strong> \(W = \int F(x)dx\).<br>
+        <strong>Energía eléctrica:</strong> \(W = \int P(t)dt\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.1</strong> – Calcula el área entre \(y=x^2\) y \(y=2x-x^2\).<br>
+        <div class="solucion">Solución: Puntos de corte: \(x^2=2x-x^2 \Rightarrow 2x^2-2x=0 \Rightarrow x=0,1\). Área = \(\int_0^1 (2x-2x^2)dx = [x^2 - \frac{2}{3}x^3]_0^1 = 1 - \frac{2}{3}=\frac{1}{3}\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.2 (Energía)</strong> – La potencia en una resistencia es \(P(t)=V_m I_m \sin^2(\omega t)\). Calcula la energía disipada en un periodo \(T\).<br>
+        <div class="solucion">Solución: \(E = \int_0^T P(t)dt = V_m I_m \cdot \frac{T}{2}\). Usando valores eficaces: \(E = V_{rms}I_{rms} T\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 4 -->
+<div class="unidad" id="unidad4">
+    <h2>📌 Unidad 4: Series infinitas</h2>
+    <div class="definicion">
+        <strong>Serie numérica:</strong> \(\sum_{n=1}^\infty a_n\). Convergencia si la sucesión de sumas parciales tiene límite finito.<br>
+        <strong>Series de potencia:</strong> \(\sum_{n=0}^\infty c_n (x-a)^n\). Radio de convergencia \(R\).<br>
+        <strong>Serie de Taylor:</strong> \(f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 4.1</strong> – Determina la convergencia de \(\sum_{n=1}^\infty \frac{1}{n^2}\).<br>
+        <div class="solucion">Solución: Converge (serie p con \(p=2>1\)). Su suma es \(\pi^2/6\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 4.2 (Aproximación)</strong> – Usa la serie de Maclaurin de \(e^x\) para aproximar \(e^{0.5}\) con 3 términos.<br>
+        <div class="solucion">Solución: \(e^x \approx 1 + x + \frac{x^2}{2}\). En \(x=0.5\): \(1+0.5+0.125=1.625\).</div>
+    </div>
+</div>
+
+<h2>⚡ Problemas integradores de ingeniería eléctrica</h2>
+<div class="ejercicio">
+    <strong>Problema 1</strong> – La carga en un condensador es \(q(t)=\int_0^t i(\tau)d\tau\). Si \(i(t)=5e^{-10t}\) A, encuentra \(q(t)\) y la carga total cuando \(t\to\infty\).<br>
+    <div class="solucion">Solución: \(q(t)= \int_0^t 5e^{-10\tau}d\tau = 5\left[-\frac{1}{10}e^{-10\tau}\right]_0^t = 0.5(1-e^{-10t})\) C. Carga total: \(0.5\) C.</div>
+</div>
+<div class="ejercicio">
+    <strong>Problema 2</strong> – El flujo magnético a través de una bobina es \(\Phi(t)=0.01\cos(120\pi t)\) Wb. La tensión inducida es \(v(t)=-N\frac{d\Phi}{dt}\). Para \(N=100\), calcula \(v(t)\) y su valor eficaz.<br>
+    <div class="solucion">Solución: \(v(t)= -100\cdot 0.01\cdot (-120\pi \sin(120\pi t)) = 120\pi \sin(120\pi t)\) V. \(V_{rms}= \frac{120\pi}{\sqrt{2}} \approx 266.6\) V.</div>
+</div>
+
+<footer>
+    <p>Basado en el Documento Rector PNFE (2014) · Bibliografía: Purcell, Stewart.</p>
+</footer>
+<div class="no-print" style="text-align:center; margin-top:30px;">
+    <button onclick="window.print()">🖨️ Guardar como PDF (Ctrl+P)</button>
+</div>
+</body>
+</html>
