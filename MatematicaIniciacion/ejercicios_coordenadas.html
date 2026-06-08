@@ -2,18 +2,39 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicios - Coordenadas</title>
+    <title>Ejercicios de Sistema de Coordenadas</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-    <style>/* mismo estilo */</style>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 8px; border: 1px solid #ccc; background: #fef9e6; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
 </head>
 <body>
 <div class="latex-container">
-    <h1>Ejercicios: Sistema de Coordenadas</h1>
-    <div class="ejercicio">1. Calcula la distancia entre \(A(2,3)\) y \(B(5,7)\).</div>
-    <div class="ejercicio">2. Halla la pendiente de la recta que pasa por \(P(1,4)\) y \(Q(3,10)\).</div>
-    <div class="ejercicio">3. Encuentra la ecuación de la recta con pendiente \(m=3\) que pasa por \(R(2,5)\).</div>
-    <div class="ejercicio">4. ¿Qué tipo de triángulo forman los puntos \(S(-2,1), T(1,5), U(4,1)\)? Justifica.</div>
-    <button class="btn-pdf" onclick="window.print()">🖨️ PDF</button>
+    <h1>Ejercicios de Sistema de Coordenadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones_coordenadas.html">soluciones_coordenadas.html</a> (requiere contraseña).</p>
+
+    <div class="ejercicio"><strong>1.</strong> Ubica los puntos \(A(2,3), B(5,7), C(2,7)\) y únelos en orden \(A-B-C-A\). ¿Qué figura se forma?</div>
+    <div class="ejercicio"><strong>2.</strong> Calcula el perímetro del triángulo del ejercicio 1 usando la fórmula de distancia.</div>
+    <div class="ejercicio"><strong>3.</strong> Dibuja la recta que pasa por \(P(1,4)\) y \(Q(3,10)\). Encuentra su pendiente.</div>
+    <div class="ejercicio"><strong>4.</strong> Halla la ecuación de la recta con pendiente \(m=3\) que pasa por \(R(2,5)\).</div>
+    <div class="ejercicio"><strong>5.</strong> Dados \(S(-2,1), T(1,5), U(4,1)\), clasifica el triángulo \(STU\) (rectángulo, acutángulo u obtusángulo) usando Pitágoras. Luego calcula su perímetro.</div>
+    <div class="ejercicio"><strong>6.</strong> Encuentra la ecuación de la recta que pasa por \(T(1,5)\) y \(U(4,1)\).</div>
+    <div class="ejercicio"><strong>7.</strong> Dibuja el rectángulo con vértices \(D(1,1), E(5,1), F(5,4), G(1,4)\). Calcula su perímetro.</div>
+    <div class="ejercicio"><strong>8.</strong> Dados \(H(2,2)\) e \(I(6,5)\), calcula la distancia \(HI\) y la pendiente de la recta \(HI\).</div>
+    <div class="ejercicio"><strong>9.</strong> Encuentra la ecuación de la recta que pasa por \(H\) e \(I\) (ejercicio 8).</div>
+    <div class="ejercicio"><strong>10.</strong> Encuentra el punto de intersección entre la recta del ejercicio 3 y la del ejercicio 4 resolviendo el sistema.</div>
+    <div class="ejercicio"><strong>11.</strong> Dibuja el polígono con vértices \(O(1,2), P(4,5), Q(6,3), R(3,0)\) en orden. Calcula su perímetro. ¿Es un rectángulo? Justifica.</div>
+    <div class="ejercicio"><strong>12.</strong> Encuentra la ecuación de la recta que pasa por \(O(1,2)\) y \(P(4,5)\).</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria_coordenadas.html">← Teoría</a> | <a href="preparciales_coordenadas.html">📝 Pre‑parciales</a> | <a href="soluciones_coordenadas.html">🔐 Soluciones</a></div>
 </div>
 </body>
 </html>
