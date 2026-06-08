@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadística, Álgebra Lineal y Geometría - PNF Electricidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>/* mismo estilo */</style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Estadística, Álgebra Lineal y Geometría Analítica</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">PNFE · Código: 01EAG105 · Trayecto I</div>
+    <div class="abstract">Matrices, espacios vectoriales, probabilidad, rectas y cónicas.</div>
+
+    <h2>Índice</h2>
+    <ul>
+        <li><a href="#sec1">1. Matrices y determinantes</a></li>
+        <li><a href="#sec2">2. Sistemas de ecuaciones lineales</a></li>
+        <li><a href="#sec3">3. Espacios vectoriales</a></li>
+        <li><a href="#sec4">4. Valores y vectores propios</a></li>
+        <li><a href="#sec5">5. Estadística y probabilidad</a></li>
+        <li><a href="#sec6">6. Geometría analítica (rectas, planos, cónicas)</a></li>
+    </ul>
+
+    <h2 id="sec1">1. Matrices y determinantes</h2>
+    <div class="definicion">Matriz \(A_{m\times n}\). Determinante 2x2: \(\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc\).</div>
+    <div class="ejercicio"><strong>Ejercicio 1.1.</strong> \(\det\begin{pmatrix}2&5\\-1&3\end{pmatrix}\). <div class="solucion">11.</div></div>
+    <div class="ejercicio"><strong>Ejercicio 1.2.</strong> Halla la inversa de \(\begin{pmatrix}2&5\\1&3\end{pmatrix}\). <div class="solucion">\(\begin{pmatrix}3&-5\\-1&2\end{pmatrix}\).</div></div>
+
+    <h2 id="sec2">2. Sistemas de ecuaciones lineales</h2>
+    <div class="ejemplo">Representación \(AX=B\). Métodos: Gauss, Gauss-Jordan, Cramer.</div>
+    <div class="ejercicio"><strong>Ejercicio 2.1 (Análisis de redes).</strong> \(\begin{cases}10I_1-2I_2=12\\-2I_1+8I_2=6\end{cases}\). <div class="solucion">\(I_1=1.5\) A, \(I_2=1.125\) A.</div></div>
+
+    <h2 id="sec3">3. Espacios vectoriales</h2>
+    <div class="definicion">Espacio vectorial: conjunto con suma y producto escalar. Ejemplo: \(\mathbb{R}^n\).</div>
+    <div class="ejercicio"><strong>Ejercicio 3.1.</strong> Determina si \((1,0,1), (0,1,1), (1,1,0)\) son linealmente independientes. <div class="solucion">Determinante \(-2\neq0\) → independientes.</div></div>
+
+    <h2 id="sec4">4. Valores y vectores propios</h2>
+    <div class="definicion">\(A\vec{v}=\lambda\vec{v}\). Polinomio característico: \(\det(A-\lambda I)=0\).</div>
+    <div class="ejercicio"><strong>Ejercicio 4.1.</strong> Valores propios de \(\begin{pmatrix}2&1\\1&2\end{pmatrix}\). <div class="solucion">\(\lambda=1,3\).</div></div>
+    <div class="ejemplo"><strong>Aplicación:</strong> Estabilidad de sistemas eléctricos y frecuencias naturales.</div>
+
+    <h2 id="sec5">5. Estadística y probabilidad</h2>
+    <div class="definicion">Media: \(\bar{x}=\frac{1}{n}\sum x_i\). Varianza: \(s^2=\frac{\sum (x_i-\bar{x})^2}{n-1}\).</div>
+    <div class="ejercicio"><strong>Ejercicio 5.1.</strong> Dados 12,15,14,13,15,12,16,14,15, calcula media y desviación. <div class="solucion">Media ≈14, desviación ≈1.41.</div></div>
+    <div class="ejercicio"><strong>Ejercicio 5.2 (Fiabilidad).</strong> Vida útil \(N(1000,50)\) h. Probabilidad de durar más de 1100 h. <div class="solucion">\(z=2\), \(P(Z>2)=0.0228\).</div></div>
+
+    <h2 id="sec6">6. Geometría analítica</h2>
+    <div class="definicion">Recta: \(y=mx+b\). Circunferencia: \((x-h)^2+(y-k)^2=r^2\). Elipse, parábola, hipérbola.</div>
+    <div class="ejercicio"><strong>Ejercicio 6.1.</strong> Recta por \((1,2)\) con pendiente 3. <div class="solucion">\(y=3x-1\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 6.2 (Coordenadas polares).</strong> Convierte \((3,3)\) a polares. <div class="solucion">\(r=3\sqrt{2}\), \(\theta=45^\circ\).</div></div>
+
+    <div class="bibliografia">
+        Grossman, Stanley. <em>Álgebra Lineal</em>. McGraw Hill, 1996.<br>
+        Noble, Ben. <em>Álgebra Lineal Aplicada</em>. Prentice Hall, 1998.<br>
+        Ayres, Frank. <em>Matrices</em>. McGraw Hill, 1991.
+    </div>
+    <div style="text-align:center;">MSc. Orlando Silva · PNF Electricidad</div>
+</div>
+</body>
+</html>
