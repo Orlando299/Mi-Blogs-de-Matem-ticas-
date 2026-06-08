@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Teoría de Factorización - Matemática de Iniciación</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Factorización de Expresiones Algebraicas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática de Iniciación · PNF Electricidad · Trayecto Inicial</div>
+
+    <h2>1. Factor Común</h2>
+    <div class="definicion">
+        <strong>Definición.</strong> Consiste en extraer el factor que se repite en todos los términos de la expresión.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 1.</strong> \(7x + 14y = 7(x + 2y)\)
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 2.</strong> \(18a^2b - 9ab^2 + 3ab = 3ab(6a - 3b + 1)\)
+    </div>
+
+    <h2>2. Trinomio Cuadrado Perfecto (TCP)</h2>
+    <div class="definicion">
+        Un trinomio es cuadrado perfecto si el primero y tercer término son cuadrados perfectos y el segundo término es el doble producto de las raíces cuadradas del primero y tercero.
+        \[
+        a^2 \pm 2ab + b^2 = (a \pm b)^2
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(x^2 + 6x + 9 = (x+3)^2\)
+    </div>
+
+    <h2>3. Diferencia de Cuadrados (Suma por Diferencia)</h2>
+    <div class="definicion">
+        \[
+        a^2 - b^2 = (a+b)(a-b)
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(4x^2 - 25 = (2x+5)(2x-5)\)
+    </div>
+
+    <h2>4. Trinomios de la forma \(x^2 + bx + c\)</h2>
+    <div class="definicion">
+        Se buscan dos números \(m\) y \(n\) tales que \(m+n = b\) y \(m \cdot n = c\). Entonces:
+        \[
+        x^2 + bx + c = (x+m)(x+n)
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(x^2 + 7x + 12 = (x+3)(x+4)\) porque \(3+4=7\) y \(3\cdot4=12\).
+    </div>
+
+    <h2>5. Trinomios de la forma \(ax^2 + bx + c\) (aspa simple)</h2>
+    <div class="definicion">
+        Se descompone el término cuadrático y el término independiente, y se verifica que la suma de los productos cruzados dé el término lineal.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(2x^2 + 7x + 3 = (2x+1)(x+3)\).
+    </div>
+
+    <h2>6. Simplificación de fracciones algebraicas</h2>
+    <div class="definicion">
+        Se factorizan numerador y denominador por cualquiera de los métodos anteriores y luego se eliminan los factores comunes.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(\frac{x^2-9}{x^2+2x-15} = \frac{(x-3)(x+3)}{(x+5)(x-3)} = \frac{x+3}{x+5}\), con \(x \neq 3, -5\).
+    </div>
+
+    <h2>7. Operaciones con fracciones algebraicas</h2>
+    <div class="definicion">
+        Se aplican las mismas reglas que con fracciones numéricas: suma, resta, multiplicación, división, usando el mínimo común múltiplo de los denominadores.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> \(\frac{x+1}{x-2} + \frac{x-3}{x+2} = \frac{(x+1)(x+2)+(x-3)(x-2)}{(x-2)(x+2)} = \frac{2x^2 - 2x + 8}{x^2-4}\).
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF (Teoría)</button>
+    <div style="margin-top: 20px;">
+        <a href="ejercicios_factorizacion.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ir a ejercicios</a>
+        <a href="preparciales_factorizacion.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Ir a pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
