@@ -102,22 +102,6 @@
   }
   .nav-links a:hover { color: var(--gold-soft); }
 
-  .back-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 0.4rem 1rem;
-    border-radius: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .back-btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
   /* Hero */
   .hero {
     padding: 5rem 3rem 5rem;
@@ -224,7 +208,7 @@
   /* Materias Grid */
   .materias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     padding: 1rem 3rem 6rem;
     max-width: 1100px;
@@ -235,13 +219,10 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 1.25rem;
-    padding: 2.25rem 2rem;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    padding: 2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    text-decoration: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     animation: fadeUp 0.7s ease forwards;
   }
@@ -252,343 +233,77 @@
   .materia-card:nth-child(4) { animation-delay: 0.4s; }
   .materia-card:nth-child(5) { animation-delay: 0.5s; }
 
-  .materia-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 30% 30%, var(--card-glow), transparent 65%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-
   .materia-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    border-color: var(--card-accent);
   }
 
-  .materia-card:hover::before { opacity: 0.12; }
-
-  .card-calculo-dif { --card-accent: var(--gold); --card-glow: var(--gold); }
-  .card-calculo-int { --card-accent: var(--teal); --card-glow: var(--teal); }
-  .card-algebra { --card-accent: var(--lavender);--card-glow: var(--lavender); }
-  .card-ecuaciones { --card-accent: var(--rose); --card-glow: var(--rose); }
-  .card-iniciacion { --card-accent: #b8860b; --card-glow: #b8860b; }
-
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
   .card-number {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
-    color: var(--card-accent);
+    color: var(--gold);
     letter-spacing: 0.15em;
-    margin-bottom: 1.5rem;
-    opacity: 0.7;
   }
-
   .card-icon {
     font-size: 2rem;
-    margin-bottom: 1.25rem;
-    display: block;
-    filter: grayscale(20%);
   }
-
   .card-title {
     font-family: 'EB Garamond', serif;
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 0.6rem;
+    margin: 0.5rem 0;
     line-height: 1.2;
   }
-
   .card-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.5;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
   }
-
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
   .card-tag {
-    display: inline-block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
-    padding: 0.3rem 0.75rem;
+    padding: 0.2rem 0.7rem;
     border-radius: 100px;
-    border: 1px solid var(--card-accent);
-    color: var(--card-accent);
-    letter-spacing: 0.05em;
+    border: 1px solid var(--gold);
+    color: var(--gold);
     opacity: 0.8;
-    margin-right: 0.4rem;
-    margin-bottom: 0.4rem;
   }
-
-  .card-arrow {
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    display: flex;
+  .btn-pdf {
+    background: var(--gold);
+    color: #0a0c10;
+    text-decoration: none;
+    padding: 0.6rem 1rem;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--card-accent);
-    font-size: 1rem;
-    transition: background 0.2s, transform 0.2s;
-  }
-
-  .materia-card:hover .card-arrow {
-    background: var(--card-accent);
-    color: var(--bg);
-    transform: rotate(45deg);
-  }
-
-  /* Vistas de Materia */
-  .materia-view {
-    display: none;
-    max-width: 1000px;
-    margin: 0 auto;
-    animation: fadeUp 0.4s ease;
-  }
-  .materia-view.active {
-    display: block;
-  }
-  .view-summary, .view-detail {
-    background: var(--surface);
-    border-radius: 1.25rem;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  .view-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .view-header h2 {
-    font-family: 'EB Garamond', serif;
-    font-size: 2rem;
-    color: var(--gold);
-  }
-  .btn-group {
-    display: flex;
-    gap: 1rem;
-  }
-  .btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 0.5rem 1.2rem;
-    border-radius: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-primary {
-    background: var(--gold);
-    color: #0a0c10;
+    gap: 0.5rem;
+    transition: 0.2s;
     border: none;
-    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
   }
-  .btn-primary:hover {
+  .btn-pdf:hover {
     background: var(--gold-soft);
     transform: translateY(-2px);
-  }
-  .btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  /* Temario detallado */
-  .temario-unidad {
-    margin: 2rem 0;
-  }
-  .unidad-titulo {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--teal);
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .subtemas {
-    list-style: none;
-    padding-left: 1.5rem;
-  }
-  .subtemas li {
-    padding: 0.4rem 0;
-    display: flex;
-    gap: 1rem;
-    align-items: baseline;
-    font-size: 0.9rem;
-  }
-  .subtemas li strong {
-    min-width: 80px;
-    color: var(--gold-soft);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-  }
-  .badge-hours {
-    background: rgba(201,168,76,0.15);
-    padding: 0.2rem 0.6rem;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    color: var(--gold);
-    margin-left: 0.5rem;
-  }
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    background: rgba(255,255,255,0.03);
-    padding: 1rem;
-    border-radius: 1rem;
-    margin: 1.5rem 0;
-  }
-  .info-card {
-    text-align: center;
-  }
-  .info-card .label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-  .info-card .value {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--gold);
-  }
-  .resources-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin: 1rem 0;
-  }
-  .resource-link {
-    background: rgba(78,205,196,0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 40px;
-    text-decoration: none;
-    color: var(--teal);
-    font-size: 0.8rem;
-    transition: all 0.2s;
-  }
-  .resource-link:hover {
-    background: var(--teal);
-    color: var(--bg);
-  }
-
-  /* Estilos para la guía de Matemática de Iniciación */
-  .definicion, .ejemplo {
-    background: rgba(78,205,196,0.08);
-    border-left: 6px solid var(--teal);
-    padding: 1rem;
-    margin: 1.5rem 0;
-    border-radius: 12px;
-  }
-  .ejemplo {
-    border-left-color: var(--gold);
-    background: rgba(201,168,76,0.05);
-  }
-  .formula {
-    font-family: 'JetBrains Mono', monospace;
-    background: rgba(255,255,255,0.05);
-    padding: 0.8rem;
-    border-radius: 12px;
-    overflow-x: auto;
-    margin: 1rem 0;
-  }
-  .ejercicio {
-    background: rgba(224,122,143,0.08);
-    border-left: 6px solid var(--rose);
-    padding: 1rem;
-    margin: 1.5rem 0;
-    border-radius: 12px;
-  }
-  .solucion {
-    display: none;
-    background: var(--bg);
-    padding: 0.8rem;
-    margin-top: 0.8rem;
-    border-radius: 8px;
-    border-left: 3px solid var(--gold);
-  }
-  .solucion.mostrar {
-    display: block;
-  }
-  .solucion button, .ejercicio button {
-    background: var(--gold);
-    color: #0a0c10;
-    border: none;
-    padding: 0.3rem 1rem;
-    border-radius: 30px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    cursor: pointer;
-    transition: 0.2s;
-    margin-bottom: 0.5rem;
-  }
-  .solucion button:hover, .ejercicio button:hover {
-    background: var(--gold-soft);
-  }
-
-  .comments-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-  .comment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-  .comment-form input, .comment-form textarea {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    padding: 0.8rem;
-    color: var(--text);
-    font-family: inherit;
-  }
-  .comment-form textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  .comment-form button {
-    width: fit-content;
-    background: var(--gold);
-    color: #0a0c10;
-    border: none;
-    padding: 0.5rem 1.5rem;
-    border-radius: 40px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .comment {
-    background: rgba(255,255,255,0.03);
-    padding: 1rem;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-  }
-  .comment-author {
-    font-weight: bold;
-    color: var(--gold-soft);
-  }
-  .comment-date {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-left: 0.5rem;
-  }
-  .comment-text {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
   }
 
   .stats-bar {
@@ -596,10 +311,8 @@
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: center;
-    gap: 0;
-    margin: 0 3rem;
-    max-width: 1100px;
     margin: 0 auto;
+    max-width: 1100px;
   }
   .stat-item {
     flex: 1;
@@ -622,6 +335,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
+
   footer {
     text-align: center;
     padding: 3rem;
@@ -630,10 +344,12 @@
     border-top: 1px solid var(--border);
     margin-top: 2rem;
   }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { gap: 1rem; }
@@ -642,26 +358,18 @@
     .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
     .stats-bar { flex-direction: column; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
-    .view-summary, .view-detail { padding: 1rem; }
-    .view-header h2 { font-size: 1.4rem; }
-    .btn-group { flex-wrap: wrap; }
   }
 </style>
 </head>
 <body>
-
 <canvas id="canvas-bg"></canvas>
 
 <div class="wrapper">
-
   <nav>
-    <div class="nav-logo" id="logo-home">
-      ∂<em></em> PNF Electricidad <span>· Matemáticas</span>
-    </div>
+    <div class="nav-logo" id="logo-home">∂<em></em> PNF Electricidad <span>· Matemáticas</span></div>
     <ul class="nav-links">
       <li><a id="nav-materias">Materias</a></li>
       <li><a id="nav-contacto">Contacto</a></li>
-      <li><button class="back-btn" id="global-back-btn" style="display: none;">← Regresar</button></li>
     </ul>
   </nav>
 
@@ -673,60 +381,64 @@
       <p class="hero-desc">
         Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales de Matemática de Iniciación, Matemática I, Álgebra Lineal y Ecuaciones Diferenciales para Ingeniería Eléctrica.
       </p>
-      <button class="hero-cta" id="hero-cta-btn">
-        Ver materias &nbsp;→
-      </button>
+      <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
     </section>
 
-    <div class="stats-bar" id="stats-bar">
+    <div class="stats-bar">
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Materias Base</span></div>
       <div class="stat-item"><span class="stat-number">PNFE</span><span class="stat-label">Documento Rector</span></div>
       <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
     </div>
 
-    <p class="section-label" id="materias-label">Selecciona una materia (Contenido oficial PNFE)</p>
-    <div class="materias-grid" id="materias-grid">
-      <!-- Nueva tarjeta: Matemática de Iniciación -->
-      <div class="materia-card card-iniciacion" data-materia="iniciacion">
-        <div class="card-number">00 / UNIDAD CURRICULAR</div><span class="card-icon">🧮</span>
+    <p class="section-label" id="materias-label">Selecciona una materia y descarga su guía en PDF</p>
+    <div class="materias-grid">
+      <!-- Matemática de Iniciación -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">00 · Trayecto Inicial</span><span class="card-icon">🧮</span></div>
         <h2 class="card-title">Matemática de Iniciación</h2>
         <p class="card-subtitle">Álgebra básica, números complejos, funciones, trigonometría y sistemas de ecuaciones. Fundamentos para ingeniería.</p>
-        <div><span class="card-tag">Factorización</span><span class="card-tag">Números complejos</span><span class="card-tag">Matrices</span><span class="card-tag">Logaritmos</span></div>
-        <div class="card-arrow">→</div>
+        <div class="card-tags"><span class="card-tag">Factorización</span><span class="card-tag">Números complejos</span><span class="card-tag">Matrices</span><span class="card-tag">Logaritmos</span></div>
+        <a href="guias/guia_matematica_iniciacion.html" target="_blank" class="btn-pdf">📄 Descargar / Ver Guía PDF</a>
       </div>
-      <div class="materia-card card-calculo-dif" data-materia="calculo-dif">
-        <div class="card-number">01 / UNIDAD CURRICULAR</div><span class="card-icon">∂</span>
-        <h2 class="card-title">Matemática I<br>Cálculo Diferencial</h2>
-        <p class="card-subtitle">Límites, derivadas y aplicaciones. Análisis completo de funciones.</p>
-        <div><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
-        <div class="card-arrow">→</div>
+
+      <!-- Matemática I - Cálculo Diferencial -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div>
+        <h2 class="card-title">Matemática I: Cálculo Diferencial</h2>
+        <p class="card-subtitle">Límites, derivadas y aplicaciones. Análisis completo de funciones. Optimización y rapidez de variación.</p>
+        <div class="card-tags"><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
+        <a href="guias/guia_matematica_I_diferencial.html" target="_blank" class="btn-pdf">📄 Descargar / Ver Guía PDF</a>
       </div>
-      <div class="materia-card card-calculo-int" data-materia="calculo-int">
-        <div class="card-number">02 / UNIDAD CURRICULAR</div><span class="card-icon">∫</span>
-        <h2 class="card-title">Matemática I<br>Cálculo Integral</h2>
-        <p class="card-subtitle">Integrales, series y aplicaciones geométricas y físicas.</p>
-        <div><span class="card-tag">Integrales</span><span class="card-tag">Series</span><span class="card-tag">Teorema Fundamental</span></div>
-        <div class="card-arrow">→</div>
+
+      <!-- Matemática I - Cálculo Integral -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div>
+        <h2 class="card-title">Matemática I: Cálculo Integral</h2>
+        <p class="card-subtitle">Integrales, series y aplicaciones geométricas y físicas. Teorema Fundamental. Energía y valor eficaz.</p>
+        <div class="card-tags"><span class="card-tag">Integrales</span><span class="card-tag">Series</span><span class="card-tag">Teorema Fundamental</span></div>
+        <a href="guias/guia_matematica_I_integral.html" target="_blank" class="btn-pdf">📄 Descargar / Ver Guía PDF</a>
       </div>
-      <div class="materia-card card-algebra" data-materia="algebra">
-        <div class="card-number">03 / UNIDAD CURRICULAR</div><span class="card-icon">⊗</span>
-        <h2 class="card-title">Estadística, Álgebra Lineal<br>y Geometría Analítica</h2>
-        <p class="card-subtitle">Matrices, espacios vectoriales, transformaciones y probabilidad.</p>
-        <div><span class="card-tag">Matrices</span><span class="card-tag">Eigenvalores</span><span class="card-tag">Vectores</span></div>
-        <div class="card-arrow">→</div>
+
+      <!-- Estadística, Álgebra Lineal y Geometría Analítica -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div>
+        <h2 class="card-title">Estadística, Álgebra Lineal y Geometría Analítica</h2>
+        <p class="card-subtitle">Matrices, espacios vectoriales, transformaciones, probabilidad y geometría analítica.</p>
+        <div class="card-tags"><span class="card-tag">Matrices</span><span class="card-tag">Eigenvalores</span><span class="card-tag">Vectores</span><span class="card-tag">Probabilidad</span></div>
+        <a href="guias/guia_estadistica_algebra.html" target="_blank" class="btn-pdf">📄 Descargar / Ver Guía PDF</a>
       </div>
-      <div class="materia-card card-ecuaciones" data-materia="ecuaciones">
-        <div class="card-number">04 / UNIDAD CURRICULAR</div><span class="card-icon">≋</span>
-        <h2 class="card-title">Matemáticas II<br>Ecuaciones Diferenciales</h2>
-        <p class="card-subtitle">EDO, Transformada de Laplace y Series de Fourier.</p>
-        <div><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Fourier</span></div>
-        <div class="card-arrow">→</div>
+
+      <!-- Matemáticas II - Ecuaciones Diferenciales -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div>
+        <h2 class="card-title">Matemáticas II: Ecuaciones Diferenciales</h2>
+        <p class="card-subtitle">EDO de primer orden y superior, Transformada de Laplace, Series de Fourier. Aplicaciones a circuitos.</p>
+        <div class="card-tags"><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Fourier</span></div>
+        <a href="guias/guia_ecuaciones_diferenciales.html" target="_blank" class="btn-pdf">📄 Descargar / Ver Guía PDF</a>
       </div>
     </div>
   </div>
-
-  <div id="materia-views-container"></div>
 
   <footer id="contacto">
     <p>Programa Nacional de Formación en Electricidad · Matemáticas para Ingeniería Eléctrica</p>
@@ -735,497 +447,34 @@
 </div>
 
 <script>
-// ======================== DATOS DE MATERIAS ========================
-const materiasData = {
-  'iniciacion': {
-    nombre: 'Matemática de Iniciación',
-    codigo: '01MAT000',
-    trayecto: 'Inicial',
-    uc: 0,  // No aplica créditos en trayecto inicial
-    objetivos: [
-      'Desarrollar competencias en operaciones básicas de la matemática: factorización, potenciación, racionalización.',
-      'Manejar sistemas de coordenadas cartesianas y funciones reales.',
-      'Aplicar funciones trigonométricas y logarítmicas en contextos eléctricos.',
-      'Resolver sistemas de ecuaciones lineales de hasta tres variables.',
-      'Comprender nociones básicas de números complejos y su representación polar.'
-    ],
-    temario: [
-      { titulo: 'Unidad 1: Factorización, Potenciación y Racionalización', horas: 12, subtemas: ['Factor común', 'Diferencia de cuadrados', 'Trinomio cuadrado perfecto', 'Suma/diferencia de cubos', 'Potenciación y radicales', 'Racionalización de denominadores'] },
-      { titulo: 'Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales', horas: 10, subtemas: ['Plano cartesiano', 'Distancia entre puntos', 'Funciones reales: dominio y rango', 'Función lineal, cuadrática', 'Composición de funciones'] },
-      { titulo: 'Unidad 3: Funciones Trigonométricas y Logarítmicas', horas: 14, subtemas: ['Circunferencia unitaria', 'Razones trigonométricas', 'Identidades fundamentales', 'Funciones logarítmicas: propiedades', 'Ecuaciones logarítmicas y exponenciales'] },
-      { titulo: 'Unidad 4: Determinantes y Matrices', horas: 10, subtemas: ['Definición de matriz', 'Operaciones con matrices', 'Determinante 2x2 y 3x3', 'Matriz inversa', 'Aplicación a sistemas lineales'] },
-      { titulo: 'Unidad 5: Sistemas de Ecuaciones Lineales', horas: 12, subtemas: ['Método de sustitución', 'Método de igualación', 'Método de reducción (Gauss)', 'Regla de Cramer', 'Sistemas 3x3'] },
-      { titulo: 'Unidad 6: Nociones Básicas de Números Complejos', horas: 10, subtemas: ['Definición y forma binómica', 'Operaciones suma, resta, multiplicación, división', 'Módulo y argumento', 'Forma polar y exponencial', 'Aplicaciones en circuitos de corriente alterna'] }
-    ],
-    metodologia: 'Clases teórico-prácticas con énfasis en la resolución de ejercicios. Uso de ejemplos del ámbito eléctrico para motivar los conceptos. Evaluación continua con talleres semanales.',
-    evaluacion: 'Tres cortes: 25% (semana 12), 30% (semana 24), 45% (semana 35-36). Incluye pruebas escritas y proyecto final integrador.',
-    bibliografia: 'Navarro, E. "Problemarios de Matemática 1° a 5° año". Caracas.<br>Rita, María. "Matemática 9no Grado". Editorial Salesiana.<br>Purcell, Varberg, Rigdon. "Cálculo". Pearson, 9na ed. (capítulos preliminares).<br>Documento Rector PNFE (2014).',
-    ejercicios: 'Guía extensa con más de 100 ejercicios progresivos. Las soluciones se muestran interactivamente dentro de la plataforma.'
-  },
-  'calculo-dif': {
-    nombre: 'Matemática I: Cálculo Diferencial',
-    codigo: '01MAT208',
-    trayecto: 'I',
-    uc: 8,
-    objetivos: [
-      'Comprender el concepto de límite y continuidad de funciones reales.',
-      'Dominar las técnicas de derivación y su interpretación geométrica y física.',
-      'Aplicar la derivada a problemas de optimización, rapidez de variación y análisis de funciones.',
-      'Utilizar la regla de L\'Hôpital para el cálculo de límites indeterminados.'
-    ],
-    temario: [
-      { titulo: 'Unidad 1: Límites y Continuidad', horas: 12, subtemas: ['1.1 Definición intuitiva y formal de límite', '1.2 Límites laterales', '1.3 Propiedades de los límites', '1.4 Límites infinitos y al infinito. Asíntotas', '1.5 Continuidad. Tipos de discontinuidades', '1.6 Teorema del valor intermedio'] },
-      { titulo: 'Unidad 2: Derivadas', horas: 16, subtemas: ['2.1 Definición de derivada. Interpretación geométrica', '2.2 Reglas de derivación', '2.3 Regla de la cadena', '2.4 Derivación implícita', '2.5 Derivadas de orden superior', '2.6 Derivada de funciones paramétricas'] },
-      { titulo: 'Unidad 3: Aplicaciones de la Derivada', horas: 20, subtemas: ['3.1 Recta tangente y normal', '3.2 Teorema de Rolle y teorema del valor medio', '3.3 Funciones crecientes y decrecientes. Criterio de la primera derivada', '3.4 Concavidad y puntos de inflexión', '3.5 Optimización (máximos y mínimos)', '3.6 Problemas de rapidez de variación', '3.7 Regla de L\'Hôpital'] },
-      { titulo: 'Unidad 4: Estudio completo de funciones', horas: 12, subtemas: ['4.1 Dominio, simetrías, cortes con ejes', '4.2 Asíntotas', '4.3 Crecimiento y decrecimiento', '4.4 Máximos y mínimos', '4.5 Concavidad y puntos de inflexión', '4.6 Trazado de curvas'] }
-    ],
-    metodologia: 'Clases teórico-prácticas con resolución de problemas. Uso de software gráfico para visualización de funciones. Trabajo colaborativo en grupos.',
-    evaluacion: 'Tres cortes: 25% (semana 12), 30% (semana 24), 45% (semana 35-36). Incluye pruebas escritas, talleres y proyecto de análisis de funciones.',
-    bibliografia: 'Purcell, Varberg, Rigdon. "Cálculo". Pearson, 9na ed., 2007.<br>Stewart, James. "Cálculo". Cengage, 6ta ed., 2008.<br>Leithold, Louis. "El Cálculo". Oxford, 7ma ed., 2010.',
-    ejercicios: 'Colección de problemas por cada unidad. Disponible en formato PDF.'
-  },
-  'calculo-int': {
-    nombre: 'Matemática I: Cálculo Integral',
-    codigo: '01MAT208',
-    trayecto: 'I',
-    uc: 8,
-    objetivos: [
-      'Comprender la integral indefinida como antiderivada y sus propiedades.',
-      'Aplicar métodos de integración para resolver integrales de diversos tipos.',
-      'Interpretar la integral definida como límite de sumas de Riemann y aplicar el Teorema Fundamental del Cálculo.',
-      'Resolver problemas de áreas, volúmenes, trabajo y otras aplicaciones físicas y geométricas.',
-      'Analizar la convergencia de series numéricas y de potencia.'
-    ],
-    temario: [
-      { titulo: 'Unidad 1: Integral indefinida', horas: 10, subtemas: ['1.1 Antiderivada. Constante de integración', '1.2 Propiedades de la integral indefinida', '1.3 Integrales inmediatas', '1.4 Integración por sustitución'] },
-      { titulo: 'Unidad 2: Métodos de integración', horas: 24, subtemas: ['2.1 Integración por partes', '2.2 Sustitución trigonométrica', '2.3 Integración de funciones racionales (fracciones parciales)', '2.4 Integración de funciones trigonométricas', '2.5 Integrales de funciones irracionales'] },
-      { titulo: 'Unidad 3: Integral definida', horas: 14, subtemas: ['3.1 Sumas de Riemann. Definición', '3.2 Propiedades de la integral definida', '3.3 Teorema Fundamental del Cálculo', '3.4 Teorema del valor medio para integrales', '3.5 Integrales impropias'] },
-      { titulo: 'Unidad 4: Aplicaciones de la integral', horas: 12, subtemas: ['4.1 Cálculo de áreas entre curvas', '4.2 Volúmenes de revolución (discos, arandelas, cascarones)', '4.3 Longitud de arco', '4.4 Trabajo mecánico', '4.5 Fuerza sobre superficies planas sumergidas'] },
-      { titulo: 'Unidad 5: Series infinitas', horas: 14, subtemas: ['5.1 Sucesiones. Convergencia', '5.2 Series numéricas. Criterios de convergencia', '5.3 Series alternas. Convergencia absoluta/condicional', '5.4 Series de potencia. Radio de convergencia', '5.5 Series de Taylor y Maclaurin'] }
-    ],
-    metodologia: 'Clases expositivas y talleres de integración. Uso de software para visualización de áreas y volúmenes.',
-    evaluacion: 'Tres cortes: 25% (semana 12), 30% (semana 24), 45% (semana 35-36). Incluye pruebas escritas y proyecto de aplicación.',
-    bibliografia: 'Purcell, Varberg, Rigdon. "Cálculo". Pearson, 9na ed., 2007.<br>Stewart, James. "Cálculo". Cengage, 6ta ed., 2008.<br>James Gllyn. "Matemáticas avanzadas para Ingeniería". Pearson, 2002.',
-    ejercicios: 'Banco de ejercicios de integración y series. Incluye respuestas seleccionadas.'
-  },
-  'algebra': {
-    nombre: 'Estadística, Álgebra Lineal y Geometría Analítica',
-    codigo: '01EAG105',
-    trayecto: 'I',
-    uc: 5,
-    objetivos: [
-      'Manejar operaciones con matrices y determinantes, y resolver sistemas de ecuaciones lineales.',
-      'Comprender los conceptos de espacio vectorial, base, dimensión y transformaciones lineales.',
-      'Calcular valores y vectores propios y aplicarlos a problemas de ingeniería.',
-      'Aplicar la estadística descriptiva y la probabilidad a problemas reales.',
-      'Analizar rectas, planos y cónicas desde la geometría analítica.'
-    ],
-    temario: [
-      { titulo: 'Unidad 1: Matrices y determinantes', horas: 10, subtemas: ['1.1 Definición y tipos de matrices', '1.2 Operaciones con matrices', '1.3 Matriz inversa. Método de Gauss-Jordán', '1.4 Determinantes. Propiedades', '1.5 Menores y cofactores. Matriz adjunta'] },
-      { titulo: 'Unidad 2: Sistemas de ecuaciones lineales', horas: 8, subtemas: ['2.1 Representación matricial', '2.2 Eliminación de Gauss', '2.3 Regla de Cramer', '2.4 Sistemas homogéneos'] },
-      { titulo: 'Unidad 3: Espacios vectoriales', horas: 12, subtemas: ['3.1 Definición y ejemplos', '3.2 Subespacios', '3.3 Combinación lineal. Dependencia/independencia lineal', '3.4 Base y dimensión', '3.5 Cambio de base', '3.6 Ortogonalización de Gram-Schmidt'] },
-      { titulo: 'Unidad 4: Transformaciones lineales', horas: 8, subtemas: ['4.1 Definición y propiedades', '4.2 Núcleo e imagen', '4.3 Representación matricial'] },
-      { titulo: 'Unidad 5: Valores y vectores propios', horas: 8, subtemas: ['5.1 Definición', '5.2 Polinomio característico', '5.3 Diagonalización de matrices', '5.4 Aplicaciones en ingeniería'] },
-      { titulo: 'Unidad 6: Estadística y probabilidad', horas: 10, subtemas: ['6.1 Medidas de tendencia central y dispersión', '6.2 Teoría de probabilidad', '6.3 Teorema de Bayes', '6.4 Distribuciones discretas'] },
-      { titulo: 'Unidad 7: Geometría analítica', horas: 8, subtemas: ['7.1 Rectas y planos', '7.2 Circunferencia, parábola, elipse, hipérbola', '7.3 Coordenadas polares y paramétricas'] }
-    ],
-    metodologia: 'Clases teóricas con ejemplos prácticos. Resolución de problemas con matrices y espacios vectoriales.',
-    evaluacion: 'Evaluación continua con pruebas cortas, talleres y examen final integrador.',
-    bibliografia: 'Grossman, Stanley. "Álgebra Lineal". McGraw Hill, 1996.<br>Noble, Ben. "Álgebra Lineal Aplicada". Prentice Hall, 1998.<br>Ayres, Frank. "Matrices". McGraw Hill, 1991.',
-    ejercicios: 'Prácticas de álgebra lineal y problemas de estadística aplicada.'
-  },
-  'ecuaciones': {
-    nombre: 'Matemáticas II: Ecuaciones Diferenciales',
-    codigo: '01MAT206',
-    trayecto: 'II',
-    uc: 6,
-    objetivos: [
-      'Clasificar y resolver ecuaciones diferenciales de primer orden y grado superior.',
-      'Resolver ecuaciones diferenciales lineales de orden superior con coeficientes constantes.',
-      'Aplicar la transformada de Laplace para resolver problemas de valor inicial.',
-      'Desarrollar funciones periódicas en series de Fourier.',
-      'Introducir el método de separación de variables para ecuaciones diferenciales parciales.'
-    ],
-    temario: [
-      { titulo: 'Unidad 1: EDO de primer orden', horas: 12, subtemas: ['1.1 Clasificación de EDO', '1.2 Variables separables', '1.3 Ecuaciones exactas y factores integrantes', '1.4 Ecuaciones lineales', '1.5 Bernoulli y Riccati', '1.6 Aplicaciones geométricas y físicas'] },
-      { titulo: 'Unidad 2: EDO de orden superior', horas: 14, subtemas: ['2.1 Ecuaciones lineales homogéneas con coeficientes constantes', '2.2 Ecuación característica', '2.3 Coeficientes indeterminados', '2.4 Variación de parámetros', '2.5 Aplicaciones a circuitos RLC'] },
-      { titulo: 'Unidad 3: Transformada de Laplace', horas: 14, subtemas: ['3.1 Definición y funciones de orden exponencial', '3.2 Transformada de funciones elementales', '3.3 Propiedades. Teorema de traslación', '3.4 Función escalón de Heaviside', '3.5 Transformada inversa. Fracciones parciales', '3.6 Teorema de convolución', '3.7 Aplicación a PVI'] },
-      { titulo: 'Unidad 4: Series de Fourier', horas: 10, subtemas: ['4.1 Funciones periódicas', '4.2 Series trigonométricas de Fourier', '4.3 Coeficientes de Fourier', '4.4 Funciones pares e impares', '4.5 Series de senos y cosenos'] },
-      { titulo: 'Unidad 5: Introducción a EDP', horas: 6, subtemas: ['5.1 Clasificación', '5.2 Método de separación de variables', '5.3 Aplicación a ecuación de onda y calor'] }
-    ],
-    metodologia: 'Clases teórico-prácticas con énfasis en modelado de sistemas físicos y eléctricos.',
-    evaluacion: 'Tres cortes: 25% (semana 12), 30% (semana 24), 45% (semana 35-36).',
-    bibliografia: 'Purcell, Varberg, Rigdon. "Cálculo". Pearson, 2007.<br>Stewart, James. "Cálculo". Cengage, 2008.<br>Tomeo, Uña, San Martín. "Problemas Resueltos de Cálculo". Thomson, 2005.',
-    ejercicios: 'Colección de EDO con aplicaciones a circuitos y sistemas mecánicos.'
-  }
-};
-
-// ======================== FUNCIONES PARA COMENTARIOS ========================
-function loadComments(materiaId) {
-  const stored = localStorage.getItem(`comments_${materiaId}`);
-  return stored ? JSON.parse(stored) : [];
-}
-function saveComment(materiaId, nombre, texto) {
-  const comments = loadComments(materiaId);
-  comments.push({ nombre, texto, fecha: new Date().toLocaleString() });
-  localStorage.setItem(`comments_${materiaId}`, JSON.stringify(comments));
-  renderComments(materiaId);
-}
-function renderComments(materiaId) {
-  const container = document.getElementById(`comments-${materiaId}`);
-  if (!container) return;
-  const comments = loadComments(materiaId);
-  if (comments.length === 0) {
-    container.innerHTML = '<p style="color: var(--muted);">No hay comentarios aún. Sé el primero en preguntar.</p>';
-    return;
-  }
-  container.innerHTML = comments.map(c => `
-    <div class="comment">
-      <div><span class="comment-author">${escapeHtml(c.nombre)}</span><span class="comment-date">${c.fecha}</span></div>
-      <div class="comment-text">${escapeHtml(c.texto)}</div>
-    </div>
-  `).join('');
-}
-function escapeHtml(str) {
-  return str.replace(/[&<>]/g, function(m) {
-    if (m === '&') return '&amp;';
-    if (m === '<') return '&lt;';
-    if (m === '>') return '&gt;';
-    return m;
-  });
-}
-
-// ======================== GENERAR VISTAS (con guía especial para "iniciacion") ========================
-const container = document.getElementById('materia-views-container');
-
-function buildMateriaView(materiaId, data) {
-  const viewDiv = document.createElement('div');
-  viewDiv.id = `${materiaId}-view`;
-  viewDiv.className = 'materia-view';
-  
-  // Para la materia de iniciación, el contenido detallado será la guía extendida con ejercicios interactivos
-  let detalleHTML = '';
-  if (materiaId === 'iniciacion') {
-    detalleHTML = `
-      <div class="view-header">
-        <h2>${data.nombre} - Guía completa</h2>
-        <div class="btn-group">
-          <button class="btn show-summary-btn" data-materia="${materiaId}">← Volver al resumen</button>
-        </div>
-      </div>
-      <h3>📘 Fundamentos para Ingeniería Eléctrica</h3>
-      <p>Esta guía cubre todos los temas del Trayecto Inicial, con teoría, ejemplos y ejercicios resueltos paso a paso. Cada ejercicio incluye una solución interactiva.</p>
-      
-      <!-- UNIDAD 1: Factorización y potenciación -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">📐 Unidad 1: Factorización, Potenciación y Racionalización</div>
-        <div class="definicion"><strong>Factorización:</strong> Escribir una expresión como producto de factores irreducibles.<br>
-        <strong>Potenciación:</strong> \(a^n = a \cdot a \cdots a\) (n veces).<br>
-        <strong>Racionalizar:</strong> Eliminar radicales del denominador.
-        </div>
-        <div class="ejemplo"><strong>Ejemplo eléctrico:</strong> En el cálculo de impedancias, a veces aparece \( \frac{1}{R+j\omega L} \). Racionalizando: \( \frac{R-j\omega L}{R^2+(\omega L)^2} \).</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 1.1</strong> – Factoriza: \(x^2 - 16\)<br>
-          <button onclick="toggleSolucion('sol11_inic')">Ver solución</button>
-          <div id="sol11_inic" class="solucion">\((x-4)(x+4)\)</div>
-        </div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 1.2</strong> – Racionaliza: \(\frac{5}{\sqrt{3}}\)<br>
-          <button onclick="toggleSolucion('sol12_inic')">Ver solución</button>
-          <div id="sol12_inic" class="solucion">\(\frac{5\sqrt{3}}{3}\)</div>
-        </div>
-      </div>
-      
-      <!-- UNIDAD 2: Sistema de coordenadas y funciones -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">📈 Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales</div>
-        <div class="definicion">Distancia entre dos puntos: \(d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\).<br>
-        Dominio de una función: valores de \(x\) para los que \(f(x)\) es real.</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 2.1</strong> – Halla el dominio de \(f(x)=\frac{x+1}{x^2-4}\).<br>
-          <button onclick="toggleSolucion('sol21_inic')">Ver solución</button>
-          <div id="sol21_inic" class="solucion">\(x \neq \pm2\), dominio \(\mathbb{R}\setminus\{-2,2\}\)</div>
-        </div>
-      </div>
-      
-      <!-- UNIDAD 3: Trigonometría y logaritmos -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">📐 Unidad 3: Funciones Trigonométricas y Logarítmicas</div>
-        <div class="formula">\(\sin^2\theta+\cos^2\theta=1,\quad \ln(ab)=\ln a+\ln b\)</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 3.1</strong> – Resuelve \(\log_2(x)+\log_2(x-2)=3\).<br>
-          <button onclick="toggleSolucion('sol31_inic')">Ver solución</button>
-          <div id="sol31_inic" class="solucion">\(x=4\) (la solución negativa no es válida)</div>
-        </div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 3.2</strong> – Simplifica \(\frac{\sin^2 x}{1-\cos x}\).<br>
-          <button onclick="toggleSolucion('sol32_inic')">Ver solución</button>
-          <div id="sol32_inic" class="solucion">\(1+\cos x\)</div>
-        </div>
-      </div>
-      
-      <!-- UNIDAD 4: Matrices y determinantes -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">🔢 Unidad 4: Determinantes y Matrices</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 4.1</strong> – Calcula \(\det\begin{pmatrix}2&5\\-1&3\end{pmatrix}\).<br>
-          <button onclick="toggleSolucion('sol41_inic')">Ver solución</button>
-          <div id="sol41_inic" class="solucion">\(2\cdot3 - 5\cdot(-1)=6+5=11\)</div>
-        </div>
-      </div>
-      
-      <!-- UNIDAD 5: Sistemas de ecuaciones lineales -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">⚡ Unidad 5: Sistemas de Ecuaciones</div>
-        <div class="ejemplo"><strong>Aplicación a circuitos:</strong> Resolver un sistema de corrientes de malla.</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 5.1</strong> – Resuelve: \(\begin{cases}3x+4y=18\\2x-y=1\end{cases}\)<br>
-          <button onclick="toggleSolucion('sol51_inic')">Ver solución</button>
-          <div id="sol51_inic" class="solucion">\(x=2, y=3\)</div>
-        </div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 5.2 (Eléctrico)</strong> – Por Kirchhoff: \(I_1+I_2=I_3\), además \(2I_1+4I_3=12\), \(3I_2+4I_3=10\). Halla las corrientes.<br>
-          <button onclick="toggleSolucion('sol52_inic')">Ver solución</button>
-          <div id="sol52_inic" class="solucion">\(I_1\approx1.6923\,\text{A},\; I_2\approx0.4615\,\text{A},\; I_3\approx2.1538\,\text{A}\)</div>
-        </div>
-      </div>
-      
-      <!-- UNIDAD 6: Números complejos -->
-      <div class="temario-unidad">
-        <div class="unidad-titulo">🌀 Unidad 6: Números Complejos</div>
-        <div class="definicion">Forma binómica: \(z=a+bj\) (en ingeniería se usa \(j\) para no confundir con corriente).<br>
-        Módulo: \(|z|=\sqrt{a^2+b^2}\). Forma polar: \(z=|z|e^{j\theta}\).</div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 6.1</strong> – Dados \(z_1=3+4j\), \(z_2=1-2j\), calcula \(z_1/z_2\).<br>
-          <button onclick="toggleSolucion('sol61_inic')">Ver solución</button>
-          <div id="sol61_inic" class="solucion">\(-1+2j\)</div>
-        </div>
-        <div class="ejercicio">
-          <strong>✏️ Ejercicio 6.2</strong> – Convierte \(z = -2+2j\sqrt{3}\) a forma polar.<br>
-          <button onclick="toggleSolucion('sol62_inic')">Ver solución</button>
-          <div id="sol62_inic" class="solucion">\(4\angle 120^\circ\)</div>
-        </div>
-      </div>
-      
-      <h3>📎 Recursos descargables</h3>
-      <div class="resources-links">
-        <a href="#" class="resource-link">📥 Guía completa (PDF)</a>
-        <a href="#" class="resource-link">📄 Ejercicios adicionales</a>
-        <a href="#" class="resource-link">📊 Hoja de fórmulas</a>
-      </div>
-      
-      <div class="comments-section">
-        <h3>💬 Preguntas y comentarios</h3>
-        <div class="comment-form">
-          <input type="text" id="nombre-iniciacion" placeholder="Tu nombre" maxlength="50">
-          <textarea id="texto-iniciacion" placeholder="Escribe tu pregunta o comentario..."></textarea>
-          <button onclick="window.postComment('iniciacion')">Enviar comentario</button>
-        </div>
-        <div id="comments-iniciacion"></div>
-      </div>
-    `;
-  } else {
-    // Para las demás materias, el detalle se construye genéricamente
-    detalleHTML = `
-      <div class="view-header">
-        <h2>${data.nombre} - Contenido completo</h2>
-        <div class="btn-group">
-          <button class="btn show-summary-btn" data-materia="${materiaId}">← Volver al resumen</button>
-        </div>
-      </div>
-      <h3>🎯 Objetivos de aprendizaje</h3>
-      <ul class="topic-list">${data.objetivos.map(o => `<li><strong>✓</strong><span>${o}</span></li>`).join('')}</ul>
-      
-      <h3>📚 Temario detallado</h3>
-      ${data.temario.map(u => `
-        <div class="temario-unidad">
-          <div class="unidad-titulo">${u.titulo} <span class="badge-hours">${u.horas} horas</span></div>
-          <ul class="subtemas">${u.subtemas.map(s => `<li><strong>📌</strong><span>${s}</span></li>`).join('')}</ul>
-        </div>
-      `).join('')}
-      
-      <div class="info-grid">
-        <div class="info-card"><div class="label">Unidades de crédito</div><div class="value">${data.uc}</div></div>
-        <div class="info-card"><div class="label">Horas totales estimadas</div><div class="value">${data.temario.reduce((acc, u) => acc + u.horas, 0)}</div></div>
-        <div class="info-card"><div class="label">Trayecto</div><div class="value">${data.trayecto}</div></div>
-      </div>
-      
-      <h3>📖 Metodología</h3>
-      <p>${data.metodologia}</p>
-      <h3>📝 Evaluación</h3>
-      <p>${data.evaluacion}</p>
-      <h3>📚 Bibliografía completa</h3>
-      <p>${data.bibliografia}</p>
-      
-      <h3>📎 Recursos descargables</h3>
-      <div class="resources-links">
-        <a href="#" class="resource-link">📥 Programa de la materia (PDF)</a>
-        <a href="#" class="resource-link">📄 Ejercicios resueltos</a>
-        <a href="#" class="resource-link">📊 Guía de evaluaciones</a>
-      </div>
-      
-      <div class="comments-section">
-        <h3>💬 Preguntas y comentarios</h3>
-        <div class="comment-form">
-          <input type="text" id="nombre-${materiaId}" placeholder="Tu nombre" maxlength="50">
-          <textarea id="texto-${materiaId}" placeholder="Escribe tu pregunta o comentario..."></textarea>
-          <button onclick="window.postComment('${materiaId}')">Enviar comentario</button>
-        </div>
-        <div id="comments-${materiaId}"></div>
-      </div>
-    `;
-  }
-  
-  viewDiv.innerHTML = `
-    <div class="view-summary">
-      <div class="view-header">
-        <h2>${data.nombre}</h2>
-        <div class="btn-group">
-          <button class="btn show-detail-btn" data-materia="${materiaId}">📖 Ver contenido completo</button>
-        </div>
-      </div>
-      <p><strong>Código:</strong> ${data.codigo} | <strong>Trayecto:</strong> ${data.trayecto} ${data.uc ? `| <strong>UC:</strong> ${data.uc}` : ''}</p>
-      <ul class="topic-list">
-        ${data.temario.map(u => `<li><strong>${u.titulo}</strong><span>${u.horas} horas · ${u.subtemas.length} subtemas</span></li>`).join('')}
-      </ul>
-      <div class="resources">
-        <h4>📘 Bibliografía oficial PNFE</h4>
-        <p>${data.bibliografia}</p>
-      </div>
-    </div>
-    <div class="view-detail" id="detail-${materiaId}" style="display: none;">
-      ${detalleHTML}
-    </div>
-  `;
-  return viewDiv;
-}
-
-// Construir todas las vistas
-for (const [id, data] of Object.entries(materiasData)) {
-  container.appendChild(buildMateriaView(id, data));
-}
-
-// Función global para toggle de soluciones (usada en la guía)
-window.toggleSolucion = function(id) {
-  const solDiv = document.getElementById(id);
-  if (solDiv) solDiv.classList.toggle('mostrar');
-};
-
-// Función para postear comentarios (se reutiliza)
-window.postComment = function(materiaId) {
-  const nombreInput = document.getElementById(`nombre-${materiaId}`);
-  const textoInput = document.getElementById(`texto-${materiaId}`);
-  const nombre = nombreInput ? nombreInput.value.trim() : '';
-  const texto = textoInput ? textoInput.value.trim() : '';
-  if (!nombre || !texto) {
-    alert('Por favor, ingresa tu nombre y tu comentario.');
-    return;
-  }
-  saveComment(materiaId, nombre, texto);
-  if (nombreInput) nombreInput.value = '';
-  if (textoInput) textoInput.value = '';
-};
-
-// ======================== LÓGICA DE NAVEGACIÓN ========================
-const homeSection = document.getElementById('home-section');
-const materiasGridHome = document.getElementById('materias-grid');
-const statsBarHome = document.getElementById('stats-bar');
-const materiasLabelHome = document.getElementById('materias-label');
-const backBtnGlobal = document.getElementById('global-back-btn');
-const logoHome = document.getElementById('logo-home');
-const navMateriasLink = document.getElementById('nav-materias');
-const navContactoLink = document.getElementById('nav-contacto');
-const heroCtaBtn = document.getElementById('hero-cta-btn');
-
-let currentMateria = null;
-let currentView = 'summary';
-
-function showHome() {
-  homeSection.style.display = 'block';
-  document.querySelectorAll('.materia-view').forEach(view => view.classList.remove('active'));
-  if (materiasGridHome) materiasGridHome.style.display = 'grid';
-  if (statsBarHome) statsBarHome.style.display = 'flex';
-  if (materiasLabelHome) materiasLabelHome.style.display = 'flex';
-  backBtnGlobal.style.display = 'none';
-  currentMateria = null;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showMateria(materiaId, view = 'summary') {
-  homeSection.style.display = 'none';
-  document.querySelectorAll('.materia-view').forEach(viewDiv => viewDiv.classList.remove('active'));
-  const targetView = document.getElementById(`${materiaId}-view`);
-  if (targetView) {
-    targetView.classList.add('active');
-    const summaryDiv = targetView.querySelector('.view-summary');
-    const detailDiv = targetView.querySelector('.view-detail');
-    if (view === 'detail') {
-      summaryDiv.style.display = 'none';
-      if (detailDiv) detailDiv.style.display = 'block';
-      renderComments(materiaId);
-    } else {
-      summaryDiv.style.display = 'block';
-      if (detailDiv) detailDiv.style.display = 'none';
-    }
-  }
-  backBtnGlobal.style.display = 'inline-block';
-  currentMateria = materiaId;
-  currentView = view;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// Eventos de tarjetas
-document.querySelectorAll('.materia-card').forEach(card => {
-  card.addEventListener('click', (e) => {
+  // Smooth scroll para los enlaces
+  document.getElementById('nav-materias').addEventListener('click', (e) => {
     e.preventDefault();
-    const materia = card.getAttribute('data-materia');
-    if (materia) showMateria(materia, 'summary');
+    document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
   });
-});
+  document.getElementById('nav-contacto').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+  });
+  document.getElementById('hero-cta-btn').addEventListener('click', () => {
+    document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
+  });
+  document.getElementById('logo-home').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-// Eventos para botones dentro de las vistas (delegación)
-document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('show-detail-btn')) {
-    const materia = e.target.getAttribute('data-materia');
-    if (materia) showMateria(materia, 'detail');
-  }
-  if (e.target.classList.contains('show-summary-btn')) {
-    const materia = e.target.getAttribute('data-materia');
-    if (materia) showMateria(materia, 'summary');
-  }
-});
-
-backBtnGlobal.addEventListener('click', showHome);
-logoHome.addEventListener('click', showHome);
-navMateriasLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (homeSection.style.display === 'none') showHome();
-  document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
-});
-navContactoLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  showHome();
-  document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-});
-heroCtaBtn.addEventListener('click', () => {
-  if (homeSection.style.display === 'none') showHome();
-  document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' });
-});
-
-showHome();
-
-// ======================== CANVAS FÓRMULAS FLOTANTES ========================
-(function() {
-  const canvas = document.getElementById('canvas-bg');
-  const ctx = canvas.getContext('2d');
-  const symbols = ['∂f/∂x', '∫₀^∞', '∑ₙ', 'lim→0', 'det(A)', 'λ₁,₂', 'e^{iπ}', '∇²φ', 'Ax=b', 'd²y/dx²', '∮ E·dl', 'L{f}', 'y″+py′', 'R·C', 'ω₀', 'Z=jωL', '∂²u/∂t²', 'rank(A)', 'ker(T)', 'F(s)', '⟨u,v⟩', 'span{v₁}', 'curl F', 'div B=0'];
-  let W, H, particles = [];
-  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
-  function Particle() { this.reset = function() { this.x = Math.random() * W; this.y = Math.random() * H; this.vx = (Math.random() - 0.5) * 0.18; this.vy = (Math.random() - 0.5) * 0.12; this.alpha = Math.random() * 0.07 + 0.02; this.sym = symbols[Math.floor(Math.random() * symbols.length)]; }; this.reset(); }
-  function init() { resize(); particles = Array.from({ length: 38 }, () => new Particle()); }
-  function draw() { ctx.clearRect(0, 0, W, H); ctx.font = `300 14px 'JetBrains Mono', monospace`; for (const p of particles) { ctx.globalAlpha = p.alpha; ctx.fillStyle = '#c9a84c'; ctx.fillText(p.sym, p.x, p.y); p.x += p.vx; p.y += p.vy; if (p.x < -80 || p.x > W + 80 || p.y < -30 || p.y > H + 30) { p.x = Math.random() * W; p.y = Math.random() < 0.5 ? -20 : H + 20; } } ctx.globalAlpha = 1; requestAnimationFrame(draw); }
-  window.addEventListener('resize', resize); init(); draw();
-})();
+  // Canvas de fórmulas flotantes (igual que antes)
+  (function() {
+    const canvas = document.getElementById('canvas-bg');
+    const ctx = canvas.getContext('2d');
+    const symbols = ['∂f/∂x', '∫₀^∞', '∑ₙ', 'lim→0', 'det(A)', 'λ₁,₂', 'e^{iπ}', '∇²φ', 'Ax=b', 'd²y/dx²', '∮ E·dl', 'L{f}', 'y″+py′', 'R·C', 'ω₀', 'Z=jωL', '∂²u/∂t²', 'rank(A)', 'ker(T)', 'F(s)', '⟨u,v⟩', 'span{v₁}', 'curl F', 'div B=0'];
+    let W, H, particles = [];
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function Particle() { this.reset = function() { this.x = Math.random() * W; this.y = Math.random() * H; this.vx = (Math.random() - 0.5) * 0.18; this.vy = (Math.random() - 0.5) * 0.12; this.alpha = Math.random() * 0.07 + 0.02; this.sym = symbols[Math.floor(Math.random() * symbols.length)]; }; this.reset(); }
+    function init() { resize(); particles = Array.from({ length: 38 }, () => new Particle()); }
+    function draw() { ctx.clearRect(0, 0, W, H); ctx.font = `300 14px 'JetBrains Mono', monospace`; for (const p of particles) { ctx.globalAlpha = p.alpha; ctx.fillStyle = '#c9a84c'; ctx.fillText(p.sym, p.x, p.y); p.x += p.vx; p.y += p.vy; if (p.x < -80 || p.x > W + 80 || p.y < -30 || p.y > H + 30) { p.x = Math.random() * W; p.y = Math.random() < 0.5 ? -20 : H + 20; } } ctx.globalAlpha = 1; requestAnimationFrame(draw); }
+    window.addEventListener('resize', resize); init(); draw();
+  })();
 </script>
 </body>
 </html>
