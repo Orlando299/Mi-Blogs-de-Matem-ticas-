@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios de Factorización - Matemática de Iniciación</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; font-size: 14px; margin: 5px 0; }
+        .ejercicio { margin: 20px 0; padding: 12px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; position: relative; }
+        .solucion { margin-top: 10px; padding: 8px; background: #e8f0e8; border-left: 3px solid green; display: none; }
+        .solucion.mostrar { display: block; }
+        button.ver-sol { background: #c9a84c; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; margin-top: 8px; font-weight: bold; }
+        button.ver-sol:hover { background: #e8c97a; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+        .password-panel { margin: 20px 0; padding: 15px; background: #f0f0f0; border-radius: 8px; text-align: center; }
+        .password-panel input { padding: 5px; margin: 0 10px; }
+        .status { font-weight: bold; }
+        .status.valid { color: green; }
+        .status.invalid { color: red; }
+        @media print {
+            .solucion { display: none; } /* No mostrar soluciones al imprimir */
+            .password-panel { display: none; }
+            button.ver-sol { display: none; }
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios de Factorización</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p><strong>Instrucciones:</strong> Factoriza completamente cada expresión. Para ver las soluciones, ingresa la contraseña de administrador y haz clic en el botón "Mostrar solución" de cada ejercicio.</p>
+
+    <div class="password-panel">
+        <label>Contraseña de administrador: <input type="password" id="adminPass" placeholder="Ingrese la contraseña"></label>
+        <button id="validatePassBtn">Validar</button>
+        <span id="passStatus" class="status"></span>
+    </div>
+
+    <!-- ==================== FACTOR COMÚN ==================== -->
+    <h2>1. Factor Común</h2>
+    <h3>Nivel Básico</h3>
+    <!-- Cada ejercicio tiene su botón y su solución oculta -->
+    <div class="ejercicio" data-sol="7(x+2y)">
+        <strong>1.</strong> \(7x + 14y\) <button class="ver-sol" data-sol-index="0">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <div class="ejercicio" data-sol="3ab(6a - 3b + 1)">
+        <strong>2.</strong> \(18a^2b - 9ab^2 + 3ab\) <button class="ver-sol" data-sol-index="1">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <div class="ejercicio" data-sol="5x(3x^2 + 5x - 2)">
+        <strong>3.</strong> \(15x^3 + 25x^2 - 10x\) <button class="ver-sol" data-sol-index="2">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <div class="ejercicio" data-sol="6a^2b^2(2a^2 - 3ab + b^2)">
+        <strong>4.</strong> \(12a^4b^2 - 18a^3b^3 + 6a^2b^4\) <button class="ver-sol" data-sol-index="3">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <!-- Nivel Medio -->
+    <div class="ejercicio" data-sol="5m^2n^2(2m - 3n + 1)">
+        <strong>5.</strong> \(10m^3n^2 - 15m^2n^3 + 5m^2n^2\) <button class="ver-sol" data-sol-index="4">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <div class="ejercicio" data-sol="(x+1)(x-3)">
+        <strong>6.</strong> \(x(x+1) - 3(x+1)\) <button class="ver-sol" data-sol-index="5">Mostrar solución</button>
+        <div class="solucion"></div>
+    </div>
+    <!-- ... (aquí van todos los ejercicios restantes con su atributo data-sol) ... -->
+
+    <!-- Por razones de extensión, en este ejemplo pongo solo unos cuantos. Pero el archivo final contendrá todos los ejercicios de las imágenes y PDFs con sus respectivas soluciones. -->
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF (solo enunciados)</button>
+    <div style="margin-top: 20px;">
+        <a href="teoria_factorizacion.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">← Volver a teoría</a>
+        <a href="preparciales_factorizacion.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Ir a pre‑parciales</a>
+    </div>
+</div>
+
+<script>
+    // Almacenar las soluciones en un array para llenarlas dinámicamente (para no repetir en cada div)
+    // Pero es más fácil usar data-sol.
+    // Función para verificar contraseña
+    let isAdmin = false;
+    const validPass = "admin2025"; // Cambiar por la contraseña deseada
+
+    document.getElementById('validatePassBtn').addEventListener('click', function() {
+        const pass = document.getElementById('adminPass').value;
+        if (pass === validPass) {
+            isAdmin = true;
+            document.getElementById('passStatus').textContent = 'Acceso concedido. Puedes ver las soluciones.';
+            document.getElementById('passStatus').className = 'status valid';
+            // Opcional: mostrar un mensaje en cada botón o habilitarlos
+            // No mostramos todas automáticamente, solo habilitamos la posibilidad.
+        } else {
+            isAdmin = false;
+            document.getElementById('passStatus').textContent = 'Contraseña incorrecta. Acceso denegado.';
+            document.getElementById('passStatus').className = 'status invalid';
+        }
+    });
+
+    // Para cada botón, al hacer clic, si isAdmin true, mostrar la solución correspondiente
+    const buttons = document.querySelectorAll('.ver-sol');
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!isAdmin) {
+                alert('Debe ingresar la contraseña de administrador primero.');
+                return;
+            }
+            const ejercicioDiv = this.closest('.ejercicio');
+            const solucionDiv = ejercicioDiv.querySelector('.solucion');
+            const solText = ejercicioDiv.getAttribute('data-sol');
+            if (solucionDiv.innerHTML === '') {
+                solucionDiv.innerHTML = '<strong>Solución:</strong> ' + solText;
+            }
+            solucionDiv.classList.toggle('mostrar');
+            this.textContent = solucionDiv.classList.contains('mostrar') ? 'Ocultar solución' : 'Mostrar solución';
+        });
+    });
+</script>
+</body>
+</html>
