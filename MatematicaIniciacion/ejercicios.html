@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios de Factorización - Matemática Iniciación</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .ejercicio { margin: 20px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; }
+        .solucion { margin-top: 10px; padding: 8px; background: #e8f0e8; border-left: 3px solid green; display: none; }
+        .solucion.mostrar { display: block; }
+        button.ver-sol { background: #c9a84c; border: none; padding: 4px 12px; border-radius: 20px; cursor: pointer; margin-top: 8px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .solucion { display: block; } button.ver-sol { display: none; } .latex-container { margin: 0; padding: 20px; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios de Factorización</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p><strong>Instrucciones:</strong> Factoriza completamente cada expresión. Al final de cada sección puedes mostrar las soluciones.</p>
+
+    <h2>1. Factor Común</h2>
+    <div class="ejercicio"><strong>1.</strong> \(7x + 14y\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(7(x+2y)\)</div></div>
+    <div class="ejercicio"><strong>2.</strong> \(18a^2b - 9ab^2 + 3ab\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(3ab(6a - 3b + 1)\)</div></div>
+    <div class="ejercicio"><strong>3.</strong> \(15x^3 + 25x^2 - 10x\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(5x(3x^2 + 5x - 2)\)</div></div>
+    <div class="ejercicio"><strong>4.</strong> \(12a^4b^2 - 18a^3b^3 + 6a^2b^4\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(6a^2b^2(2a^2 - 3ab + b^2)\)</div></div>
+    <!-- Agrega aquí todos los ejercicios de factor común que me enviaste (nivel medio y avanzado también) -->
+
+    <h2>2. Trinomio Cuadrado Perfecto</h2>
+    <div class="ejercicio"><strong>1.</strong> \((x+3)(x+3)\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\((x+3)^2\)</div></div>
+    <!-- ... resto ... -->
+
+    <h2>3. Suma por Diferencia (Diferencia de cuadrados)</h2>
+    <div class="ejercicio"><strong>1.</strong> \((x+5)(x-5)\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(x^2-25\)</div></div>
+    <!-- ... resto ... -->
+
+    <h2>4. Trinomios \(x^2 + bx + c\)</h2>
+    <div class="ejercicio"><strong>1.</strong> \(x^2 + 7x + 12\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\((x+3)(x+4)\)</div></div>
+    <!-- ... todos los del PDF ... -->
+
+    <h2>5. Aspa simple (\(ax^2+bx+c\))</h2>
+    <div class="ejercicio"><strong>1.</strong> \(2x^2+7x+3\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\((2x+1)(x+3)\)</div></div>
+    <!-- ... hasta el 10 ... -->
+
+    <h2>6. Simplificación de fracciones algebraicas</h2>
+    <div class="ejercicio"><strong>1.</strong> \(\frac{x^2-9}{x^2+2x-15}\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(\frac{x+3}{x+5},\ x\neq 3,-5\)</div></div>
+    <!-- ... resto ... -->
+
+    <h2>7. Operaciones con fracciones algebraicas</h2>
+    <div class="ejercicio"><strong>1.</strong> \(\frac{x^2+2x-15}{x^2-25} \cdot \frac{x+5}{x-3}\) <button class="ver-sol" onclick="toggleSol(this)">Mostrar solución</button><div class="solucion">\(\frac{x+5}{x-5}\)</div></div>
+    <!-- ... -->
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF (Ejercicios)</button>
+    <div style="margin-top: 20px;">
+        <a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Ir a pre‑parciales</a>
+    </div>
+</div>
+<script>
+    function toggleSol(btn) {
+        let solDiv = btn.nextElementSibling;
+        solDiv.classList.toggle('mostrar');
+        btn.textContent = solDiv.classList.contains('mostrar') ? 'Ocultar solución' : 'Mostrar solución';
+    }
+</script>
+</body>
+</html>
