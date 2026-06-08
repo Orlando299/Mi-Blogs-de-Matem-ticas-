@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones de Sistema de Coordenadas</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 10px 0; padding: 8px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones de Sistema de Coordenadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>Soluciones de ejercicios y pre‑parciales</h2>
+
+        <h3>Ejercicios de coordenadas</h3>
+        <div class="solucion-item">1. Triángulo rectángulo (con vértices \(A(2,3), B(5,7), C(2,7)\)).</div>
+        <div class="solucion-item">2. Perímetro: \(AB=5,\ BC=3,\ CA=4\) → \(P=12\) unidades.</div>
+        <div class="solucion-item">3. Pendiente \(m = \frac{10-4}{3-1}=3\).</div>
+        <div class="solucion-item">4. \(y-5=3(x-2) \Rightarrow y=3x-1\).</div>
+        <div class="solucion-item">5. Triángulo \(STU\): lados \(ST=5,\ TU=\sqrt{18}\approx4.24,\ US=5\). No es rectángulo porque \(5^2+5^2 \neq (\sqrt{18})^2\) (es isósceles y acutángulo). Perímetro \(\approx 14.24\).</div>
+        <div class="solucion-item">6. Recta \(TU\): pendiente \(m=\frac{1-5}{4-1}=-\frac{4}{3}\), ecuación: \(y-5=-\frac{4}{3}(x-1)\).</div>
+        <div class="solucion-item">7. Rectángulo \(DEFG\): lados horizontales de longitud 4, verticales de longitud 3, perímetro 14.</div>
+        <div class="solucion-item">8. \(HI = \sqrt{(6-2)^2+(5-2)^2}=5\); pendiente \(m=\frac{5-2}{6-2}=\frac{3}{4}\).</div>
+        <div class="solucion-item">9. Recta \(HI\): \(y-2=\frac{3}{4}(x-2) \Rightarrow y=\frac{3}{4}x+\frac{1}{2}\).</div>
+        <div class="solucion-item">10. Intersección entre recta del ejercicio 3 (y=3x+1) y del ejercicio 4 (y=3x-1) → no hay intersección (paralelas).</div>
+        <div class="solucion-item">11. Polígono \(OPQR\): lados \(OP=\sqrt{18}\approx4.24,\ PQ=\sqrt{8}\approx2.83,\ QR=\sqrt{18}\approx4.24,\ RO=\sqrt{8}\approx2.83\); perímetro \(\approx14.14\). No es un rectángulo (los lados no son perpendiculares).</div>
+        <div class="solucion-item">12. Recta \(OP\): pendiente \(m=\frac{5-2}{4-1}=1\), ecuación \(y-2=1(x-1) \Rightarrow y=x+1\).</div>
+
+        <h3>Pre‑parcial 1</h3>
+        <div class="solucion-item">1. Triángulo rectángulo (con catetos horizontales/verticales).</div>
+        <div class="solucion-item">2. Perímetro: \(AB=5,\ BC=3,\ AC=4\) → \(12\).</div>
+        <div class="solucion-item">3. Pendiente \(m=3\).</div>
+        <div class="solucion-item">4. \(y=3x-1\).</div>
+        <div class="solucion-item">5. La recta \(y=3x-1\) pasa por \(A(2,3)?\) \(3=3(2)-1=5\) no; por \(B(5,7)?\) \(7=3(5)-1=14\) no; por \(C(2,7)?\) \(7=5\) no. No pasa por ninguno.</div>
+
+        <h3>Pre‑parcial 2</h3>
+        <div class="solucion-item">1. Rectángulo de ancho 4, alto 3.</div>
+        <div class="solucion-item">2. Perímetro = 2(4+3)=14.</div>
+        <div class="solucion-item">3. a) \(HI = \sqrt{4^2+3^2}=5\); b) \(m=3/4\).</div>
+        <div class="solucion-item">4. \(y=\frac{3}{4}x+\frac{1}{2}\).</div>
+        <div class="solucion-item">5. Gráfico: la recta cruza el rectángulo.</div>
+
+        <h3>Pre‑parcial 3</h3>
+        <div class="solucion-item">1. Rectángulo (o cuadrado de 4x3).</div>
+        <div class="solucion-item">2. Perímetro = 14.</div>
+        <div class="solucion-item">3. Diagonal \(JL = 5\).</div>
+        <div class="solucion-item">4. \(y-4=-2(x-3) \Rightarrow y=-2x+10\).</div>
+        <div class="solucion-item">5. La recta corta al rectángulo en dos puntos (ver gráfico).</div>
+
+        <h3>Pre‑parcial 4</h3>
+        <div class="solucion-item">1. Polígono irregular.</div>
+        <div class="solucion-item">2. Perímetro ≈ 14.14 (ver cálculos).</div>
+        <div class="solucion-item">3. No es rectángulo porque las pendientes de lados opuestos no son iguales (OP tiene pendiente 1, QR pendiente -1).</div>
+        <div class="solucion-item">4. \(y=x+1\).</div>
+        <div class="solucion-item">5. La recta OP es un lado del polígono.</div>
+
+        <h3>Pre‑parcial 5</h3>
+        <div class="solucion-item">1. Triángulo isósceles.</div>
+        <div class="solucion-item">2. No es rectángulo (comprobación: \(5^2+5^2 \neq (\sqrt{18})^2\)). Perímetro = \(5+5+\sqrt{18}\approx 14.24\).</div>
+        <div class="solucion-item">3. Recta \(TU\): pendiente \(-\frac{4}{3}\), ecuación \(y-1=-\frac{4}{3}(x-4)\) o \(y=-\frac{4}{3}x+\frac{19}{3}\).</div>
+        <div class="solucion-item">4. Recta con pendiente \(1/2\) por \(S\): \(y-1=\frac{1}{2}(x+2) \Rightarrow y=\frac{1}{2}x+2\).</div>
+        <div class="solucion-item">5. Intersección: resolver \(-\frac{4}{3}x+\frac{19}{3}=\frac{1}{2}x+2\) → multiplicando por 6: \(-8x+38=3x+12\) → \(26=11x\) → \(x=26/11\approx2.364\), \(y= (1/2)(26/11)+2 = 13/11+2=35/11\approx3.182\). Punto \(\left(\frac{26}{11},\frac{35}{11}\right)\).</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
