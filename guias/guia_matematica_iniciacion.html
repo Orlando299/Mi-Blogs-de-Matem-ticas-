@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía de Matemática de Iniciación - PNF Electricidad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            line-height: 1.5;
+            background: white;
+            color: black;
+            padding: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #1a3e6f;
+            margin-top: 1.5em;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.3em;
+        }
+        h1 { text-align: center; border-bottom: none; font-size: 28px; }
+        .portada { text-align: center; margin-bottom: 40px; border-bottom: 1px solid #aaa; padding-bottom: 20px; }
+        .unidad { margin: 30px 0; }
+        .definicion, .ejemplo {
+            background: #f5f5f5;
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #1a3e6f;
+        }
+        .ejemplo { border-left-color: #c96b1a; }
+        .formula {
+            font-family: monospace;
+            background: #f9f2e0;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .ejercicio {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fef9e6;
+        }
+        .solucion {
+            margin-top: 8px;
+            padding: 8px;
+            background: #e8f0e8;
+            border-left: 3px solid green;
+        }
+        .badge {
+            background: #1a3e6f;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        @media print {
+            body { padding: 20px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="portada">
+    <h1>📐 Matemática de Iniciación</h1>
+    <p>Programa Nacional de Formación en Electricidad (PNFE)</p>
+    <p>Código: 01MAT000 · Trayecto Inicial</p>
+    <p>Basado en el Documento Rector (Octubre 2014)</p>
+    <p style="margin-top: 20px;"><strong>Guía completa con teoría, ejemplos y ejercicios resueltos</strong></p>
+</div>
+
+<div style="text-align:center; margin: 30px 0;">
+    <span class="badge">Fundamentos para Ingeniería Eléctrica</span>
+</div>
+
+<h2>Índice</h2>
+<ul>
+    <li><a href="#unidad1">Unidad 1: Factorización, Potenciación y Racionalización</a></li>
+    <li><a href="#unidad2">Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales</a></li>
+    <li><a href="#unidad3">Unidad 3: Funciones Trigonométricas y Logarítmicas</a></li>
+    <li><a href="#unidad4">Unidad 4: Determinantes y Matrices</a></li>
+    <li><a href="#unidad5">Unidad 5: Sistemas de Ecuaciones Lineales</a></li>
+    <li><a href="#unidad6">Unidad 6: Nociones Básicas de Números Complejos</a></li>
+</ul>
+
+<!-- UNIDAD 1 -->
+<div class="unidad" id="unidad1">
+    <h2>📌 Unidad 1: Factorización, Potenciación y Racionalización</h2>
+    <div class="definicion">
+        <strong>Factorización:</strong> Escribir una expresión algebraica como producto de factores irreducibles.<br>
+        <strong>Potenciación:</strong> \(a^n = a \cdot a \cdots a\) (n veces). Propiedades: \(a^m a^n = a^{m+n}\), \((a^m)^n = a^{mn}\), \(a^{-n}=1/a^n\).<br>
+        <strong>Racionalización:</strong> Eliminar radicales del denominador.
+    </div>
+    <h3>Casos de factorización importantes</h3>
+    <ul>
+        <li>Diferencia de cuadrados: \(a^2 - b^2 = (a+b)(a-b)\)</li>
+        <li>Trinomio cuadrado perfecto: \(a^2 \pm 2ab + b^2 = (a \pm b)^2\)</li>
+        <li>Suma/diferencia de cubos: \(a^3 \pm b^3 = (a \pm b)(a^2 \mp ab + b^2)\)</li>
+    </ul>
+    <div class="ejemplo">
+        <strong>⚡ Aplicación eléctrica:</strong> Al calcular impedancias en paralelo: \(Z = \frac{R \cdot j\omega L}{R + j\omega L}\). Para separar parte real e imaginaria, racionalizamos multiplicando por el conjugado.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.1</strong> – Factoriza: \(x^2 - 16\)<br>
+        <div class="solucion">Solución: \((x-4)(x+4)\)</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.2</strong> – Racionaliza: \(\frac{5}{\sqrt{3}}\)<br>
+        <div class="solucion">Solución: \(\frac{5\sqrt{3}}{3}\)</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.3 (Eléctrico)</strong> – Si \(Z = 4+3j\) y \(V=10\), calcula la corriente \(I = V/Z\) racionalizando.<br>
+        <div class="solucion">Solución: \(I = \frac{10}{4+3j} = \frac{10(4-3j)}{25} = \frac{40-30j}{25} = 1.6 - 1.2j\) A</div>
+    </div>
+</div>
+
+<!-- UNIDAD 2 -->
+<div class="unidad" id="unidad2">
+    <h2>📌 Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales</h2>
+    <div class="definicion">
+        <strong>Plano cartesiano:</strong> Par ordenado \((x,y)\). Distancia entre dos puntos: \(d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\).<br>
+        <strong>Función real:</strong> Relación que asigna a cada \(x\) un único \(y = f(x)\). Dominio: valores de \(x\) con imagen real.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.1</strong> – Halla el dominio de \(f(x)=\frac{x+1}{x^2-4}\).<br>
+        <div class="solucion">Solución: \(x^2-4 \neq 0 \Rightarrow x \neq \pm2\). Dominio \(\mathbb{R}\setminus\{-2,2\}\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.2</strong> – Distancia entre \(A(2,-1)\) y \(B(5,3)\).<br>
+        <div class="solucion">Solución: \(\sqrt{(5-2)^2+(3+1)^2} = \sqrt{9+16}=5\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 3 -->
+<div class="unidad" id="unidad3">
+    <h2>📌 Unidad 3: Funciones Trigonométricas y Logarítmicas</h2>
+    <div class="definicion">
+        Identidades: \(\sin^2\theta + \cos^2\theta = 1\), \(\tan\theta = \frac{\sin\theta}{\cos\theta}\).<br>
+        Logaritmos: \(\ln(ab)=\ln a + \ln b\), \(\ln(a^n)=n\ln a\), \(\log_a x = \frac{\ln x}{\ln a}\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.1</strong> – Resuelve \(\log_2(x) + \log_2(x-2)=3\).<br>
+        <div class="solucion">Solución: \(\log_2(x(x-2))=3 \Rightarrow x(x-2)=8 \Rightarrow x^2-2x-8=0 \Rightarrow x=4\) (descartamos \(x=-2\)).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.2</strong> – Simplifica \(\frac{\sin^2 x}{1-\cos x}\).<br>
+        <div class="solucion">Solución: \(\frac{1-\cos^2 x}{1-\cos x} = 1+\cos x\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 4 -->
+<div class="unidad" id="unidad4">
+    <h2>📌 Unidad 4: Determinantes y Matrices</h2>
+    <div class="definicion">
+        Matriz \(A_{m\times n}\). Determinante de 2x2: \(\det\begin{pmatrix}a&b\\c&d\end{pmatrix}=ad-bc\).<br>
+        Para 3x3: Regla de Sarrus.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 4.1</strong> – Calcula \(\det\begin{pmatrix}2&5\\-1&3\end{pmatrix}\).<br>
+        <div class="solucion">Solución: \(2\cdot3 - 5\cdot(-1)=6+5=11\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 4.2</strong> – Halla el determinante de \(A=\begin{pmatrix}1&2&3\\0&1&4\\5&6&0\end{pmatrix}\).<br>
+        <div class="solucion">Solución: \(1(1\cdot0-4\cdot6)-2(0\cdot0-4\cdot5)+3(0\cdot6-1\cdot5)= -24+40-15=1\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 5 -->
+<div class="unidad" id="unidad5">
+    <h2>📌 Unidad 5: Sistemas de Ecuaciones Lineales</h2>
+    <div class="definicion">
+        Métodos: sustitución, igualación, reducción (Gauss), regla de Cramer.
+    </div>
+    <div class="ejemplo">
+        Aplicación en circuitos: leyes de Kirchhoff generan sistemas de ecuaciones.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 5.1</strong> – Resuelve \(\begin{cases}3x+4y=18\\2x-y=1\end{cases}\).<br>
+        <div class="solucion">Solución: \(x=2, y=3\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 5.2 (Eléctrico)</strong> – Dado el sistema de corrientes: \(I_1+I_2=I_3\), \(2I_1+4I_3=12\), \(3I_2+4I_3=10\). Halla \(I_1,I_2,I_3\).<br>
+        <div class="solucion">Solución: Resolviendo se obtiene \(I_1=22/13 \approx 1.6923\) A, \(I_2=6/13 \approx 0.4615\) A, \(I_3=28/13 \approx 2.1538\) A.</div>
+    </div>
+</div>
+
+<!-- UNIDAD 6 -->
+<div class="unidad" id="unidad6">
+    <h2>📌 Unidad 6: Nociones Básicas de Números Complejos</h2>
+    <div class="definicion">
+        Forma binómica: \(z = a + bj\) (en ingeniería se usa \(j\) en lugar de \(i\)).<br>
+        Módulo: \(|z| = \sqrt{a^2+b^2}\). Argumento: \(\theta = \arctan(b/a)\).<br>
+        Forma polar: \(z = |z|(\cos\theta + j\sin\theta) = |z| e^{j\theta}\).
+    </div>
+    <div class="ejemplo">
+        Impedancia \(Z = R + jX\). Por ejemplo, \(Z=10+10j\) tiene módulo \(10\sqrt{2}\) y fase \(45^\circ\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 6.1</strong> – Dados \(z_1=3+4j\), \(z_2=1-2j\), calcula \(z_1/z_2\).<br>
+        <div class="solucion">Solución: \(\frac{3+4j}{1-2j} \cdot \frac{1+2j}{1+2j} = \frac{-5+10j}{5} = -1+2j\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 6.2</strong> – Convierte \(z = -2+2j\sqrt{3}\) a forma polar.<br>
+        <div class="solucion">Solución: Módulo \(4\), argumento \(120^\circ\) (2π/3 rad). Forma polar: \(4\angle 120^\circ\).</div>
+    </div>
+</div>
+
+<!-- Problemas integradores -->
+<h2>⚡ Problemas integradores (aplicación a electricidad)</h2>
+<div class="ejercicio">
+    <strong>Problema 1</strong> – Una tensión \(v(t)=100\sin(314t)\) se aplica a una carga \(Z=20+15j\ \Omega\). Expresa la corriente fasorial y en el tiempo.<br>
+    <div class="solucion">Solución: \(|Z|=25,\ \phi=36.87^\circ\). \(I = \frac{100\angle0^\circ}{25\angle36.87^\circ}=4\angle-36.87^\circ\) A. En el tiempo: \(i(t)=4\sin(314t-36.87^\circ)\) A.</div>
+</div>
+<div class="ejercicio">
+    <strong>Problema 2</strong> – Un transformador ideal tiene relación \(N_p/N_s=8\). Si \(V_p=1200\) V, halla \(V_s\). Si \(I_s=10\) A, halla \(I_p\).<br>
+    <div class="solucion">Solución: \(V_s=150\) V, \(I_p=1.25\) A.</div>
+</div>
+
+<footer>
+    <p>Guía basada en el Documento Rector del PNF en Electricidad (MPPEU, 2014) · Bibliografía: Purcell, Stewart, Navarro.</p>
+    <p>Generada para descarga e impresión. Se permite su uso y modificación con fines educativos.</p>
+</footer>
+
+<div class="no-print" style="text-align:center; margin-top:30px;">
+    <button onclick="window.print()">🖨️ Guardar como PDF (Ctrl+P)</button>
+</div>
+</body>
+</html>
