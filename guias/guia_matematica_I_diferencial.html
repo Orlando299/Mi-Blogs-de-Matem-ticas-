@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Guía de Cálculo Diferencial - PNF Electricidad</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            line-height: 1.5;
+            background: white;
+            color: black;
+            padding: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1, h2, h3 {
+            color: #1a3e6f;
+            margin-top: 1.5em;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 0.3em;
+        }
+        h1 { text-align: center; border-bottom: none; font-size: 28px; }
+        .portada { text-align: center; margin-bottom: 40px; border-bottom: 1px solid #aaa; padding-bottom: 20px; }
+        .unidad { margin: 30px 0; }
+        .definicion, .teorema, .ejemplo {
+            background: #f5f5f5;
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #1a3e6f;
+        }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula {
+            font-family: monospace;
+            background: #f9f2e0;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .ejercicio {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fef9e6;
+        }
+        .solucion {
+            margin-top: 8px;
+            padding: 8px;
+            background: #e8f0e8;
+            border-left: 3px solid green;
+        }
+        .badge {
+            background: #1a3e6f;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8em;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        @media print {
+            body { padding: 20px; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="portada">
+    <h1>📈 Matemática I: Cálculo Diferencial</h1>
+    <p>Programa Nacional de Formación en Electricidad (PNFE)</p>
+    <p>Código: 01MAT208 · Trayecto I</p>
+    <p>Basado en el Documento Rector (Octubre 2014)</p>
+    <p style="margin-top: 20px;"><strong>Límites, derivadas y aplicaciones en ingeniería eléctrica</strong></p>
+</div>
+
+<div style="text-align:center; margin: 30px 0;">
+    <span class="badge">Unidad curricular fundamental para el análisis de señales y circuitos</span>
+</div>
+
+<h2>Índice</h2>
+<ul>
+    <li><a href="#unidad1">Unidad 1: Límites y Continuidad</a></li>
+    <li><a href="#unidad2">Unidad 2: Derivadas</a></li>
+    <li><a href="#unidad3">Unidad 3: Aplicaciones de la Derivada</a></li>
+    <li><a href="#unidad4">Unidad 4: Estudio completo de funciones</a></li>
+</ul>
+
+<!-- UNIDAD 1 -->
+<div class="unidad" id="unidad1">
+    <h2>📌 Unidad 1: Límites y Continuidad</h2>
+    <div class="definicion">
+        <strong>Límite de una función:</strong> \(\lim_{x \to a} f(x) = L\) significa que \(f(x)\) se acerca a \(L\) cuando \(x\) se acerca a \(a\) (por ambos lados).<br>
+        <strong>Propiedades básicas:</strong> suma, resta, producto, cociente (si el denominador no tiende a 0).<br>
+        <strong>Límites notables:</strong> \(\lim_{x \to 0} \frac{\sin x}{x}=1\), \(\lim_{x \to \infty} (1+1/x)^x = e\).
+    </div>
+    <div class="definicion">
+        <strong>Continuidad:</strong> \(f\) es continua en \(x=a\) si:<br>
+        1) \(f(a)\) existe, 2) \(\lim_{x\to a} f(x)\) existe, 3) \(\lim_{x\to a} f(x)=f(a)\).
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.1</strong> – Calcula \(\lim_{x \to 2} \frac{x^2-4}{x-2}\).<br>
+        <div class="solucion">Solución: \(\lim_{x \to 2} \frac{(x-2)(x+2)}{x-2} = 4\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.2</strong> – \(\lim_{x \to 0} \frac{\sin(3x)}{x}\).<br>
+        <div class="solucion">Solución: \(3 \cdot \lim_{x \to 0} \frac{\sin(3x)}{3x} = 3 \cdot 1 = 3\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 1.3 (Eléctrico)</strong> – En un circuito RC, la carga del condensador es \(q(t)=Q(1-e^{-t/RC})\). Encuentra \(\lim_{t\to\infty} q(t)\).<br>
+        <div class="solucion">Solución: \(\lim_{t\to\infty} q(t)=Q\). El condensador se carga completamente.</div>
+    </div>
+</div>
+
+<!-- UNIDAD 2 -->
+<div class="unidad" id="unidad2">
+    <h2>📌 Unidad 2: Derivadas</h2>
+    <div class="definicion">
+        <strong>Derivada:</strong> \(f'(x) = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}\).<br>
+        Interpretación geométrica: pendiente de la recta tangente.
+    </div>
+    <div class="formula">
+        Reglas de derivación:<br>
+        \(\frac{d}{dx}[c]=0\), \(\frac{d}{dx}[x^n]=nx^{n-1}\), \(\frac{d}{dx}[e^x]=e^x\), \(\frac{d}{dx}[\ln x]=\frac{1}{x}\),<br>
+        \(\frac{d}{dx}[\sin x]=\cos x\), \(\frac{d}{dx}[\cos x]=-\sin x\), regla del producto, cociente y cadena.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.1</strong> – Deriva \(f(x)=3x^5-2x^3+7x-1\).<br>
+        <div class="solucion">Solución: \(f'(x)=15x^4-6x^2+7\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.2</strong> – \(g(x)=\sin(3x^2)\).<br>
+        <div class="solucion">Solución: \(g'(x)=\cos(3x^2)\cdot 6x = 6x\cos(3x^2)\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 2.3 (Eléctrico)</strong> – La corriente en un inductor es \(i(t)=I_m\sin(\omega t)\). La tensión es \(v_L=L\frac{di}{dt}\). Calcula \(v_L(t)\).<br>
+        <div class="solucion">Solución: \(v_L(t)=L I_m \omega \cos(\omega t)\).</div>
+    </div>
+</div>
+
+<!-- UNIDAD 3 -->
+<div class="unidad" id="unidad3">
+    <h2>📌 Unidad 3: Aplicaciones de la Derivada</h2>
+    <div class="teorema">
+        <strong>Crecimiento/decrecimiento:</strong> Si \(f'(x)>0\) en un intervalo, \(f\) es creciente; si \(f'(x)<0\), decreciente.<br>
+        <strong>Máximos y mínimos relativos:</strong> ocurren donde \(f'(x)=0\) (puntos críticos).<br>
+        <strong>Concavidad:</strong> \(f''(x)>0\) → cóncava hacia arriba; \(f''(x)<0\) → cóncava hacia abajo. Puntos de inflexión donde cambia la concavidad.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.1</strong> – Encuentra los máximos y mínimos de \(f(x)=x^3-3x^2-9x+5\).<br>
+        <div class="solucion">Solución: \(f'(x)=3x^2-6x-9=0 \Rightarrow x=-1, x=3\). \(f''(-1)=-12<0\) → máximo en \(x=-1\), \(f(-1)=10\); \(f''(3)=12>0\) → mínimo en \(x=3\), \(f(3)=-22\).</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.2 (Optimización)</strong> – Un generador tiene una potencia de salida \(P(I)=12I-0.5I^2\) (kW). ¿Qué corriente \(I\) maximiza la potencia?<br>
+        <div class="solucion">Solución: \(P'(I)=12-I=0 \Rightarrow I=12\) A. \(P''(I)=-1<0\) → máximo. Potencia máxima: \(P(12)=72\) kW.</div>
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 3.3 (Rapidez de variación)</strong> – Un capacitor de \(C=100\,\mu\text{F}\) se carga con una corriente \(i(t)=0.2 e^{-50t}\) A. La tensión es \(v(t)=\frac{1}{C}\int_0^t i(\tau)d\tau\). Calcula la rapidez de cambio de la tensión en \(t=0\).<br>
+        <div class="solucion">Solución: \(\frac{dv}{dt}= \frac{i(t)}{C} = \frac{0.2 e^{-50t}}{100\times10^{-6}} = 2000 e^{-50t}\). En \(t=0\): \(2000\) V/s.</div>
+    </div>
+</div>
+
+<!-- UNIDAD 4 -->
+<div class="unidad" id="unidad4">
+    <h2>📌 Unidad 4: Estudio completo de funciones</h2>
+    <div class="definicion">
+        Para trazar la gráfica de una función se debe analizar: dominio, simetrías, cortes con ejes, asíntotas, intervalos de crecimiento/decrecimiento, máximos/mínimos, concavidad y puntos de inflexión.
+    </div>
+    <div class="ejercicio">
+        <strong>Ejercicio 4.1</strong> – Estudia y grafica \(f(x)=\frac{x^2-4}{x^2-1}\).<br>
+        <div class="solucion">Solución: Dominio \(\mathbb{R}\setminus\{-1,1\}\). Asíntotas verticales \(x=\pm1\). Asíntota horizontal \(y=1\). Ceros en \(x=\pm2\). Simetría par. Puntos críticos: \(f'(x)=0\) → \(x=0\), allí hay un máximo local \(f(0)=4\). La gráfica se puede obtener con software.</div>
+    </div>
+</div>
+
+<h2>⚡ Problemas integradores de ingeniería eléctrica</h2>
+<div class="ejercicio">
+    <strong>Problema 1</strong> – La potencia instantánea en una resistencia es \(p(t)=V_m I_m \sin^2(\omega t)\). Encuentra la potencia media usando la definición \(P_{med}=\frac{1}{T}\int_0^T p(t)dt\). (Ayuda: \(\sin^2(\omega t)=\frac{1-\cos(2\omega t)}{2}\)).<br>
+    <div class="solucion">Solución: \(P_{med}= \frac{V_m I_m}{2}\). Con valores eficaces: \(P_{med}=V_{rms}I_{rms}\).</div>
+</div>
+<div class="ejercicio">
+    <strong>Problema 2</strong> – La corriente en un circuito RL es \(i(t)=\frac{V}{R}(1-e^{-Rt/L})\). Calcula la derivada en \(t=0\) e interpreta.<br>
+    <div class="solucion">Solución: \(i'(t)=\frac{V}{L}e^{-Rt/L}\). En \(t=0\), \(i'(0)=V/L\). Es la pendiente inicial, gobernada por la inductancia.</div>
+</div>
+
+<footer>
+    <p>Basado en el Documento Rector PNFE (2014) · Bibliografía: Purcell, Stewart, Leithold.</p>
+</footer>
+<div class="no-print" style="text-align:center; margin-top:30px;">
+    <button onclick="window.print()">🖨️ Guardar como PDF (Ctrl+P)</button>
+</div>
+</body>
+</html>
