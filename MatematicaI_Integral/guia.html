@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo Integral - PNF Electricidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>/* mismo estilo que el de diferencial */</style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Cálculo Integral</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">PNFE · Código: 01MAT208 · Trayecto I</div>
+    <div class="abstract">Integrales, series y aplicaciones en energía y valor eficaz.</div>
+
+    <h2>Índice</h2>
+    <ul>
+        <li><a href="#sec1">1. Integral indefinida y métodos de integración</a></li>
+        <li><a href="#sec2">2. Integral definida y Teorema Fundamental</a></li>
+        <li><a href="#sec3">3. Aplicaciones (áreas, volúmenes, trabajo, energía)</a></li>
+        <li><a href="#sec4">4. Series infinitas</a></li>
+    </ul>
+
+    <h2 id="sec1">1. Integral indefinida y métodos de integración</h2>
+    <div class="definicion"><strong>Definición 1.1.</strong> \(\int f(x)dx = F(x)+C\) donde \(F'(x)=f(x)\).</div>
+    <div class="teorema"><strong>Integrales inmediatas:</strong> \(\int x^n dx = \frac{x^{n+1}}{n+1}+C\ (n\neq-1)\), \(\int \frac{1}{x}dx=\ln|x|+C\), \(\int e^x dx=e^x+C\), \(\int \sin x\,dx=-\cos x+C\).</div>
+    <div class="teorema"><strong>Métodos:</strong> sustitución, integración por partes (\(\int u\,dv = uv - \int v\,du\)), fracciones parciales.</div>
+    <div class="ejercicio"><strong>Ejercicio 1.1.</strong> \(\int (3x^2-4x+2)dx\). <div class="solucion">\(x^3-2x^2+2x+C\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 1.2.</strong> \(\int x e^{x^2}dx\). <div class="solucion">\(\frac{1}{2}e^{x^2}+C\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 1.3.</strong> \(\int \ln x\,dx\). <div class="solucion">\(x\ln x - x + C\).</div></div>
+
+    <h2 id="sec2">2. Integral definida y Teorema Fundamental</h2>
+    <div class="definicion"><strong>Definición 2.1.</strong> \(\int_a^b f(x)dx = \lim_{n\to\infty}\sum f(x_i^*)\Delta x\).</div>
+    <div class="teorema"><strong>Teorema Fundamental del Cálculo:</strong> Si \(F'=f\), entonces \(\int_a^b f(x)dx = F(b)-F(a)\).</div>
+    <div class="ejercicio"><strong>Ejercicio 2.1.</strong> \(\int_0^2 (x^3-2x)dx\). <div class="solucion">0.</div></div>
+    <div class="ejercicio"><strong>Ejercicio 2.2 (Valor eficaz).</strong> Para \(i(t)=I_m\sin(\omega t)\), calcula \(I_{rms}=\sqrt{\frac{1}{T}\int_0^T i^2(t)dt}\). <div class="solucion">\(I_{rms}=I_m/\sqrt{2}\).</div></div>
+
+    <h2 id="sec3">3. Aplicaciones de la integral</h2>
+    <div class="teorema"><strong>Área entre curvas:</strong> \(A=\int_a^b |f(x)-g(x)|dx\).</div>
+    <div class="teorema"><strong>Volumen de revolución (disco):</strong> \(V=\pi\int_a^b [R(x)]^2 dx\).</div>
+    <div class="teorema"><strong>Trabajo y energía:</strong> \(W=\int F(x)dx\), \(E=\int P(t)dt\).</div>
+    <div class="ejercicio"><strong>Ejercicio 3.1.</strong> Área entre \(y=x^2\) y \(y=2x-x^2\). <div class="solucion">\(\int_0^1 (2x-2x^2)dx = \frac{1}{3}\).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 3.2 (Energía).</strong> La potencia en una resistencia es \(P(t)=V_m I_m \sin^2(\omega t)\). Calcula la energía disipada en un periodo. <div class="solucion">\(E = V_{rms}I_{rms} T\).</div></div>
+
+    <h2 id="sec4">4. Series infinitas</h2>
+    <div class="definicion"><strong>Serie numérica:</strong> \(\sum_{n=1}^\infty a_n\). Converge si las sumas parciales tienen límite finito.</div>
+    <div class="teorema"><strong>Serie de Taylor:</strong> \(f(x)=\sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n\).</div>
+    <div class="ejercicio"><strong>Ejercicio 4.1.</strong> Determina la convergencia de \(\sum_{n=1}^\infty \frac{1}{n^2}\). <div class="solucion">Converge (serie p con \(p=2>1\), suma \(\pi^2/6\)).</div></div>
+    <div class="ejercicio"><strong>Ejercicio 4.2 (Aproximación).</strong> Usa la serie de Maclaurin de \(e^x\) para aproximar \(e^{0.5}\) con 3 términos. <div class="solucion">\(1 + 0.5 + 0.125 = 1.625\).</div></div>
+
+    <div class="bibliografia">
+        Purcell, Varberg, Rigdon. <em>Cálculo</em>. Pearson, 9ª ed.<br>
+        Stewart, James. <em>Cálculo</em>. Cengage, 6ª ed.
+    </div>
+    <div style="text-align:center;">MSc. Orlando Silva · PNF Electricidad</div>
+</div>
+</body>
+</html>
