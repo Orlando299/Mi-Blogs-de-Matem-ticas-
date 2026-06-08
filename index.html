@@ -250,6 +250,7 @@
   .materia-card:nth-child(2) { animation-delay: 0.2s; }
   .materia-card:nth-child(3) { animation-delay: 0.3s; }
   .materia-card:nth-child(4) { animation-delay: 0.4s; }
+  .materia-card:nth-child(5) { animation-delay: 0.5s; }
 
   .materia-card::before {
     content: '';
@@ -272,6 +273,7 @@
   .card-calculo-int { --card-accent: var(--teal); --card-glow: var(--teal); }
   .card-algebra { --card-accent: var(--lavender);--card-glow: var(--lavender); }
   .card-ecuaciones { --card-accent: var(--rose); --card-glow: var(--rose); }
+  .card-iniciacion { --card-accent: #b8860b; --card-glow: #b8860b; }
 
   .card-number {
     font-family: 'JetBrains Mono', monospace;
@@ -482,7 +484,60 @@
     color: var(--bg);
   }
 
-  /* Comentarios */
+  /* Estilos para la guía de Matemática de Iniciación */
+  .definicion, .ejemplo {
+    background: rgba(78,205,196,0.08);
+    border-left: 6px solid var(--teal);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+  }
+  .ejemplo {
+    border-left-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+  .formula {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(255,255,255,0.05);
+    padding: 0.8rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+  .ejercicio {
+    background: rgba(224,122,143,0.08);
+    border-left: 6px solid var(--rose);
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 12px;
+  }
+  .solucion {
+    display: none;
+    background: var(--bg);
+    padding: 0.8rem;
+    margin-top: 0.8rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .solucion.mostrar {
+    display: block;
+  }
+  .solucion button, .ejercicio button {
+    background: var(--gold);
+    color: #0a0c10;
+    border: none;
+    padding: 0.3rem 1rem;
+    border-radius: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-bottom: 0.5rem;
+  }
+  .solucion button:hover, .ejercicio button:hover {
+    background: var(--gold-soft);
+  }
+
   .comments-section {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -612,13 +667,11 @@
 
   <div id="home-section">
     <section class="hero">
-      <!-- Foto comentada por defecto. Quita los comentarios y pon tu ruta -->
-       <img src="perfil1.jpg.webp" alt="Profesor" class="hero-photo">
+      <img src="perfil1.jpg.webp" alt="Profesor" class="hero-photo">
       <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
       <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
       <p class="hero-desc">
-        Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales de Matemática I, Matemática II,
-        Álgebra Lineal y Ecuaciones Diferenciales para Ingeniería Eléctrica.
+        Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales de Matemática de Iniciación, Matemática I, Álgebra Lineal y Ecuaciones Diferenciales para Ingeniería Eléctrica.
       </p>
       <button class="hero-cta" id="hero-cta-btn">
         Ver materias &nbsp;→
@@ -626,7 +679,7 @@
     </section>
 
     <div class="stats-bar" id="stats-bar">
-      <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Materias Base</span></div>
+      <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Materias Base</span></div>
       <div class="stat-item"><span class="stat-number">PNFE</span><span class="stat-label">Documento Rector</span></div>
       <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
@@ -634,6 +687,14 @@
 
     <p class="section-label" id="materias-label">Selecciona una materia (Contenido oficial PNFE)</p>
     <div class="materias-grid" id="materias-grid">
+      <!-- Nueva tarjeta: Matemática de Iniciación -->
+      <div class="materia-card card-iniciacion" data-materia="iniciacion">
+        <div class="card-number">00 / UNIDAD CURRICULAR</div><span class="card-icon">🧮</span>
+        <h2 class="card-title">Matemática de Iniciación</h2>
+        <p class="card-subtitle">Álgebra básica, números complejos, funciones, trigonometría y sistemas de ecuaciones. Fundamentos para ingeniería.</p>
+        <div><span class="card-tag">Factorización</span><span class="card-tag">Números complejos</span><span class="card-tag">Matrices</span><span class="card-tag">Logaritmos</span></div>
+        <div class="card-arrow">→</div>
+      </div>
       <div class="materia-card card-calculo-dif" data-materia="calculo-dif">
         <div class="card-number">01 / UNIDAD CURRICULAR</div><span class="card-icon">∂</span>
         <h2 class="card-title">Matemática I<br>Cálculo Diferencial</h2>
@@ -674,8 +735,33 @@
 </div>
 
 <script>
-// ======================== DATOS DE MATERIAS (Contenido en detalle máximo) ========================
+// ======================== DATOS DE MATERIAS ========================
 const materiasData = {
+  'iniciacion': {
+    nombre: 'Matemática de Iniciación',
+    codigo: '01MAT000',
+    trayecto: 'Inicial',
+    uc: 0,  // No aplica créditos en trayecto inicial
+    objetivos: [
+      'Desarrollar competencias en operaciones básicas de la matemática: factorización, potenciación, racionalización.',
+      'Manejar sistemas de coordenadas cartesianas y funciones reales.',
+      'Aplicar funciones trigonométricas y logarítmicas en contextos eléctricos.',
+      'Resolver sistemas de ecuaciones lineales de hasta tres variables.',
+      'Comprender nociones básicas de números complejos y su representación polar.'
+    ],
+    temario: [
+      { titulo: 'Unidad 1: Factorización, Potenciación y Racionalización', horas: 12, subtemas: ['Factor común', 'Diferencia de cuadrados', 'Trinomio cuadrado perfecto', 'Suma/diferencia de cubos', 'Potenciación y radicales', 'Racionalización de denominadores'] },
+      { titulo: 'Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales', horas: 10, subtemas: ['Plano cartesiano', 'Distancia entre puntos', 'Funciones reales: dominio y rango', 'Función lineal, cuadrática', 'Composición de funciones'] },
+      { titulo: 'Unidad 3: Funciones Trigonométricas y Logarítmicas', horas: 14, subtemas: ['Circunferencia unitaria', 'Razones trigonométricas', 'Identidades fundamentales', 'Funciones logarítmicas: propiedades', 'Ecuaciones logarítmicas y exponenciales'] },
+      { titulo: 'Unidad 4: Determinantes y Matrices', horas: 10, subtemas: ['Definición de matriz', 'Operaciones con matrices', 'Determinante 2x2 y 3x3', 'Matriz inversa', 'Aplicación a sistemas lineales'] },
+      { titulo: 'Unidad 5: Sistemas de Ecuaciones Lineales', horas: 12, subtemas: ['Método de sustitución', 'Método de igualación', 'Método de reducción (Gauss)', 'Regla de Cramer', 'Sistemas 3x3'] },
+      { titulo: 'Unidad 6: Nociones Básicas de Números Complejos', horas: 10, subtemas: ['Definición y forma binómica', 'Operaciones suma, resta, multiplicación, división', 'Módulo y argumento', 'Forma polar y exponencial', 'Aplicaciones en circuitos de corriente alterna'] }
+    ],
+    metodologia: 'Clases teórico-prácticas con énfasis en la resolución de ejercicios. Uso de ejemplos del ámbito eléctrico para motivar los conceptos. Evaluación continua con talleres semanales.',
+    evaluacion: 'Tres cortes: 25% (semana 12), 30% (semana 24), 45% (semana 35-36). Incluye pruebas escritas y proyecto final integrador.',
+    bibliografia: 'Navarro, E. "Problemarios de Matemática 1° a 5° año". Caracas.<br>Rita, María. "Matemática 9no Grado". Editorial Salesiana.<br>Purcell, Varberg, Rigdon. "Cálculo". Pearson, 9na ed. (capítulos preliminares).<br>Documento Rector PNFE (2014).',
+    ejercicios: 'Guía extensa con más de 100 ejercicios progresivos. Las soluciones se muestran interactivamente dentro de la plataforma.'
+  },
   'calculo-dif': {
     nombre: 'Matemática I: Cálculo Diferencial',
     codigo: '01MAT208',
@@ -809,32 +895,138 @@ function escapeHtml(str) {
   });
 }
 
-// ======================== GENERAR VISTAS DINÁMICAMENTE ========================
+// ======================== GENERAR VISTAS (con guía especial para "iniciacion") ========================
 const container = document.getElementById('materia-views-container');
+
 function buildMateriaView(materiaId, data) {
   const viewDiv = document.createElement('div');
   viewDiv.id = `${materiaId}-view`;
   viewDiv.className = 'materia-view';
   
-  // Resumen
-  viewDiv.innerHTML = `
-    <div class="view-summary">
+  // Para la materia de iniciación, el contenido detallado será la guía extendida con ejercicios interactivos
+  let detalleHTML = '';
+  if (materiaId === 'iniciacion') {
+    detalleHTML = `
       <div class="view-header">
-        <h2>${data.nombre}</h2>
+        <h2>${data.nombre} - Guía completa</h2>
         <div class="btn-group">
-          <button class="btn show-detail-btn" data-materia="${materiaId}">📖 Ver contenido completo</button>
+          <button class="btn show-summary-btn" data-materia="${materiaId}">← Volver al resumen</button>
         </div>
       </div>
-      <p><strong>Código:</strong> ${data.codigo} | <strong>Trayecto:</strong> ${data.trayecto} | <strong>UC:</strong> ${data.uc}</p>
-      <ul class="topic-list">
-        ${data.temario.map(u => `<li><strong>${u.titulo}</strong><span>${u.horas} horas · ${u.subtemas.length} subtemas</span></li>`).join('')}
-      </ul>
-      <div class="resources">
-        <h4>📘 Bibliografía oficial PNFE</h4>
-        <p>${data.bibliografia}</p>
+      <h3>📘 Fundamentos para Ingeniería Eléctrica</h3>
+      <p>Esta guía cubre todos los temas del Trayecto Inicial, con teoría, ejemplos y ejercicios resueltos paso a paso. Cada ejercicio incluye una solución interactiva.</p>
+      
+      <!-- UNIDAD 1: Factorización y potenciación -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">📐 Unidad 1: Factorización, Potenciación y Racionalización</div>
+        <div class="definicion"><strong>Factorización:</strong> Escribir una expresión como producto de factores irreducibles.<br>
+        <strong>Potenciación:</strong> \(a^n = a \cdot a \cdots a\) (n veces).<br>
+        <strong>Racionalizar:</strong> Eliminar radicales del denominador.
+        </div>
+        <div class="ejemplo"><strong>Ejemplo eléctrico:</strong> En el cálculo de impedancias, a veces aparece \( \frac{1}{R+j\omega L} \). Racionalizando: \( \frac{R-j\omega L}{R^2+(\omega L)^2} \).</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 1.1</strong> – Factoriza: \(x^2 - 16\)<br>
+          <button onclick="toggleSolucion('sol11_inic')">Ver solución</button>
+          <div id="sol11_inic" class="solucion">\((x-4)(x+4)\)</div>
+        </div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 1.2</strong> – Racionaliza: \(\frac{5}{\sqrt{3}}\)<br>
+          <button onclick="toggleSolucion('sol12_inic')">Ver solución</button>
+          <div id="sol12_inic" class="solucion">\(\frac{5\sqrt{3}}{3}\)</div>
+        </div>
       </div>
-    </div>
-    <div class="view-detail" id="detail-${materiaId}" style="display: none;">
+      
+      <!-- UNIDAD 2: Sistema de coordenadas y funciones -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">📈 Unidad 2: Sistema de Coordenadas Cartesianas y Funciones Reales</div>
+        <div class="definicion">Distancia entre dos puntos: \(d = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\).<br>
+        Dominio de una función: valores de \(x\) para los que \(f(x)\) es real.</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 2.1</strong> – Halla el dominio de \(f(x)=\frac{x+1}{x^2-4}\).<br>
+          <button onclick="toggleSolucion('sol21_inic')">Ver solución</button>
+          <div id="sol21_inic" class="solucion">\(x \neq \pm2\), dominio \(\mathbb{R}\setminus\{-2,2\}\)</div>
+        </div>
+      </div>
+      
+      <!-- UNIDAD 3: Trigonometría y logaritmos -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">📐 Unidad 3: Funciones Trigonométricas y Logarítmicas</div>
+        <div class="formula">\(\sin^2\theta+\cos^2\theta=1,\quad \ln(ab)=\ln a+\ln b\)</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 3.1</strong> – Resuelve \(\log_2(x)+\log_2(x-2)=3\).<br>
+          <button onclick="toggleSolucion('sol31_inic')">Ver solución</button>
+          <div id="sol31_inic" class="solucion">\(x=4\) (la solución negativa no es válida)</div>
+        </div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 3.2</strong> – Simplifica \(\frac{\sin^2 x}{1-\cos x}\).<br>
+          <button onclick="toggleSolucion('sol32_inic')">Ver solución</button>
+          <div id="sol32_inic" class="solucion">\(1+\cos x\)</div>
+        </div>
+      </div>
+      
+      <!-- UNIDAD 4: Matrices y determinantes -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">🔢 Unidad 4: Determinantes y Matrices</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 4.1</strong> – Calcula \(\det\begin{pmatrix}2&5\\-1&3\end{pmatrix}\).<br>
+          <button onclick="toggleSolucion('sol41_inic')">Ver solución</button>
+          <div id="sol41_inic" class="solucion">\(2\cdot3 - 5\cdot(-1)=6+5=11\)</div>
+        </div>
+      </div>
+      
+      <!-- UNIDAD 5: Sistemas de ecuaciones lineales -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">⚡ Unidad 5: Sistemas de Ecuaciones</div>
+        <div class="ejemplo"><strong>Aplicación a circuitos:</strong> Resolver un sistema de corrientes de malla.</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 5.1</strong> – Resuelve: \(\begin{cases}3x+4y=18\\2x-y=1\end{cases}\)<br>
+          <button onclick="toggleSolucion('sol51_inic')">Ver solución</button>
+          <div id="sol51_inic" class="solucion">\(x=2, y=3\)</div>
+        </div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 5.2 (Eléctrico)</strong> – Por Kirchhoff: \(I_1+I_2=I_3\), además \(2I_1+4I_3=12\), \(3I_2+4I_3=10\). Halla las corrientes.<br>
+          <button onclick="toggleSolucion('sol52_inic')">Ver solución</button>
+          <div id="sol52_inic" class="solucion">\(I_1\approx1.6923\,\text{A},\; I_2\approx0.4615\,\text{A},\; I_3\approx2.1538\,\text{A}\)</div>
+        </div>
+      </div>
+      
+      <!-- UNIDAD 6: Números complejos -->
+      <div class="temario-unidad">
+        <div class="unidad-titulo">🌀 Unidad 6: Números Complejos</div>
+        <div class="definicion">Forma binómica: \(z=a+bj\) (en ingeniería se usa \(j\) para no confundir con corriente).<br>
+        Módulo: \(|z|=\sqrt{a^2+b^2}\). Forma polar: \(z=|z|e^{j\theta}\).</div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 6.1</strong> – Dados \(z_1=3+4j\), \(z_2=1-2j\), calcula \(z_1/z_2\).<br>
+          <button onclick="toggleSolucion('sol61_inic')">Ver solución</button>
+          <div id="sol61_inic" class="solucion">\(-1+2j\)</div>
+        </div>
+        <div class="ejercicio">
+          <strong>✏️ Ejercicio 6.2</strong> – Convierte \(z = -2+2j\sqrt{3}\) a forma polar.<br>
+          <button onclick="toggleSolucion('sol62_inic')">Ver solución</button>
+          <div id="sol62_inic" class="solucion">\(4\angle 120^\circ\)</div>
+        </div>
+      </div>
+      
+      <h3>📎 Recursos descargables</h3>
+      <div class="resources-links">
+        <a href="#" class="resource-link">📥 Guía completa (PDF)</a>
+        <a href="#" class="resource-link">📄 Ejercicios adicionales</a>
+        <a href="#" class="resource-link">📊 Hoja de fórmulas</a>
+      </div>
+      
+      <div class="comments-section">
+        <h3>💬 Preguntas y comentarios</h3>
+        <div class="comment-form">
+          <input type="text" id="nombre-iniciacion" placeholder="Tu nombre" maxlength="50">
+          <textarea id="texto-iniciacion" placeholder="Escribe tu pregunta o comentario..."></textarea>
+          <button onclick="window.postComment('iniciacion')">Enviar comentario</button>
+        </div>
+        <div id="comments-iniciacion"></div>
+      </div>
+    `;
+  } else {
+    // Para las demás materias, el detalle se construye genéricamente
+    detalleHTML = `
       <div class="view-header">
         <h2>${data.nombre} - Contenido completo</h2>
         <div class="btn-group">
@@ -842,15 +1034,13 @@ function buildMateriaView(materiaId, data) {
         </div>
       </div>
       <h3>🎯 Objetivos de aprendizaje</h3>
-      <ul class="topic-list"><li>${data.objetivos.map(o => `<strong>✓</strong><span>${o}</span>`).join('</li><li>')}</li></ul>
+      <ul class="topic-list">${data.objetivos.map(o => `<li><strong>✓</strong><span>${o}</span></li>`).join('')}</ul>
       
       <h3>📚 Temario detallado</h3>
       ${data.temario.map(u => `
         <div class="temario-unidad">
           <div class="unidad-titulo">${u.titulo} <span class="badge-hours">${u.horas} horas</span></div>
-          <ul class="subtemas">
-            ${u.subtemas.map(s => `<li><strong>📌</strong><span>${s}</span></li>`).join('')}
-          </ul>
+          <ul class="subtemas">${u.subtemas.map(s => `<li><strong>📌</strong><span>${s}</span></li>`).join('')}</ul>
         </div>
       `).join('')}
       
@@ -862,10 +1052,8 @@ function buildMateriaView(materiaId, data) {
       
       <h3>📖 Metodología</h3>
       <p>${data.metodologia}</p>
-      
       <h3>📝 Evaluación</h3>
       <p>${data.evaluacion}</p>
-      
       <h3>📚 Bibliografía completa</h3>
       <p>${data.bibliografia}</p>
       
@@ -874,10 +1062,7 @@ function buildMateriaView(materiaId, data) {
         <a href="#" class="resource-link">📥 Programa de la materia (PDF)</a>
         <a href="#" class="resource-link">📄 Ejercicios resueltos</a>
         <a href="#" class="resource-link">📊 Guía de evaluaciones</a>
-        <a href="#" class="resource-link">🎥 Videos recomendados</a>
-        <a href="#" class="resource-link">📘 Apuntes de clase</a>
       </div>
-      <p style="font-size:0.8rem; color:var(--muted); margin-top:0.5rem;">⚠️ Los enlaces son simulados. Reemplázalos con tus archivos reales.</p>
       
       <div class="comments-section">
         <h3>💬 Preguntas y comentarios</h3>
@@ -888,29 +1073,58 @@ function buildMateriaView(materiaId, data) {
         </div>
         <div id="comments-${materiaId}"></div>
       </div>
+    `;
+  }
+  
+  viewDiv.innerHTML = `
+    <div class="view-summary">
+      <div class="view-header">
+        <h2>${data.nombre}</h2>
+        <div class="btn-group">
+          <button class="btn show-detail-btn" data-materia="${materiaId}">📖 Ver contenido completo</button>
+        </div>
+      </div>
+      <p><strong>Código:</strong> ${data.codigo} | <strong>Trayecto:</strong> ${data.trayecto} ${data.uc ? `| <strong>UC:</strong> ${data.uc}` : ''}</p>
+      <ul class="topic-list">
+        ${data.temario.map(u => `<li><strong>${u.titulo}</strong><span>${u.horas} horas · ${u.subtemas.length} subtemas</span></li>`).join('')}
+      </ul>
+      <div class="resources">
+        <h4>📘 Bibliografía oficial PNFE</h4>
+        <p>${data.bibliografia}</p>
+      </div>
+    </div>
+    <div class="view-detail" id="detail-${materiaId}" style="display: none;">
+      ${detalleHTML}
     </div>
   `;
   return viewDiv;
 }
 
+// Construir todas las vistas
+for (const [id, data] of Object.entries(materiasData)) {
+  container.appendChild(buildMateriaView(id, data));
+}
+
+// Función global para toggle de soluciones (usada en la guía)
+window.toggleSolucion = function(id) {
+  const solDiv = document.getElementById(id);
+  if (solDiv) solDiv.classList.toggle('mostrar');
+};
+
+// Función para postear comentarios (se reutiliza)
 window.postComment = function(materiaId) {
   const nombreInput = document.getElementById(`nombre-${materiaId}`);
   const textoInput = document.getElementById(`texto-${materiaId}`);
-  const nombre = nombreInput.value.trim();
-  const texto = textoInput.value.trim();
+  const nombre = nombreInput ? nombreInput.value.trim() : '';
+  const texto = textoInput ? textoInput.value.trim() : '';
   if (!nombre || !texto) {
     alert('Por favor, ingresa tu nombre y tu comentario.');
     return;
   }
   saveComment(materiaId, nombre, texto);
-  nombreInput.value = '';
-  textoInput.value = '';
+  if (nombreInput) nombreInput.value = '';
+  if (textoInput) textoInput.value = '';
 };
-
-// Renderizar todas las materias
-for (const [id, data] of Object.entries(materiasData)) {
-  container.appendChild(buildMateriaView(id, data));
-}
 
 // ======================== LÓGICA DE NAVEGACIÓN ========================
 const homeSection = document.getElementById('home-section');
@@ -924,7 +1138,7 @@ const navContactoLink = document.getElementById('nav-contacto');
 const heroCtaBtn = document.getElementById('hero-cta-btn');
 
 let currentMateria = null;
-let currentView = 'summary'; // 'summary' or 'detail'
+let currentView = 'summary';
 
 function showHome() {
   homeSection.style.display = 'block';
