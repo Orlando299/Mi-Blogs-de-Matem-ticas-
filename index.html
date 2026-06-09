@@ -39,6 +39,7 @@
   }
   .wrapper { position: relative; z-index: 2; }
 
+  /* NAV */
   nav {
     display: flex;
     align-items: center;
@@ -81,135 +82,295 @@
   .nav-ai-btn .ai-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse-dot 2s infinite; }
   @keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
 
+  /* HERO - NUEVO DISEÑO LATERAL */
   .hero {
-    padding: 5rem 3rem 5rem;
-    max-width: 900px;
+    padding: 4rem 3rem;
+    max-width: 1200px;
     margin: 0 auto;
+  }
+  .hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .hero-image {
+    flex: 1;
+    min-width: 220px;
     text-align: center;
   }
   .hero-photo {
-    width: 140px; height: 140px;
-    border-radius: 50%; object-fit: cover;
-    border: 3px solid var(--gold);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 30% 50%;  /* Ajusta para efecto perfil costado */
+    border: 4px solid var(--gold);
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards;
+    transition: transform 0.3s;
+  }
+  .hero-photo:hover {
+    transform: scale(1.02);
+  }
+  .hero-content {
+    flex: 2;
+    min-width: 280px;
   }
   .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem; color: var(--teal);
-    letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.1s ease forwards;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: left;
   }
   .hero h1 {
     font-family: 'EB Garamond', serif;
-    font-size: clamp(2.8rem, 6vw, 5rem);
-    font-weight: 400; line-height: 1.1; margin-bottom: 1.5rem;
-    opacity: 0; animation: fadeUp 0.8s 0.25s ease forwards;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    text-align: left;
   }
-  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
   .hero-desc {
-    font-size: 1.05rem; color: var(--muted);
-    max-width: 520px; margin: 0 auto 3rem; line-height: 1.7;
-    opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards;
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 100%;
   }
-  .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.55s ease forwards; }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
   .hero-cta {
-    display: inline-flex; align-items: center; gap: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     background: linear-gradient(135deg, var(--gold), #a07830);
-    color: #0a0c10; font-weight: 600; font-size: 0.9rem;
-    letter-spacing: 0.03em; padding: 0.85rem 2rem;
-    border-radius: 100px; transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer; border: none; font-family: inherit;
+    color: #0a0c10;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
   }
-  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.35); }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+  }
   .hero-cta-ghost {
-    display: inline-flex; align-items: center; gap: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     background: transparent;
     border: 1px solid rgba(78,205,196,0.4);
-    color: var(--teal); font-weight: 500; font-size: 0.9rem;
-    letter-spacing: 0.03em; padding: 0.85rem 2rem;
-    border-radius: 100px; transition: all 0.2s;
-    cursor: pointer; font-family: inherit;
+    color: var(--teal);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-family: inherit;
   }
-  .hero-cta-ghost:hover { background: rgba(78,205,196,0.08); border-color: var(--teal); transform: translateY(-2px); }
+  .hero-cta-ghost:hover {
+    background: rgba(78,205,196,0.08);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
 
+  /* STATS */
   .stats-bar {
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    display: flex; justify-content: center; margin: 0 auto; max-width: 1100px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1100px;
   }
-  .stat-item { flex: 1; text-align: center; padding: 2rem 1rem; border-right: 1px solid var(--border); }
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-right: 1px solid var(--border);
+  }
   .stat-item:last-child { border-right: none; }
-  .stat-number { font-family: 'EB Garamond', serif; font-size: 2.5rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.4rem; }
-  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .stat-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
 
+  /* SECTION LABEL */
   .section-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--muted); text-align: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
     padding: 4rem 3rem 1.5rem;
-    display: flex; align-items: center; gap: 1.5rem;
-    max-width: 1100px; margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
   }
-  .section-label::before, .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
 
+  /* CARDS */
   .materias-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem; padding: 1rem 3rem 6rem;
-    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 3rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   .materia-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 1.25rem; padding: 1.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 1.8rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex; flex-direction: column;
-    opacity: 0; animation: fadeUp 0.7s ease forwards;
+    display: flex;
+    flex-direction: column;
   }
-  .materia-card:nth-child(1) { animation-delay: 0.1s; }
-  .materia-card:nth-child(2) { animation-delay: 0.2s; }
-  .materia-card:nth-child(3) { animation-delay: 0.3s; }
-  .materia-card:nth-child(4) { animation-delay: 0.4s; }
-  .materia-card:nth-child(5) { animation-delay: 0.5s; }
-  .materia-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-  .card-number { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
+  .materia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .card-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+  }
   .card-icon { font-size: 2rem; }
-  .card-title { font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.2rem; line-height: 1.2; }
-  .card-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
-  .tema-bloque {
-    margin: 12px 0; padding: 10px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 12px; border-left: 3px solid var(--gold);
+  .card-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0.5rem 0 0.2rem;
+    line-height: 1.2;
   }
-  .tema-titulo { font-weight: bold; color: var(--gold); display: block; margin-bottom: 6px; font-size: 0.9rem; }
+  .card-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .tema-bloque {
+    margin: 12px 0;
+    padding: 10px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
+  }
+  .tema-titulo {
+    font-weight: bold;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+  }
   .tema-links a {
-    color: var(--teal); text-decoration: none; font-size: 0.75rem; margin-right: 12px;
-    background: rgba(78,205,196,0.1); padding: 3px 8px; border-radius: 20px; transition: 0.2s;
-    display: inline-block; margin-bottom: 4px;
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 0.75rem;
+    margin-right: 12px;
+    background: rgba(78,205,196,0.1);
+    padding: 3px 8px;
+    border-radius: 20px;
+    transition: 0.2s;
+    display: inline-block;
+    margin-bottom: 4px;
   }
   .tema-links a:hover { background: var(--teal); color: #0a0c10; }
   .sol-link { color: var(--rose) !important; background: rgba(224,122,143,0.1) !important; }
   .sol-link:hover { background: var(--rose) !important; color: #0a0c10 !important; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0.5rem; }
-  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    opacity: 0.8;
+  }
   .card-ask-ai {
-    display: flex; align-items: center; gap: 0.5rem;
-    margin-top: auto; padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
     border-top: 1px solid var(--border);
     background: none;
-    color: var(--teal); font-size: 0.78rem;
+    color: var(--teal);
+    font-size: 0.78rem;
     font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.05em; cursor: pointer;
-    transition: color 0.2s; text-align: left;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: color 0.2s;
+    text-align: left;
     width: 100%;
   }
   .card-ask-ai:hover { color: var(--gold-soft); }
   .card-ask-ai .spark { font-size: 0.9rem; }
 
-  footer { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
 
-  /* AI ASSISTANT PANEL */
+  /* AI PANEL (versión offline simplificada) */
   #ai-panel {
     position: fixed;
     bottom: 0; right: 0;
@@ -219,7 +380,8 @@
     border: 1px solid rgba(201,168,76,0.25);
     border-bottom: none; border-right: none;
     border-radius: 1.25rem 0 0 0;
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
     z-index: 200;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -227,47 +389,70 @@
   }
   #ai-panel.open { transform: translateY(0); }
   .ai-panel-header {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
   }
   .ai-panel-title { display: flex; align-items: center; gap: 0.6rem; }
   .ai-panel-title .ai-avatar {
-    width: 32px; height: 32px; border-radius: 50%;
+    width: 32px; height: 32px;
+    border-radius: 50%;
     background: linear-gradient(135deg, var(--gold), var(--teal));
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.9rem;
   }
   .ai-panel-title .ai-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: var(--gold); }
   .ai-panel-title .ai-subtitle {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
     display: block;
   }
   .ai-panel-close {
-    background: none; border: none; color: var(--muted);
-    font-size: 1.2rem; cursor: pointer; padding: 0.25rem 0.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
     border-radius: 6px;
   }
   .ai-panel-close:hover { color: var(--text); }
   .ai-subject-bar {
-    display: flex; gap: 0.4rem; padding: 0.75rem 1rem;
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--border);
-    overflow-x: auto; flex-shrink: 0;
+    overflow-x: auto;
+    flex-shrink: 0;
   }
   .ai-subject-chip {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.05em;
-    padding: 0.3rem 0.75rem; border-radius: 100px;
-    border: 1px solid var(--border); background: none;
-    color: var(--muted); cursor: pointer; white-space: nowrap;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
   }
   .ai-subject-chip:hover { border-color: var(--gold); color: var(--gold); }
   .ai-subject-chip.active { border-color: var(--gold); background: rgba(201,168,76,0.12); color: var(--gold-soft); }
   #ai-messages {
-    flex: 1; overflow-y: auto; padding: 1rem 1.25rem;
-    display: flex; flex-direction: column; gap: 0.75rem;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
   .ai-msg { display: flex; gap: 0.6rem; align-items: flex-start; }
   .ai-msg.user { flex-direction: row-reverse; }
@@ -275,7 +460,8 @@
     max-width: 82%;
     padding: 0.65rem 0.9rem;
     border-radius: 1rem;
-    font-size: 0.85rem; line-height: 1.55;
+    font-size: 0.85rem;
+    line-height: 1.55;
   }
   .ai-msg.user .ai-msg-bubble {
     background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.08));
@@ -288,9 +474,14 @@
     border-radius: 0.2rem 1rem 1rem 1rem;
   }
   .ai-msg-avatar {
-    width: 26px; height: 26px; border-radius: 50%;
-    flex-shrink: 0; font-size: 0.75rem;
-    display: flex; align-items: center; justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .ai-msg.assistant .ai-msg-avatar { background: linear-gradient(135deg, var(--gold), var(--teal)); }
   .ai-msg.user .ai-msg-avatar { background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
@@ -301,65 +492,98 @@
   @keyframes typing-dot { 0%,80%,100% { transform: scale(0.7); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
   .ai-quick-prompts {
     padding: 0 1.25rem 0.75rem;
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     flex-shrink: 0;
   }
   .ai-quick-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem; padding: 0.3rem 0.7rem;
+    font-size: 0.62rem;
+    padding: 0.3rem 0.7rem;
     border-radius: 100px;
     border: 1px solid rgba(78,205,196,0.25);
     background: rgba(78,205,196,0.06);
-    color: var(--teal); cursor: pointer;
+    color: var(--teal);
+    cursor: pointer;
   }
   .ai-quick-btn:hover { background: rgba(78,205,196,0.14); border-color: var(--teal); }
   .ai-input-area {
-    display: flex; gap: 0.5rem; padding: 0.75rem 1rem;
-    border-top: 1px solid var(--border); flex-shrink: 0;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
   }
   #ai-input {
-    flex: 1; background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border); border-radius: 0.75rem;
-    color: var(--text); font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.85rem; padding: 0.6rem 0.9rem;
-    resize: none; outline: none;
-    min-height: 38px; max-height: 120px;
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.9rem;
+    resize: none;
+    outline: none;
+    min-height: 38px;
+    max-height: 120px;
   }
   #ai-input:focus { border-color: rgba(201,168,76,0.4); }
   #ai-send {
     background: linear-gradient(135deg, var(--gold), #a07830);
-    border: none; border-radius: 0.75rem;
-    width: 38px; height: 38px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
+    border: none;
+    border-radius: 0.75rem;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1rem;
-    flex-shrink: 0; align-self: flex-end;
+    flex-shrink: 0;
+    align-self: flex-end;
   }
   #ai-send:hover { transform: scale(1.05); }
   #ai-send:disabled { opacity: 0.4; cursor: not-allowed; }
   #ai-fab {
-    position: fixed; bottom: 2rem; right: 2rem;
-    width: 54px; height: 54px;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 54px;
+    height: 54px;
     background: linear-gradient(135deg, var(--gold), #a07830);
-    border: none; border-radius: 50%;
+    border: none;
+    border-radius: 50%;
     box-shadow: 0 4px 24px rgba(201,168,76,0.4);
-    cursor: pointer; z-index: 199;
-    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 199;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.3rem;
   }
   #ai-fab:hover { transform: scale(1.1); }
   #ai-fab.panel-open { transform: scale(0); pointer-events: none; }
   .ai-welcome {
-    text-align: center; padding: 1.5rem 1rem;
-    color: var(--muted); font-size: 0.82rem; line-height: 1.6;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
   }
   .ai-welcome .welcome-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
   .ai-welcome strong { color: var(--gold); display: block; margin-bottom: 0.4rem; font-family: 'EB Garamond', serif; font-size: 1.05rem; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
+    nav { padding: 1rem 1.5rem; }
     .nav-links { gap: 1rem; }
-    .hero { padding: 3rem 1.5rem; }
+    .hero { padding: 2rem 1.5rem; }
+    .hero-container { flex-direction: column; text-align: center; gap: 2rem; }
+    .hero-eyebrow, .hero h1, .hero-desc { text-align: center; }
+    .hero-ctas { justify-content: center; }
+    .hero-photo { width: 180px; height: 180px; }
     .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
     .stats-bar { flex-direction: column; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
@@ -381,14 +605,22 @@
   </nav>
 
   <div id="home-section">
+    <!-- NUEVA PORTADA LATERAL -->
     <section class="hero">
-      <img src="perfil1.jpg.webp" alt="Profesor" class="hero-photo">
-      <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
-      <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
-      <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios, pre‑parciales y soluciones protegidas.</p>
-      <div class="hero-ctas">
-        <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
-        <button class="hero-cta-ghost" id="hero-ai-btn">✦ Consultar al Asistente IA</button>
+      <div class="hero-container">
+        <div class="hero-image">
+          <!-- CAMBIA "perfil1.jpg.webp" por el nombre de TU foto -->
+          <img src="perfil2.jpg.webp.webp" alt="MSc. Orlando Silva" class="hero-photo">
+        </div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
+          <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
+          <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios, pre‑parciales y soluciones protegidas.</p>
+          <div class="hero-ctas">
+            <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
+            <button class="hero-cta-ghost" id="hero-ai-btn">✦ Consultar al Asistente IA</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -402,6 +634,7 @@
     <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios, pre‑parciales y soluciones (con contraseña)</p>
 
     <div class="materias-grid">
+      <!-- Matemática de Iniciación -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">00 · Trayecto Inicial</span><span class="card-icon">🧮</span></div>
         <h2 class="card-title">Matemática de Iniciación</h2>
@@ -428,40 +661,44 @@
         <button class="card-ask-ai" data-materia="Matemática de Iniciación"><span class="spark">✦</span> Consultar sobre esta materia</button>
       </div>
 
+      <!-- Cálculo Diferencial -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div>
         <h2 class="card-title">Cálculo Diferencial</h2>
-        <p class="card-subtitle">Límites, derivadas, reglas de diferenciación y aplicaciones en ingeniería eléctrica.</p>
+        <p class="card-subtitle">Límites, derivadas y aplicaciones en ingeniería eléctrica.</p>
         <div class="tema-bloque"><span class="tema-titulo">📈 Límites y Continuidad</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="tema-bloque"><span class="tema-titulo">🔢 Derivadas</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="card-tags"><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
         <button class="card-ask-ai" data-materia="Cálculo Diferencial"><span class="spark">✦</span> Consultar sobre esta materia</button>
       </div>
 
+      <!-- Cálculo Integral -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div>
         <h2 class="card-title">Cálculo Integral</h2>
-        <p class="card-subtitle">Integrales indefinidas y definidas, técnicas de integración y aplicaciones.</p>
+        <p class="card-subtitle">Integrales indefinidas y definidas, técnicas de integración.</p>
         <div class="tema-bloque"><span class="tema-titulo">📊 Integral Indefinida</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="tema-bloque"><span class="tema-titulo">📉 Integral Definida</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="card-tags"><span class="card-tag">Antiderivadas</span><span class="card-tag">Área</span><span class="card-tag">Sustitución</span></div>
         <button class="card-ask-ai" data-materia="Cálculo Integral"><span class="spark">✦</span> Consultar sobre esta materia</button>
       </div>
 
+      <!-- Álgebra Lineal -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div>
         <h2 class="card-title">Álgebra Lineal y Geometría</h2>
-        <p class="card-subtitle">Matrices, determinantes, vectores y transformaciones lineales aplicadas.</p>
+        <p class="card-subtitle">Matrices, determinantes, vectores y transformaciones lineales.</p>
         <div class="tema-bloque"><span class="tema-titulo">🔲 Matrices y Determinantes</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="tema-bloque"><span class="tema-titulo">↗ Vectores y Espacios</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="card-tags"><span class="card-tag">Matrices</span><span class="card-tag">Vectores</span><span class="card-tag">Eigenvalores</span></div>
         <button class="card-ask-ai" data-materia="Álgebra Lineal y Geometría"><span class="spark">✦</span> Consultar sobre esta materia</button>
       </div>
 
+      <!-- Ecuaciones Diferenciales -->
       <div class="materia-card">
         <div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div>
         <h2 class="card-title">Ecuaciones Diferenciales</h2>
-        <p class="card-subtitle">EDO de primer y segundo orden, transformada de Laplace y circuitos RLC.</p>
+        <p class="card-subtitle">EDO de primer y segundo orden, Transformada de Laplace.</p>
         <div class="tema-bloque"><span class="tema-titulo">〰 EDO de 1er Orden</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="tema-bloque"><span class="tema-titulo">⚡ Transformada de Laplace</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
         <div class="card-tags"><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Circuitos RLC</span></div>
@@ -476,6 +713,7 @@
   </footer>
 </div>
 
+<!-- AI PANEL -->
 <div id="ai-panel">
   <div class="ai-panel-header">
     <div class="ai-panel-title">
@@ -534,156 +772,69 @@ document.getElementById('logo-home').addEventListener('click', () => { window.sc
 
 // ==================== BASE DE CONOCIMIENTO OFFLINE ====================
 const knowledgeBase = {
-  'general': {
-    description: 'Programa Nacional de Formación en Electricidad (PNFE) de Venezuela. Basado en Documento Rector 2014-2015.',
-    topics: ['Límites', 'Derivadas', 'Integrales', 'Matrices', 'Ecuaciones Diferenciales', 'Factorización', 'Coordenadas']
-  },
+  'general': { description: 'PNFE - Matemáticas para Ingeniería Eléctrica' },
   'Matemática de Iniciación': {
-    description: 'Matemática de Iniciación - Trayecto Inicial del PNFE. Fundamentos de álgebra, geometría analítica y números complejos.',
+    description: 'Matemática de Iniciación - Trayecto Inicial',
     topics: {
-      'factorización': 'La factorización es el proceso de escribir una expresión algebraica como producto de factores. Métodos: factor común, diferencia de cuadrados (a²-b²=(a+b)(a-b)), trinomio cuadrado perfecto (a²±2ab+b²=(a±b)²), suma/diferencia de cubos (a³±b³=(a±b)(a²∓ab+b²)), y aspa simple para ax²+bx+c.',
-      'diferencia de cuadrados': 'a² - b² = (a+b)(a-b). Ejemplo: x²-9 = (x+3)(x-3).',
-      'trinomio cuadrado perfecto': 'a² + 2ab + b² = (a+b)². Ejemplo: x²+6x+9 = (x+3)².',
-      'factor común': 'ab + ac = a(b+c). Ejemplo: 7x+14y = 7(x+2y).',
-      'coordenadas': 'El sistema de coordenadas cartesianas usa dos ejes perpendiculares (x,y). Distancia entre dos puntos: d = √[(x₂-x₁)² + (y₂-y₁)²]. Pendiente: m = (y₂-y₁)/(x₂-x₁).',
-      'pendiente': 'La pendiente m indica la inclinación de una recta. Si m>0 es creciente, m<0 es decreciente. Fórmula: m = (y₂-y₁)/(x₂-x₁).',
-      'recta': 'Ecuaciones de la recta: punto-pendiente: y-y₁ = m(x-x₁); pendiente-ordenada: y = mx + b; general: Ax+By+C=0.',
-      'ejercicio factorización': 'Intenta factorizar: x² - 5x + 6 = (x-2)(x-3). ¿Puedes resolver: 2x² + 7x + 3?',
-      'ejercicio coordenadas': 'Calcula la distancia entre A(2,3) y B(5,7). Respuesta: 5 unidades. ¿Cuál es la pendiente de la recta que pasa por estos puntos?'
+      'factorización': 'La factorización es escribir una expresión como producto de factores. Métodos: factor común, diferencia de cuadrados (a²-b²=(a+b)(a-b)), trinomio cuadrado perfecto (a²±2ab+b²=(a±b)²), aspa simple.',
+      'coordenadas': 'Distancia entre puntos: d = √[(x₂-x₁)²+(y₂-y₁)²]. Pendiente: m = (y₂-y₁)/(x₂-x₁).',
+      'recta': 'Ecuaciones: punto-pendiente: y-y₁=m(x-x₁); pendiente-ordenada: y=mx+b.'
     }
   },
   'Cálculo Diferencial': {
-    description: 'Cálculo Diferencial - Trayecto I del PNFE. Límites, derivadas y aplicaciones en ingeniería eléctrica.',
+    description: 'Cálculo Diferencial - Trayecto I',
     topics: {
-      'límite': 'El límite de una función f(x) cuando x tiende a a es L si f(x) se acerca a L cuando x se acerca a a. Notación: lim_{x→a} f(x)=L.',
-      'derivada': 'La derivada mide la tasa de cambio instantánea. Definición: f\'(x)=lim_{h→0}[f(x+h)-f(x)]/h. Reglas: derivada de xⁿ es nxⁿ⁻¹, de sen x es cos x, de eˣ es eˣ.',
-      'regla de la cadena': 'Para funciones compuestas: (f∘g)\'(x) = f\'(g(x))·g\'(x). Ejemplo: (sen(2x))\' = cos(2x)·2 = 2cos(2x).',
-      'optimización': 'Para encontrar máximos/mínimos de una función, se deriva, se iguala a cero (puntos críticos) y se evalúa la segunda derivada o se analiza el signo.',
-      'ejercicio derivada': 'Deriva f(x)=3x⁴-2x²+5. Solución: f\'(x)=12x³-4x.',
-      'aplicación eléctrica': 'En circuitos, la corriente i(t)=dq/dt es la derivada de la carga. La tensión en un inductor es v_L=L·di/dt.'
+      'límite': 'El límite de f(x) cuando x→a es L si f(x) se acerca a L.',
+      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.',
+      'regla cadena': '(f∘g)\'(x) = f\'(g(x))·g\'(x)'
     }
   },
   'Cálculo Integral': {
-    description: 'Cálculo Integral - Trayecto I del PNFE. Integrales indefinidas, definidas y aplicaciones.',
+    description: 'Cálculo Integral - Trayecto I',
     topics: {
-      'integral indefinida': 'Es la antiderivada: ∫f(x)dx = F(x)+C donde F\'(x)=f(x). Ejemplo: ∫x²dx = x³/3 + C.',
-      'integral definida': '∫ₐᵇ f(x)dx = F(b)-F(a) (Teorema Fundamental del Cálculo). Representa el área bajo la curva.',
-      'técnicas de integración': 'Sustitución (cambio de variable), integración por partes (∫u dv = uv - ∫v du), fracciones parciales.',
-      'ejercicio integral': 'Calcula ∫(3x²-4x+1)dx. Solución: x³-2x²+x+C.',
-      'aplicación eléctrica': 'La carga en un capacitor es q(t)=∫i(t)dt. El valor eficaz (RMS) es √[(1/T)∫₀ᵀ i²(t)dt].'
+      'integral': '∫f(x)dx = F(x)+C, donde F\'=f. Teorema Fundamental: ∫ₐᵇ f(x)dx = F(b)-F(a)',
+      'técnicas': 'Sustitución, integración por partes (∫u dv = uv - ∫v du), fracciones parciales.'
     }
   },
   'Álgebra Lineal y Geometría': {
-    description: 'Álgebra Lineal y Geometría - Trayecto I del PNFE. Matrices, vectores, espacios vectoriales.',
+    description: 'Álgebra Lineal - Trayecto I',
     topics: {
-      'matriz': 'Arreglo rectangular de números. Suma, resta, multiplicación. Matriz inversa: A·A⁻¹ = I.',
-      'determinante': 'Escalar asociado a matrices cuadradas. Para 2x2: det[[a,b],[c,d]] = ad-bc.',
-      'vector': 'Magnitud con dirección. En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.',
-      'eigenvalor': 'Valor propio: A·v = λ·v. Se obtiene de det(A-λI)=0.',
-      'ejercicio matrices': 'Multiplica [[1,2],[3,4]]·[[0,1],[-1,2]] = [[-2,5],[-4,11]].',
-      'aplicación circuitos': 'Los sistemas de ecuaciones de mallas o nodos se resuelven con matrices.'
+      'matriz': 'Arreglo rectangular. Determinante 2x2: ad-bc.',
+      'vector': 'En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.',
+      'eigenvalor': 'A·v = λ·v. Se obtiene de det(A-λI)=0.'
     }
   },
   'Ecuaciones Diferenciales': {
-    description: 'Ecuaciones Diferenciales - Trayecto II del PNFE. EDO de primer y segundo orden, Laplace, aplicaciones a circuitos.',
+    description: 'Ecuaciones Diferenciales - Trayecto II',
     topics: {
-      'edo primer orden': 'dy/dx = f(x,y). Métodos: variables separables, factor integrante, lineales (dy/dx+P(x)y=Q(x)).',
-      'edo segundo orden': 'ay″+by′+cy=0. Ecuación característica: ar²+br+c=0. Raíces determinan la solución.',
-      'laplace': 'Transformada de Laplace: L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. Convierte EDOs en ecuaciones algebraicas.',
-      'circuito rlc': 'Circuito con resistencia, inductancia y capacitancia. EDO: Lq″+Rq′+q/C=V(t).',
-      'ejercicio laplace': 'L{1}=1/s, L{eᵃᵗ}=1/(s-a), L{sen(ωt)}=ω/(s²+ω²).',
-      'ejercicio edo': 'Resuelve y″+4y=0. Solución: y = C₁cos(2x)+C₂sen(2x).'
+      'edo': 'Ecuación con derivadas. Lineal: y\'+P(x)y=Q(x).',
+      'laplace': 'L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. L{1}=1/s, L{eᵃᵗ}=1/(s-a), L{sen(ωt)}=ω/(s²+ω²)',
+      'rlc': 'Circuito RLC: Lq″+Rq′+q/C = V(t)'
     }
   }
 };
 
-// Función de búsqueda inteligente offline
 function getResponse(question, subject) {
   const q = question.toLowerCase();
   const kb = knowledgeBase[subject] || knowledgeBase['general'];
+  let responses = [];
   
-  // Palabras clave y respuestas
-  const responses = [];
+  if (q.match(/hola|buenos días|hey/i)) responses.push('¡Hola! Soy el Asistente PNFE. ¿En qué puedo ayudarte?');
+  if (q.match(/factorización|factorizar/i)) responses.push(kb.topics?.factorización || 'Factorización: expresa una suma como producto.');
+  if (q.match(/coordenadas|distancia|pendiente|recta/i)) responses.push(kb.topics?.coordenadas || 'La distancia entre puntos se calcula con Pitágoras.');
+  if (q.match(/límite|límites/i)) responses.push(kb.topics?.límite || 'El límite es el valor al que se acerca una función.');
+  if (q.match(/derivada|derivar/i)) responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea.');
+  if (q.match(/integral|integrar|antiderivada/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
+  if (q.match(/matriz|determinante/i)) responses.push(kb.topics?.matriz || 'Las matrices se suman y multiplican. El determinante es un escalar.');
+  if (q.match(/edo|ecuación diferencial|laplace/i)) responses.push(kb.topics?.edo || 'Una EDO relaciona una función con sus derivadas.');
+  if (q.match(/ejercicio|propón|practicar/i)) responses.push('✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?');
   
-  // Verificar si es un saludo
-  if (q.match(/hola|buenos días|buenas tardes|hey|qué tal/i)) {
-    responses.push('¡Hola! Soy el Asistente PNFE. Puedo ayudarte con tus dudas de matemáticas para Ingeniería Eléctrica. ¿Qué te gustaría consultar?');
-  }
-  
-  // Factorización
-  if (q.match(/factorización|factorizar|factor común|diferencia de cuadrados|trinomio cuadrado|aspa/i)) {
-    responses.push(kb.topics?.factorización || knowledgeBase['Matemática de Iniciación'].topics.factorización);
-  }
-  
-  // Coordenadas
-  if (q.match(/coordenadas|plano cartesiano|distancia entre puntos|pendiente|recta|eje/i)) {
-    responses.push(kb.topics?.coordenadas || knowledgeBase['Matemática de Iniciación'].topics.coordenadas);
-    if (q.match(/pendiente/i)) responses.push(knowledgeBase['Matemática de Iniciación'].topics.pendiente);
-    if (q.match(/recta|ecuación de la recta/i)) responses.push(knowledgeBase['Matemática de Iniciación'].topics.recta);
-  }
-  
-  // Límites
-  if (q.match(/límite|límites|continuidad/i)) {
-    responses.push(kb.topics?.límite || 'El límite de una función f(x) cuando x tiende a a es el valor al que se acerca f(x). La continuidad requiere que el límite exista, la función esté definida y coincidan.');
-  }
-  
-  // Derivadas
-  if (q.match(/derivada|derivar|diferenciar|regla de la cadena|regla del producto/i)) {
-    responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea. Reglas básicas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x, d/dx[eˣ]=eˣ.');
-    if (q.match(/cadena/i)) responses.push(knowledgeBase['Cálculo Diferencial'].topics['regla de la cadena']);
-  }
-  
-  // Integrales
-  if (q.match(/integral|integrar|antiderivada|teorema fundamental|área bajo la curva/i)) {
-    responses.push(kb.topics?.['integral indefinida'] || 'La integral indefinida es la antiderivada: ∫f(x)dx=F(x)+C. La integral definida calcula el área bajo la curva.');
-    if (q.match(/teorema fundamental|TFC/i)) responses.push('El Teorema Fundamental del Cálculo: ∫ₐᵇ f(x)dx = F(b)-F(a), donde F\'=f.');
-  }
-  
-  // Ecuaciones diferenciales
-  if (q.match(/ecuaciones diferenciales|edo|laplace|transformada de laplace|rlc|circuito/i)) {
-    responses.push(kb.topics?.['edo primer orden'] || 'Una ecuación diferencial relaciona una función con sus derivadas. Se usan para modelar circuitos eléctricos, decaimiento, etc.');
-    if (q.match(/laplace|transformada/i)) responses.push(knowledgeBase['Ecuaciones Diferenciales'].topics.laplace);
-    if (q.match(/rlc|circuito/i)) responses.push(knowledgeBase['Ecuaciones Diferenciales'].topics['circuito rlc']);
-  }
-  
-  // Matrices y álgebra lineal
-  if (q.match(/matriz|matrices|determinante|vector|eigenvalor|valor propio|vectores propios|álgebra lineal/i)) {
-    responses.push(kb.topics?.matriz || 'Las matrices son arreglos de números. Se suman, multiplican y pueden tener inversa. Los determinantes ayudan a resolver sistemas.');
-    if (q.match(/determinante/i)) responses.push(knowledgeBase['Álgebra Lineal y Geometría'].topics.determinante);
-    if (q.match(/eigenvalor|valor propio/i)) responses.push(knowledgeBase['Álgebra Lineal y Geometría'].topics.eigenvalor);
-  }
-  
-  // Ejercicios
-  if (q.match(/ejercicio|problema|practicar|propón/i)) {
-    if (subject === 'Matemática de Iniciación') {
-      responses.push('📐 Ejercicio de factorización: Factoriza 2x² + 7x + 3. (Solución: (2x+1)(x+3))\n📐 Ejercicio de coordenadas: Encuentra la distancia entre (-2,1) y (4,5). (Solución: √52 ≈ 7.21)');
-    } else if (subject === 'Cálculo Diferencial') {
-      responses.push('📈 Ejercicio de derivadas: Deriva f(x)=3x⁴·ln(x).\n📈 Ejercicio de límites: Calcula lim_{x→0} sen(2x)/x. (Solución: 2)');
-    } else if (subject === 'Cálculo Integral') {
-      responses.push('📊 Ejercicio de integral: Calcula ∫(3x²-4x+1)dx.\n📊 Ejercicio de integral definida: ∫₀² (x³-2x)dx.');
-    } else if (subject === 'Álgebra Lineal y Geometría') {
-      responses.push('🔲 Ejercicio de matrices: Multiplica [[2,-1],[0,3]]·[[1,2],[4,-2]].\n🔲 Ejercicio de vectores: Calcula el producto escalar de u=(2,3) y v=(4,-1).');
-    } else if (subject === 'Ecuaciones Diferenciales') {
-      responses.push('〰 Ejercicio EDO: Resuelve y″-3y′+2y=0.\n〰 Ejercicio Laplace: Encuentra L{t·eᵗ}.');
-    } else {
-      responses.push('✏️ Puedes practicar con las guías de ejercicios disponibles en cada materia. ¿Cuál tema te interesa más?');
-    }
-  }
-  
-  // Información general del PNFE
-  if (q.match(/pnfe|programa nacional|qué es|qué materias|trayectos/i)) {
-    responses.push('El Programa Nacional de Formación en Electricidad (PNFE) forma Técnicos Superiores e Ingenieros Electricistas. Las materias de matemáticas son: Matemática de Iniciación (Trayecto Inicial), Cálculo Diferencial (Trayecto I), Cálculo Integral (Trayecto I), Álgebra Lineal y Geometría (Trayecto I), y Ecuaciones Diferenciales (Trayecto II).');
-  }
-  
-  // Si no hay coincidencia
-  if (responses.length === 0) {
-    responses.push(`No encontré una respuesta específica sobre "${question.substring(0, 50)}...". Puedes consultar las guías de teoría o preguntarme de otra manera. Estoy aquí para ayudarte.`);
-  }
+  if (responses.length === 0) responses.push(`No tengo una respuesta específica para "${question.substring(0, 50)}...". Consulta las guías de teoría o pregúntame de otra manera.`);
   
   return responses.join('\n\n');
 }
 
-// ==================== UI DEL ASISTENTE OFFLINE ====================
+// ==================== UI DEL ASISTENTE ====================
 const panel = document.getElementById('ai-panel');
 const fab = document.getElementById('ai-fab');
 const closeBtn = document.getElementById('ai-close');
@@ -694,15 +845,8 @@ const sendBtn = document.getElementById('ai-send');
 let selectedSubject = 'general';
 let isLoading = false;
 
-function openPanel() {
-  panel.classList.add('open');
-  fab.classList.add('panel-open');
-  setTimeout(() => inputEl.focus(), 400);
-}
-function closePanel() {
-  panel.classList.remove('open');
-  fab.classList.remove('panel-open');
-}
+function openPanel() { panel.classList.add('open'); fab.classList.add('panel-open'); setTimeout(() => inputEl.focus(), 400); }
+function closePanel() { panel.classList.remove('open'); fab.classList.remove('panel-open'); }
 
 fab.addEventListener('click', openPanel);
 closeBtn.addEventListener('click', closePanel);
@@ -719,14 +863,12 @@ document.getElementById('ai-subject-bar').addEventListener('click', e => {
   updateQuickPrompts(selectedSubject);
 });
 
-// Card "Consultar" buttons
+// Card consult buttons
 document.querySelectorAll('.card-ask-ai').forEach(btn => {
   btn.addEventListener('click', () => {
     const materia = btn.dataset.materia;
     openPanel();
-    document.querySelectorAll('.ai-subject-chip').forEach(c => {
-      c.classList.toggle('active', c.dataset.subject === materia);
-    });
+    document.querySelectorAll('.ai-subject-chip').forEach(c => c.classList.toggle('active', c.dataset.subject === materia));
     selectedSubject = materia;
     updateQuickPrompts(materia);
     inputEl.value = `¿Puedes explicarme ${materia}?`;
@@ -736,97 +878,59 @@ document.querySelectorAll('.card-ask-ai').forEach(btn => {
 
 function updateQuickPrompts(subject) {
   const prompts = {
-    'general': ['¿Qué es una derivada?', 'Explica la integral definida', '¿Para qué sirve Laplace?', 'Propón un ejercicio', '¿Qué materias hay?'],
-    'Matemática de Iniciación': ['¿Qué es factorización?', 'Explica la diferencia de cuadrados', 'Fórmula de distancia', 'Propón un ejercicio', '¿Cómo se calcula la pendiente?'],
-    'Cálculo Diferencial': ['¿Qué es un límite?', 'Regla de la cadena', '¿Para qué sirven las derivadas?', 'Propón un ejercicio', 'Aplicaciones en electricidad'],
-    'Cálculo Integral': ['¿Qué es una integral?', 'Teorema Fundamental', 'Integración por partes', 'Propón un ejercicio', 'Aplicaciones en circuitos'],
-    'Álgebra Lineal y Geometría': ['¿Cómo se multiplican matrices?', '¿Qué es un determinante?', 'Vectores en ℝ²', 'Propón un ejercicio', '¿Qué son eigenvalores?'],
-    'Ecuaciones Diferenciales': ['¿Qué es una EDO?', '¿Cómo se resuelve una EDO lineal?', 'Transformada de Laplace', 'Propón un ejercicio', 'Circuito RLC']
+    'general': ['¿Qué es una derivada?', 'Explica la integral', '¿Para qué sirve Laplace?', 'Propón un ejercicio'],
+    'Matemática de Iniciación': ['¿Qué es factorización?', 'Fórmula de distancia', 'Propón un ejercicio'],
+    'Cálculo Diferencial': ['¿Qué es un límite?', 'Regla de la cadena', 'Propón un ejercicio'],
+    'Cálculo Integral': ['¿Qué es una integral?', 'Teorema Fundamental', 'Propón un ejercicio'],
+    'Álgebra Lineal y Geometría': ['Multiplica matrices', '¿Qué son eigenvalores?', 'Propón un ejercicio'],
+    'Ecuaciones Diferenciales': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Propón un ejercicio']
   };
   const container = document.getElementById('ai-quick-prompts');
   const list = prompts[subject] || prompts['general'];
   container.innerHTML = list.map(p => `<button class="ai-quick-btn">${p}</button>`).join('');
 }
 
-// Auto-resize textarea
-inputEl.addEventListener('input', () => {
-  inputEl.style.height = 'auto';
-  inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
-});
-inputEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-});
+inputEl.addEventListener('input', () => { inputEl.style.height = 'auto'; inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px'; });
+inputEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
 sendBtn.addEventListener('click', sendMessage);
 
 function addMessage(role, content) {
   const welcome = messagesEl.querySelector('.ai-welcome');
   if (welcome) welcome.remove();
-
   const div = document.createElement('div');
   div.className = `ai-msg ${role}`;
-  div.innerHTML = `
-    <div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div>
-    <div class="ai-msg-bubble">${formatContent(content)}</div>
-  `;
+  div.innerHTML = `<div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div><div class="ai-msg-bubble">${content.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>`;
   messagesEl.appendChild(div);
   messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function formatContent(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`(.*?)`/g, '<code>$1</code>')
-    .replace(/\n\n/g, '<br><br>')
-    .replace(/\n- /g, '<br>• ')
-    .replace(/\n/g, '<br>');
 }
 
 function showTyping() {
   const div = document.createElement('div');
   div.className = 'ai-msg assistant';
   div.id = 'ai-typing-indicator';
-  div.innerHTML = `
-    <div class="ai-msg-avatar">✦</div>
-    <div class="ai-typing"><span></span><span></span><span></span></div>
-  `;
+  div.innerHTML = `<div class="ai-msg-avatar">✦</div><div class="ai-typing"><span></span><span></span><span></span></div>`;
   messagesEl.appendChild(div);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-function removeTyping() {
-  const t = document.getElementById('ai-typing-indicator');
-  if (t) t.remove();
-}
+function removeTyping() { const t = document.getElementById('ai-typing-indicator'); if (t) t.remove(); }
 
 function sendMessage() {
   const text = inputEl.value.trim();
   if (!text || isLoading) return;
-
-  inputEl.value = '';
-  inputEl.style.height = 'auto';
-  isLoading = true;
-  sendBtn.disabled = true;
-
+  inputEl.value = ''; inputEl.style.height = 'auto';
+  isLoading = true; sendBtn.disabled = true;
   addMessage('user', text);
   showTyping();
-
-  // Simular tiempo de procesamiento (más natural)
   setTimeout(() => {
     removeTyping();
     const reply = getResponse(text, selectedSubject);
     addMessage('assistant', reply);
-    isLoading = false;
-    sendBtn.disabled = false;
-    inputEl.focus();
+    isLoading = false; sendBtn.disabled = false; inputEl.focus();
   }, 500 + Math.random() * 400);
 }
 
-// Inicializar quick prompts
 updateQuickPrompts('general');
-
-// Guardar la función getResponse en window para debug (opcional)
-window.getResponse = getResponse;
 </script>
 </body>
 </html>
