@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNFE | Nuevo diseño lateral - Prueba</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c9a84c;
+    --gold-soft: #e8c97a;
+    --teal: #4ecdc4;
+    --text: #e8e6df;
+    --muted: #6b6a63;
+    --rose: #e07a8f;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  #canvas-bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.4;
+  }
+  .wrapper { position: relative; z-index: 2; }
+
+  /* NAV */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    background: rgba(10,12,16,0.7);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+    cursor: pointer;
+  }
+  .nav-logo span { font-style: italic; color: var(--text); opacity: 0.5; font-size: 0.9rem; margin-left: 0.5rem; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-soft); }
+
+  /* HERO - NUEVO DISEÑO LATERAL */
+  .hero {
+    padding: 4rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+  .hero-image {
+    flex: 1;
+    min-width: 220px;
+    text-align: center;
+  }
+  .hero-photo {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: 25% 50%;  /* Ajusta para efecto de perfil de costado */
+    border: 4px solid var(--gold);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+  }
+  .hero-photo:hover {
+    transform: scale(1.02);
+  }
+  .hero-content {
+    flex: 2;
+    min-width: 280px;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: left;
+    max-width: 100%;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    color: #0a0c10;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+  }
+  .hero-cta-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    border: 1px solid rgba(78,205,196,0.4);
+    color: var(--teal);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .hero-cta-ghost:hover {
+    background: rgba(78,205,196,0.08);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+
+  /* STATS */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    padding: 2rem 1rem;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 4rem 3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label::before, .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* CARDS (igual que antes) */
+  .materias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 3rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .materia-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 1.8rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .materia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .card-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+  }
+  .card-icon { font-size: 2rem; }
+  .card-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0.5rem 0 0.2rem;
+    line-height: 1.2;
+  }
+  .card-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    opacity: 0.8;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 2rem 1.5rem; }
+    .hero-container { flex-direction: column; text-align: center; gap: 2rem; }
+    .hero-eyebrow, .hero h1, .hero-desc { text-align: center; }
+    .hero-ctas { justify-content: center; }
+    .hero-photo { width: 180px; height: 180px; }
+    .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+<canvas id="canvas-bg"></canvas>
+<div class="wrapper">
+  <nav>
+    <div class="nav-logo" id="logo-home">∂<em></em> PNF Electricidad <span>· Matemáticas</span></div>
+    <ul class="nav-links">
+      <li><a id="nav-materias">Materias</a></li>
+      <li><a id="nav-contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div id="home-section">
+    <!-- NUEVA PORTADA LATERAL -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-image">
+          <img src="perfil.jpg.webp" alt="MSc. Orlando Silva" class="hero-photo">
+        </div>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
+          <h1>Las matemáticas son el<br><em>lenguaje del universo</em></h1>
+          <p class="hero-desc">Basado en el documento rector del PNFE (2014-2015). Contenidos oficiales con teoría, ejercicios, pre‑parciales y soluciones protegidas.</p>
+          <div class="hero-ctas">
+            <button class="hero-cta" id="hero-cta-btn">Ver materias &nbsp;→</button>
+            <button class="hero-cta-ghost" id="hero-ai-btn">✦ Consultar al Asistente IA</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-bar">
+      <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Materias</span></div>
+      <div class="stat-item"><span class="stat-number">PNFE</span><span class="stat-label">Documento Rector</span></div>
+      <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
+      <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
+    </div>
+
+    <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios, pre‑parciales y soluciones (con contraseña)</p>
+
+    <div class="materias-grid">
+      <!-- Matemática de Iniciación -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">00 · Trayecto Inicial</span><span class="card-icon">🧮</span></div>
+        <h2 class="card-title">Matemática de Iniciación</h2>
+        <p class="card-subtitle">Fundamentos de álgebra, geometría analítica y números complejos.</p>
+        <div class="card-tags"><span class="card-tag">Factorización</span><span class="card-tag">Coordenadas</span><span class="card-tag">Pendiente</span></div>
+      </div>
+      <!-- Cálculo Diferencial -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div>
+        <h2 class="card-title">Cálculo Diferencial</h2>
+        <p class="card-subtitle">Límites, derivadas y aplicaciones en ingeniería eléctrica.</p>
+        <div class="card-tags"><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
+      </div>
+      <!-- Cálculo Integral -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div>
+        <h2 class="card-title">Cálculo Integral</h2>
+        <p class="card-subtitle">Integrales indefinidas, definidas y aplicaciones.</p>
+        <div class="card-tags"><span class="card-tag">Antiderivadas</span><span class="card-tag">Área</span><span class="card-tag">Sustitución</span></div>
+      </div>
+      <!-- Álgebra Lineal -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div>
+        <h2 class="card-title">Álgebra Lineal y Geometría</h2>
+        <p class="card-subtitle">Matrices, determinantes, vectores y transformaciones lineales.</p>
+        <div class="card-tags"><span class="card-tag">Matrices</span><span class="card-tag">Vectores</span><span class="card-tag">Eigenvalores</span></div>
+      </div>
+      <!-- Ecuaciones Diferenciales -->
+      <div class="materia-card">
+        <div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div>
+        <h2 class="card-title">Ecuaciones Diferenciales</h2>
+        <p class="card-subtitle">EDO, Transformada de Laplace y circuitos RLC.</p>
+        <div class="card-tags"><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Circuitos RLC</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contacto">
+    <p>Programa Nacional de Formación en Electricidad · Matemáticas para Ingeniería Eléctrica</p>
+    <p style="margin-top:0.5rem; font-size:0.72rem;">MSc. Orlando Silva · Basado en Documento Rector PNFE (2014-2015) · <strong>Versión de prueba</strong></p>
+  </footer>
+</div>
+
+<script>
+  // CANVAS BACKGROUND
+  (function() {
+    const canvas = document.getElementById('canvas-bg');
+    const ctx = canvas.getContext('2d');
+    const symbols = ['∂f/∂x', '∫₀^∞', '∑ₙ', 'lim→0', 'det(A)', 'λ₁,₂', 'e^{iπ}', '∇²φ', 'Ax=b', 'd²y/dx²', '∮ E·dl', 'L{f}', 'y″+py′', 'R·C', 'ω₀', 'Z=jωL'];
+    let W, H, particles = [];
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    function Particle() { this.reset = function() { this.x = Math.random() * W; this.y = Math.random() * H; this.vx = (Math.random() - 0.5) * 0.18; this.vy = (Math.random() - 0.5) * 0.12; this.alpha = Math.random() * 0.07 + 0.02; this.sym = symbols[Math.floor(Math.random() * symbols.length)]; }; this.reset(); }
+    function init() { resize(); particles = Array.from({ length: 38 }, () => new Particle()); }
+    function draw() { ctx.clearRect(0, 0, W, H); ctx.font = `300 14px 'JetBrains Mono', monospace`; for (const p of particles) { ctx.globalAlpha = p.alpha; ctx.fillStyle = '#c9a84c'; ctx.fillText(p.sym, p.x, p.y); p.x += p.vx; p.y += p.vy; if (p.x < -80 || p.x > W + 80 || p.y < -30 || p.y > H + 30) { p.x = Math.random() * W; p.y = Math.random() < 0.5 ? -20 : H + 20; } } ctx.globalAlpha = 1; requestAnimationFrame(draw); }
+    window.addEventListener('resize', resize); init(); draw();
+  })();
+
+  // NAV SCROLL
+  document.getElementById('nav-materias').addEventListener('click', e => { e.preventDefault(); document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('nav-contacto').addEventListener('click', e => { e.preventDefault(); document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('hero-cta-btn').addEventListener('click', () => { document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('logo-home').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.getElementById('hero-ai-btn')?.addEventListener('click', () => { alert('Asistente IA disponible en la versión completa. Esta es una prueba de diseño.'); });
+</script>
+</body>
+</html>
