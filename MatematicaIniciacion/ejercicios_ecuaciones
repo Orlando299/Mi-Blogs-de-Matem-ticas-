@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios de Sistemas de Ecuaciones - Matemática de Iniciación</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Sistemas de Ecuaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Resuelve cada sistema usando el método indicado o el que prefieras. Las soluciones están en <a href="soluciones_ecuaciones.html">soluciones_ecuaciones.html</a> (contraseña requerida).</p>
+
+    <h2>📌 Sistemas 2×2 (métodos específicos)</h2>
+    <div class="ejercicio"><strong>1. a)</strong> Resuelve por <strong>sustitución</strong>:
+        \[
+        \begin{cases}
+        5x + 2y = 1 \\
+        -3x + 3y = 5
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>1. b)</strong> Resuelve por <strong>reducción</strong>:
+        \[
+        \begin{cases}
+        2x + y = 6 \\
+        4x + 3y = 14
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>2. a)</strong> Resuelve por <strong>igualación</strong>:
+        \[
+        \begin{cases}
+        5x - 2y = 2 \\
+        x + 2y = 2
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>2. b)</strong> Resuelve por <strong>reducción</strong>:
+        \[
+        \begin{cases}
+        5x - y = 3 \\
+        -2x + 4y = -12
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>3. a)</strong> Resuelve por <strong>sustitución</strong>:
+        \[
+        \begin{cases}
+        3x + 5y = 15 \\
+        2x - 3y = -9
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>3. b)</strong> Resuelve por <strong>reducción</strong>:
+        \[
+        \begin{cases}
+        4x + 6y = 2 \\
+        6x + 5y = 1
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>4. a)</strong> Resuelve por <strong>sustitución</strong>:
+        \[
+        \begin{cases}
+        -2x + 3y = 14 \\
+        3x - y = -14
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>4. b)</strong> Resuelve por <strong>igualación</strong>:
+        \[
+        \begin{cases}
+        2x + 3y = 2 \\
+        -6x + 12y = 1
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>5. a)</strong> Resuelve por <strong>igualación</strong>:
+        \[
+        \begin{cases}
+        5x + 2y = 11 \\
+        2x - 3y = 12
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>5. b)</strong> Resuelve por <strong>reducción</strong>:
+        \[
+        \begin{cases}
+        -2x + 4y = 7 \\
+        3x - 5y = 4
+        \end{cases}
+        \]
+    </div>
+
+    <h2>🔁 Sistemas 2×2 varios (incluye casos especiales)</h2>
+    <div class="ejercicio"><strong>6. a)</strong> 
+        \[
+        \begin{cases}
+        x + 2y = 1 \\
+        -3x + y = -10
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>6. b)</strong> 
+        \[
+        \begin{cases}
+        -x + 2y = 4 \\
+        2x - 4y = 3
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>7. a)</strong> 
+        \[
+        \begin{cases}
+        x + 4y = 1 \\
+        2x + y = -5
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>7. b)</strong> 
+        \[
+        \begin{cases}
+        3x + y = 4 \\
+        -6x - 2y = 1
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>8. a)</strong> 
+        \[
+        \begin{cases}
+        3x - 2y = -4 \\
+        2x + y = 2
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>8. b)</strong> 
+        \[
+        \begin{cases}
+        x - 4y = 5 \\
+        3x - 12y = 15
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>9. a)</strong> 
+        \[
+        \begin{cases}
+        2x + 3y = 1 \\
+        3x + 2y = 4
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>9. b)</strong> 
+        \[
+        \begin{cases}
+        4x - 3y = 5 \\
+        -8x + 6y = 10
+        \end{cases}
+        \]
+    </div>
+
+    <div class="ejercicio"><strong>10.</strong> 
+        \[
+        \begin{cases}
+        4x - y = -9 \\
+        2x + 2y = -2
+        \end{cases}
+        \]
+    </div>
+
+    <h2>🧮 Sistemas con fracciones</h2>
+    <div class="ejercicio"><strong>11.</strong> 
+        \[
+        \begin{cases}
+        \frac{2(x+4)}{3} - \frac{y}{2} = \frac{9}{2} \\[1em]
+        x + 2y - \frac{1}{3}(3x - 2) = -\frac{4}{3}
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>12.</strong> 
+        \[
+        \begin{cases}
+        \frac{2x - 1}{2} + \frac{y - 3}{3} = \frac{11}{6} \\[1em]
+        \frac{2x}{5} + \frac{y - 1}{10} = \frac{6}{5}
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>13.</strong> 
+        \[
+        \begin{cases}
+        \frac{3x - 2y}{3} + 4y = \frac{13}{3} \\[1em]
+        \frac{2(-2y + x)}{3} - \frac{3x}{2} = -\frac{13}{6}
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>14.</strong> 
+        \[
+        \begin{cases}
+        \frac{2(x+1)}{3} - y = -3 \\[1em]
+        3(x + 5 - y) + 3x = 12
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>15.</strong> 
+        \[
+        \begin{cases}
+        \frac{7x - 9y}{2} - \frac{2x + 4}{2} = -15 \\[1em]
+        5(x - 1 + y) = 25
+        \end{cases}
+        \]
+    </div>
+
+    <h2>📈 Ecuación lineal en dos variables (gráfica y soluciones)</h2>
+    <div class="ejercicio"><strong>16. a)</strong> Busca dos pares de valores que sean solución de la ecuación \(5x - 4y = 1\).</div>
+    <div class="ejercicio"><strong>16. b)</strong> Representa gráficamente la recta \(5x - 4y = 1\).</div>
+
+    <h2>📚 Problemas de aplicación (verbales)</h2>
+    <div class="ejercicio"><strong>Problema 1.</strong> Calcula un número sabiendo que la suma de sus dos cifras es 10; y que, si invertimos el orden de dichas cifras, el número obtenido es 36 unidades mayor que el inicial.</div>
+    <div class="ejercicio"><strong>Problema 2.</strong> En un triángulo rectángulo, uno de sus ángulos agudos es 12° mayor que el otro. ¿Cuánto miden sus tres ángulos?</div>
+    <div class="ejercicio"><strong>Problema 3.</strong> La distancia entre dos ciudades A y B es de 255 km. Un coche sale de A hacia B a 90 km/h. Al mismo tiempo, sale otro de B hacia A a 80 km/h. Calcula el tiempo que tardan en encontrarse y la distancia recorrida por cada uno.</div>
+    <div class="ejercicio"><strong>Problema 4.</strong> Halla un número de dos cifras sabiendo que la primera cifra es igual a la tercera parte de la segunda; y que si invertimos el orden de sus cifras, obtenemos otro número que excede en 54 unidades al inicial.</div>
+    <div class="ejercicio"><strong>Problema 5.</strong> La base mayor de un trapecio mide el triple que su base menor. La altura del trapecio es 4 cm y su área es 24 cm². Calcula la longitud de sus dos bases.</div>
+    <div class="ejercicio"><strong>Problema 6.</strong> La razón entre las edades de dos personas es de 2/3. Sabiendo que se llevan 15 años, ¿cuál es la edad de cada una?</div>
+    <div class="ejercicio"><strong>Problema 7.</strong> Un número excede en 12 unidades a otro; y si restáramos 4 unidades a cada uno de ellos, entonces el primero sería igual al doble del segundo. Halla los dos números.</div>
+    <div class="ejercicio"><strong>Problema 8.</strong> El perímetro de un triángulo isósceles es de 19 cm. La longitud de cada uno de sus lados iguales excede en 2 cm al doble de la longitud del lado desigual. ¿Cuánto miden los lados del triángulo?</div>
+    <div class="ejercicio"><strong>Problema 9.</strong> Pablo y Alicia llevan entre los dos 160 €. Si Alicia le da 10 € a Pablo, ambos tendrán la misma cantidad. ¿Cuánto dinero lleva cada uno?</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria_ecuaciones.html">← Volver a teoría</a> | <a href="preparciales_ecuaciones.html">📝 Pre‑parciales</a> | <a href="soluciones_ecuaciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
