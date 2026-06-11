@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Teoría de Ecuaciones Lineales - Matemática de Iniciación</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ecuaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática de Iniciación · PNF Electricidad · Trayecto Inicial</div>
+
+    <h2>1. Ecuaciones lineales con una variable</h2>
+    <div class="definicion">
+        Una ecuación lineal con una variable \(x\) es de la forma:
+        \[
+        a x + b = 0 \quad (a \neq 0)
+        \]
+        Su solución es única: \(x = -\frac{b}{a}\).
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 1:</strong> \(3x - 5 = 0\) → \(3x = 5\) → \(x = \frac{5}{3}\).
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 2:</strong> \(\frac{2x}{3} + 4 = 10\) → \(\frac{2x}{3} = 6\) → \(2x = 18\) → \(x = 9\).
+    </div>
+
+    <h2>2. Ecuaciones lineales con dos variables</h2>
+    <div class="definicion">
+        Una ecuación lineal con dos variables \(x\) e \(y\) se escribe como:
+        \[
+        a x + b y = c
+        \]
+        donde \(a\) y \(b\) no son ambos cero. Tiene infinitas soluciones \((x,y)\) que geométricamente representan una recta en el plano cartesiano.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(2x - 3y = 6\). Algunas soluciones: \((3,0)\), \((0,-2)\), \((6,2)\).
+    </div>
+
+    <h2>3. Sistemas de dos ecuaciones lineales con dos incógnitas (2×2)</h2>
+    <div class="definicion">
+        Un sistema de dos ecuaciones lineales con dos incógnitas tiene la forma:
+        \[
+        \begin{cases}
+        a_1 x + b_1 y = c_1 \\
+        a_2 x + b_2 y = c_2
+        \end{cases}
+        \]
+        Resolverlo significa encontrar todos los pares \((x,y)\) que satisfacen ambas ecuaciones simultáneamente.
+    </div>
+
+    <h3>Método de sustitución</h3>
+    <div class="teorema">
+        Pasos:
+        <ol>
+            <li>Despejar una variable de una ecuación.</li>
+            <li>Sustituir esa expresión en la otra ecuación.</li>
+            <li>Resolver la ecuación resultante (una variable).</li>
+            <li>Sustituir el valor obtenido para hallar la otra variable.</li>
+        </ol>
+    </div>
+    <div class="ejemplo">
+        \(\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}\) <br>
+        De la primera: \(x = 8 - 2y\). Sustituyendo en la segunda: \(3(8-2y) - y = 3 \rightarrow 24 - 6y - y = 3 \rightarrow 24 - 7y = 3 \rightarrow -7y = -21 \rightarrow y = 3\). Luego \(x = 8 - 2(3) = 2\). Solución: \((2,3)\).
+    </div>
+
+    <h3>Método de igualación</h3>
+    <div class="teorema">
+        Pasos:
+        <ol>
+            <li>Despejar la misma variable de ambas ecuaciones.</li>
+            <li>Igualar las expresiones obtenidas.</li>
+            <li>Resolver la ecuación resultante.</li>
+            <li>Sustituir para hallar la otra variable.</li>
+        </ol>
+    </div>
+    <div class="ejemplo">
+        \(\begin{cases} 2x - y = 5 \\ x + y = 4 \end{cases}\) <br>
+        Despejamos \(y\): \(y = 2x - 5\) y \(y = 4 - x\). Igualamos: \(2x - 5 = 4 - x \rightarrow 3x = 9 \rightarrow x = 3\). Luego \(y = 4 - 3 = 1\). Solución: \((3,1)\).
+    </div>
+
+    <h3>Método de reducción (suma/resta)</h3>
+    <div class="teorema">
+        Pasos:
+        <ol>
+            <li>Multiplicar una o ambas ecuaciones para que los coeficientes de una variable sean opuestos.</li>
+            <li>Sumar las ecuaciones para eliminar esa variable.</li>
+            <li>Resolver la ecuación resultante.</li>
+            <li>Sustituir para hallar la otra variable.</li>
+        </ol>
+    </div>
+    <div class="ejemplo">
+        \(\begin{cases} 3x + 4y = 10 \\ 2x - 4y = 0 \end{cases}\) <br>
+        Sumamos: \(5x = 10 \rightarrow x = 2\). Sustituyendo en la segunda: \(2(2) - 4y = 0 \rightarrow 4 = 4y \rightarrow y = 1\). Solución: \((2,1)\).
+    </div>
+
+    <h2>4. Sistemas de tres ecuaciones lineales con tres incógnitas (3×3)</h2>
+    <div class="definicion">
+        Forma general:
+        \[
+        \begin{cases}
+        a_1 x + b_1 y + c_1 z = d_1 \\
+        a_2 x + b_2 y + c_2 z = d_2 \\
+        a_3 x + b_3 y + c_3 z = d_3
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Método de eliminación (Gauss)</h3>
+    <div class="teorema">
+        Se combinan ecuaciones para eliminar una variable, reduciendo el sistema a uno 2×2, luego se resuelve y se sustituye hacia atrás.
+    </div>
+    <div class="ejemplo">
+        \(\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x - y + 2z = 5 \end{cases}\)<br>
+        <strong>Paso 1:</strong> Eliminamos \(y\) de las dos primeras: sumamos 1ª y 2ª → \(3x + 2z = 9\).<br>
+        <strong>Paso 2:</strong> Eliminamos \(y\) de 1ª y 3ª: restamos 1ª menos 3ª → \(2y - z = 1\).<br>
+        (Ahora tenemos un sistema 2×2 en \(x,z\) y una ecuación con \(y,z\). Se continúa resolviendo.)<br>
+        <strong>Solución final:</strong> \((x,y,z) = (1,2,3)\).
+    </div>
+
+    <h2>5. Aplicaciones en electricidad (Leyes de Kirchhoff)</h2>
+    <div class="ejemplo">
+        En un circuito de dos mallas, las corrientes cumplen:
+        \[
+        \begin{cases}
+        R_1 I_1 + R_2 (I_1 - I_2) = V_1 \\
+        R_3 I_2 + R_2 (I_2 - I_1) = -V_2
+        \end{cases}
+        \]
+        Este es un sistema lineal 2×2 que se resuelve con cualquiera de los métodos anteriores.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div style="margin-top: 20px;">
+        <a href="ejercicios_ecuaciones.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ir a ejercicios</a>
+        <a href="preparciales_ecuaciones.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Ir a pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
