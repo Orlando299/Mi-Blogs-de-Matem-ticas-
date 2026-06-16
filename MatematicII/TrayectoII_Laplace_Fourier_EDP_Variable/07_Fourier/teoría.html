@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 7: Series de Fourier</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 7: Series de Fourier</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Funciones periódicas</h2>
+    <div class="definicion">
+        Una función \(f(x)\) es <strong>periódica</strong> con periodo \(T\) si:
+        \[
+        f(x + T) = f(x) \quad \text{para todo } x
+        \]
+        El periodo fundamental es el menor valor positivo de \(T\) que cumple esta propiedad.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(\sin x\) tiene periodo \(2\pi\). \(\cos(2x)\) tiene periodo \(\pi\).
+    </div>
+
+    <h2>2. Series trigonométricas de Fourier</h2>
+    <div class="definicion">
+        Para una función periódica \(f(x)\) de periodo \(2L\) (definida en \([-L, L]\)), su <strong>serie de Fourier</strong> es:
+        \[
+        f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty \left[a_n \cos\left(\frac{n\pi x}{L}\right) + b_n \sin\left(\frac{n\pi x}{L}\right)\right]
+        \]
+    </div>
+
+    <h3>Coeficientes de Fourier (fórmulas de Euler)</h3>
+    <div class="formula">
+        \[
+        a_0 = \frac{1}{L}\int_{-L}^{L} f(x)\,dx
+        \]
+        \[
+        a_n = \frac{1}{L}\int_{-L}^{L} f(x)\cos\left(\frac{n\pi x}{L}\right)\,dx, \quad n = 1,2,3,\dots
+        \]
+        \[
+        b_n = \frac{1}{L}\int_{-L}^{L} f(x)\sin\left(\frac{n\pi x}{L}\right)\,dx, \quad n = 1,2,3,\dots
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Encontrar la serie de Fourier de \(f(x) = x\) en \([-1, 1]\).<br>
+        \(L = 1\).<br>
+        \(a_0 = \int_{-1}^{1} x\,dx = 0\).<br>
+        \(a_n = \int_{-1}^{1} x\cos(n\pi x)\,dx = 0\) (función impar).<br>
+        \(b_n = \int_{-1}^{1} x\sin(n\pi x)\,dx = \frac{2(-1)^{n+1}}{n\pi}\).<br>
+        \[
+        f(x) \sim \sum_{n=1}^\infty \frac{2(-1)^{n+1}}{n\pi}\sin(n\pi x)
+        \]
+    </div>
+
+    <h2>3. Funciones pares e impares</h2>
+    <div class="definicion">
+        <ul>
+            <li><strong>Función par:</strong> \(f(-x) = f(x)\) → la serie de Fourier solo tiene términos coseno (\(b_n = 0\)).</li>
+            <li><strong>Función impar:</strong> \(f(-x) = -f(x)\) → la serie de Fourier solo tiene términos seno (\(a_n = 0\)).</li>
+        </ul>
+    </div>
+
+    <h3>Series de cosenos (funciones pares)</h3>
+    <div class="formula">
+        \[
+        f(x) \sim \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos\left(\frac{n\pi x}{L}\right)
+        \]
+        \[
+        a_n = \frac{2}{L}\int_0^L f(x)\cos\left(\frac{n\pi x}{L}\right)\,dx
+        \]
+    </div>
+
+    <h3>Series de senos (funciones impares)</h3>
+    <div class="formula">
+        \[
+        f(x) \sim \sum_{n=1}^\infty b_n \sin\left(\frac{n\pi x}{L}\right)
+        \]
+        \[
+        b_n = \frac{2}{L}\int_0^L f(x)\sin\left(\frac{n\pi x}{L}\right)\,dx
+        \]
+    </div>
+
+    <h2>4. Convergencia de las series de Fourier</h2>
+    <div class="teorema">
+        <strong>Teorema de Dirichlet:</strong> Si \(f(x)\) es continua por partes y tiene derivada por partes en \([-L, L]\), entonces la serie de Fourier converge a:
+        <ul>
+            <li>\(f(x)\) en los puntos donde \(f\) es continua.</li>
+            <li>\(\frac{f(x^+) + f(x^-)}{2}\) en los puntos de discontinuidad.</li>
+        </ul>
+    </div>
+
+    <h2>5. Fenómeno de Gibbs</h2>
+    <div class="definicion">
+        Cerca de una discontinuidad, la serie de Fourier presenta un "sobrepico" que no desaparece incluso con muchos términos. Este sobrepico es aproximadamente el 9% del valor del salto.
+    </div>
+
+    <h2>6. Aplicaciones a señales eléctricas</h2>
+    <div class="ejemplo">
+        <strong>Onda cuadrada:</strong> \(f(x) = \begin{cases} 1 & 0 < x < \pi \\ -1 & -\pi < x < 0 \end{cases}\)<br>
+        Serie de Fourier:
+        \[
+        f(x) \sim \frac{4}{\pi}\sum_{n=1}^\infty \frac{\sin((2n-1)x)}{2n-1}
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Diente de sierra:</strong> \(f(x) = x\) en \([-L, L]\)<br>
+        \[
+        f(x) \sim \sum_{n=1}^\infty \frac{2(-1)^{n+1}L}{n\pi}\sin\left(\frac{n\pi x}{L}\right)
+        \]
+    </div>
+
+    <h2>7. Resumen</h2>
+    <ul>
+        <li><strong>Serie de Fourier:</strong> \(f(x) \sim \frac{a_0}{2} + \sum (a_n\cos + b_n\sin)\)</li>
+        <li><strong>Función par:</strong> solo cosenos</li>
+        <li><strong>Función impar:</strong> solo senos</li>
+        <li><strong>Convergencia:</strong> Dirichlet</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
