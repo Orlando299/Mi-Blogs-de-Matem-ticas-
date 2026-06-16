@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - EDO de Segundo Orden</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: EDO de Segundo Orden</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item">1. \(y = C_1 e^{x} + C_2 e^{2x}\)</div>
+        <div class="solucion-item">2. \(y = C_1 e^{-2x} + C_2 e^{-3x}\)</div>
+        <div class="solucion-item">3. \(y = C_1 e^{x} + C_2 e^{3x}\)</div>
+        <div class="solucion-item">4. \(y = C_1 e^{x/2} + C_2 e^{-2x}\)</div>
+        <div class="solucion-item">5. \(y = (C_1 + C_2 x) e^{-2x}\)</div>
+        <div class="solucion-item">6. \(y = (C_1 + C_2 x) e^{3x}\)</div>
+        <div class="solucion-item">7. \(y = (C_1 + C_2 x) e^{x/2}\)</div>
+        <div class="solucion-item">8. \(y = (C_1 + C_2 x) e^{-x}\)</div>
+        <div class="solucion-item">9. \(y = C_1 \cos(2x) + C_2 \sin(2x)\)</div>
+        <div class="solucion-item">10. \(y = e^{-3x}(C_1 \cos 2x + C_2 \sin 2x)\)</div>
+        <div class="solucion-item">11. \(y = e^{x}(C_1 \cos 2x + C_2 \sin 2x)\)</div>
+        <div class="solucion-item">12. \(y = e^{-x/2}(C_1 \cos x + C_2 \sin x)\)</div>
+        <div class="solucion-item">13. \(y = 2e^{x} - e^{2x}\)</div>
+        <div class="solucion-item">14. \(y = (2 + 3x)e^{-2x}\)</div>
+        <div class="solucion-item">15. \(y = \sin(3x)\)</div>
+        <div class="solucion-item">16. \(y = C_1 e^{x} + C_2 e^{2x} + 2x^2 + 6x + 7\)</div>
+        <div class="solucion-item">17. \(y = C_1 \cos 2x + C_2 \sin 2x - \frac{x}{4}\cos 2x\)</div>
+        <div class="solucion-item">18. \(y = C_1 e^{-x} + C_2 e^{2x} + \frac{1}{2}e^{3x}\)</div>
+        <div class="solucion-item">19. \(y = C_1 \cos x + C_2 \sin x + \frac{x}{2}\sin x\)</div>
+        <div class="solucion-item">20. \(x(t) = e^{-t}(C_1 \cos 3t + C_2 \sin 3t)\), subamortiguado</div>
+        <div class="solucion-item">21. \(x(t) = (C_1 + C_2 t) e^{-3t}\), críticamente amortiguado</div>
+        <div class="solucion-item">22. \(x(t) = C_1 \cos 2t + C_2 \sin 2t\), no amortiguado</div>
+        <div class="solucion-item">23. \(q(t) = e^{-2t}(C_1 \cos t + C_2 \sin t)\)</div>
+        <div class="solucion-item">24. \(q(t) = e^{-t}(\cos t + \sin t)\)</div>
+        <div class="solucion-item">25. \(y = C_1 e^{x} + C_2 e^{-x} + \frac{x}{2}e^{x}\)</div>
+        <div class="solucion-item">26. \(y = C_1 \cos x + C_2 \sin x - \cos x \cdot \ln|\sec x + \tan x|\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(y = C_1 e^{x} + C_2 e^{2x}\); 2. \(y = (C_1 + C_2 x) e^{-2x}\); 3. \(y = C_1 \cos 2x + C_2 \sin 2x\); 4. \(y = 2e^{x} - e^{2x}\); 5. \(x(t) = e^{-t}(C_1 \cos 3t + C_2 \sin 3t)\), subamortiguado</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(y = C_1 e^{-2x} + C_2 e^{-3x}\); 2. \(y = (C_1 + C_2 x) e^{3x}\); 3. \(y = e^{-3x}(C_1 \cos 2x + C_2 \sin 2x)\); 4. \(y = (2 + 3x)e^{-2x}\); 5. \(q(t) = e^{-2t}(C_1 \cos t + C_2 \sin t)\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
