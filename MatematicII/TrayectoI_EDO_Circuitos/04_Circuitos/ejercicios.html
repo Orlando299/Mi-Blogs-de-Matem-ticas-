@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Aplicaciones a Circuitos Eléctricos</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Aplicaciones a Circuitos Eléctricos</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Circuito RC - Respuesta a escalón</h2>
+    <div class="ejercicio">1. Un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V_0=5\) V. Encuentra \(v_C(t)\) e \(i(t)\) si \(v_C(0)=0\).</div>
+    <div class="ejercicio">2. Un circuito RC con \(R=5\ \Omega\), \(C=0.02\) F, \(V_0=10\) V. Encuentra \(v_C(t)\) si \(v_C(0)=2\) V.</div>
+    <div class="ejercicio">3. En un circuito RC, \(v_C(t)=6(1-e^{-20t})\) V. Encuentra \(R\) y \(C\) si la fuente es de \(6\) V.</div>
+
+    <h2>2. Circuito RC - Respuesta natural</h2>
+    <div class="ejercicio">4. Un capacitor de \(100\ \mu\)F se descarga a través de una resistencia de \(10\ k\Omega\). Si la tensión inicial es \(12\) V, encuentra \(v_C(t)\).</div>
+    <div class="ejercicio">5. Un capacitor de \(50\ \mu\)F tiene \(v_C(0)=20\) V y se descarga por una resistencia de \(5\ k\Omega\). ¿Cuánto tiempo tarda en llegar a \(5\) V?</div>
+
+    <h2>3. Circuito RL - Respuesta a escalón</h2>
+    <div class="ejercicio">6. Circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V_0=12\) V. Encuentra \(i(t)\) si \(i(0)=0\).</div>
+    <div class="ejercicio">7. Circuito RL con \(L=0.5\) H, \(R=2\ \Omega\), \(V_0=10\) V. Encuentra \(i(t)\) si \(i(0)=1\) A.</div>
+    <div class="ejercicio">8. En un circuito RL, la corriente es \(i(t)=2(1-e^{-2t})\) A. Encuentra \(L\) y \(R\) si \(V_0=8\) V.</div>
+
+    <h2>4. Circuito RL - Respuesta natural</h2>
+    <div class="ejercicio">9. Un inductor de \(2\) H con corriente inicial \(3\) A se descarga a través de una resistencia de \(4\ \Omega\). Encuentra \(i(t)\).</div>
+    <div class="ejercicio">10. Un inductor de \(1\) H tiene \(i(0)=5\) A. ¿Cuánto tiempo tarda en llegar a \(1\) A a través de una resistencia de \(2\ \Omega\)?</div>
+
+    <h2>5. Circuito RLC en serie - Clasificación del amortiguamiento</h2>
+    <div class="ejercicio">11. \(L=1\) H, \(R=4\ \Omega\), \(C=0.2\) F. Clasifica el amortiguamiento y escribe la solución general para \(q(t)\).</div>
+    <div class="ejercicio">12. \(L=1\) H, \(R=2\ \Omega\), \(C=1\) F. Clasifica el amortiguamiento y escribe la solución general.</div>
+    <div class="ejercicio">13. \(L=2\) H, \(R=4\ \Omega\), \(C=0.125\) F. Clasifica el amortiguamiento y escribe la solución general.</div>
+
+    <h2>6. Circuito RLC en serie - Casos particulares</h2>
+    <div class="ejercicio">14. Encuentra \(q(t)\) para \(L=1\) H, \(R=6\ \Omega\), \(C=0.2\) F, con \(q(0)=1\), \(i(0)=0\).</div>
+    <div class="ejercicio">15. Encuentra \(q(t)\) para \(L=1\) H, \(R=4\ \Omega\), \(C=0.25\) F, con \(q(0)=2\), \(i(0)=-1\).</div>
+    <div class="ejercicio">16. Encuentra \(q(t)\) para \(L=1\) H, \(R=4\ \Omega\), \(C=0.25\) F, con \(V(t)=10\) V constante, \(q(0)=0\), \(i(0)=0\).</div>
+
+    <h2>7. Circuito RLC con fuentes variables</h2>
+    <div class="ejercicio">17. Encuentra la solución particular para \(L=1\) H, \(R=2\ \Omega\), \(C=0.2\) F, \(V(t)=10\sin(3t)\) V.</div>
+    <div class="ejercicio">18. Encuentra la solución general para \(L=1\) H, \(R=4\ \Omega\), \(C=0.25\) F, \(V(t)=5\cos(2t)\) V.</div>
+
+    <h2>8. Problemas integradores</h2>
+    <div class="ejercicio">19. Un circuito RLC en serie tiene \(L=1\) H, \(R=2\ \Omega\), \(C=0.5\) F, \(V(t)=0\). Si \(q(0)=1\), \(i(0)=0\), encuentra la carga en el capacitor para todo \(t\).</div>
+    <div class="ejercicio">20. Un circuito RLC en serie tiene \(L=1\) H, \(R=2\ \Omega\), \(C=0.5\) F, \(V(t)=10\) V. Encuentra \(q(t)\) si \(q(0)=0\), \(i(0)=0\).</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
