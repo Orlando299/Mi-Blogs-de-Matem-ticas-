@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Transformada de Laplace</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Transformada de Laplace</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Transformadas directas</h2>
+    <div class="ejercicio">1. \(\mathcal{L}\{3t^2 - 2e^{5t} + 4\sin(2t)\}\)</div>
+    <div class="ejercicio">2. \(\mathcal{L}\{e^{-3t}\cos(2t)\}\)</div>
+    <div class="ejercicio">3. \(\mathcal{L}\{t^2 e^{4t}\}\)</div>
+    <div class="ejercicio">4. \(\mathcal{L}\{\sinh(3t)\}\)</div>
+    <div class="ejercicio">5. \(\mathcal{L}\{\cosh(2t)\}\)</div>
+
+    <h2>2. Teorema de traslación</h2>
+    <div class="ejercicio">6. \(\mathcal{L}\{e^{2t}\sin(3t)\}\)</div>
+    <div class="ejercicio">7. \(\mathcal{L}\{e^{-t}\cos(4t)\}\)</div>
+    <div class="ejercicio">8. \(\mathcal{L}\{t^3 e^{-2t}\}\)</div>
+
+    <h2>3. Transformada inversa (fracciones parciales)</h2>
+    <div class="ejercicio">9. \(\mathcal{L}^{-1}\left\{\frac{1}{(s-1)(s-2)}\right\}\)</div>
+    <div class="ejercicio">10. \(\mathcal{L}^{-1}\left\{\frac{s}{(s+1)(s+2)}\right\}\)</div>
+    <div class="ejercicio">11. \(\mathcal{L}^{-1}\left\{\frac{1}{s^2+4s+3}\right\}\)</div>
+    <div class="ejercicio">12. \(\mathcal{L}^{-1}\left\{\frac{s+1}{s^2+2s+5}\right\}\)</div>
+
+    <h2>4. Problemas de Valor Inicial (PVI) con Laplace</h2>
+    <div class="ejercicio">13. \(y' + 2y = 4\), \(y(0) = 1\)</div>
+    <div class="ejercicio">14. \(y' - y = e^{2x}\), \(y(0) = 0\)</div>
+    <div class="ejercicio">15. \(y'' + 4y = 0\), \(y(0) = 1\), \(y'(0) = 0\)</div>
+    <div class="ejercicio">16. \(y'' - 3y' + 2y = e^x\), \(y(0) = 0\), \(y'(0) = 0\)</div>
+
+    <h2>5. Función escalón de Heaviside</h2>
+    <div class="ejercicio">17. Calcula \(\mathcal{L}\{u(t-2)\}\)</div>
+    <div class="ejercicio">18. Calcula \(\mathcal{L}\{u(t-3)\sin(2t)\}\)</div>
+    <div class="ejercicio">19. Encuentra \(\mathcal{L}\{f(t)\}\) donde \(f(t) = \begin{cases} 0 & t < 2 \\ 3 & t \geq 2 \end{cases}\)</div>
+
+    <h2>6. Aplicaciones a circuitos</h2>
+    <div class="ejercicio">20. Usa Laplace para resolver la corriente en un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante, \(i(0)=0\).</div>
+    <div class="ejercicio">21. Resuelve el circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante, \(v_c(0)=0\) usando Laplace.</div>
+
+    <h2>7. Teorema de convolución</h2>
+    <div class="ejercicio">22. Usa convolución para encontrar \(\mathcal{L}^{-1}\left\{\frac{1}{s^2(s-1)}\right\}\)</div>
+    <div class="ejercicio">23. Usa convolución para encontrar \(\mathcal{L}^{-1}\left\{\frac{1}{s^2+4}\cdot\frac{1}{s+2}\right\}\)</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
