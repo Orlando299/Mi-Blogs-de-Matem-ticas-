@@ -82,7 +82,7 @@
   .nav-ai-btn .ai-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse-dot 2s infinite; }
   @keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
 
-  /* HERO - NUEVO DISEÑO LATERAL */
+  /* HERO - DISEÑO LATERAL */
   .hero {
     padding: 4rem 3rem;
     max-width: 1200px;
@@ -101,18 +101,16 @@
     text-align: center;
   }
   .hero-photo {
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: 30% 50%;  /* Ajusta para efecto perfil costado */
+    object-position: 30% 50%;
     border: 4px solid var(--gold);
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     transition: transform 0.3s;
   }
-  .hero-photo:hover {
-    transform: scale(1.02);
-  }
+  .hero-photo:hover { transform: scale(1.02); }
   .hero-content {
     flex: 2;
     min-width: 280px;
@@ -134,10 +132,7 @@
     margin-bottom: 1.2rem;
     text-align: left;
   }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
   .hero-desc {
     font-size: 1rem;
     color: var(--muted);
@@ -168,10 +163,7 @@
     border: none;
     font-family: inherit;
   }
-  .hero-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(201,168,76,0.35);
-  }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.35); }
   .hero-cta-ghost {
     display: inline-flex;
     align-items: center;
@@ -188,11 +180,7 @@
     cursor: pointer;
     font-family: inherit;
   }
-  .hero-cta-ghost:hover {
-    background: rgba(78,205,196,0.08);
-    border-color: var(--teal);
-    transform: translateY(-2px);
-  }
+  .hero-cta-ghost:hover { background: rgba(78,205,196,0.08); border-color: var(--teal); transform: translateY(-2px); }
 
   /* STATS */
   .stats-bar {
@@ -203,27 +191,10 @@
     margin: 0 auto;
     max-width: 1100px;
   }
-  .stat-item {
-    flex: 1;
-    text-align: center;
-    padding: 2rem 1rem;
-    border-right: 1px solid var(--border);
-  }
+  .stat-item { flex: 1; text-align: center; padding: 2rem 1rem; border-right: 1px solid var(--border); }
   .stat-item:last-child { border-right: none; }
-  .stat-number {
-    font-family: 'EB Garamond', serif;
-    font-size: 2.5rem;
-    color: var(--gold);
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.4rem;
-  }
-  .stat-label {
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
+  .stat-number { font-family: 'EB Garamond', serif; font-size: 2.5rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.4rem; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
   /* SECTION LABEL */
   .section-label {
@@ -240,17 +211,12 @@
     max-width: 1100px;
     margin: 0 auto;
   }
-  .section-label::before, .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .section-label::before, .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
   /* CARDS */
   .materias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1.5rem;
     padding: 1rem 3rem 6rem;
     max-width: 1200px;
@@ -265,42 +231,17 @@
     display: flex;
     flex-direction: column;
   }
-  .materia-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
-  .card-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-  }
+  .materia-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .card-number { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
   .card-icon { font-size: 2rem; }
-  .card-title {
-    font-family: 'EB Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--text);
-    margin: 0.5rem 0 0.2rem;
-    line-height: 1.2;
-  }
-  .card-subtitle {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 1rem;
-  }
+  .card-title { font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.2rem; line-height: 1.2; }
+  .card-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
   .tema-bloque {
-    margin: 12px 0;
+    margin: 10px 0;
     padding: 10px;
     background: rgba(255,255,255,0.03);
-    border-radius: 12px;
+    border-radius: 10px;
     border-left: 3px solid var(--gold);
   }
   .tema-titulo {
@@ -308,13 +249,13 @@
     color: var(--gold);
     display: block;
     margin-bottom: 6px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .tema-links a {
     color: var(--teal);
     text-decoration: none;
     font-size: 0.75rem;
-    margin-right: 12px;
+    margin-right: 10px;
     background: rgba(78,205,196,0.1);
     padding: 3px 8px;
     border-radius: 20px;
@@ -325,21 +266,8 @@
   .tema-links a:hover { background: var(--teal); color: #0a0c10; }
   .sol-link { color: var(--rose) !important; background: rgba(224,122,143,0.1) !important; }
   .sol-link:hover { background: var(--rose) !important; color: #0a0c10 !important; }
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1rem 0 0.5rem;
-  }
-  .card-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    padding: 0.2rem 0.7rem;
-    border-radius: 100px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    opacity: 0.8;
-  }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0.5rem; }
+  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
   .card-ask-ai {
     display: flex;
     align-items: center;
@@ -361,16 +289,9 @@
   .card-ask-ai .spark { font-size: 0.9rem; }
 
   /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 3rem;
-    color: var(--muted);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--border);
-    margin-top: 2rem;
-  }
+  footer { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
-  /* AI PANEL (versión offline simplificada) */
+  /* AI PANEL (offline) */
   #ai-panel {
     position: fixed;
     bottom: 0; right: 0;
@@ -380,8 +301,7 @@
     border: 1px solid rgba(201,168,76,0.25);
     border-bottom: none; border-right: none;
     border-radius: 1.25rem 0 0 0;
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     z-index: 200;
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -389,70 +309,39 @@
   }
   #ai-panel.open { transform: translateY(0); }
   .ai-panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--border);
     flex-shrink: 0;
   }
   .ai-panel-title { display: flex; align-items: center; gap: 0.6rem; }
   .ai-panel-title .ai-avatar {
-    width: 32px; height: 32px;
-    border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 50%;
     background: linear-gradient(135deg, var(--gold), var(--teal));
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 0.9rem;
   }
   .ai-panel-title .ai-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: var(--gold); }
-  .ai-panel-title .ai-subtitle {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    display: block;
-  }
-  .ai-panel-close {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-  }
+  .ai-panel-title .ai-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; display: block; }
+  .ai-panel-close { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 6px; }
   .ai-panel-close:hover { color: var(--text); }
   .ai-subject-bar {
-    display: flex;
-    gap: 0.4rem;
-    padding: 0.75rem 1rem;
+    display: flex; gap: 0.4rem; padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    flex-shrink: 0;
+    overflow-x: auto; flex-shrink: 0;
   }
   .ai-subject-chip {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.05em;
-    padding: 0.3rem 0.75rem;
-    border-radius: 100px;
-    border: 1px solid var(--border);
-    background: none;
-    color: var(--muted);
-    cursor: pointer;
-    white-space: nowrap;
+    font-size: 0.65rem; letter-spacing: 0.05em;
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+    border: 1px solid var(--border); background: none;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
   }
   .ai-subject-chip:hover { border-color: var(--gold); color: var(--gold); }
   .ai-subject-chip.active { border-color: var(--gold); background: rgba(201,168,76,0.12); color: var(--gold-soft); }
   #ai-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    flex: 1; overflow-y: auto; padding: 1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
   }
   .ai-msg { display: flex; gap: 0.6rem; align-items: flex-start; }
   .ai-msg.user { flex-direction: row-reverse; }
@@ -460,8 +349,7 @@
     max-width: 82%;
     padding: 0.65rem 0.9rem;
     border-radius: 1rem;
-    font-size: 0.85rem;
-    line-height: 1.55;
+    font-size: 0.85rem; line-height: 1.55;
   }
   .ai-msg.user .ai-msg-bubble {
     background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.08));
@@ -474,14 +362,9 @@
     border-radius: 0.2rem 1rem 1rem 1rem;
   }
   .ai-msg-avatar {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    flex-shrink: 0; font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
   }
   .ai-msg.assistant .ai-msg-avatar { background: linear-gradient(135deg, var(--gold), var(--teal)); }
   .ai-msg.user .ai-msg-avatar { background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
@@ -492,85 +375,56 @@
   @keyframes typing-dot { 0%,80%,100% { transform: scale(0.7); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
   .ai-quick-prompts {
     padding: 0 1.25rem 0.75rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
     flex-shrink: 0;
   }
   .ai-quick-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem;
-    padding: 0.3rem 0.7rem;
+    font-size: 0.62rem; padding: 0.3rem 0.7rem;
     border-radius: 100px;
     border: 1px solid rgba(78,205,196,0.25);
     background: rgba(78,205,196,0.06);
-    color: var(--teal);
-    cursor: pointer;
+    color: var(--teal); cursor: pointer;
   }
   .ai-quick-btn:hover { background: rgba(78,205,196,0.14); border-color: var(--teal); }
   .ai-input-area {
-    display: flex;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
+    display: flex; gap: 0.5rem; padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border); flex-shrink: 0;
   }
   #ai-input {
-    flex: 1;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    color: var(--text);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.85rem;
-    padding: 0.6rem 0.9rem;
-    resize: none;
-    outline: none;
-    min-height: 38px;
-    max-height: 120px;
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); border-radius: 0.75rem;
+    color: var(--text); font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem; padding: 0.6rem 0.9rem;
+    resize: none; outline: none;
+    min-height: 38px; max-height: 120px;
   }
   #ai-input:focus { border-color: rgba(201,168,76,0.4); }
   #ai-send {
     background: linear-gradient(135deg, var(--gold), #a07830);
-    border: none;
-    border-radius: 0.75rem;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: none; border-radius: 0.75rem;
+    width: 38px; height: 38px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
     font-size: 1rem;
-    flex-shrink: 0;
-    align-self: flex-end;
+    flex-shrink: 0; align-self: flex-end;
   }
   #ai-send:hover { transform: scale(1.05); }
   #ai-send:disabled { opacity: 0.4; cursor: not-allowed; }
   #ai-fab {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 54px;
-    height: 54px;
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 54px; height: 54px;
     background: linear-gradient(135deg, var(--gold), #a07830);
-    border: none;
-    border-radius: 50%;
+    border: none; border-radius: 50%;
     box-shadow: 0 4px 24px rgba(201,168,76,0.4);
-    cursor: pointer;
-    z-index: 199;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    cursor: pointer; z-index: 199;
+    display: flex; align-items: center; justify-content: center;
     font-size: 1.3rem;
   }
   #ai-fab:hover { transform: scale(1.1); }
   #ai-fab.panel-open { transform: scale(0); pointer-events: none; }
   .ai-welcome {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    color: var(--muted);
-    font-size: 0.82rem;
-    line-height: 1.6;
+    text-align: center; padding: 1.5rem 1rem;
+    color: var(--muted); font-size: 0.82rem; line-height: 1.6;
   }
   .ai-welcome .welcome-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
   .ai-welcome strong { color: var(--gold); display: block; margin-bottom: 0.4rem; font-family: 'EB Garamond', serif; font-size: 1.05rem; }
@@ -583,8 +437,8 @@
     .hero-container { flex-direction: column; text-align: center; gap: 2rem; }
     .hero-eyebrow, .hero h1, .hero-desc { text-align: center; }
     .hero-ctas { justify-content: center; }
-    .hero-photo { width: 180px; height: 180px; }
-    .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; }
+    .hero-photo { width: 200px; height: 200px; }
+    .materias-grid { padding: 1rem 1.5rem 4rem; gap: 1rem; grid-template-columns: 1fr; }
     .stats-bar { flex-direction: column; }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
     #ai-panel { width: 100%; border-radius: 1.25rem 1.25rem 0 0; height: 75vh; }
@@ -605,12 +459,10 @@
   </nav>
 
   <div id="home-section">
-    <!-- NUEVA PORTADA LATERAL -->
     <section class="hero">
       <div class="hero-container">
         <div class="hero-image">
-          <!-- CAMBIA "perfil1.jpg.webp" por el nombre de TU foto -->
-          <img src="perfil2.jpg.webp.webp" alt="MSc. Orlando Silva" class="hero-photo">
+          <img src="perfil1.jpg.webp" alt="MSc. Orlando Silva" class="hero-photo">
         </div>
         <div class="hero-content">
           <p class="hero-eyebrow">Programa Nacional de Formación en Electricidad</p>
@@ -634,99 +486,268 @@
     <p class="section-label" id="materias-label">Cada materia incluye teoría, ejercicios, pre‑parciales y soluciones (con contraseña)</p>
 
     <div class="materias-grid">
-      <!-- Matemática de Iniciación -->
-<div class="materia-card">
-  <div class="card-header"><span class="card-number">00 · Trayecto Inicial</span><span class="card-icon">🧮</span></div>
-  <h2 class="card-title">Matemática de Iniciación</h2>
-  <p class="card-subtitle">Fundamentos de álgebra, geometría analítica, sistemas de ecuaciones y números complejos.</p>
 
-  <!-- Factorización -->
-  <div class="tema-bloque">
-    <span class="tema-titulo">📐 Factorización</span>
-    <div class="tema-links">
-      <a href="MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
-      <a href="MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
-      <a href="MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
-      <a href="MatematicaIniciacion/soluciones_factorizacion.html" target="_blank" class="sol-link">🔐 Soluciones</a>
-    </div>
-  </div>
-
-  <!-- Sistema de Coordenadas -->
-  <div class="tema-bloque">
-    <span class="tema-titulo">📌 Sistema de Coordenadas</span>
-    <div class="tema-links">
-      <a href="MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
-      <a href="MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
-      <a href="MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
-      <a href="MatematicaIniciacion/soluciones_coordenadas.html" target="_blank" class="sol-link">🔐 Soluciones</a>
-    </div>
-  </div>
-
-  <!-- Sistemas de Ecuaciones Lineales (NUEVO) -->
-  <div class="tema-bloque">
-    <span class="tema-titulo">🔢 Sistemas de Ecuaciones Lineales</span>
-    <div class="tema-links">
-      <a href="MatematicaIniciacion/teoria_ecuaciones.html" target="_blank">📘 Teoría</a>
-      <a href="MatematicaIniciacion/ejercicios_ecuaciones.html" target="_blank">📝 Ejercicios</a>
-      <a href="MatematicaIniciacion/preparciales_ecuaciones.html" target="_blank">📋 Pre‑parciales</a>
-      <a href="MatematicaIniciacion/soluciones_ecuaciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
-    </div>
-  </div>
-
-  <div class="card-tags">
-    <span class="card-tag">Factorización</span>
-    <span class="card-tag">Coordenadas</span>
-    <span class="card-tag">Sistemas de ecuaciones</span>
-  </div>
-  <button class="card-ask-ai" data-materia="Matemática de Iniciación">
-    <span class="spark">✦</span> Consultar sobre esta materia
-  </button>
-</div>
-      <!-- Cálculo Diferencial -->
+      <!-- ===================================================== -->
+      <!-- MATEMÁTICA DE INICIACIÓN (3 bloques completos)        -->
+      <!-- ===================================================== -->
       <div class="materia-card">
-        <div class="card-header"><span class="card-number">01 · Trayecto I</span><span class="card-icon">∂</span></div>
+        <div class="card-header">
+          <span class="card-number">00 · Trayecto Inicial</span>
+          <span class="card-icon">🧮</span>
+        </div>
+        <h2 class="card-title">Matemática de Iniciación</h2>
+        <p class="card-subtitle">Fundamentos de álgebra, geometría analítica, sistemas de ecuaciones y números complejos.</p>
+
+        <!-- Bloque 1: Factorización -->
+        <div class="tema-bloque">
+          <span class="tema-titulo">📐 Factorización</span>
+          <div class="tema-links">
+            <a href="MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
+            <a href="MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
+            <a href="MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="MatematicaIniciacion/soluciones_factorizacion.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+          </div>
+        </div>
+
+        <!-- Bloque 2: Sistema de Coordenadas -->
+        <div class="tema-bloque">
+          <span class="tema-titulo">📌 Sistema de Coordenadas</span>
+          <div class="tema-links">
+            <a href="MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
+            <a href="MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
+            <a href="MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="MatematicaIniciacion/soluciones_coordenadas.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+          </div>
+        </div>
+
+        <!-- Bloque 3: Sistemas de Ecuaciones Lineales -->
+        <div class="tema-bloque">
+          <span class="tema-titulo">🔢 Sistemas de Ecuaciones Lineales</span>
+          <div class="tema-links">
+            <a href="MatematicaIniciacion/teoria_ecuaciones.html" target="_blank">📘 Teoría</a>
+            <a href="MatematicaIniciacion/ejercicios_ecuaciones.html" target="_blank">📝 Ejercicios</a>
+            <a href="MatematicaIniciacion/preparciales_ecuaciones.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="MatematicaIniciacion/soluciones_ecuaciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+          </div>
+        </div>
+
+        <div class="card-tags">
+          <span class="card-tag">Factorización</span>
+          <span class="card-tag">Coordenadas</span>
+          <span class="card-tag">Sistemas de ecuaciones</span>
+        </div>
+        <button class="card-ask-ai" data-materia="Matemática de Iniciación">
+          <span class="spark">✦</span> Consultar sobre esta materia
+        </button>
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- CÁLCULO DIFERENCIAL (placeholder)                     -->
+      <!-- ===================================================== -->
+      <div class="materia-card">
+        <div class="card-header">
+          <span class="card-number">01 · Trayecto I</span>
+          <span class="card-icon">∂</span>
+        </div>
         <h2 class="card-title">Cálculo Diferencial</h2>
         <p class="card-subtitle">Límites, derivadas y aplicaciones en ingeniería eléctrica.</p>
-        <div class="tema-bloque"><span class="tema-titulo">📈 Límites y Continuidad</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="tema-bloque"><span class="tema-titulo">🔢 Derivadas</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="card-tags"><span class="card-tag">Límites</span><span class="card-tag">Derivadas</span><span class="card-tag">Optimización</span></div>
-        <button class="card-ask-ai" data-materia="Cálculo Diferencial"><span class="spark">✦</span> Consultar sobre esta materia</button>
+        <div class="tema-bloque">
+          <span class="tema-titulo">📈 Límites y Continuidad</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="tema-bloque">
+          <span class="tema-titulo">🔢 Derivadas</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">Límites</span>
+          <span class="card-tag">Derivadas</span>
+          <span class="card-tag">Optimización</span>
+        </div>
+        <button class="card-ask-ai" data-materia="Cálculo Diferencial">
+          <span class="spark">✦</span> Consultar sobre esta materia
+        </button>
       </div>
 
-      <!-- Cálculo Integral -->
+      <!-- ===================================================== -->
+      <!-- CÁLCULO INTEGRAL (placeholder)                        -->
+      <!-- ===================================================== -->
       <div class="materia-card">
-        <div class="card-header"><span class="card-number">02 · Trayecto I</span><span class="card-icon">∫</span></div>
+        <div class="card-header">
+          <span class="card-number">02 · Trayecto I</span>
+          <span class="card-icon">∫</span>
+        </div>
         <h2 class="card-title">Cálculo Integral</h2>
         <p class="card-subtitle">Integrales indefinidas y definidas, técnicas de integración.</p>
-        <div class="tema-bloque"><span class="tema-titulo">📊 Integral Indefinida</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="tema-bloque"><span class="tema-titulo">📉 Integral Definida</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="card-tags"><span class="card-tag">Antiderivadas</span><span class="card-tag">Área</span><span class="card-tag">Sustitución</span></div>
-        <button class="card-ask-ai" data-materia="Cálculo Integral"><span class="spark">✦</span> Consultar sobre esta materia</button>
+        <div class="tema-bloque">
+          <span class="tema-titulo">📊 Integral Indefinida</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="tema-bloque">
+          <span class="tema-titulo">📉 Integral Definida</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">Antiderivadas</span>
+          <span class="card-tag">Área</span>
+          <span class="card-tag">Sustitución</span>
+        </div>
+        <button class="card-ask-ai" data-materia="Cálculo Integral">
+          <span class="spark">✦</span> Consultar sobre esta materia
+        </button>
       </div>
 
-      <!-- Álgebra Lineal -->
+      <!-- ===================================================== -->
+      <!-- ÁLGEBRA LINEAL Y GEOMETRÍA (placeholder)              -->
+      <!-- ===================================================== -->
       <div class="materia-card">
-        <div class="card-header"><span class="card-number">03 · Trayecto I</span><span class="card-icon">⊗</span></div>
+        <div class="card-header">
+          <span class="card-number">03 · Trayecto I</span>
+          <span class="card-icon">⊗</span>
+        </div>
         <h2 class="card-title">Álgebra Lineal y Geometría</h2>
         <p class="card-subtitle">Matrices, determinantes, vectores y transformaciones lineales.</p>
-        <div class="tema-bloque"><span class="tema-titulo">🔲 Matrices y Determinantes</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="tema-bloque"><span class="tema-titulo">↗ Vectores y Espacios</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="card-tags"><span class="card-tag">Matrices</span><span class="card-tag">Vectores</span><span class="card-tag">Eigenvalores</span></div>
-        <button class="card-ask-ai" data-materia="Álgebra Lineal y Geometría"><span class="spark">✦</span> Consultar sobre esta materia</button>
+        <div class="tema-bloque">
+          <span class="tema-titulo">🔲 Matrices y Determinantes</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="tema-bloque">
+          <span class="tema-titulo">↗ Vectores y Espacios</span>
+          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">Matrices</span>
+          <span class="card-tag">Vectores</span>
+          <span class="card-tag">Eigenvalores</span>
+        </div>
+        <button class="card-ask-ai" data-materia="Álgebra Lineal y Geometría">
+          <span class="spark">✦</span> Consultar sobre esta materia
+        </button>
       </div>
 
-      <!-- Ecuaciones Diferenciales -->
+      <!-- ===================================================== -->
+      <!-- ECUACIONES DIFERENCIALES (8 unidades completas)       -->
+      <!-- ===================================================== -->
       <div class="materia-card">
-        <div class="card-header"><span class="card-number">04 · Trayecto II</span><span class="card-icon">≋</span></div>
+        <div class="card-header">
+          <span class="card-number">04 · Trayecto II</span>
+          <span class="card-icon">≋</span>
+        </div>
         <h2 class="card-title">Ecuaciones Diferenciales</h2>
-        <p class="card-subtitle">EDO de primer y segundo orden, Transformada de Laplace.</p>
-        <div class="tema-bloque"><span class="tema-titulo">〰 EDO de 1er Orden</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="tema-bloque"><span class="tema-titulo">⚡ Transformada de Laplace</span><div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div></div>
-        <div class="card-tags"><span class="card-tag">EDO</span><span class="card-tag">Laplace</span><span class="card-tag">Circuitos RLC</span></div>
-        <button class="card-ask-ai" data-materia="Ecuaciones Diferenciales"><span class="spark">✦</span> Consultar sobre esta materia</button>
+        <p class="card-subtitle">EDO, Laplace, EDP, Fourier y Variable Compleja. Aplicaciones a circuitos eléctricos.</p>
+
+        <!-- ===== PRIMER SEMESTRE ===== -->
+        <div style="margin: 10px 0; padding: 8px; background: rgba(78,205,196,0.06); border-radius: 8px;">
+          <span style="color: var(--teal); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">📘 PRIMER SEMESTRE</span>
+
+          <!-- Unidad 1 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 1: EDO - Definición y Métodos Básicos</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 2 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 2: EDO - Métodos Avanzados de 1er Orden</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 3 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 3: EDO de Segundo Orden</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 4 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">⚡ Unidad 4: Aplicaciones a Circuitos Eléctricos</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/04_Circuitos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/04_Circuitos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/04_Circuitos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/04_Circuitos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SEGUNDO SEMESTRE ===== -->
+        <div style="margin: 10px 0; padding: 8px; background: rgba(201,168,76,0.06); border-radius: 8px;">
+          <span style="color: var(--gold); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">📘 SEGUNDO SEMESTRE</span>
+
+          <!-- Unidad 5 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 5: Transformada de Laplace</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/05_Laplace/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/05_Laplace/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/05_Laplace/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/05_Laplace/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 6 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 6: Ecuaciones Diferenciales Parciales</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/06_EDP/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/06_EDP/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/06_EDP/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/06_EDP/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 7 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 7: Series de Fourier</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/07_Fourier/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/07_Fourier/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/07_Fourier/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/07_Fourier/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <!-- Unidad 8 -->
+          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
+            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 8: Funciones de Variable Compleja</span>
+            <div class="tema-links">
+              <a href="EcuacionesDiferenciales/08_VariableCompleja/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EcuacionesDiferenciales/08_VariableCompleja/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EcuacionesDiferenciales/08_VariableCompleja/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EcuacionesDiferenciales/08_VariableCompleja/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-tags">
+          <span class="card-tag">EDO</span>
+          <span class="card-tag">Laplace</span>
+          <span class="card-tag">EDP</span>
+          <span class="card-tag">Fourier</span>
+          <span class="card-tag">Variable Compleja</span>
+        </div>
+        <button class="card-ask-ai" data-materia="Ecuaciones Diferenciales">
+          <span class="spark">✦</span> Consultar sobre esta materia
+        </button>
       </div>
-    </div>
-  </div>
+
+    </div><!-- fin materias-grid -->
+  </div><!-- fin home-section -->
 
   <footer id="contacto">
     <p>Programa Nacional de Formación en Electricidad · Matemáticas para Ingeniería Eléctrica</p>
@@ -734,12 +755,15 @@
   </footer>
 </div>
 
-<!-- AI PANEL -->
+<!-- ===== AI PANEL (offline) ===== -->
 <div id="ai-panel">
   <div class="ai-panel-header">
     <div class="ai-panel-title">
       <div class="ai-avatar">✦</div>
-      <div><span class="ai-name">Asistente PNFE</span><span class="ai-subtitle">MATEMÁTICAS · INGENIERÍA ELÉCTRICA</span></div>
+      <div>
+        <span class="ai-name">Asistente PNFE</span>
+        <span class="ai-subtitle">MATEMÁTICAS · INGENIERÍA ELÉCTRICA</span>
+      </div>
     </div>
     <button class="ai-panel-close" id="ai-close">✕</button>
   </div>
@@ -797,40 +821,37 @@ const knowledgeBase = {
   'Matemática de Iniciación': {
     description: 'Matemática de Iniciación - Trayecto Inicial',
     topics: {
-      'factorización': 'La factorización es escribir una expresión como producto de factores. Métodos: factor común, diferencia de cuadrados (a²-b²=(a+b)(a-b)), trinomio cuadrado perfecto (a²±2ab+b²=(a±b)²), aspa simple.',
+      'factorización': 'La factorización es escribir una expresión como producto de factores. Métodos: factor común, diferencia de cuadrados, trinomio cuadrado perfecto, aspa simple.',
       'coordenadas': 'Distancia entre puntos: d = √[(x₂-x₁)²+(y₂-y₁)²]. Pendiente: m = (y₂-y₁)/(x₂-x₁).',
-      'recta': 'Ecuaciones: punto-pendiente: y-y₁=m(x-x₁); pendiente-ordenada: y=mx+b.'
+      'sistemas': 'Un sistema de ecuaciones lineales se resuelve por sustitución, igualación, reducción o eliminación gaussiana.'
     }
   },
   'Cálculo Diferencial': {
     description: 'Cálculo Diferencial - Trayecto I',
     topics: {
       'límite': 'El límite de f(x) cuando x→a es L si f(x) se acerca a L.',
-      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.',
-      'regla cadena': '(f∘g)\'(x) = f\'(g(x))·g\'(x)'
+      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.'
     }
   },
   'Cálculo Integral': {
     description: 'Cálculo Integral - Trayecto I',
     topics: {
-      'integral': '∫f(x)dx = F(x)+C, donde F\'=f. Teorema Fundamental: ∫ₐᵇ f(x)dx = F(b)-F(a)',
-      'técnicas': 'Sustitución, integración por partes (∫u dv = uv - ∫v du), fracciones parciales.'
+      'integral': '∫f(x)dx = F(x)+C, donde F\'=f. Teorema Fundamental: ∫ₐᵇ f(x)dx = F(b)-F(a)'
     }
   },
   'Álgebra Lineal y Geometría': {
     description: 'Álgebra Lineal - Trayecto I',
     topics: {
       'matriz': 'Arreglo rectangular. Determinante 2x2: ad-bc.',
-      'vector': 'En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.',
-      'eigenvalor': 'A·v = λ·v. Se obtiene de det(A-λI)=0.'
+      'vector': 'En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.'
     }
   },
   'Ecuaciones Diferenciales': {
     description: 'Ecuaciones Diferenciales - Trayecto II',
     topics: {
       'edo': 'Ecuación con derivadas. Lineal: y\'+P(x)y=Q(x).',
-      'laplace': 'L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. L{1}=1/s, L{eᵃᵗ}=1/(s-a), L{sen(ωt)}=ω/(s²+ω²)',
-      'rlc': 'Circuito RLC: Lq″+Rq′+q/C = V(t)'
+      'laplace': 'L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. L{1}=1/s, L{eᵃᵗ}=1/(s-a).',
+      'circuito rlc': 'Circuito RLC: Lq″+Rq′+q/C = V(t).'
     }
   }
 };
@@ -839,19 +860,19 @@ function getResponse(question, subject) {
   const q = question.toLowerCase();
   const kb = knowledgeBase[subject] || knowledgeBase['general'];
   let responses = [];
-  
+
   if (q.match(/hola|buenos días|hey/i)) responses.push('¡Hola! Soy el Asistente PNFE. ¿En qué puedo ayudarte?');
   if (q.match(/factorización|factorizar/i)) responses.push(kb.topics?.factorización || 'Factorización: expresa una suma como producto.');
   if (q.match(/coordenadas|distancia|pendiente|recta/i)) responses.push(kb.topics?.coordenadas || 'La distancia entre puntos se calcula con Pitágoras.');
-  if (q.match(/límite|límites/i)) responses.push(kb.topics?.límite || 'El límite es el valor al que se acerca una función.');
-  if (q.match(/derivada|derivar/i)) responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea.');
-  if (q.match(/integral|integrar|antiderivada/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
-  if (q.match(/matriz|determinante/i)) responses.push(kb.topics?.matriz || 'Las matrices se suman y multiplican. El determinante es un escalar.');
-  if (q.match(/edo|ecuación diferencial|laplace/i)) responses.push(kb.topics?.edo || 'Una EDO relaciona una función con sus derivadas.');
+  if (q.match(/sistemas|ecuaciones lineales/i)) responses.push(kb.topics?.sistemas || 'Los sistemas se resuelven por sustitución, igualación o reducción.');
+  if (q.match(/límite|límites|continuidad/i)) responses.push(kb.topics?.límite || 'El límite es el valor al que se acerca una función.');
+  if (q.match(/derivada|derivar|diferenciar/i)) responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea.');
+  if (q.match(/integral|integrar|antiderivada|teorema fundamental/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
+  if (q.match(/matriz|determinante|vector|álgebra lineal/i)) responses.push(kb.topics?.matriz || 'Las matrices se suman y multiplican. El determinante es un escalar.');
+  if (q.match(/edo|ecuación diferencial|laplace|rlc|circuito/i)) responses.push(kb.topics?.edo || 'Una EDO relaciona una función con sus derivadas. Se usa para modelar circuitos.');
   if (q.match(/ejercicio|propón|practicar/i)) responses.push('✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?');
-  
+
   if (responses.length === 0) responses.push(`No tengo una respuesta específica para "${question.substring(0, 50)}...". Consulta las guías de teoría o pregúntame de otra manera.`);
-  
   return responses.join('\n\n');
 }
 
@@ -874,7 +895,6 @@ closeBtn.addEventListener('click', closePanel);
 document.getElementById('nav-ai-open').addEventListener('click', openPanel);
 document.getElementById('hero-ai-btn').addEventListener('click', () => { openPanel(); document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' }); });
 
-// Subject chips
 document.getElementById('ai-subject-bar').addEventListener('click', e => {
   const chip = e.target.closest('.ai-subject-chip');
   if (!chip) return;
@@ -884,7 +904,6 @@ document.getElementById('ai-subject-bar').addEventListener('click', e => {
   updateQuickPrompts(selectedSubject);
 });
 
-// Card consult buttons
 document.querySelectorAll('.card-ask-ai').forEach(btn => {
   btn.addEventListener('click', () => {
     const materia = btn.dataset.materia;
@@ -900,11 +919,11 @@ document.querySelectorAll('.card-ask-ai').forEach(btn => {
 function updateQuickPrompts(subject) {
   const prompts = {
     'general': ['¿Qué es una derivada?', 'Explica la integral', '¿Para qué sirve Laplace?', 'Propón un ejercicio'],
-    'Matemática de Iniciación': ['¿Qué es factorización?', 'Fórmula de distancia', 'Propón un ejercicio'],
+    'Matemática de Iniciación': ['¿Qué es factorización?', 'Fórmula de distancia', 'Resuelve un sistema', 'Propón un ejercicio'],
     'Cálculo Diferencial': ['¿Qué es un límite?', 'Regla de la cadena', 'Propón un ejercicio'],
     'Cálculo Integral': ['¿Qué es una integral?', 'Teorema Fundamental', 'Propón un ejercicio'],
     'Álgebra Lineal y Geometría': ['Multiplica matrices', '¿Qué son eigenvalores?', 'Propón un ejercicio'],
-    'Ecuaciones Diferenciales': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Propón un ejercicio']
+    'Ecuaciones Diferenciales': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Circuito RLC', 'Propón un ejercicio']
   };
   const container = document.getElementById('ai-quick-prompts');
   const list = prompts[subject] || prompts['general'];
@@ -920,7 +939,10 @@ function addMessage(role, content) {
   if (welcome) welcome.remove();
   const div = document.createElement('div');
   div.className = `ai-msg ${role}`;
-  div.innerHTML = `<div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div><div class="ai-msg-bubble">${content.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>`;
+  div.innerHTML = `
+    <div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div>
+    <div class="ai-msg-bubble">${content.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>
+  `;
   messagesEl.appendChild(div);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
@@ -954,4 +976,4 @@ function sendMessage() {
 updateQuickPrompts('general');
 </script>
 </body>
-</html>
+  </html>
