@@ -39,7 +39,6 @@
   }
   .wrapper { position: relative; z-index: 2; }
 
-  /* NAV */
   nav {
     display: flex;
     align-items: center;
@@ -82,7 +81,6 @@
   .nav-ai-btn .ai-dot { width: 6px; height: 6px; background: var(--teal); border-radius: 50%; animation: pulse-dot 2s infinite; }
   @keyframes pulse-dot { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
 
-  /* HERO - DISEÑO LATERAL */
   .hero {
     padding: 4rem 3rem;
     max-width: 1200px;
@@ -95,11 +93,7 @@
     gap: 4rem;
     flex-wrap: wrap;
   }
-  .hero-image {
-    flex: 1;
-    min-width: 220px;
-    text-align: center;
-  }
+  .hero-image { flex: 1; min-width: 220px; text-align: center; }
   .hero-photo {
     width: 280px;
     height: 280px;
@@ -111,10 +105,7 @@
     transition: transform 0.3s;
   }
   .hero-photo:hover { transform: scale(1.02); }
-  .hero-content {
-    flex: 2;
-    min-width: 280px;
-  }
+  .hero-content { flex: 2; min-width: 280px; }
   .hero-eyebrow {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.75rem;
@@ -182,7 +173,6 @@
   }
   .hero-cta-ghost:hover { background: rgba(78,205,196,0.08); border-color: var(--teal); transform: translateY(-2px); }
 
-  /* STATS */
   .stats-bar {
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
@@ -196,7 +186,6 @@
   .stat-number { font-family: 'EB Garamond', serif; font-size: 2.5rem; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.4rem; }
   .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
-  /* SECTION LABEL */
   .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
@@ -213,10 +202,9 @@
   }
   .section-label::before, .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  /* CARDS */
   .materias-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 1.5rem;
     padding: 1rem 3rem 6rem;
     max-width: 1200px;
@@ -235,39 +223,42 @@
   .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
   .card-number { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.15em; }
   .card-icon { font-size: 2rem; }
-  .card-title { font-family: 'EB Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.2rem; line-height: 1.2; }
-  .card-subtitle { font-size: 0.85rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+  .card-title { font-family: 'EB Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--text); margin: 0.5rem 0 0.2rem; line-height: 1.2; }
+  .card-subtitle { font-size: 0.8rem; color: var(--muted); line-height: 1.4; margin-bottom: 1rem; }
+
   .tema-bloque {
-    margin: 10px 0;
-    padding: 10px;
+    margin: 6px 0;
+    padding: 6px 10px;
     background: rgba(255,255,255,0.03);
-    border-radius: 10px;
+    border-radius: 6px;
     border-left: 3px solid var(--gold);
   }
   .tema-titulo {
     font-weight: bold;
     color: var(--gold);
     display: block;
-    margin-bottom: 6px;
-    font-size: 0.85rem;
+    margin-bottom: 3px;
+    font-size: 0.72rem;
   }
   .tema-links a {
     color: var(--teal);
     text-decoration: none;
-    font-size: 0.75rem;
-    margin-right: 10px;
+    font-size: 0.65rem;
+    margin-right: 6px;
     background: rgba(78,205,196,0.1);
-    padding: 3px 8px;
+    padding: 2px 7px;
     border-radius: 20px;
     transition: 0.2s;
     display: inline-block;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .tema-links a:hover { background: var(--teal); color: #0a0c10; }
   .sol-link { color: var(--rose) !important; background: rgba(224,122,143,0.1) !important; }
   .sol-link:hover { background: var(--rose) !important; color: #0a0c10 !important; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0.5rem; }
-  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.2rem 0.7rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0 0.5rem; }
+  .card-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; padding: 0.15rem 0.6rem; border-radius: 100px; border: 1px solid var(--gold); color: var(--gold); opacity: 0.8; }
+
   .card-ask-ai {
     display: flex;
     align-items: center;
@@ -277,7 +268,7 @@
     border-top: 1px solid var(--border);
     background: none;
     color: var(--teal);
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -288,7 +279,6 @@
   .card-ask-ai:hover { color: var(--gold-soft); }
   .card-ask-ai .spark { font-size: 0.9rem; }
 
-  /* FOOTER */
   footer { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
   /* AI PANEL (offline) */
@@ -332,8 +322,8 @@
   }
   .ai-subject-chip {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem; letter-spacing: 0.05em;
-    padding: 0.3rem 0.75rem; border-radius: 100px;
+    font-size: 0.6rem; letter-spacing: 0.05em;
+    padding: 0.25rem 0.6rem; border-radius: 100px;
     border: 1px solid var(--border); background: none;
     color: var(--muted); cursor: pointer; white-space: nowrap;
   }
@@ -380,7 +370,7 @@
   }
   .ai-quick-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem; padding: 0.3rem 0.7rem;
+    font-size: 0.6rem; padding: 0.25rem 0.6rem;
     border-radius: 100px;
     border: 1px solid rgba(78,205,196,0.25);
     background: rgba(78,205,196,0.06);
@@ -477,7 +467,7 @@
     </section>
 
     <div class="stats-bar">
-      <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Materias</span></div>
+      <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Materias</span></div>
       <div class="stat-item"><span class="stat-number">PNFE</span><span class="stat-label">Documento Rector</span></div>
       <div class="stat-item"><span class="stat-number">Ing.</span><span class="stat-label">Eléctrica UNI</span></div>
       <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Trayectos</span></div>
@@ -487,9 +477,9 @@
 
     <div class="materias-grid">
 
-      <!-- ===================================================== -->
-      <!-- MATEMÁTICA DE INICIACIÓN (3 bloques completos)        -->
-      <!-- ===================================================== -->
+      <!-- ========================================================== -->
+      <!-- 00. MATEMÁTICA DE INICIACIÓN (Trayecto Inicial - 3 bloques) -->
+      <!-- ========================================================== -->
       <div class="materia-card">
         <div class="card-header">
           <span class="card-number">00 · Trayecto Inicial</span>
@@ -498,7 +488,6 @@
         <h2 class="card-title">Matemática de Iniciación</h2>
         <p class="card-subtitle">Fundamentos de álgebra, geometría analítica, sistemas de ecuaciones y números complejos.</p>
 
-        <!-- Bloque 1: Factorización -->
         <div class="tema-bloque">
           <span class="tema-titulo">📐 Factorización</span>
           <div class="tema-links">
@@ -509,7 +498,6 @@
           </div>
         </div>
 
-        <!-- Bloque 2: Sistema de Coordenadas -->
         <div class="tema-bloque">
           <span class="tema-titulo">📌 Sistema de Coordenadas</span>
           <div class="tema-links">
@@ -520,7 +508,6 @@
           </div>
         </div>
 
-        <!-- Bloque 3: Sistemas de Ecuaciones Lineales -->
         <div class="tema-bloque">
           <span class="tema-titulo">🔢 Sistemas de Ecuaciones Lineales</span>
           <div class="tema-links">
@@ -541,195 +528,329 @@
         </button>
       </div>
 
-      <!-- ===================================================== -->
-      <!-- CÁLCULO DIFERENCIAL (placeholder)                     -->
-      <!-- ===================================================== -->
+      <!-- ========================================================== -->
+      <!-- 01. MATEMÁTICA I (Trayecto I y II)                         -->
+      <!-- ========================================================== -->
       <div class="materia-card">
         <div class="card-header">
-          <span class="card-number">01 · Trayecto I</span>
-          <span class="card-icon">∂</span>
+          <span class="card-number">01 · Trayecto I y II</span>
+          <span class="card-icon">∫</span>
         </div>
-        <h2 class="card-title">Cálculo Diferencial</h2>
-        <p class="card-subtitle">Límites, derivadas y aplicaciones en ingeniería eléctrica.</p>
-        <div class="tema-bloque">
-          <span class="tema-titulo">📈 Límites y Continuidad</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        <h2 class="card-title">Matemática I</h2>
+        <p class="card-subtitle">Cálculo Diferencial (Trayecto I) y Cálculo Integral (Trayecto II).</p>
+
+        <!-- TRAYECTO I: CÁLCULO DIFERENCIAL -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(78,205,196,0.06); border-radius: 5px;">
+          <span style="color: var(--teal); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO I - CÁLCULO DIFERENCIAL</span>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Límites y Continuidad</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Derivadas</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Aplicaciones de la Derivada</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Estudio completo de funciones</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
         </div>
-        <div class="tema-bloque">
-          <span class="tema-titulo">🔢 Derivadas</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+
+        <!-- TRAYECTO II: CÁLCULO INTEGRAL -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(201,168,76,0.06); border-radius: 5px;">
+          <span style="color: var(--gold); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO II - CÁLCULO INTEGRAL</span>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Integral indefinida</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Métodos de integración</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Integral definida y aplicaciones</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Series infinitas</span>
+            <div class="tema-links">
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
         </div>
+
         <div class="card-tags">
           <span class="card-tag">Límites</span>
           <span class="card-tag">Derivadas</span>
-          <span class="card-tag">Optimización</span>
+          <span class="card-tag">Integrales</span>
+          <span class="card-tag">Series</span>
         </div>
-        <button class="card-ask-ai" data-materia="Cálculo Diferencial">
+        <button class="card-ask-ai" data-materia="Matemática I">
           <span class="spark">✦</span> Consultar sobre esta materia
         </button>
       </div>
 
-      <!-- ===================================================== -->
-      <!-- CÁLCULO INTEGRAL (placeholder)                        -->
-      <!-- ===================================================== -->
+      <!-- ========================================================== -->
+      <!-- 02. ESTADÍSTICA, ÁLGEBRA LINEAL Y GEOMETRÍA                -->
+      <!-- ========================================================== -->
       <div class="materia-card">
         <div class="card-header">
-          <span class="card-number">02 · Trayecto I</span>
-          <span class="card-icon">∫</span>
-        </div>
-        <h2 class="card-title">Cálculo Integral</h2>
-        <p class="card-subtitle">Integrales indefinidas y definidas, técnicas de integración.</p>
-        <div class="tema-bloque">
-          <span class="tema-titulo">📊 Integral Indefinida</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
-        </div>
-        <div class="tema-bloque">
-          <span class="tema-titulo">📉 Integral Definida</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
-        </div>
-        <div class="card-tags">
-          <span class="card-tag">Antiderivadas</span>
-          <span class="card-tag">Área</span>
-          <span class="card-tag">Sustitución</span>
-        </div>
-        <button class="card-ask-ai" data-materia="Cálculo Integral">
-          <span class="spark">✦</span> Consultar sobre esta materia
-        </button>
-      </div>
-
-      <!-- ===================================================== -->
-      <!-- ÁLGEBRA LINEAL Y GEOMETRÍA (placeholder)              -->
-      <!-- ===================================================== -->
-      <div class="materia-card">
-        <div class="card-header">
-          <span class="card-number">03 · Trayecto I</span>
+          <span class="card-number">02 · Trayecto I y II</span>
           <span class="card-icon">⊗</span>
         </div>
-        <h2 class="card-title">Álgebra Lineal y Geometría</h2>
-        <p class="card-subtitle">Matrices, determinantes, vectores y transformaciones lineales.</p>
-        <div class="tema-bloque">
-          <span class="tema-titulo">🔲 Matrices y Determinantes</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+        <h2 class="card-title">Estadística, Álgebra Lineal y Geometría</h2>
+        <p class="card-subtitle">Estadística y Álgebra Lineal (Trayecto I) · Álgebra Lineal y Geometría Analítica (Trayecto II).</p>
+
+        <!-- TRAYECTO I: ESTADÍSTICA Y ÁLGEBRA LINEAL -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(78,205,196,0.06); border-radius: 5px;">
+          <span style="color: var(--teal); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO I - ESTADÍSTICA Y ÁLGEBRA LINEAL</span>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Estadística Descriptiva y Probabilidad</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Matrices y Operaciones</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Sistemas de Ecuaciones Lineales (Gauss-Jordan)</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Determinantes y Regla de Cramer</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
         </div>
-        <div class="tema-bloque">
-          <span class="tema-titulo">↗ Vectores y Espacios</span>
-          <div class="tema-links"><span style="color:var(--muted);font-size:0.75rem;">Próximamente…</span></div>
+
+        <!-- TRAYECTO II: ÁLGEBRA LINEAL Y GEOMETRÍA ANALÍTICA -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(201,168,76,0.06); border-radius: 5px;">
+          <span style="color: var(--gold); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO II - ÁLGEBRA LINEAL Y GEOMETRÍA ANALÍTICA</span>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 5: Espacios Vectoriales y Transformaciones Lineales</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 6: Valores y Vectores Propios</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 7: Geometría Analítica con Enfoque Vectorial en el Plano</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
+
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</span>
+            <div class="tema-links">
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="EstadisticaAlgebraLinealGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            </div>
+          </div>
         </div>
+
         <div class="card-tags">
+          <span class="card-tag">Estadística</span>
           <span class="card-tag">Matrices</span>
+          <span class="card-tag">Sistemas</span>
+          <span class="card-tag">Determinantes</span>
           <span class="card-tag">Vectores</span>
-          <span class="card-tag">Eigenvalores</span>
+          <span class="card-tag">Geometría</span>
         </div>
-        <button class="card-ask-ai" data-materia="Álgebra Lineal y Geometría">
+        <button class="card-ask-ai" data-materia="Estadística, Álgebra Lineal y Geometría">
           <span class="spark">✦</span> Consultar sobre esta materia
         </button>
       </div>
 
-      <!-- ===================================================== -->
-      <!-- ECUACIONES DIFERENCIALES (8 unidades completas)       -->
-      <!-- ===================================================== -->
+      <!-- ========================================================== -->
+      <!-- 03. MATEMÁTICA II (Trayecto I y II)                        -->
+      <!-- ========================================================== -->
       <div class="materia-card">
         <div class="card-header">
-          <span class="card-number">04 · Trayecto II</span>
+          <span class="card-number">03 · Trayecto I y II</span>
           <span class="card-icon">≋</span>
         </div>
-        <h2 class="card-title">Ecuaciones Diferenciales</h2>
-        <p class="card-subtitle">EDO, Laplace, EDP, Fourier y Variable Compleja. Aplicaciones a circuitos eléctricos.</p>
+        <h2 class="card-title">Matemática II</h2>
+        <p class="card-subtitle">Ecuaciones Diferenciales y Aplicaciones a Circuitos (Trayecto I) · Laplace, EDP, Fourier, Variable Compleja (Trayecto II).</p>
 
-        <!-- ===== TRAYECTO I ===== -->
-        <div style="margin: 10px 0; padding: 8px; background: rgba(78,205,196,0.06); border-radius: 8px;">
-          <span style="color: var(--teal); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">📘 TRAYECTO I</span>
+        <!-- TRAYECTO I: EDO Y CIRCUITOS -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(78,205,196,0.06); border-radius: 5px;">
+          <span style="color: var(--teal); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO I - EDO Y CIRCUITOS</span>
 
-          <!-- Unidad 1 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 1: EDO - Definición y Métodos Básicos</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: EDO - Definición y Métodos Básicos</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/01_EDO_Definicion_MetodosBasicos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 2 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 2: EDO - Métodos Avanzados de 1er Orden</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: EDO - Métodos Avanzados de 1er Orden</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/02_EDO_MetodosAvanzados/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 3 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 3: EDO de Segundo Orden</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: EDO de Segundo Orden</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/03_EDO_SegundoOrden/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 4 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">⚡ Unidad 4: Aplicaciones a Circuitos Eléctricos</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">⚡ Unidad 4: Aplicaciones a Circuitos Eléctricos</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/04_Circuitos/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/04_Circuitos/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/04_Circuitos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/04_Circuitos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
 
-        <!-- ===== TRAYECTO II ===== -->
-        <div style="margin: 10px 0; padding: 8px; background: rgba(201,168,76,0.06); border-radius: 8px;">
-          <span style="color: var(--gold); font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; display: block; margin-bottom: 6px;">📘 TRAYECTO II</span>
+        <!-- TRAYECTO II: LAPLACE · EDP · FOURIER · VARIABLE COMPLEJA -->
+        <div style="margin: 6px 0; padding: 5px; background: rgba(201,168,76,0.06); border-radius: 5px;">
+          <span style="color: var(--gold); font-size: 0.55rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">📘 TRAYECTO II - LAPLACE · EDP · FOURIER · VARIABLE COMPLEJA</span>
 
-          <!-- Unidad 5 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 5: Transformada de Laplace</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 5: Transformada de Laplace</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/05_Laplace/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/05_Laplace/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/05_Laplace/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/05_Laplace/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 6 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 6: Ecuaciones Diferenciales Parciales</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 6: Ecuaciones Diferenciales Parciales</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/06_EDP/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/06_EDP/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/06_EDP/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/06_EDP/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 7 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 7: Series de Fourier</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 7: Series de Fourier</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/07_Fourier/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/07_Fourier/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/07_Fourier/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/07_Fourier/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
-          <!-- Unidad 8 -->
-          <div class="tema-bloque" style="margin: 6px 0; padding: 8px;">
-            <span class="tema-titulo" style="font-size: 0.8rem;">📌 Unidad 8: Funciones de Variable Compleja</span>
+          <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
+            <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 8: Funciones de Variable Compleja</span>
             <div class="tema-links">
-              <a href="EcuacionesDiferenciales/08_VariableCompleja/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EcuacionesDiferenciales/08_VariableCompleja/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EcuacionesDiferenciales/08_VariableCompleja/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EcuacionesDiferenciales/08_VariableCompleja/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -741,7 +862,7 @@
           <span class="card-tag">Fourier</span>
           <span class="card-tag">Variable Compleja</span>
         </div>
-        <button class="card-ask-ai" data-materia="Ecuaciones Diferenciales">
+        <button class="card-ask-ai" data-materia="Matemática II">
           <span class="spark">✦</span> Consultar sobre esta materia
         </button>
       </div>
@@ -771,10 +892,9 @@
   <div class="ai-subject-bar" id="ai-subject-bar">
     <button class="ai-subject-chip active" data-subject="general">General</button>
     <button class="ai-subject-chip" data-subject="Matemática de Iniciación">Mat. Iniciación</button>
-    <button class="ai-subject-chip" data-subject="Cálculo Diferencial">Cálculo Dif.</button>
-    <button class="ai-subject-chip" data-subject="Cálculo Integral">Cálculo Int.</button>
-    <button class="ai-subject-chip" data-subject="Álgebra Lineal y Geometría">Álgebra Lineal</button>
-    <button class="ai-subject-chip" data-subject="Ecuaciones Diferenciales">Ec. Diferenciales</button>
+    <button class="ai-subject-chip" data-subject="Matemática I">Mat. I</button>
+    <button class="ai-subject-chip" data-subject="Estadística, Álgebra Lineal y Geometría">Estad. Alg. Geom.</button>
+    <button class="ai-subject-chip" data-subject="Matemática II">Mat. II</button>
   </div>
 
   <div id="ai-messages">
@@ -826,28 +946,24 @@ const knowledgeBase = {
       'sistemas': 'Un sistema de ecuaciones lineales se resuelve por sustitución, igualación, reducción o eliminación gaussiana.'
     }
   },
-  'Cálculo Diferencial': {
-    description: 'Cálculo Diferencial - Trayecto I',
+  'Matemática I': {
+    description: 'Matemática I - Cálculo Diferencial e Integral',
     topics: {
       'límite': 'El límite de f(x) cuando x→a es L si f(x) se acerca a L.',
-      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.'
-    }
-  },
-  'Cálculo Integral': {
-    description: 'Cálculo Integral - Trayecto I',
-    topics: {
+      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.',
       'integral': '∫f(x)dx = F(x)+C, donde F\'=f. Teorema Fundamental: ∫ₐᵇ f(x)dx = F(b)-F(a)'
     }
   },
-  'Álgebra Lineal y Geometría': {
-    description: 'Álgebra Lineal - Trayecto I',
+  'Estadística, Álgebra Lineal y Geometría': {
+    description: 'Estadística, Álgebra Lineal y Geometría',
     topics: {
+      'estadística': 'Media: Σx/n. Mediana: valor central. Moda: valor más frecuente.',
       'matriz': 'Arreglo rectangular. Determinante 2x2: ad-bc.',
       'vector': 'En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.'
     }
   },
-  'Ecuaciones Diferenciales': {
-    description: 'Ecuaciones Diferenciales - Trayecto II',
+  'Matemática II': {
+    description: 'Matemática II - Ecuaciones Diferenciales',
     topics: {
       'edo': 'Ecuación con derivadas. Lineal: y\'+P(x)y=Q(x).',
       'laplace': 'L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. L{1}=1/s, L{eᵃᵗ}=1/(s-a).',
@@ -867,7 +983,8 @@ function getResponse(question, subject) {
   if (q.match(/sistemas|ecuaciones lineales/i)) responses.push(kb.topics?.sistemas || 'Los sistemas se resuelven por sustitución, igualación o reducción.');
   if (q.match(/límite|límites|continuidad/i)) responses.push(kb.topics?.límite || 'El límite es el valor al que se acerca una función.');
   if (q.match(/derivada|derivar|diferenciar/i)) responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea.');
-  if (q.match(/integral|integrar|antiderivada|teorema fundamental/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
+  if (q.match(/integral|integrar|antiderivada/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
+  if (q.match(/estadística|media|mediana|moda|probabilidad/i)) responses.push(kb.topics?.estadística || 'La estadística describe y analiza datos.');
   if (q.match(/matriz|determinante|vector|álgebra lineal/i)) responses.push(kb.topics?.matriz || 'Las matrices se suman y multiplican. El determinante es un escalar.');
   if (q.match(/edo|ecuación diferencial|laplace|rlc|circuito/i)) responses.push(kb.topics?.edo || 'Una EDO relaciona una función con sus derivadas. Se usa para modelar circuitos.');
   if (q.match(/ejercicio|propón|practicar/i)) responses.push('✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?');
@@ -920,10 +1037,9 @@ function updateQuickPrompts(subject) {
   const prompts = {
     'general': ['¿Qué es una derivada?', 'Explica la integral', '¿Para qué sirve Laplace?', 'Propón un ejercicio'],
     'Matemática de Iniciación': ['¿Qué es factorización?', 'Fórmula de distancia', 'Resuelve un sistema', 'Propón un ejercicio'],
-    'Cálculo Diferencial': ['¿Qué es un límite?', 'Regla de la cadena', 'Propón un ejercicio'],
-    'Cálculo Integral': ['¿Qué es una integral?', 'Teorema Fundamental', 'Propón un ejercicio'],
-    'Álgebra Lineal y Geometría': ['Multiplica matrices', '¿Qué son eigenvalores?', 'Propón un ejercicio'],
-    'Ecuaciones Diferenciales': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Circuito RLC', 'Propón un ejercicio']
+    'Matemática I': ['¿Qué es un límite?', 'Regla de la cadena', 'Teorema Fundamental', 'Propón un ejercicio'],
+    'Estadística, Álgebra Lineal y Geometría': ['¿Qué es la media?', 'Multiplica matrices', '¿Qué son eigenvalores?', 'Propón un ejercicio'],
+    'Matemática II': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Circuito RLC', 'Propón un ejercicio']
   };
   const container = document.getElementById('ai-quick-prompts');
   const list = prompts[subject] || prompts['general'];
