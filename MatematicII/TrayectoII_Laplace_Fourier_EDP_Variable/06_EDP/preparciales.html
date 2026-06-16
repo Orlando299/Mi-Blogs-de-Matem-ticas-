@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre‑parcial - Ecuaciones Diferenciales Parciales</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
+        .pregunta { margin: 15px 0; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre‑parcial: Ecuaciones Diferenciales Parciales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <div class="examen">
+        <h2>Pre‑parcial 1</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> Clasifica las siguientes EDP:
+            <br>a) \(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0\)
+            <br>b) \(\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}\)
+        </div>
+        <div class="pregunta"><strong>2. (15 puntos)</strong> Resuelve la ecuación de onda \(\frac{\partial^2 u}{\partial t^2} = 4\frac{\partial^2 u}{\partial x^2}\) con condiciones de frontera \(u(0,t)=0\), \(u(\pi,t)=0\) y condiciones iniciales \(u(x,0)=\sin x\), \(\frac{\partial u}{\partial t}(x,0)=0\).</div>
+        <div class="pregunta"><strong>3. (15 puntos)</strong> Resuelve la ecuación de calor \(\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}\) con \(u(0,t)=0\), \(u(L,t)=0\), \(u(x,0)=3\sin\left(\frac{\pi x}{L}\right)\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Enuncia el método de separación de variables para resolver una EDP.</div>
+    </div>
+
+    <div class="examen">
+        <h2>Pre‑parcial 2</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> Clasifica las siguientes EDP:
+            <br>a) \(\frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}\)
+            <br>b) \(\nabla^2 u = 0\)
+        </div>
+        <div class="pregunta"><strong>2. (15 puntos)</strong> Resuelve la ecuación de onda con \(c=1\), \(L=2\), condiciones iniciales \(u(x,0)=0\), \(\frac{\partial u}{\partial t}(x,0)=1\).</div>
+        <div class="pregunta"><strong>3. (15 puntos)</strong> Encuentra el potencial eléctrico \(u(x,y)\) en una placa rectangular con \(u(0,y)=0\), \(u(a,y)=0\), \(u(x,0)=0\), \(u(x,b)=V_0\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Explica la diferencia entre una EDP elíptica, parabólica e hiperbólica.</div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Teoría</a> | <a href="ejercicios.html">📝 Ejercicios</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
