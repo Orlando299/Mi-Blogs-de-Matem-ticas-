@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 8: Funciones de Variable Compleja</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 8: Funciones de Variable Compleja</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Números complejos (repaso)</h2>
+    <div class="definicion">
+        Un número complejo se expresa como:
+        \[
+        z = x + iy
+        \]
+        donde \(x = \Re(z)\) es la parte real e \(y = \Im(z)\) la parte imaginaria.
+    </div>
+    <div class="formula">
+        <strong>Forma polar:</strong> \(z = r(\cos\theta + i\sin\theta) = r e^{i\theta}\)<br>
+        donde \(r = |z| = \sqrt{x^2+y^2}\) y \(\theta = \arg(z) = \tan^{-1}(y/x)\).
+    </div>
+
+    <h2>2. Funciones complejas</h2>
+    <div class="definicion">
+        Una función compleja \(f(z)\) asigna un número complejo a cada número complejo \(z\). Se puede escribir como:
+        \[
+        f(z) = u(x,y) + i v(x,y)
+        \]
+        donde \(u\) y \(v\) son funciones reales de dos variables reales.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(f(z) = z^2 = (x+iy)^2 = (x^2-y^2) + i(2xy)\).<br>
+        Aquí \(u = x^2 - y^2\), \(v = 2xy\).
+    </div>
+
+    <h2>3. Funciones analíticas y condiciones de Cauchy-Riemann</h2>
+    <div class="definicion">
+        Una función \(f(z) = u + iv\) es <strong>analítica</strong> en una región si es diferenciable en todo punto de esa región.
+    </div>
+    <div class="teorema">
+        <strong>Condiciones de Cauchy-Riemann:</strong>
+        \[
+        \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+        \]
+        Si estas condiciones se cumplen y las derivadas parciales son continuas, la función es analítica.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(f(z) = z^2\). \(u = x^2-y^2\), \(v = 2xy\).<br>
+        \(u_x = 2x\), \(v_y = 2x\) → \(\checkmark\)<br>
+        \(u_y = -2y\), \(-v_x = -2y\) → \(\checkmark\)<br>
+        \(f(z) = z^2\) es analítica en todo \(\mathbb{C}\).
+    </div>
+
+    <h2>4. Integración compleja</h2>
+    <div class="definicion">
+        La integral de una función compleja a lo largo de un camino \(\gamma\) se define como:
+        \[
+        \int_\gamma f(z)\,dz = \int_a^b f(\gamma(t))\gamma'(t)\,dt
+        \]
+    </div>
+
+    <h3>Teorema de Cauchy</h3>
+    <div class="teorema">
+        Si \(f(z)\) es analítica en una región simplemente conexa y \(\gamma\) es un camino cerrado en esa región, entonces:
+        \[
+        \oint_\gamma f(z)\,dz = 0
+        \]
+    </div>
+
+    <h3>Fórmula integral de Cauchy</h3>
+    <div class="teorema">
+        Si \(f(z)\) es analítica dentro y sobre un camino cerrado \(\gamma\), entonces para cualquier \(a\) dentro de \(\gamma\):
+        \[
+        f(a) = \frac{1}{2\pi i}\oint_\gamma \frac{f(z)}{z-a}\,dz
+        \]
+    </div>
+
+    <h2>5. Series de Taylor y Laurent</h2>
+    <div class="definicion">
+        Una función analítica \(f(z)\) puede desarrollarse en <strong>serie de Taylor</strong> alrededor de \(z_0\):
+        \[
+        f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n
+        \]
+    </div>
+    <div class="definicion">
+        La <strong>serie de Laurent</strong> generaliza la serie de Taylor incluyendo potencias negativas:
+        \[
+        f(z) = \sum_{n=-\infty}^\infty a_n (z-z_0)^n
+        \]
+        donde \(a_n = \frac{1}{2\pi i}\oint_\gamma \frac{f(z)}{(z-z_0)^{n+1}}\,dz\).
+    </div>
+
+    <h2>6. Teoría de residuos</h2>
+    <div class="definicion">
+        El <strong>residuo</strong> de \(f(z)\) en una singularidad aislada \(z_0\) es el coeficiente \(a_{-1}\) en la serie de Laurent:
+        \[
+        \text{Res}(f, z_0) = a_{-1}
+        \]
+    </div>
+    <div class="teorema">
+        <strong>Teorema de los residuos:</strong> Si \(f(z)\) es analítica dentro y sobre un camino cerrado \(\gamma\), excepto en un número finito de singularidades \(z_k\) dentro de \(\gamma\), entonces:
+        \[
+        \oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \text{Res}(f, z_k)
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Calcular \(\oint_{|z|=2} \frac{1}{z^2-1}\,dz\).<br>
+        Singularidades en \(z = 1\) y \(z = -1\).<br>
+        \(\text{Res}(f, 1) = \frac{1}{2}\), \(\text{Res}(f, -1) = -\frac{1}{2}\).<br>
+        Suma de residuos = 0 → integral = 0.
+    </div>
+
+    <h2>7. Aplicación a integrales reales</h2>
+    <div class="teorema">
+        El teorema de los residuos permite calcular integrales reales del tipo:
+        \[
+        \int_{-\infty}^\infty \frac{P(x)}{Q(x)}\,dx
+        \]
+        extendiendo la función al plano complejo y usando un contorno adecuado (semicírculo).
+    </div>
+    <div class="ejemplo">
+        \[
+        \int_{-\infty}^\infty \frac{1}{x^2+1}\,dx = \pi
+        \]
+    </div>
+
+    <h2>8. Resumen</h2>
+    <ul>
+        <li><strong>Función analítica:</strong> Cumple Cauchy-Riemann.</li>
+        <li><strong>Teorema de Cauchy:</strong> Integral sobre camino cerrado = 0.</li>
+        <li><strong>Fórmula integral de Cauchy:</strong> \(f(a) = \frac{1}{2\pi i}\oint \frac{f(z)}{z-a}dz\).</li>
+        <li><strong>Serie de Laurent:</strong> Incluye potencias negativas.</li>
+        <li><strong>Residuo:</strong> Coeficiente \(a_{-1}\).</li>
+        <li><strong>Teorema de residuos:</strong> \(\oint f(z)dz = 2\pi i \sum \text{Res}\).</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
