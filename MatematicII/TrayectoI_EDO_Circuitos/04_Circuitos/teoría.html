@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 4: Aplicaciones a Circuitos Eléctricos</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 4: Aplicaciones a Circuitos Eléctricos</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto I</div>
+
+    <h2>1. Elementos básicos de circuitos</h2>
+    <div class="definicion">
+        <strong>Resistor (R):</strong> \(v_R = R i\) (Ley de Ohm)<br>
+        <strong>Inductor (L):</strong> \(v_L = L \frac{di}{dt}\)<br>
+        <strong>Capacitor (C):</strong> \(i_C = C \frac{dv_C}{dt}\) o \(v_C = \frac{1}{C}\int i_C dt\)
+    </div>
+
+    <h2>2. Circuito RC (Resistor-Capacitor)</h2>
+    <div class="definicion">
+        Un circuito RC serie satisface:
+        \[
+        RC \frac{dv_C}{dt} + v_C = v(t)
+        \]
+        donde \(v_C(t)\) es la tensión en el capacitor.
+    </div>
+
+    <h3>2.1 Respuesta a escalón (\(v(t) = V_0\) constante)</h3>
+    <div class="teorema">
+        La solución general es:
+        \[
+        v_C(t) = V_0 + C e^{-t/(RC)}
+        \]
+        Con condición inicial \(v_C(0) = 0\):
+        \[
+        v_C(t) = V_0(1 - e^{-t/(RC)})
+        \]
+        La corriente es:
+        \[
+        i(t) = \frac{V_0}{R} e^{-t/(RC)}
+        \]
+    </div>
+    <div class="ejemplo">
+        Circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V_0=5\) V:<br>
+        \(v_C(t) = 5(1 - e^{-10t})\) V.<br>
+        \(i(t) = 0.5 e^{-10t}\) A.
+    </div>
+
+    <h3>2.2 Respuesta natural (descarga)</h3>
+    <div class="teorema">
+        Si el capacitor tiene carga inicial \(v_C(0) = V_0\) y no hay fuente:
+        \[
+        v_C(t) = V_0 e^{-t/(RC)}
+        \]
+    </div>
+
+    <h2>3. Circuito RL (Resistor-Inductor)</h2>
+    <div class="definicion">
+        Un circuito RL serie satisface:
+        \[
+        L \frac{di}{dt} + R i = v(t)
+        \]
+        donde \(i(t)\) es la corriente en el inductor.
+    </div>
+
+    <h3>3.1 Respuesta a escalón (\(v(t) = V_0\) constante)</h3>
+    <div class="teorema">
+        La solución general es:
+        \[
+        i(t) = \frac{V_0}{R} + C e^{-Rt/L}
+        \]
+        Con condición inicial \(i(0) = 0\):
+        \[
+        i(t) = \frac{V_0}{R}(1 - e^{-Rt/L})
+        \]
+    </div>
+    <div class="ejemplo">
+        Circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V_0=12\) V:<br>
+        \(i(t) = 3(1 - e^{-2t})\) A.
+    </div>
+
+    <h3>3.2 Respuesta natural</h3>
+    <div class="teorema">
+        Si el inductor tiene corriente inicial \(i(0) = I_0\) y no hay fuente:
+        \[
+        i(t) = I_0 e^{-Rt/L}
+        \]
+    </div>
+
+    <h2>4. Circuito RLC en serie</h2>
+    <div class="definicion">
+        Un circuito RLC en serie satisface:
+        \[
+        L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = v(t)
+        \]
+        o en términos de corriente:
+        \[
+        L \frac{d^2i}{dt^2} + R \frac{di}{dt} + \frac{1}{C} i = \frac{dv}{dt}
+        \]
+    </div>
+
+    <h3>4.1 Clasificación del amortiguamiento</h3>
+    <div class="definicion">
+        Para el caso homogéneo \(Lq'' + Rq' + \frac{1}{C}q = 0\):<br>
+        \(\alpha = \frac{R}{2L}\) (factor de amortiguamiento)<br>
+        \(\omega_0 = \frac{1}{\sqrt{LC}}\) (frecuencia natural)<br>
+        <ul>
+            <li><strong>Sobreamortiguado:</strong> \(\alpha > \omega_0\) → raíces reales distintas</li>
+            <li><strong>Críticamente amortiguado:</strong> \(\alpha = \omega_0\) → raíz real doble</li>
+            <li><strong>Subamortiguado:</strong> \(\alpha < \omega_0\) → raíces complejas conjugadas</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        \(L=1\) H, \(R=6\ \Omega\), \(C=0.2\) F:<br>
+        \(\alpha = 3\), \(\omega_0 = \sqrt{5} \approx 2.236\) → \(\alpha > \omega_0\) → sobreamortiguado.<br>
+        Ecuación característica: \(r^2 + 6r + 5 = 0\) → \(r = -1, -5\)<br>
+        \(q(t) = C_1 e^{-t} + C_2 e^{-5t}\).
+    </div>
+
+    <h2>5. Circuito RLC en paralelo</h2>
+    <div class="definicion">
+        Un circuito RLC en paralelo satisface:
+        \[
+        \frac{d^2v}{dt^2} + \frac{1}{RC}\frac{dv}{dt} + \frac{1}{LC}v = \frac{1}{C}\frac{di}{dt}
+        \]
+    </div>
+
+    <h2>6. Análisis de transitorios</h2>
+    <div class="definicion">
+        El comportamiento de un circuito tiene dos partes:
+        <ul>
+            <li><strong>Régimen transitorio:</strong> parte que depende de las condiciones iniciales y decae con el tiempo.</li>
+            <li><strong>Régimen permanente:</strong> comportamiento cuando \(t \to \infty\) (solución particular).</li>
+        </ul>
+    </div>
+
+    <h2>7. Resumen de constantes de tiempo</h2>
+    <ul>
+        <li><strong>Circuito RC:</strong> \(\tau = RC\)</li>
+        <li><strong>Circuito RL:</strong> \(\tau = L/R\)</li>
+        <li><strong>Circuito RLC:</strong> \(\alpha = R/(2L)\), \(\omega_0 = 1/\sqrt{LC}\)</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+          </html>
