@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Series de Fourier</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Series de Fourier</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item">1. \(f(x) \sim \sum_{n=1}^\infty \frac{2(-1)^{n+1}}{n\pi}\sin(n\pi x)\)</div>
+        <div class="solucion-item">2. \(f(x) \sim \frac{4}{3} + \sum_{n=1}^\infty \frac{16(-1)^n}{n^2\pi^2}\cos\left(\frac{n\pi x}{2}\right)\)</div>
+        <div class="solucion-item">3. \(f(x) \sim \frac{1}{2} + \sum_{n=1}^\infty \frac{2}{(2n-1)\pi}\sin((2n-1)x)\)</div>
+        <div class="solucion-item">4. \(f(x) \sim \frac{\pi}{2} - \frac{4}{\pi}\sum_{n=1}^\infty \frac{\cos((2n-1)x)}{(2n-1)^2}\)</div>
+        <div class="solucion-item">5. \(f(x) \sim \sum_{n=1}^\infty \frac{2(1-(-1)^n)}{n\pi}\sin(nx)\)</div>
+        <div class="solucion-item">6. Converge a \(0\) (promedio de los límites laterales).</div>
+        <div class="solucion-item">7. Aproximadamente el 9% del salto.</div>
+        <div class="solucion-item">8. \(f(x) \sim \frac{4A}{\pi}\sum_{n=1}^\infty \frac{1}{2n-1}\sin\left(\frac{(2n-1)\pi x}{L}\right)\)</div>
+        <div class="solucion-item">9. \(f(x) \sim \frac{L}{2} - \frac{4L}{\pi^2}\sum_{n=1}^\infty \frac{\cos((2n-1)\pi x/L)}{(2n-1)^2}\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(f(x) \sim \sum_{n=1}^\infty \frac{2(-1)^{n+1}}{n\pi}\sin(n\pi x)\); 2. \(f(x) \sim \frac{\pi}{2} - \frac{4}{\pi}\sum_{n=1}^\infty \frac{\cos((2n-1)x)}{(2n-1)^2}\); 3. Converge a \(1/2\); 4. Ver teoría.</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(f(x) \sim \frac{1}{2} + \sum_{n=1}^\infty \frac{2}{(2n-1)\pi}\sin((2n-1)x)\); 2. \(f(x) \sim \sum_{n=1}^\infty \frac{2(1-(-1)^n)}{n\pi}\sin(nx)\); 3. \(f(x) \sim \frac{4A}{\pi}\sum_{n=1}^\infty \frac{1}{2n-1}\sin((2n-1)\pi x/L)\); 4. Ver teoría.</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
