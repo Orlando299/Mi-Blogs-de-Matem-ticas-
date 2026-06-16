@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - EDO: Métodos Avanzados de Primer Orden</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: EDO - Métodos Avanzados de Primer Orden</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Factor integrante (EDO lineales de primer orden)</h2>
+    <div class="ejercicio">1. \(\frac{dy}{dx} + 2y = 4x\)</div>
+    <div class="ejercicio">2. \(\frac{dy}{dx} - y = e^{2x}\)</div>
+    <div class="ejercicio">3. \(x\frac{dy}{dx} + y = x^3\)</div>
+    <div class="ejercicio">4. \(\frac{dy}{dx} + y\cot x = \csc x\)</div>
+    <div class="ejercicio">5. \(\frac{dy}{dx} - 3y = e^{2x}\)</div>
+    <div class="ejercicio">6. \(x\frac{dy}{dx} + 2y = x^2\)</div>
+
+    <h2>2. Ecuación de Bernoulli</h2>
+    <div class="ejercicio">7. \(y' + y = xy^2\)</div>
+    <div class="ejercicio">8. \(y' + \frac{1}{x}y = y^2\)</div>
+    <div class="ejercicio">9. \(y' + 2xy = 2xy^3\)</div>
+    <div class="ejercicio">10. \(y' - y = y^3\)</div>
+    <div class="ejercicio">11. \(y' + \frac{2}{x}y = 3y^2\)</div>
+
+    <h2>3. Problemas de Valor Inicial (PVI) con factor integrante</h2>
+    <div class="ejercicio">12. \(y' + 2y = 4x\), \(y(0) = 1\)</div>
+    <div class="ejercicio">13. \(\frac{dy}{dx} - y = e^{2x}\), \(y(0) = 0\)</div>
+    <div class="ejercicio">14. \(x\frac{dy}{dx} + y = x^3\), \(y(1) = 2\)</div>
+    <div class="ejercicio">15. \(y' + 3y = e^x\), \(y(0) = 2\)</div>
+
+    <h2>4. Aplicaciones a circuitos</h2>
+    <div class="ejercicio">16. En un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante, encuentra \(i(t)\) si \(i(0)=0\).</div>
+    <div class="ejercicio">17. En un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante, encuentra \(v_c(t)\) si \(v_c(0)=0\).</div>
+    <div class="ejercicio">18. En un circuito RL con \(L=0.5\) H, \(R=2\ \Omega\), \(V(t)=10\sin(2t)\) V, encuentra la solución general para \(i(t)\).</div>
+
+    <h2>5. Problemas integradores</h2>
+    <div class="ejercicio">19. Resuelve \(y' + y = e^x y^2\).</div>
+    <div class="ejercicio">20. Resuelve \(y' + \frac{2}{x}y = x^2 y^2\) con \(y(1)=1\).</div>
+    <div class="ejercicio">21. Encuentra la corriente en un circuito RL con \(v(t)=V_0\sin(\omega t)\) (solución general).</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
