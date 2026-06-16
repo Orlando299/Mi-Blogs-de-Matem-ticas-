@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Aplicaciones a Circuitos Eléctricos</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Aplicaciones a Circuitos Eléctricos</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item">1. \(v_C(t) = 5(1 - e^{-10t})\) V, \(i(t) = 0.5 e^{-10t}\) A</div>
+        <div class="solucion-item">2. \(v_C(t) = 10 - 8e^{-10t}\) V</div>
+        <div class="solucion-item">3. \(RC = 1/20\) → \(R \cdot C = 0.05\)</div>
+        <div class="solucion-item">4. \(v_C(t) = 12 e^{-t}\) V (con \(\tau = 1\) s)</div>
+        <div class="solucion-item">5. \(t = RC \ln(4) \approx 0.25 \ln 4 \approx 0.346\) s</div>
+        <div class="solucion-item">6. \(i(t) = 3(1 - e^{-2t})\) A</div>
+        <div class="solucion-item">7. \(i(t) = 5 - 4e^{-4t}\) A</div>
+        <div class="solucion-item">8. \(\tau = 0.5\) → \(L/R = 0.5\), \(V_0/R = 2\) → \(R=4\ \Omega\), \(L=2\) H</div>
+        <div class="solucion-item">9. \(i(t) = 3 e^{-2t}\) A</div>
+        <div class="solucion-item">10. \(t = \frac{L}{R}\ln 5 = 0.5 \ln 5 \approx 0.805\) s</div>
+        <div class="solucion-item">11. \(\alpha = 2\), \(\omega_0 = \sqrt{5} \approx 2.236\) → sobreamortiguado: \(q(t) = C_1 e^{-0.764t} + C_2 e^{-3.236t}\)</div>
+        <div class="solucion-item">12. \(\alpha = 1\), \(\omega_0 = 1\) → críticamente amortiguado: \(q(t) = (C_1 + C_2 t) e^{-t}\)</div>
+        <div class="solucion-item">13. \(\alpha = 1\), \(\omega_0 = 2\) → subamortiguado: \(q(t) = e^{-t}(C_1 \cos \sqrt{3}t + C_2 \sin \sqrt{3}t)\)</div>
+        <div class="solucion-item">14. \(q(t) = \frac{5}{4}e^{-t} - \frac{1}{4}e^{-5t}\)</div>
+        <div class="solucion-item">15. \(q(t) = e^{-2t}(2\cos 2t + \frac{3}{2}\sin 2t)\)</div>
+        <div class="solucion-item">16. \(q(t) = 2.5 - e^{-2t}(2.5\cos 2t + 2.5\sin 2t)\)</div>
+        <div class="solucion-item">17. \(q_p(t) = A\cos 3t + B\sin 3t\) (se determinan A y B)</div>
+        <div class="solucion-item">18. \(q(t) = e^{-2t}(C_1 \cos 2t + C_2 \sin 2t) + A\cos 2t + B\sin 2t\)</div>
+        <div class="solucion-item">19. \(q(t) = e^{-t}(\cos t + \sin t)\)</div>
+        <div class="solucion-item">20. \(q(t) = 10 - e^{-t}(10\cos t + 10\sin t)\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(v_C(t) = 5(1 - e^{-10t})\) V; 2. \(i(t) = 3(1 - e^{-2t})\) A; 3. \(q(t) = C_1 e^{-0.764t} + C_2 e^{-3.236t}\); 4. \(q(t) = \frac{5}{4}e^{-t} - \frac{1}{4}e^{-5t}\); 5. \(q(t) = e^{-t}(\cos t + \sin t)\)</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(v_C(t) = 10 - 8e^{-10t}\) V; 2. \(i(t) = 5 - 4e^{-4t}\) A; 3. \(q(t) = e^{-t}(C_1 \cos \sqrt{3}t + C_2 \sin \sqrt{3}t)\); 4. \(q(t) = e^{-2t}(2\cos 2t + \frac{3}{2}\sin 2t)\); 5. \(q(t) = e^{-2t}(C_1 \cos 2t + C_2 \sin 2t) + A\cos 2t + B\sin 2t\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
