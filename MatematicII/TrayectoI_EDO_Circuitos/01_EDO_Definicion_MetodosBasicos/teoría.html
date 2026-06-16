@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 1: EDO - Definición, Clasificación y Métodos Básicos</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 1: Ecuaciones Diferenciales Ordinarias</h1>
+    <h1 style="font-size: 1.5rem; margin-top: -0.5rem;">Definición, Clasificación y Métodos Básicos</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto I · Primer Semestre</div>
+
+    <h2>1. Definición de Ecuación Diferencial</h2>
+    <div class="definicion">
+        Una <strong>ecuación diferencial</strong> es una ecuación que contiene derivadas o diferenciales de una o más variables dependientes con respecto a una o más variables independientes.
+    </div>
+
+    <h3>Notación:</h3>
+    <ul>
+        <li>Prima: \(y', y'', y''', \dots, y^{(n)}\)</li>
+        <li>Leibniz: \(\frac{dy}{dx}, \frac{d^2y}{dx^2}, \dots, \frac{d^ny}{dx^n}\)</li>
+        <li>Operador: \(D y, D^2 y, \dots, D^n y\)</li>
+    </ul>
+
+    <h2>2. Clasificación de las Ecuaciones Diferenciales</h2>
+
+    <h3>2.1 Según el tipo</h3>
+    <ul>
+        <li><strong>Ordinaria (EDO):</strong> una variable independiente.</li>
+        <li><strong>Parcial (EDP):</strong> dos o más variables independientes.</li>
+    </ul>
+
+    <h3>2.2 Según el orden</h3>
+    <div class="definicion">El orden es la derivada más alta presente.</div>
+    <div class="ejemplo">\(y' + y = x\) → orden 1; \(y'' + 3y' + 2y = 0\) → orden 2</div>
+
+    <h3>2.3 Según el grado</h3>
+    <div class="definicion">El grado es el exponente de la derivada de mayor orden (si es polinómica).</div>
+    <div class="ejemplo">\((y')^2 + 3y = 0\) → grado 2; \(y'' + (y')^3 = 0\) → grado 1</div>
+
+    <h3>2.4 Según la linealidad</h3>
+    <ul>
+        <li><strong>Lineal:</strong> \(y\) y sus derivadas aparecen linealmente.</li>
+        <li><strong>No lineal:</strong> hay productos, potencias o funciones no lineales de \(y\).</li>
+    </ul>
+    <div class="ejemplo">
+        Lineales: \(y' + 2y = e^x\), \(y'' - 3y' + 2y = 0\)<br>
+        No lineales: \(y' + y^2 = x\), \(y y' + y = 0\)
+    </div>
+
+    <h3>2.5 Homogénea vs. No homogénea</h3>
+    <div class="formula">
+        \(a_n(x)y^{(n)} + \cdots + a_1(x)y' + a_0(x)y = g(x)\)
+    </div>
+    <ul>
+        <li>\(g(x) = 0\) → <strong>homogénea</strong></li>
+        <li>\(g(x) \neq 0\) → <strong>no homogénea</strong></li>
+    </ul>
+
+    <h2>3. Solución de una EDO</h2>
+    <ul>
+        <li><strong>General:</strong> contiene constantes arbitrarias.</li>
+        <li><strong>Particular:</strong> se obtiene asignando valores a las constantes.</li>
+        <li><strong>Singular:</strong> no se obtiene de la general.</li>
+    </ul>
+
+    <h2>4. Problemas de Valor Inicial (PVI)</h2>
+    <div class="definicion">Una EDO con condiciones sobre la función y sus derivadas en un mismo punto.</div>
+    <div class="ejemplo">\(y' + 2y = e^x\), \(y(0) = 1\)</div>
+
+    <h2>5. Método de Variables Separables</h2>
+    <div class="teorema">
+        Si la EDO se puede escribir como:
+        \[
+        g(y)\,dy = f(x)\,dx
+        \]
+        entonces se integra directamente:
+        \[
+        \int g(y)\,dy = \int f(x)\,dx + C
+        \]
+    </div>
+    <div class="ejemplo">
+        \(\frac{dy}{dx} = \frac{x}{y}\) → \(y\,dy = x\,dx\) → \(\frac{y^2}{2} = \frac{x^2}{2} + C\) → \(y^2 - x^2 = C\)
+    </div>
+
+    <h2>6. Método de Ecuaciones Exactas</h2>
+    <div class="definicion">
+        Una EDO de la forma:
+        \[
+        M(x,y)\,dx + N(x,y)\,dy = 0
+        \]
+        es <strong>exacta</strong> si:
+        \[
+        \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}
+        \]
+    </div>
+    <div class="teorema">
+        Si es exacta, existe una función \(F(x,y)\) tal que:
+        \[
+        \frac{\partial F}{\partial x} = M,\quad \frac{\partial F}{\partial y} = N
+        \]
+        y la solución es \(F(x,y) = C\).
+    </div>
+    <div class="ejemplo">
+        \(2xy\,dx + (x^2 - 1)\,dy = 0\)<br>
+        \(M = 2xy \Rightarrow \frac{\partial M}{\partial y} = 2x\)<br>
+        \(N = x^2 - 1 \Rightarrow \frac{\partial N}{\partial x} = 2x\) → es exacta.<br>
+        \(F = x^2 y - y\) → solución: \(x^2 y - y = C\) → \(y(x^2 - 1) = C\).
+    </div>
+
+    <h2>7. Existencia y Unicidad</h2>
+    <div class="teorema">
+        <strong>Teorema de Picard-Lindelöf:</strong> Si \(f\) y \(\frac{\partial f}{\partial y}\) son continuas en un rectángulo que contiene a \((x_0, y_0)\), el PVI \(y' = f(x,y)\), \(y(x_0) = y_0\) tiene una única solución.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+  </html>
