@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - EDO: Definición, Clasificación y Métodos Básicos</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: EDO - Definición, Clasificación y Métodos Básicos</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Clasificación de EDO</h2>
+    <div class="ejercicio"><strong>1.</strong> Clasifica las siguientes ecuaciones por tipo, orden, grado y linealidad:
+        <br>a) \(\frac{dy}{dx} + y = 0\)
+        <br>b) \(\frac{d^2y}{dx^2} + 2\frac{dy}{dx} + y = e^x\)
+        <br>c) \(\left(\frac{dy}{dx}\right)^2 + y = x\)
+        <br>d) \(y\frac{dy}{dx} + y = 0\)
+        <br>e) \(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0\)
+    </div>
+
+    <div class="ejercicio"><strong>2.</strong> Indica si las siguientes ecuaciones son homogéneas o no homogéneas:
+        <br>a) \(y'' + 4y = 0\)
+        <br>b) \(y'' - 3y' + 2y = \sin x\)
+        <br>c) \(y' + y = e^x\)
+        <br>d) \(y'' + 2y' + y = 0\)
+    </div>
+
+    <div class="ejercicio"><strong>3.</strong> Determina el orden y el grado de:
+        <br>a) \(\frac{d^2y}{dx^2} + 3\frac{dy}{dx} + 2y = 0\)
+        <br>b) \(\left(\frac{dy}{dx}\right)^3 + y = 0\)
+        <br>c) \(\frac{d^3y}{dx^3} + \left(\frac{dy}{dx}\right)^2 = x\)
+    </div>
+
+    <h2>2. Variables separables</h2>
+    <div class="ejercicio"><strong>4.</strong> Resuelve: \(\frac{dy}{dx} = \frac{x}{y}\)</div>
+    <div class="ejercicio"><strong>5.</strong> Resuelve: \(\frac{dy}{dx} = \frac{y+1}{x-2}\)</div>
+    <div class="ejercicio"><strong>6.</strong> Resuelve: \(\frac{dy}{dx} = e^{x-y}\)</div>
+    <div class="ejercicio"><strong>7.</strong> Resuelve: \(x\,dx + y\,dy = 0\)</div>
+
+    <h2>3. Ecuaciones exactas</h2>
+    <div class="ejercicio"><strong>8.</strong> Verifica si es exacta y resuelve: \((2xy)\,dx + (x^2 - 1)\,dy = 0\)</div>
+    <div class="ejercicio"><strong>9.</strong> Resuelve: \((3x^2y + y^2)\,dx + (x^3 + 2xy)\,dy = 0\)</div>
+    <div class="ejercicio"><strong>10.</strong> Resuelve: \((e^x \sin y + y)\,dx + (e^x \cos y + x)\,dy = 0\)</div>
+    <div class="ejercicio"><strong>11.</strong> Determina si \((y^2 + 2xy)\,dx + (x^2 + 2xy)\,dy = 0\) es exacta. Si lo es, resuélvela.</div>
+
+    <h2>4. Problemas de Valor Inicial</h2>
+    <div class="ejercicio"><strong>12.</strong> Resuelve el PVI: \(\frac{dy}{dx} = \frac{y}{x}\), \(y(1) = 2\)</div>
+    <div class="ejercicio"><strong>13.</strong> Resuelve el PVI: \((2x + y)\,dx + (x + 2y)\,dy = 0\), \(y(0) = 1\)</div>
+
+    <h2>5. Aplicación a circuitos (introducción)</h2>
+    <div class="ejercicio"><strong>14.</strong> En un circuito RC, la carga \(q(t)\) satisface \(R\frac{dq}{dt} + \frac{1}{C}q = V_0\). Si \(R=2\Omega\), \(C=0.5F\), \(V_0=10V\), encuentra la solución general para \(q(t)\).</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
