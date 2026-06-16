@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Transformada de Laplace</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Transformada de Laplace</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item">1. \(\frac{6}{s^3} - \frac{2}{s-5} + \frac{8}{s^2+4}\)</div>
+        <div class="solucion-item">2. \(\frac{s+3}{(s+3)^2 + 4}\)</div>
+        <div class="solucion-item">3. \(\frac{2}{(s-4)^3}\)</div>
+        <div class="solucion-item">4. \(\frac{3}{s^2-9}\)</div>
+        <div class="solucion-item">5. \(\frac{s}{s^2-4}\)</div>
+        <div class="solucion-item">6. \(\frac{3}{(s-2)^2+9}\)</div>
+        <div class="solucion-item">7. \(\frac{s+1}{(s+1)^2+16}\)</div>
+        <div class="solucion-item">8. \(\frac{6}{(s+2)^4}\)</div>
+        <div class="solucion-item">9. \(e^{2t} - e^{t}\)</div>
+        <div class="solucion-item">10. \(2e^{-t} - e^{-2t}\)</div>
+        <div class="solucion-item">11. \(\frac{1}{2}e^{-t} - \frac{1}{2}e^{-3t}\)</div>
+        <div class="solucion-item">12. \(e^{-t}\cos(2t)\)</div>
+        <div class="solucion-item">13. \(y(t) = 2 - e^{-2t}\)</div>
+        <div class="solucion-item">14. \(y(t) = e^{2t} - e^{t}\)</div>
+        <div class="solucion-item">15. \(y(t) = \cos(2t)\)</div>
+        <div class="solucion-item">16. \(y(t) = e^x - e^{2x} + \frac{1}{2}xe^x\)</div>
+        <div class="solucion-item">17. \(\frac{e^{-2s}}{s}\)</div>
+        <div class="solucion-item">18. \(\frac{2e^{-3s}}{s^2+4}\)</div>
+        <div class="solucion-item">19. \(\frac{3e^{-2s}}{s}\)</div>
+        <div class="solucion-item">20. \(i(t) = 3(1 - e^{-2t})\)</div>
+        <div class="solucion-item">21. \(v_c(t) = 5(1 - e^{-10t})\)</div>
+        <div class="solucion-item">22. \(t + e^{t} - 1\)</div>
+        <div class="solucion-item">23. \(\frac{1}{2}\sin(2t) * e^{-2t}\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(\frac{6}{s^3} - \frac{2}{s-5} + \frac{8}{s^2+4}\); 2. \(\frac{s+3}{(s+3)^2+4}\); 3. \(e^{2t} - e^{t}\); 4. \(y(t) = 2 - e^{-2t}\); 5. \(\frac{2e^{-3s}}{s^2+4}\)</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(\frac{2}{(s-4)^3}\); 2. \(\frac{3}{(s-2)^2+9}\); 3. \(e^{-t}\cos(2t)\); 4. \(y(t) = \cos(2t)\); 5. \(\frac{e^{-2s}}{s}\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
