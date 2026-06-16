@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 5: Transformada de Laplace</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 5: Transformada de Laplace</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Definición y existencia</h2>
+    <div class="definicion">
+        La <strong>Transformada de Laplace</strong> de una función \(f(t)\) definida para \(t \geq 0\) es:
+        \[
+        \mathcal{L}\{f(t)\} = F(s) = \int_0^\infty e^{-st} f(t)\,dt
+        \]
+        donde \(s\) es una variable compleja.
+    </div>
+    <div class="definicion">
+        <strong>Condiciones de existencia:</strong> \(f(t)\) debe ser de orden exponencial (existen \(M > 0\) y \(\alpha\) tales que \(|f(t)| \leq M e^{\alpha t}\) para \(t\) grande) y debe ser continua por partes en todo intervalo finito.
+    </div>
+
+    <h2>2. Transformadas de funciones elementales</h2>
+    <div class="formula">
+        \[
+        \mathcal{L}\{1\} = \frac{1}{s}, \quad s > 0
+        \]
+        \[
+        \mathcal{L}\{t^n\} = \frac{n!}{s^{n+1}}, \quad s > 0, \quad n = 0,1,2,\dots
+        \]
+        \[
+        \mathcal{L}\{e^{at}\} = \frac{1}{s-a}, \quad s > a
+        \]
+        \[
+        \mathcal{L}\{\sin(\omega t)\} = \frac{\omega}{s^2 + \omega^2}, \quad s > 0
+        \]
+        \[
+        \mathcal{L}\{\cos(\omega t)\} = \frac{s}{s^2 + \omega^2}, \quad s > 0
+        \]
+        \[
+        \mathcal{L}\{\sinh(at)\} = \frac{a}{s^2 - a^2}, \quad s > |a|
+        \]
+        \[
+        \mathcal{L}\{\cosh(at)\} = \frac{s}{s^2 - a^2}, \quad s > |a|
+        \]
+    </div>
+
+    <h2>3. Propiedades fundamentales</h2>
+
+    <h3>3.1 Linealidad</h3>
+    <div class="teorema">
+        \[
+        \mathcal{L}\{a f(t) + b g(t)\} = a\mathcal{L}\{f(t)\} + b\mathcal{L}\{g(t)\}
+        \]
+    </div>
+
+    <h3>3.2 Teorema de traslación (primera)</h3>
+    <div class="teorema">
+        \[
+        \mathcal{L}\{e^{at} f(t)\} = F(s-a)
+        \]
+    </div>
+    <div class="ejemplo">
+        \(\mathcal{L}\{e^{-3t}\cos(2t)\} = \frac{s+3}{(s+3)^2 + 4}\)
+    </div>
+
+    <h3>3.3 Teorema de traslación (segunda)</h3>
+    <div class="teorema">
+        Si \(f(t)\) tiene transformada \(F(s)\), entonces:
+        \[
+        \mathcal{L}\{f(t-a)u(t-a)\} = e^{-as}F(s)
+        \]
+        donde \(u(t-a)\) es la función escalón de Heaviside.
+    </div>
+
+    <h3>3.4 Transformada de la derivada</h3>
+    <div class="teorema">
+        \[
+        \mathcal{L}\{f'(t)\} = sF(s) - f(0)
+        \]
+        \[
+        \mathcal{L}\{f''(t)\} = s^2F(s) - sf(0) - f'(0)
+        \]
+        Generalizando:
+        \[
+        \mathcal{L}\{f^{(n)}(t)\} = s^nF(s) - s^{n-1}f(0) - s^{n-2}f'(0) - \cdots - f^{(n-1)}(0)
+        \]
+    </div>
+
+    <h3>3.5 Transformada de la integral</h3>
+    <div class="teorema">
+        \[
+        \mathcal{L}\left\{\int_0^t f(\tau)\,d\tau\right\} = \frac{F(s)}{s}
+        \]
+    </div>
+
+    <h2>4. Transformada inversa</h2>
+    <div class="definicion">
+        La <strong>transformada inversa</strong> de Laplace se denota por:
+        \[
+        \mathcal{L}^{-1}\{F(s)\} = f(t)
+        \]
+    </div>
+    <div class="teorema">
+        Para encontrar la transformada inversa de funciones racionales, se usa:
+        <ul>
+            <li><strong>Fracciones parciales:</strong> descomponer \(F(s)\) en términos más simples.</li>
+            <li><strong>Uso de tablas:</strong> identificar términos con transformadas conocidas.</li>
+            <li><strong>Teorema de convolución:</strong> \(\mathcal{L}^{-1}\{F(s)G(s)\} = f(t) * g(t) = \int_0^t f(\tau)g(t-\tau)d\tau\)</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(\mathcal{L}^{-1}\left\{\frac{1}{(s-1)(s-2)}\right\}\)<br>
+        Descomponer: \(\frac{1}{(s-1)(s-2)} = \frac{1}{s-2} - \frac{1}{s-1}\)<br>
+        Inversa: \(e^{2t} - e^{t}\)
+    </div>
+
+    <h2>5. Aplicación a PVI (Problemas de Valor Inicial)</h2>
+    <div class="teorema">
+        <strong>Procedimiento:</strong>
+        <ol>
+            <li>Aplicar la transformada de Laplace a ambos lados de la EDO.</li>
+            <li>Usar las condiciones iniciales para obtener \(Y(s)\).</li>
+            <li>Resolver algebraicamente para \(Y(s)\).</li>
+            <li>Aplicar la transformada inversa para obtener \(y(t)\).</li>
+        </ol>
+    </div>
+    <div class="ejemplo">
+        Resolver \(y' + 2y = e^{-t}\), \(y(0) = 1\).<br>
+        Aplicando Laplace: \(sY(s) - 1 + 2Y(s) = \frac{1}{s+1}\)<br>
+        \(Y(s) = \frac{1}{(s+2)(s+1)} + \frac{1}{s+2} = \frac{1}{s+1}\)<br>
+        Inversa: \(y(t) = e^{-t}\)
+    </div>
+
+    <h2>6. Función escalón de Heaviside</h2>
+    <div class="definicion">
+        La <strong>función escalón unitario</strong> (Heaviside) se define como:
+        \[
+        u(t-a) = \begin{cases} 0 & t < a \\ 1 & t \geq a \end{cases}
+        \]
+    </div>
+    <div class="teorema">
+        \[
+        \mathcal{L}\{u(t-a)\} = \frac{e^{-as}}{s}
+        \]
+    </div>
+    <div class="ejemplo">
+        \(\mathcal{L}\{u(t-3)\} = \frac{e^{-3s}}{s}\)
+    </div>
+
+    <h2>7. Resumen de transformadas frecuentes</h2>
+    <ul>
+        <li>\(\mathcal{L}\{1\} = 1/s\)</li>
+        <li>\(\mathcal{L}\{t^n\} = n!/s^{n+1}\)</li>
+        <li>\(\mathcal{L}\{e^{at}\} = 1/(s-a)\)</li>
+        <li>\(\mathcal{L}\{\sin(\omega t)\} = \omega/(s^2+\omega^2)\)</li>
+        <li>\(\mathcal{L}\{\cos(\omega t)\} = s/(s^2+\omega^2)\)</li>
+        <li>\(\mathcal{L}\{u(t-a)\} = e^{-as}/s\)</li>
+        <li>\(\mathcal{L}\{e^{at}f(t)\} = F(s-a)\)</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+  </html>
