@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Matrices y Operaciones</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Matrices y Operaciones</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Identificación de matrices</h2>
+    <div class="ejercicio"><strong>1.</strong> Dada la matriz \(A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}\), indica su tamaño, diagonal principal, y si es cuadrada.</div>
+    <div class="ejercicio"><strong>2.</strong> Escribe un ejemplo de: a) matriz fila de tamaño \(1 \times 4\), b) matriz columna de tamaño \(3 \times 1\), c) matriz identidad \(3 \times 3\).</div>
+
+    <h2>2. Suma, resta y multiplicación por escalar</h2>
+    <div class="ejercicio"><strong>3.</strong> Dadas \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\), \(B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}\), calcula: a) \(A+B\), b) \(A-B\), c) \(3A\).</div>
+    <div class="ejercicio"><strong>4.</strong> Dadas \(A = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}\), \(B = \begin{pmatrix} -1 & 4 \\ 2 & -3 \end{pmatrix}\), calcula \(2A - 3B\).</div>
+
+    <h2>3. Multiplicación de matrices</h2>
+    <div class="ejercicio"><strong>5.</strong> Multiplica \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\) y \(B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}\).</div>
+    <div class="ejercicio"><strong>6.</strong> Multiplica \(A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}\) y \(B = \begin{pmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{pmatrix}\).</div>
+    <div class="ejercicio"><strong>7.</strong> Dadas \(A = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}\), \(B = \begin{pmatrix} 1 & 4 \\ -2 & 5 \end{pmatrix}\), calcula \(A \cdot B\) y \(B \cdot A\) y verifica que no son iguales.</div>
+
+    <h2>4. Matriz traspuesta</h2>
+    <div class="ejercicio"><strong>8.</strong> Calcula la traspuesta de \(A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}\).</div>
+    <div class="ejercicio"><strong>9.</strong> Si \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}\), encuentra \(A^T\) y verifica que \((A^T)^T = A\).</div>
+
+    <h2>5. Matriz inversa (introducción)</h2>
+    <div class="ejercicio"><strong>10.</strong> Verifica que \(A^{-1} = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}\) es la inversa de \(A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}\).</div>
+    <div class="ejercicio"><strong>11.</strong> Para la matriz \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\), calcula \(A \cdot A^{-1}\) si \(A^{-1} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}\).</div>
+
+    <h2>6. Aplicación a circuitos eléctricos</h2>
+    <div class="ejercicio"><strong>12.</strong> El sistema de ecuaciones de mallas de un circuito es:
+    \[
+    \begin{pmatrix} 10 & -2 \\ -2 & 8 \end{pmatrix} \begin{pmatrix} I_1 \\ I_2 \end{pmatrix} = \begin{pmatrix} 12 \\ 6 \end{pmatrix}
+    \]
+    Escribe el sistema de ecuaciones que representa.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
