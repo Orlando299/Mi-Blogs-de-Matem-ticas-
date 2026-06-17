@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre‑parcial - Matrices y Operaciones</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
+        .pregunta { margin: 15px 0; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre‑parcial: Matrices y Operaciones</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <div class="examen">
+        <h2>Pre‑parcial 1</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> Dadas \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\), \(B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}\), calcula: a) \(A+B\), b) \(A-B\), c) \(2A\).</div>
+        <div class="pregunta"><strong>2. (10 puntos)</strong> Multiplica \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\) y \(B = \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}\).</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Calcula la traspuesta de \(A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Dadas \(A = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}\), \(B = \begin{pmatrix} 1 & 4 \\ -2 & 5 \end{pmatrix}\), calcula \(A \cdot B\).</div>
+        <div class="pregunta"><strong>5. (10 puntos)</strong> Verifica si \(A = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}\) y \(A^{-1} = \begin{pmatrix} 1 & -1 \\ -1 & 2 \end{pmatrix}\) son inversas.</div>
+    </div>
+
+    <div class="examen">
+        <h2>Pre‑parcial 2</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> Dadas \(A = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}\), \(B = \begin{pmatrix} -1 & 4 \\ 2 & -3 \end{pmatrix}\), calcula \(2A - 3B\).</div>
+        <div class="pregunta"><strong>2. (10 puntos)</strong> Multiplica \(A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}\) y \(B = \begin{pmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{pmatrix}\).</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Si \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}\), encuentra \(A^T\) y verifica que \((A^T)^T = A\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Dadas \(A = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}\), \(B = \begin{pmatrix} 1 & 4 \\ -2 & 5 \end{pmatrix}\), calcula \(B \cdot A\) y verifica que \(A \cdot B \neq B \cdot A\).</div>
+        <div class="pregunta"><strong>5. (10 puntos)</strong> Escribe el sistema de ecuaciones representado por:
+        \[
+        \begin{pmatrix} 10 & -2 \\ -2 & 8 \end{pmatrix} \begin{pmatrix} I_1 \\ I_2 \end{pmatrix} = \begin{pmatrix} 12 \\ 6 \end{pmatrix}
+        \]
+        </div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Teoría</a> | <a href="ejercicios.html">📝 Ejercicios</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
