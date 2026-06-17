@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Sistemas de Ecuaciones Lineales (Gauss-Jordan)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Sistemas de Ecuaciones Lineales (Gauss-Jordan)</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios (1-23)</h2>
+        <div class="solucion-item"><strong>1.</strong> \(x=1,\ y=2,\ z=3\)</div>
+        <div class="solucion-item"><strong>2.</strong> \(x=1,\ y=2,\ z=-1\)</div>
+        <div class="solucion-item"><strong>3.</strong> \(x=1,\ y=2,\ z=1\)</div>
+        <div class="solucion-item"><strong>4.</strong> \(x=1,\ y=2,\ z=1\)</div>
+        <div class="solucion-item"><strong>5.</strong> \(w=3,\ x=2,\ y=1,\ z=4\)</div>
+        <div class="solucion-item"><strong>6.</strong> \(w=1,\ x=2,\ y=3,\ z=1\)</div>
+        <div class="solucion-item"><strong>7.</strong> Solución paramétrica: \(z = t,\ w = 5 - t,\ x = 2 - t,\ y = 1\)</div>
+        <div class="solucion-item"><strong>8.</strong> Infinitas soluciones. \(x = 2 - y + z\) con \(y, z\) libres.</div>
+        <div class="solucion-item"><strong>9.</strong> Infinitas soluciones. \(x = 3 + 2y - z\) con \(y, z\) libres.</div>
+        <div class="solucion-item"><strong>10.</strong> Infinitas soluciones. \(2x - y + z = 5\) → \(y = 2x + z - 5\) con \(x,z\) libres.</div>
+        <div class="solucion-item"><strong>11.</strong> Infinitas soluciones. \(x = 3 - y - z\) con \(y,z\) libres.</div>
+        <div class="solucion-item"><strong>12.</strong> Infinitas soluciones. \(x = 4 - z - w,\ y = 2 - w\) con \(z,w\) libres.</div>
+        <div class="solucion-item"><strong>13.</strong> Infinitas soluciones. \(w = 3 - x - y - z\) con \(x,y,z\) libres.</div>
+        <div class="solucion-item"><strong>14.</strong> Infinitas soluciones. \(x = 1 + y - 2z + w\) con \(y,z,w\) libres.</div>
+        <div class="solucion-item"><strong>15.</strong> Sin solución (las dos primeras ecuaciones son contradictorias).</div>
+        <div class="solucion-item"><strong>16.</strong> Sin solución (tercera ecuación inconsistente con las anteriores).</div>
+        <div class="solucion-item"><strong>17.</strong> Sin solución (las ecuaciones 1 y 2 son consistentes, pero la tercera es inconsistente).</div>
+        <div class="solucion-item"><strong>18.</strong> Sin solución.</div>
+        <div class="solucion-item"><strong>19.</strong> Sin solución.</div>
+        <div class="solucion-item"><strong>20.</strong> Sin solución.</div>
+        <div class="solucion-item"><strong>21.</strong> Sin solución.</div>
+        <div class="solucion-item"><strong>22.</strong> \(I_1 = 2.5\ \text{A},\ I_2 = 1.5\ \text{A}\)</div>
+        <div class="solucion-item"><strong>23.</strong> \(I_1 = 3,\ I_2 = 1,\ I_3 = 2\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(x=1,y=2,z=3\); 2. \(x=1,y=2,z=-1\); 3. Infinitas soluciones: \(x = 2 - y + z\); 4. Sin solución; 5. \(I_1=2.5,\ I_2=1.5\)</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(x=1,y=2,z=1\); 2. \(x=1,y=2,z=1\); 3. Infinitas soluciones: \(x=3+2y-z\); 4. Sin solución; 5. \(I_1=3,\ I_2=1,\ I_3=2\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
