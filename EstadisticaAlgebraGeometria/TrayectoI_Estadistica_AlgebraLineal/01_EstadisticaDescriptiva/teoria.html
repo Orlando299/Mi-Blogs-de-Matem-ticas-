@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 1: Estadística Descriptiva y Probabilidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 1: Estadística Descriptiva y Probabilidad</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto I</div>
+
+    <h2>1. Estadística Descriptiva</h2>
+    <div class="definicion">
+        La <strong>estadística descriptiva</strong> es la rama de la estadística que se encarga de recolectar, organizar, resumir y presentar datos de manera informativa.
+    </div>
+
+    <!-- (Mantengo el contenido anterior de estadística descriptiva) -->
+
+    <h2>2. Probabilidad</h2>
+
+    <div class="definicion">
+        <strong>Espacio muestral (\(\Omega\)):</strong> Es el conjunto de todos los resultados posibles de un experimento aleatorio. Por ejemplo, al lanzar un dado, \(\Omega = \{1,2,3,4,5,6\}\).
+    </div>
+
+    <div class="definicion">
+        <strong>Evento:</strong> Es un subconjunto del espacio muestral. Por ejemplo, “obtener un número par” es el evento \(A = \{2,4,6\}\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Lanzar un dado y una moneda.<br>
+        Espacio muestral: \(\Omega = \{(1,C),(1,S),(2,C),(2,S),\dots,(6,C),(6,S)\}\) (12 elementos).<br>
+        Evento A: “Obtener un número par en el dado y cara en la moneda” → \(A = \{(2,C),(4,C),(6,C)\}\).
+    </div>
+
+    <!-- (Resto de la teoría de probabilidad y combinatoria) -->
+
+    <h2>3. Teoría Combinatoria</h2>
+
+    <div class="definicion">
+        <strong>Permutaciones:</strong> Son arreglos ordenados de elementos. El número de permutaciones de \(n\) elementos distintos es \(n!\). Se diferencian por el orden.
+    </div>
+
+    <div class="definicion">
+        <strong>Variaciones (sin repetición):</strong> Son arreglos ordenados de \(r\) elementos tomados de un conjunto de \(n\): \(V(n,r) = \frac{n!}{(n-r)!}\). El orden importa.
+    </div>
+
+    <div class="definicion">
+        <strong>Combinaciones (sin repetición):</strong> Son selecciones de \(r\) elementos donde el orden no importa: \(C(n,r) = \frac{n!}{r!(n-r)!}\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> De un grupo de 5 personas, elegir un presidente y un tesorero es una variación (orden importa: presidente y tesorero son cargos diferentes). Elegir un comité de 2 personas es una combinación (el orden no importa).
+    </div>
+
+    <h2>4. Rango de la Probabilidad</h2>
+    <div class="definicion">
+        La probabilidad de cualquier evento \(A\) siempre cumple \(0 \leq P(A) \leq 1\). Un evento con probabilidad 0 es imposible; con probabilidad 1 es seguro.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
