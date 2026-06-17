@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Sistemas de Ecuaciones Lineales (Gauss-Jordan)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Sistemas de Ecuaciones Lineales (Gauss-Jordan)</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>I. Solución Única</h2>
+
+    <h3>Nivel Básico (3x3)</h3>
+    <div class="ejercicio"><strong>1.</strong>
+        \[
+        \begin{cases}
+        x + y + z = 6 \\
+        x - y + z = 2 \\
+        2x + y - z = 1
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>2.</strong>
+        \[
+        \begin{cases}
+        2x + y - z = 5 \\
+        x - 2y + 3z = -3 \\
+        3x + 2y - 2z = 8
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>3.</strong>
+        \[
+        \begin{cases}
+        x + 2y - z = 4 \\
+        2x - y + 3z = 1 \\
+        -x + 3y + 2z = 7
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Intermedio (3x3 y 4 incógnitas)</h3>
+    <div class="ejercicio"><strong>4.</strong>
+        \[
+        \begin{cases}
+        3x + 2y - z = 7 \\
+        x - y + 4z = 5 \\
+        2x + 3y - 5z = -2
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>5.</strong>
+        \[
+        \begin{cases}
+        w + x + y + z = 10 \\
+        w - x + y - z = 2 \\
+        2w + x - y + z = 5
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Avanzado (4 incógnitas)</h3>
+    <div class="ejercicio"><strong>6.</strong>
+        \[
+        \begin{cases}
+        w + 2x - y + 3z = 9 \\
+        2w - x + y - 2z = -3 \\
+        -w + 3x + 2y + z = 12 \\
+        3w + x - 2y - z = 0
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>7.</strong>
+        \[
+        \begin{cases}
+        x + y + z + w = 8 \\
+        x - y + 2z - w = 1 \\
+        2x + y - z + w = 5
+        \end{cases}
+        \]
+    </div>
+
+    <h2>II. Infinitas Soluciones</h2>
+
+    <h3>Nivel Básico (3x3)</h3>
+    <div class="ejercicio"><strong>8.</strong>
+        \[
+        \begin{cases}
+        x + y - z = 2 \\
+        2x + 2y - 2z = 4 \\
+        -x - y + z = -2
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>9.</strong>
+        \[
+        \begin{cases}
+        x - 2y + z = 3 \\
+        -2x + 4y - 2z = -6 \\
+        3x - 6y + 3z = 9
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>10.</strong>
+        \[
+        \begin{cases}
+        2x - y + z = 5 \\
+        4x - 2y + 2z = 10 \\
+        -x + 0.5y - 0.5z = -2.5
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Intermedio (3x3 y 4 incógnitas)</h3>
+    <div class="ejercicio"><strong>11.</strong>
+        \[
+        \begin{cases}
+        x + y + z = 3 \\
+        x - y + 2z = 5 \\
+        2x + y + 3z = 8
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>12.</strong>
+        \[
+        \begin{cases}
+        x + y + z + w = 6 \\
+        x - y + z - w = 2
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Avanzado (4 incógnitas)</h3>
+    <div class="ejercicio"><strong>13.</strong>
+        \[
+        \begin{cases}
+        w + x + y + z = 4 \\
+        2w + 2x + y + z = 7 \\
+        -w - x + y + z = 1
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>14.</strong>
+        \[
+        \begin{cases}
+        x - y + 2z - w = 1 \\
+        2x - 2y + 4z - 2w = 2 \\
+        -x + y - 2z + w = -1 \\
+        3x - 3y + 6z - 3w = 3
+        \end{cases}
+        \]
+    </div>
+
+    <h2>III. Sin Solución</h2>
+
+    <h3>Nivel Básico (3x3)</h3>
+    <div class="ejercicio"><strong>15.</strong>
+        \[
+        \begin{cases}
+        x + y + z = 5 \\
+        x + y + z = 7 \\
+        2x - y + z = 1
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>16.</strong>
+        \[
+        \begin{cases}
+        x - 2y + z = 4 \\
+        -2x + 4y - 2z = -8 \\
+        3x - 6y + 3z = 5
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>17.</strong>
+        \[
+        \begin{cases}
+        2x + y - z = 3 \\
+        4x + 2y - 2z = 6 \\
+        x + y - z = 2
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Intermedio (3x3 y 4 incógnitas)</h3>
+    <div class="ejercicio"><strong>18.</strong>
+        \[
+        \begin{cases}
+        x + y - z = 1 \\
+        2x - y + z = 3 \\
+        x + 2y - 2z = 0
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>19.</strong>
+        \[
+        \begin{cases}
+        x + y + z + w = 5 \\
+        x - y + z - w = 1 \\
+        2x + 2z = 7
+        \end{cases}
+        \]
+    </div>
+
+    <h3>Nivel Avanzado (4 incógnitas)</h3>
+    <div class="ejercicio"><strong>20.</strong>
+        \[
+        \begin{cases}
+        w + x + y + z = 6 \\
+        w - x + y - z = 2 \\
+        2w + x - y + z = 5 \\
+        w + x - y - z = 1
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>21.</strong>
+        \[
+        \begin{cases}
+        x + 2y + z - w = 4 \\
+        2x + 4y + 3z - w = 9 \\
+        -x - 2y + z - w = 1
+        \end{cases}
+        \]
+    </div>
+
+    <h2>IV. Aplicaciones a Circuitos Eléctricos</h2>
+    <div class="ejercicio"><strong>22.</strong> Resuelve el sistema de corrientes de un circuito de dos mallas:
+        \[
+        \begin{cases}
+        10I_1 - 5I_2 = 20 \\
+        -5I_1 + 15I_2 = 10
+        \end{cases}
+        \]
+    </div>
+    <div class="ejercicio"><strong>23.</strong> Resuelve el sistema de un circuito con tres mallas:
+        \[
+        \begin{cases}
+        12I_1 - 3I_2 - 2I_3 = 24 \\
+        -3I_1 + 8I_2 - I_3 = 0 \\
+        -2I_1 - I_2 + 6I_3 = 12
+        \end{cases}
+        \]
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
