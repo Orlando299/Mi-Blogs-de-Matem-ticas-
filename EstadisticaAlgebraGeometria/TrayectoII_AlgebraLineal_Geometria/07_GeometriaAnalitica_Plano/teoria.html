@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     <style>
         body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
-        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .latex-container { max-width: 1100px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
         h1 { text-align: center; font-size: 28px; }
         h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
@@ -17,8 +17,10 @@
         .ejemplo { border-left-color: #2e7d32; }
         .nota { border-left-color: #e07a8f; background: #fef9f9; }
         .formula { text-align: center; margin: 15px 0; font-family: monospace; background: #f9f2e0; padding: 12px; border-radius: 8px; font-size: 1.1em; }
+        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
         .grafica-descripcion { background: #e8f0fe; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px dashed #1a3e6f; }
         .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        canvas { max-width: 100%; height: auto; }
         @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
     </style>
 </head>
@@ -143,8 +145,9 @@
         \[
         x^2 + y^2 = 9
         \]
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Circunferencia centrada en \((0,0)\) que pasa por los puntos \((3,0)\), \((0,3)\), \((-3,0)\), \((0,-3)\).
+        <div class="canvas-container">
+            <canvas id="circulo1" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Circunferencia centrada en (0,0) con radio 3.</p>
         </div>
     </div>
 
@@ -153,8 +156,9 @@
         \[
         (x-2)^2 + (y+1)^2 = 16
         \]
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Circunferencia centrada en \((2,-1)\) que pasa por \((6,-1)\), \((2,3)\), \((-2,-1)\), \((2,-5)\).
+        <div class="canvas-container">
+            <canvas id="circulo2" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Circunferencia centrada en (2,-1) con radio 4.</p>
         </div>
     </div>
 
@@ -162,15 +166,13 @@
         <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(x^2 + y^2 - 4x + 6y - 3 = 0\)<br>
         Completando cuadrados:
         \[
-        (x^2 - 4x) + (y^2 + 6y) = 3
-        \]
-        \[
-        (x-2)^2 - 4 + (y+3)^2 - 9 = 3
-        \]
-        \[
         (x-2)^2 + (y+3)^2 = 16
         \]
         Centro \((2,-3)\), radio \(r=4\).
+        <div class="canvas-container">
+            <canvas id="circulo3" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Circunferencia centrada en (2,-3) con radio 4.</p>
+        </div>
     </div>
 
     <h2>7. Parábola</h2>
@@ -191,88 +193,31 @@
         </ul>
     </div>
 
-    <h3>7.2 Parábola horizontal con vértice en el origen \((0,0)\)</h3>
-    <div class="formula">
-        \[
-        y^2 = 4p x
-        \]
-        <ul>
-            <li>Vértice: \((0,0)\)</li>
-            <li>Foco: \((p,0)\)</li>
-            <li>Directriz: \(x = -p\)</li>
-            <li>Abre hacia la derecha si \(p>0\), hacia la izquierda si \(p<0\).</li>
-        </ul>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(x^2 = 8y\) (vértice en el origen, \(p=2\))
+        <div class="canvas-container">
+            <canvas id="parabola1" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Parábola \(x^2=8y\) con vértice en (0,0), foco (0,2), directriz y=-2.</p>
+        </div>
     </div>
 
-    <h3>7.3 Parábola vertical con vértice en \((h,k)\)</h3>
+    <h3>7.2 Parábola con vértice en \((h,k)\)</h3>
     <div class="formula">
         \[
         (x-h)^2 = 4p(y-k)
         \]
-        <ul>
-            <li>Vértice: \((h,k)\)</li>
-            <li>Foco: \((h,k+p)\)</li>
-            <li>Directriz: \(y = k-p\)</li>
-        </ul>
     </div>
-
-    <h3>7.4 Parábola horizontal con vértice en \((h,k)\)</h3>
-    <div class="formula">
-        \[
-        (y-k)^2 = 4p(x-h)
-        \]
-        <ul>
-            <li>Vértice: \((h,k)\)</li>
-            <li>Foco: \((h+p,k)\)</li>
-            <li>Directriz: \(x = h-p\)</li>
-        </ul>
-    </div>
-
-    <h3>7.5 Ecuación general de la parábola</h3>
-    <div class="formula">
-        \[
-        Ax^2 + Dx + Ey + F = 0 \quad (\text{vertical})
-        \]
-        \[
-        Cy^2 + Dx + Ey + F = 0 \quad (\text{horizontal})
-        \]
-    </div>
-
     <div class="ejemplo">
-        <strong>Ejemplo 1:</strong> \(x^2 = 8y\) (vértice en el origen, \(p=2\))<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Parábola que abre hacia arriba con vértice en \((0,0)\), foco en \((0,2)\) y directriz \(y=-2\).
+        <strong>Ejemplo:</strong> \((x-3)^2 = 12(y+1)\) (vértice en \((3,-1)\), \(p=3\))
+        <div class="canvas-container">
+            <canvas id="parabola2" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Parábola \((x-3)^2=12(y+1)\) con vértice (3,-1), foco (3,2), directriz y=-4.</p>
         </div>
-    </div>
-
-    <div class="ejemplo">
-        <strong>Ejemplo 2:</strong> \((x-3)^2 = 12(y+1)\) (vértice en \((3,-1)\), \(p=3\))<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Parábola que abre hacia arriba con vértice en \((3,-1)\), foco en \((3,2)\) y directriz \(y=-4\).
-        </div>
-    </div>
-
-    <div class="ejemplo">
-        <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(y^2 - 6y - 8x + 1 = 0\)<br>
-        Completando:
-        \[
-        y^2 - 6y = 8x - 1
-        \]
-        \[
-        (y-3)^2 - 9 = 8x - 1
-        \]
-        \[
-        (y-3)^2 = 8x + 8 = 8(x+1)
-        \]
-        \[
-        (y-3)^2 = 8(x+1)
-        \]
-        Vértice \((-1,3)\), \(4p=8\) → \(p=2\), abre hacia la derecha.
     </div>
 
     <h2>8. Elipse</h2>
     <div class="definicion">
-        La <strong>elipse</strong> es el conjunto de puntos cuya suma de distancias a dos puntos fijos (focos \(F_1\) y \(F_2\)) es constante.
+        La <strong>elipse</strong> es el conjunto de puntos cuya suma de distancias a dos puntos fijos (focos) es constante.
     </div>
 
     <h3>8.1 Elipse con centro en el origen \((0,0)\)</h3>
@@ -280,12 +225,14 @@
         \[
         \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
         \]
-        <ul>
-            <li>Centro: \((0,0)\)</li>
-            <li>Semieje mayor: \(a\) (en el eje \(x\) si \(a>b\), en el eje \(y\) si \(b>a\))</li>
-            <li>Semieje menor: \(b\)</li>
-            <li>Focos: \((\pm c, 0)\) si \(a>b\), donde \(c^2 = a^2 - b^2\)</li>
-        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(\frac{x^2}{16} + \frac{y^2}{9} = 1\) (centro en origen, a=4, b=3)
+        <div class="canvas-container">
+            <canvas id="elipse1" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Elipse centrada en (0,0) con semiejes a=4, b=3. Focos en (±√7,0).</p>
+        </div>
     </div>
 
     <h3>8.2 Elipse con centro en \((h,k)\)</h3>
@@ -293,134 +240,53 @@
         \[
         \frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1
         \]
-        <ul>
-            <li>Centro: \((h,k)\)</li>
-            <li>Focos: \((h\pm c, k)\) si \(a>b\)</li>
-        </ul>
     </div>
-
-    <h3>8.3 Elipse vertical (centro en el origen)</h3>
-    <div class="formula">
-        \[
-        \frac{x^2}{b^2} + \frac{y^2}{a^2} = 1
-        \]
-        <ul>
-            <li>Semieje mayor: \(a\) en el eje \(y\)</li>
-            <li>Focos: \((0, \pm c)\), \(c^2 = a^2 - b^2\)</li>
-        </ul>
-    </div>
-
-    <h3>8.4 Elipse vertical con centro en \((h,k)\)</h3>
-    <div class="formula">
-        \[
-        \frac{(x-h)^2}{b^2} + \frac{(y-k)^2}{a^2} = 1
-        \]
-    </div>
-
-    <h3>8.5 Ecuación general de la elipse</h3>
-    <div class="formula">
-        \[
-        Ax^2 + Cy^2 + Dx + Ey + F = 0 \quad (A \neq C, \text{ mismos signos})
-        \]
-    </div>
-
     <div class="ejemplo">
-        <strong>Ejemplo 1:</strong> \(\frac{x^2}{16} + \frac{y^2}{9} = 1\)<br>
-        \(a=4\), \(b=3\), \(c = \sqrt{16-9} = \sqrt{7}\)<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Elipse centrada en \((0,0)\) con vértices en \((\pm4,0)\) y \((0,\pm3)\), focos en \((\pm\sqrt{7},0)\).
+        <strong>Ejemplo:</strong> \(\frac{(x-2)^2}{25} + \frac{(y+1)^2}{9} = 1\) (centro (2,-1), a=5, b=3)
+        <div class="canvas-container">
+            <canvas id="elipse2" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Elipse centrada en (2,-1) con semiejes a=5, b=3. Focos en (2±4,-1).</p>
         </div>
     </div>
 
+    <h3>8.3 Comparación: Elipse en origen vs elipse trasladada</h3>
     <div class="ejemplo">
-        <strong>Ejemplo 2:</strong> \(\frac{(x-2)^2}{25} + \frac{(y+1)^2}{9} = 1\)<br>
-        Centro \((2,-1)\), \(a=5\), \(b=3\), \(c=4\)<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Elipse centrada en \((2,-1)\) con vértices en \((7,-1)\), \((-3,-1)\), \((2,2)\), \((2,-4)\), focos en \((6,-1)\) y \((-2,-1)\).
+        <div class="canvas-container">
+            <canvas id="elipse_compare" width="500" height="400"></canvas>
+            <p style="font-size:0.9rem;">Comparación de elipses: azul (centro en origen), roja (centro en (2,-1)).</p>
         </div>
-    </div>
-
-    <div class="ejemplo">
-        <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(4x^2 + 9y^2 - 16x + 18y - 11 = 0\)<br>
-        Completando:
-        \[
-        4(x^2 - 4x) + 9(y^2 + 2y) = 11
-        \]
-        \[
-        4[(x-2)^2 - 4] + 9[(y+1)^2 - 1] = 11
-        \]
-        \[
-        4(x-2)^2 + 9(y+1)^2 - 16 - 9 = 11
-        \]
-        \[
-        4(x-2)^2 + 9(y+1)^2 = 36
-        \]
-        \[
-        \frac{(x-2)^2}{9} + \frac{(y+1)^2}{4} = 1
-        \]
-        Centro \((2,-1)\), \(a=3\), \(b=2\), \(c=\sqrt{5}\).
     </div>
 
     <h2>9. Hipérbola</h2>
     <div class="definicion">
-        La <strong>hipérbola</strong> es el conjunto de puntos cuya diferencia de distancias a dos puntos fijos (focos \(F_1\) y \(F_2\)) es constante.
+        La <strong>hipérbola</strong> es el conjunto de puntos cuya diferencia de distancias a dos puntos fijos (focos) es constante.
     </div>
 
-    <h3>9.1 Hipérbola con centro en el origen \((0,0)\)</h3>
+    <h3>9.1 Hipérbola con centro en el origen</h3>
     <div class="formula">
         \[
         \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
         \]
-        <ul>
-            <li>Centro: \((0,0)\)</li>
-            <li>Vértices: \((\pm a, 0)\)</li>
-            <li>Focos: \((\pm c, 0)\), \(c^2 = a^2 + b^2\)</li>
-            <li>Asíntotas: \(y = \pm \frac{b}{a}x\)</li>
-        </ul>
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(\frac{x^2}{16} - \frac{y^2}{9} = 1\)
+        <div class="canvas-container">
+            <canvas id="hiperbola1" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Hipérbola centrada en (0,0) con a=4, b=3. Focos (±5,0). Asíntotas y=±(3/4)x.</p>
+        </div>
     </div>
 
-    <h3>9.2 Hipérbola vertical (centro en el origen)</h3>
-    <div class="formula">
-        \[
-        \frac{y^2}{a^2} - \frac{x^2}{b^2} = 1
-        \]
-        <ul>
-            <li>Vértices: \((0, \pm a)\)</li>
-            <li>Focos: \((0, \pm c)\), \(c^2 = a^2 + b^2\)</li>
-            <li>Asíntotas: \(y = \pm \frac{a}{b}x\)</li>
-        </ul>
-    </div>
-
-    <h3>9.3 Hipérbola con centro en \((h,k)\)</h3>
+    <h3>9.2 Hipérbola con centro en \((h,k)\)</h3>
     <div class="formula">
         \[
         \frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1
         \]
-        \[
-        \frac{(y-k)^2}{a^2} - \frac{(x-h)^2}{b^2} = 1
-        \]
     </div>
-
-    <h3>9.4 Ecuación general de la hipérbola</h3>
-    <div class="formula">
-        \[
-        Ax^2 + Cy^2 + Dx + Ey + F = 0 \quad (A \neq C, \text{ signos opuestos})
-        \]
-    </div>
-
     <div class="ejemplo">
-        <strong>Ejemplo 1:</strong> \(\frac{x^2}{16} - \frac{y^2}{9} = 1\)<br>
-        \(a=4\), \(b=3\), \(c=\sqrt{16+9}=5\)<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Hipérbola centrada en \((0,0)\) con vértices en \((\pm4,0)\), focos en \((\pm5,0)\), asíntotas \(y = \pm \frac{3}{4}x\). Ramas abren hacia la derecha e izquierda.
-        </div>
-    </div>
-
-    <div class="ejemplo">
-        <strong>Ejemplo 2:</strong> \(\frac{(y-2)^2}{9} - \frac{(x+1)^2}{16} = 1\)<br>
-        Centro \((-1,2)\), \(a=3\), \(b=4\), \(c=5\)<br>
-        <div class="grafica-descripcion">
-            <strong>📈 Gráfica:</strong> Hipérbola vertical centrada en \((-1,2)\) con vértices en \((-1,5)\) y \((-1,-1)\), focos en \((-1,7)\) y \((-1,-3)\), asíntotas \(y-2 = \pm \frac{3}{4}(x+1)\).
+        <strong>Ejemplo:</strong> \(\frac{(x-1)^2}{9} - \frac{(y+2)^2}{16} = 1\)
+        <div class="canvas-container">
+            <canvas id="hiperbola2" width="400" height="400"></canvas>
+            <p style="font-size:0.9rem;">Hipérbola centrada en (1,-2) con a=3, b=4. Focos (1±5,-2). Asíntotas y+2 = ±(4/3)(x-1).</p>
         </div>
     </div>
 
@@ -430,7 +296,6 @@
             <li><strong>Antenas parabólicas:</strong> La forma de un reflector parabólico concentra ondas electromagnéticas en el foco.</li>
             <li><strong>Líneas de transmisión:</strong> La trayectoria de un haz de luz o de una onda electromagnética puede modelarse con rectas y cónicas.</li>
             <li><strong>Campos eléctricos:</strong> Las líneas de campo eléctrico en un dipolo se representan mediante curvas cónicas (elipses e hipérbolas).</li>
-            <li><strong>Circuitos resonantes:</strong> En el plano complejo, las curvas de resonancia se describen mediante elipses.</li>
             <li><strong>Órbitas de satélites:</strong> Las órbitas elípticas se describen mediante la ecuación de la elipse.</li>
         </ul>
     </div>
@@ -441,5 +306,350 @@
         <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
     </div>
 </div>
+
+<script>
+// Función para dibujar ejes y cuadrícula en un canvas
+function dibujarEjes(ctx, w, h, xMin, xMax, yMin, yMax, centerX, centerY, scale) {
+    ctx.clearRect(0, 0, w, h);
+    // Fondo
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    // Ejes
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(w, centerY);
+    ctx.moveTo(centerX, 0);
+    ctx.lineTo(centerX, h);
+    ctx.stroke();
+    // Marcas
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "#333";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    for (let i = Math.ceil(xMin); i <= Math.floor(xMax); i++) {
+        if (i === 0) continue;
+        let px = centerX + i * scale;
+        ctx.beginPath();
+        ctx.moveTo(px, centerY - 4);
+        ctx.lineTo(px, centerY + 4);
+        ctx.stroke();
+        ctx.fillText(i, px, centerY + 6);
+    }
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (let i = Math.ceil(yMin); i <= Math.floor(yMax); i++) {
+        if (i === 0) continue;
+        let py = centerY - i * scale;
+        ctx.beginPath();
+        ctx.moveTo(centerX - 4, py);
+        ctx.lineTo(centerX + 4, py);
+        ctx.stroke();
+        ctx.fillText(i, centerX - 8, py);
+    }
+    ctx.fillStyle = "#333";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x", w - 20, centerY - 10);
+    ctx.fillText("y", centerX + 10, 20);
+}
+
+// Dibujar circunferencia
+function dibujarCircunferencia(canvasId, cx, cy, r, color, label) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, h = canvas.height;
+    const scale = 40; // pixels por unidad
+    const centerX = w/2, centerY = h/2;
+    const xMin = -w/(2*scale), xMax = w/(2*scale), yMin = -h/(2*scale), yMax = h/(2*scale);
+    dibujarEjes(ctx, w, h, xMin, xMax, yMin, yMax, centerX, centerY, scale);
+    ctx.strokeStyle = color || "#2e7d32";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    // Dibujar círculo paramétricamente
+    const steps = 100;
+    for (let i = 0; i <= steps; i++) {
+        let t = (i / steps) * 2 * Math.PI;
+        let px = centerX + (cx + r * Math.cos(t)) * scale;
+        let py = centerY - (cy + r * Math.sin(t)) * scale;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Marcar centro
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(centerX + cx*scale, centerY - cy*scale, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C("+cx+","+cy+")", centerX + cx*scale + 6, centerY - cy*scale - 4);
+}
+
+// Dibujar parábola
+function dibujarParabola(canvasId, h, k, p, color, label) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, hc = canvas.height;
+    const scale = 40;
+    const centerX = w/2, centerY = hc/2;
+    const xMin = -w/(2*scale), xMax = w/(2*scale), yMin = -hc/(2*scale), yMax = hc/(2*scale);
+    dibujarEjes(ctx, w, hc, xMin, xMax, yMin, yMax, centerX, centerY, scale);
+    ctx.strokeStyle = color || "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    // Parábola vertical: (x-h)^2 = 4p (y-k)  =>  y = k + (x-h)^2/(4p)
+    const steps = 200;
+    let first = true;
+    for (let i = 0; i <= steps; i++) {
+        let t = xMin + (i/steps)*(xMax - xMin);
+        let x = h + t;
+        let y = k + (t*t)/(4*p);
+        let px = centerX + x * scale;
+        let py = centerY - y * scale;
+        if (py > hc || py < 0 || px > w || px < 0) { first = true; continue; }
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Marcar vértice
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(centerX + h*scale, centerY - k*scale, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("V("+h+","+k+")", centerX + h*scale + 6, centerY - k*scale - 4);
+    // Marcar foco
+    let focoX = h;
+    let focoY = k + p;
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    ctx.arc(centerX + focoX*scale, centerY - focoY*scale, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "blue";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("F("+focoX+","+focoY+")", centerX + focoX*scale + 6, centerY - focoY*scale - 4);
+}
+
+// Dibujar elipse
+function dibujarElipse(canvasId, h, k, a, b, color, label) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, hc = canvas.height;
+    const scale = 40;
+    const centerX = w/2, centerY = hc/2;
+    const xMin = -w/(2*scale), xMax = w/(2*scale), yMin = -hc/(2*scale), yMax = hc/(2*scale);
+    dibujarEjes(ctx, w, hc, xMin, xMax, yMin, yMax, centerX, centerY, scale);
+    ctx.strokeStyle = color || "#2e7d32";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    // Elipse paramétrica: x = h + a cos t, y = k + b sin t
+    const steps = 100;
+    for (let i = 0; i <= steps; i++) {
+        let t = (i / steps) * 2 * Math.PI;
+        let px = centerX + (h + a * Math.cos(t)) * scale;
+        let py = centerY - (k + b * Math.sin(t)) * scale;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Marcar centro
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(centerX + h*scale, centerY - k*scale, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C("+h+","+k+")", centerX + h*scale + 6, centerY - k*scale - 4);
+    // Focos (si es horizontal)
+    let c = Math.sqrt(Math.abs(a*a - b*b));
+    if (a > b) {
+        let f1x = h + c, f2x = h - c, f1y = k, f2y = k;
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.arc(centerX + f1x*scale, centerY - f1y*scale, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX + f2x*scale, centerY - f2y*scale, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "blue";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("F1("+f1x.toFixed(1)+","+f1y+")", centerX + f1x*scale + 6, centerY - f1y*scale - 4);
+        ctx.fillText("F2("+f2x.toFixed(1)+","+f2y+")", centerX + f2x*scale + 6, centerY - f2y*scale - 4);
+    } else {
+        let f1x = h, f2x = h, f1y = k + c, f2y = k - c;
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.arc(centerX + f1x*scale, centerY - f1y*scale, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(centerX + f2x*scale, centerY - f2y*scale, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "blue";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("F1("+f1x+","+f1y.toFixed(1)+")", centerX + f1x*scale + 6, centerY - f1y*scale - 4);
+        ctx.fillText("F2("+f2x+","+f2y.toFixed(1)+")", centerX + f2x*scale + 6, centerY - f2y*scale - 4);
+    }
+}
+
+// Dibujar hipérbola
+function dibujarHiperbola(canvasId, h, k, a, b, color, label) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width, hc = canvas.height;
+    const scale = 40;
+    const centerX = w/2, centerY = hc/2;
+    const xMin = -w/(2*scale), xMax = w/(2*scale), yMin = -hc/(2*scale), yMax = hc/(2*scale);
+    dibujarEjes(ctx, w, hc, xMin, xMax, yMin, yMax, centerX, centerY, scale);
+    ctx.strokeStyle = color || "#2e7d32";
+    ctx.lineWidth = 2.5;
+    // Rama derecha e izquierda
+    const steps = 200;
+    // Rama derecha: x = h + a cosh(t), y = k + b sinh(t)
+    ctx.beginPath();
+    let first = true;
+    for (let i = -steps/2; i <= steps/2; i++) {
+        let t = (i / (steps/4)) * 2; // rango de t
+        let x = h + a * Math.cosh(t);
+        let y = k + b * Math.sinh(t);
+        let px = centerX + x * scale;
+        let py = centerY - y * scale;
+        if (px > w || px < 0 || py > hc || py < 0) { first = true; continue; }
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Rama izquierda
+    ctx.beginPath();
+    first = true;
+    for (let i = -steps/2; i <= steps/2; i++) {
+        let t = (i / (steps/4)) * 2;
+        let x = h - a * Math.cosh(t);
+        let y = k + b * Math.sinh(t);
+        let px = centerX + x * scale;
+        let py = centerY - y * scale;
+        if (px > w || px < 0 || py > hc || py < 0) { first = true; continue; }
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Asíntotas
+    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = "#888";
+    ctx.lineWidth = 1.5;
+    // y - k = ±(b/a)(x - h)
+    let x1 = h - 2*a, x2 = h + 2*a;
+    let y1 = k + (b/a)*(x1 - h);
+    let y2 = k + (b/a)*(x2 - h);
+    ctx.beginPath();
+    ctx.moveTo(centerX + x1*scale, centerY - y1*scale);
+    ctx.lineTo(centerX + x2*scale, centerY - y2*scale);
+    ctx.stroke();
+    y1 = k - (b/a)*(x1 - h);
+    y2 = k - (b/a)*(x2 - h);
+    ctx.beginPath();
+    ctx.moveTo(centerX + x1*scale, centerY - y1*scale);
+    ctx.lineTo(centerX + x2*scale, centerY - y2*scale);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // Marcar centro
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    ctx.arc(centerX + h*scale, centerY - k*scale, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.font = "12px sans-serif";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C("+h+","+k+")", centerX + h*scale + 6, centerY - k*scale - 4);
+}
+
+// Dibujar todas las gráficas al cargar la página
+window.onload = function() {
+    // Circunferencias
+    dibujarCircunferencia("circulo1", 0, 0, 3, "#2e7d32", "C(0,0)");
+    dibujarCircunferencia("circulo2", 2, -1, 4, "#c96b1a", "C(2,-1)");
+    dibujarCircunferencia("circulo3", 2, -3, 4, "#1a3e6f", "C(2,-3)");
+
+    // Parábolas
+    dibujarParabola("parabola1", 0, 0, 2, "#1a3e6f", "V(0,0)");
+    dibujarParabola("parabola2", 3, -1, 3, "#c96b1a", "V(3,-1)");
+
+    // Elipses
+    dibujarElipse("elipse1", 0, 0, 4, 3, "#1a3e6f", "C(0,0)");
+    dibujarElipse("elipse2", 2, -1, 5, 3, "#c96b1a", "C(2,-1)");
+
+    // Comparación de elipses
+    const canvasComp = document.getElementById("elipse_compare");
+    if (canvasComp) {
+        const ctx = canvasComp.getContext("2d");
+        const w = 500, hc = 400;
+        const scale = 30;
+        const centerX = 250, centerY = 200;
+        const xMin = -8, xMax = 8, yMin = -6, yMax = 6;
+        dibujarEjes(ctx, w, hc, xMin, xMax, yMin, yMax, centerX, centerY, scale);
+        // Elipse en origen
+        ctx.strokeStyle = "#1a3e6f";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+            let t = (i/100)*2*Math.PI;
+            let px = centerX + (4*Math.cos(t))*scale;
+            let py = centerY - (3*Math.sin(t))*scale;
+            if (i===0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        // Elipse trasladada
+        ctx.strokeStyle = "#c96b1a";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        for (let i = 0; i <= 100; i++) {
+            let t = (i/100)*2*Math.PI;
+            let px = centerX + (2 + 5*Math.cos(t))*scale;
+            let py = centerY - (-1 + 3*Math.sin(t))*scale;
+            if (i===0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+        // Centros
+        ctx.fillStyle = "#1a3e6f";
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "#c96b1a";
+        ctx.beginPath();
+        ctx.arc(centerX + 2*scale, centerY + 1*scale, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.font = "12px sans-serif";
+        ctx.fillStyle = "#1a3e6f";
+        ctx.textAlign = "left";
+        ctx.fillText("Centro (0,0)", centerX + 10, centerY - 10);
+        ctx.fillStyle = "#c96b1a";
+        ctx.fillText("Centro (2,-1)", centerX + 2*scale + 10, centerY + 1*scale - 10);
+        ctx.fillStyle = "#333";
+        ctx.fillText("Comparación de elipses: azul (origen), roja (trasladada)", 10, 20);
+    }
+
+    // Hipérbolas
+    dibujarHiperbola("hiperbola1", 0, 0, 4, 3, "#1a3e6f", "C(0,0)");
+    dibujarHiperbola("hiperbola2", 1, -2, 3, 4, "#c96b1a", "C(1,-2)");
+};
+</script>
 </body>
 </html>
