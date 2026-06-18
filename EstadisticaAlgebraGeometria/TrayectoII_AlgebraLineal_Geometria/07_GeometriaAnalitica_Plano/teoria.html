@@ -36,7 +36,7 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
-    <!-- ========== SECCIONES DE TEORÍA ========== -->
+    <!-- ========== SECCIONES DE TEORÍA (contenido igual al anterior) ========== -->
     <h2>1. Vectores en el plano \(\mathbb{R}^2\)</h2>
     <div class="definicion">
         Un <strong>vector en \(\mathbb{R}^2\)</strong> es un par ordenado \(v = (v_1, v_2)\). Geométricamente, representa una magnitud con dirección y sentido.
@@ -579,41 +579,32 @@ function convertirCanvasAImagen(canvasId, imgId) {
     const canvas = document.getElementById(canvasId);
     const img = document.getElementById(imgId);
     if (!canvas || !img) return;
-    img.src = canvas.toDataURL("image/png");
-    // No modificar el display, que lo maneja el CSS
+    // Esperar un momento para que el canvas se dibuje completamente
+    setTimeout(function() {
+        img.src = canvas.toDataURL("image/png");
+    }, 100);
 }
 
 // Dibujar todas las gráficas y convertirlas a imagen
 window.onload = function() {
-    const graficos = [
-        { canvas: "circulo1", img: "img-circulo1", draw: function() { dibujarCircunferencia("circulo1", 0, 0, 3, "#2e7d32"); } },
-        { canvas: "circulo2", img: "img-circulo2", draw: function() { dibujarCircunferencia("circulo2", 2, -1, 4, "#c96b1a"); } },
-        { canvas: "circulo3", img: "img-circulo3", draw: function() { dibujarCircunferencia("circulo3", 2, -3, 4, "#1a3e6f"); } },
-        { canvas: "parabola1", img: "img-parabola1", draw: function() { dibujarParabola("parabola1", 0, 0, 2, "#1a3e6f"); } },
-        { canvas: "parabola2", img: "img-parabola2", draw: function() { dibujarParabola("parabola2", 3, -1, 3, "#c96b1a"); } },
-        { canvas: "elipse1", img: "img-elipse1", draw: function() { dibujarElipse("elipse1", 0, 0, 4, 3, "#1a3e6f"); } },
-        { canvas: "elipse2", img: "img-elipse2", draw: function() { dibujarElipse("elipse2", 2, -1, 5, 3, "#c96b1a"); } },
-        { canvas: "hiperbola1", img: "img-hiperbola1", draw: function() { dibujarHiperbola("hiperbola1", 0, 0, 4, 3, "#1a3e6f"); } },
-        { canvas: "hiperbola2", img: "img-hiperbola2", draw: function() { dibujarHiperbola("hiperbola2", 1, -2, 3, 4, "#c96b1a"); } }
-    ];
-    // Dibujar todas las gráficas
-    graficos.forEach(g => { if (document.getElementById(g.canvas)) g.draw(); });
-    // Convertir a imágenes
-    graficos.forEach(g => {
-        if (document.getElementById(g.canvas) && document.getElementById(g.img)) {
-            convertirCanvasAImagen(g.canvas, g.img);
-        }
-    });
+    // Primero dibujar todos los canvas
+    dibujarCircunferencia("circulo1", 0, 0, 3, "#2e7d32");
+    dibujarCircunferencia("circulo2", 2, -1, 4, "#c96b1a");
+    dibujarCircunferencia("circulo3", 2, -3, 4, "#1a3e6f");
+    dibujarParabola("parabola1", 0, 0, 2, "#1a3e6f");
+    dibujarParabola("parabola2", 3, -1, 3, "#c96b1a");
+    dibujarElipse("elipse1", 0, 0, 4, 3, "#1a3e6f");
+    dibujarElipse("elipse2", 2, -1, 5, 3, "#c96b1a");
+    dibujarHiperbola("hiperbola1", 0, 0, 4, 3, "#1a3e6f");
+    dibujarHiperbola("hiperbola2", 1, -2, 3, 4, "#c96b1a");
 
-    // Gráfico de comparación de elipses (especial)
+    // Gráfico de comparación de elipses
     const canvasComp = document.getElementById("elipse_compare");
-    const imgComp = document.getElementById("img-elipse_compare");
-    if (canvasComp && imgComp) {
+    if (canvasComp) {
         const ctx = canvasComp.getContext("2d");
         const w = 500, hc = 400, scale = 30, centerX = 250, centerY = 200;
         const xMin = -8, xMax = 8, yMin = -6, yMax = 6;
         dibujarEjes(ctx, w, hc, xMin, xMax, yMin, yMax, centerX, centerY, scale);
-        // Elipse en origen
         ctx.strokeStyle = "#1a3e6f";
         ctx.lineWidth = 2.5;
         ctx.beginPath();
@@ -625,7 +616,6 @@ window.onload = function() {
             else ctx.lineTo(px, py);
         }
         ctx.stroke();
-        // Elipse trasladada
         ctx.strokeStyle = "#c96b1a";
         ctx.lineWidth = 2.5;
         ctx.beginPath();
@@ -653,9 +643,26 @@ window.onload = function() {
         ctx.fillText("Centro (2,-1)", centerX + 2*scale + 10, centerY + 1*scale - 10);
         ctx.fillStyle = "#333";
         ctx.fillText("Comparación de elipses: azul (origen), roja (trasladada)", 10, 20);
-        // Convertir a imagen
-        imgComp.src = canvasComp.toDataURL("image/png");
     }
+
+    // Ahora convertir cada canvas a imagen (con un pequeño retraso para asegurar dibujo)
+    setTimeout(function() {
+        convertirCanvasAImagen("circulo1", "img-circulo1");
+        convertirCanvasAImagen("circulo2", "img-circulo2");
+        convertirCanvasAImagen("circulo3", "img-circulo3");
+        convertirCanvasAImagen("parabola1", "img-parabola1");
+        convertirCanvasAImagen("parabola2", "img-parabola2");
+        convertirCanvasAImagen("elipse1", "img-elipse1");
+        convertirCanvasAImagen("elipse2", "img-elipse2");
+        convertirCanvasAImagen("hiperbola1", "img-hiperbola1");
+        convertirCanvasAImagen("hiperbola2", "img-hiperbola2");
+
+        const canvasComp2 = document.getElementById("elipse_compare");
+        const imgComp = document.getElementById("img-elipse_compare");
+        if (canvasComp2 && imgComp) {
+            imgComp.src = canvasComp2.toDataURL("image/png");
+        }
+    }, 200);
 };
 </script>
 </body>
