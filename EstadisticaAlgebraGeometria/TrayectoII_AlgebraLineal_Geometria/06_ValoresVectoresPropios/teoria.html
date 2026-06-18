@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 6: Valores y Vectores Propios</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 6: Valores y Vectores Propios</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Definición de Valor Propio y Vector Propio</h2>
+    <div class="definicion">
+        Sea \(A\) una matriz cuadrada de orden \(n\). Un <strong>valor propio</strong> (o eigenvalor) de \(A\) es un escalar \(\lambda\) para el cual existe un vector no nulo \(v \in \mathbb{R}^n\) tal que:
+        \[
+        A v = \lambda v
+        \]
+        El vector \(v\) se llama <strong>vector propio</strong> (o eigenvector) asociado a \(\lambda\).
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Para \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\), \(\lambda = 3\) es un valor propio porque:
+        \[
+        A \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 3 \\ 3 \end{pmatrix} = 3 \begin{pmatrix} 1 \\ 1 \end{pmatrix}
+        \]
+        El vector \((1,1)\) es un vector propio asociado a \(\lambda=3\).
+    </div>
+
+    <h2>2. Polinomio Característico</h2>
+    <div class="definicion">
+        El <strong>polinomio característico</strong> de una matriz \(A\) se define como:
+        \[
+        p(\lambda) = \det(A - \lambda I)
+        \]
+        Los valores propios de \(A\) son las raíces de este polinomio.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Para \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\):
+        \[
+        A - \lambda I = \begin{pmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{pmatrix}
+        \]
+        \[
+        p(\lambda) = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3)
+        \]
+        Los valores propios son \(\lambda = 1\) y \(\lambda = 3\).
+    </div>
+
+    <h2>3. Cálculo de Vectores Propios</h2>
+    <div class="definicion">
+        Para cada valor propio \(\lambda\), los vectores propios asociados son las soluciones no triviales del sistema:
+        \[
+        (A - \lambda I) v = 0
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Para \(\lambda = 3\) en la matriz anterior:
+        \[
+        (A - 3I)v = \begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = 0
+        \]
+        Esto da \(-x + y = 0\) → \(y = x\). Los vectores propios son de la forma \(v = t(1,1)\), \(t \neq 0\).
+    </div>
+
+    <h2>4. Matrices Especiales</h2>
+    <div class="definicion">
+        <ul>
+            <li><strong>Matriz diagonal:</strong> sus valores propios son los elementos de la diagonal.</li>
+            <li><strong>Matriz triangular:</strong> los valores propios son los elementos de la diagonal principal.</li>
+            <li><strong>Matriz simétrica:</strong> todos sus valores propios son reales, y existen bases ortogonales de vectores propios.</li>
+        </ul>
+    </div>
+
+    <h2>5. Diagonalización de Matrices</h2>
+    <div class="definicion">
+        Una matriz \(A\) de orden \(n\) es <strong>diagonalizable</strong> si existe una matriz invertible \(P\) y una matriz diagonal \(D\) tales que:
+        \[
+        A = P D P^{-1}
+        \]
+        Las columnas de \(P\) son vectores propios de \(A\), y los elementos de \(D\) son los valores propios correspondientes.
+    </div>
+    <div class="teorema">
+        <strong>Teorema:</strong> Una matriz \(A\) de \(n \times n\) es diagonalizable si y solo si tiene \(n\) vectores propios linealmente independientes. En particular, si tiene \(n\) valores propios distintos, siempre es diagonalizable.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Para \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\):
+        <br>
+        Valores propios: \(\lambda_1 = 1\), \(\lambda_2 = 3\).
+        <br>
+        Vectores propios: para \(\lambda_1=1\), \(v_1 = (1,-1)\); para \(\lambda_2=3\), \(v_2 = (1,1)\).
+        <br>
+        \(P = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}\), \(D = \begin{pmatrix} 1 & 0 \\ 0 & 3 \end{pmatrix}\).
+        <br>
+        Verificación: \(A = P D P^{-1}\).
+    </div>
+
+    <h2>6. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Sistemas de ecuaciones diferenciales:</strong> La solución de sistemas lineales \(\dot{x} = A x\) se obtiene mediante los valores y vectores propios de \(A\).</li>
+            <li><strong>Análisis de estabilidad:</strong> Si todos los valores propios de la matriz de estado tienen parte real negativa, el sistema es estable.</li>
+            <li><strong>Procesamiento de señales:</strong> Los valores propios de la matriz de covarianza se usan en técnicas como PCA (Análisis de Componentes Principales).</li>
+            <li><strong>Circuitos resonantes:</strong> Las frecuencias naturales de un circuito RLC se relacionan con los valores propios del sistema.</li>
+        </ul>
+    </div>
+
+    <h2>7. Resumen</h2>
+    <ul>
+        <li><strong>Valor propio:</strong> \(\lambda\) tal que \(A v = \lambda v\).</li>
+        <li><strong>Polinomio característico:</strong> \(p(\lambda) = \det(A - \lambda I)\).</li>
+        <li><strong>Vector propio:</strong> solución no trivial de \((A - \lambda I)v = 0\).</li>
+        <li><strong>Diagonalización:</strong> \(A = P D P^{-1}\).</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
