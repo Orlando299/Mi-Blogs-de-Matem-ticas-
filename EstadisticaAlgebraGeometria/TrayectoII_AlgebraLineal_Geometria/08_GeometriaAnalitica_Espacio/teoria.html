@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1100px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 15px 0; font-family: monospace; background: #f9f2e0; padding: 12px; border-radius: 8px; font-size: 1.1em; }
+        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
+        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .grafico-img { max-width: 100%; height: auto; display: none; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf { display: none; }
+            canvas { display: none !important; }
+            .grafico-img { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
+    <div class="definicion">
+        Un <strong>vector en \(\mathbb{R}^3\)</strong> es una terna ordenada \(v = (v_1, v_2, v_3)\). Geométricamente, representa una magnitud con dirección y sentido en el espacio tridimensional.
+    </div>
+    <div class="definicion">
+        <strong>Operaciones:</strong>
+        <ul>
+            <li><strong>Suma:</strong> \(u + v = (u_1+v_1, u_2+v_2, u_3+v_3)\)</li>
+            <li><strong>Producto por escalar:</strong> \(\alpha v = (\alpha v_1, \alpha v_2, \alpha v_3)\)</li>
+            <li><strong>Norma (módulo):</strong> \(\|v\| = \sqrt{v_1^2 + v_2^2 + v_3^2}\)</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). Suma: \(u+v = (3, 3, 1)\). Norma de \(u\): \(\|u\| = \sqrt{2^2+(-1)^2+3^2} = \sqrt{14}\).
+    </div>
+
+    <h2>2. Producto escalar (punto)</h2>
+    <div class="definicion">
+        El <strong>producto escalar</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
+        \[
+        u \cdot v = u_1 v_1 + u_2 v_2 + u_3 v_3 = \|u\| \|v\| \cos\theta
+        \]
+        donde \(\theta\) es el ángulo entre ellos.
+    </div>
+    <div class="teorema">
+        <strong>Consecuencias:</strong>
+        <ul>
+            <li>Si \(u \cdot v = 0\), los vectores son <strong>ortogonales</strong>.</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). \(u \cdot v = 2(1) + (-1)(4) + 3(-2) = 2 - 4 - 6 = -8 \neq 0\) → no son ortogonales.
+    </div>
+
+    <h2>3. Producto vectorial</h2>
+    <div class="definicion">
+        El <strong>producto vectorial</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
+        \[
+        u \times v = \begin{vmatrix}
+        \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+        u_1 & u_2 & u_3 \\
+        v_1 & v_2 & v_3
+        \end{vmatrix}
+        = (u_2 v_3 - u_3 v_2, \, u_3 v_1 - u_1 v_3, \, u_1 v_2 - u_2 v_1)
+        \]
+        Este vector es perpendicular a ambos vectores.
+    </div>
+    <div class="ejemplo">
+        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\):
+        \[
+        u \times v = ((-1)(-2) - 3(4), \, 3(1) - 2(-2), \, 2(4) - (-1)(1)) = (2-12, \, 3+4, \, 8+1) = (-10, 7, 9)
+        \]
+    </div>
+
+    <h2>4. Triple producto escalar</h2>
+    <div class="definicion">
+        El <strong>triple producto escalar</strong> de \(u, v, w\) es \(u \cdot (v \times w)\). Su valor absoluto es el volumen del paralelepípedo formado por los tres vectores.
+    </div>
+
+    <h2>5. Recta en el espacio</h2>
+    <div class="definicion">
+        Una recta en el espacio se puede expresar mediante un <strong>vector director</strong> \(d\) y un <strong>punto de paso</strong> \(P_0\):
+        \[
+        P = P_0 + t d, \quad t \in \mathbb{R}
+        \]
+        \((x, y, z) = (x_0, y_0, z_0) + t(a, b, c)\).
+    </div>
+    <div class="ejemplo">
+        Recta que pasa por \(P_0 = (1, -2, 3)\) con \(d = (2, 1, -3)\):
+        \[
+        (x, y, z) = (1, -2, 3) + t(2, 1, -3)
+        \]
+    </div>
+    <div class="definicion">
+        <strong>Ecuaciones paramétricas:</strong>
+        \[
+        x = x_0 + at, \quad y = y_0 + bt, \quad z = z_0 + ct
+        \]
+        <strong>Ecuación continua (simétrica):</strong> \(\frac{x-x_0}{a} = \frac{y-y_0}{b} = \frac{z-z_0}{c}\).
+    </div>
+
+    <h2>6. Plano en el espacio</h2>
+    <div class="definicion">
+        Un plano puede definirse mediante un <strong>punto</strong> \(P_0\) y un <strong>vector normal</strong> \(n = (A, B, C)\):
+        \[
+        A(x-x_0) + B(y-y_0) + C(z-z_0) = 0
+        \]
+        o en forma general:
+        \[
+        Ax + By + Cz + D = 0
+        \]
+    </div>
+    <div class="ejemplo">
+        Plano que pasa por \(P_0 = (1, -1, 2)\) y tiene normal \(n = (3, -2, 4)\):
+        \[
+        3(x-1) - 2(y+1) + 4(z-2) = 0 \Rightarrow 3x - 2y + 4z - 13 = 0
+        \]
+    </div>
+
+    <h2>7. Distancias en el espacio</h2>
+    <h3>7.1 Distancia de un punto a un plano</h3>
+    <div class="formula">
+        \[
+        d = \frac{|Ax_1 + By_1 + Cz_1 + D|}{\sqrt{A^2 + B^2 + C^2}}
+        \]
+    </div>
+    <div class="ejemplo">
+        Distancia de \(P = (2, 3, -1)\) al plano \(3x - 2y + 4z - 13 = 0\):
+        \[
+        d = \frac{|3(2) - 2(3) + 4(-1) - 13|}{\sqrt{9+4+16}} = \frac{|6-6-4-13|}{\sqrt{29}} = \frac{17}{\sqrt{29}}
+        \]
+    </div>
+
+    <h3>7.2 Distancia entre dos puntos</h3>
+    <div class="formula">
+        \[
+        d = \|P_2 - P_1\| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}
+        \]
+    </div>
+
+    <h2>8. Superficies</h2>
+    <h3>8.1 Esfera</h3>
+    <div class="formula">
+        \[
+        (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
+        \]
+    </div>
+    <div class="ejemplo">
+        Esfera con centro \((1, -2, 3)\) y radio \(5\): \((x-1)^2 + (y+2)^2 + (z-3)^2 = 25\).
+    </div>
+
+    <h3>8.2 Cilindro circular recto</h3>
+    <div class="formula">
+        \[
+        (x-h)^2 + (y-k)^2 = r^2
+        \]
+        (en el espacio, la variable \(z\) es libre)
+    </div>
+
+    <h3>8.3 Cono circular recto</h3>
+    <div class="formula">
+        \[
+        (x-h)^2 + (y-k)^2 = \frac{r^2}{h^2}(z-l)^2
+        \]
+    </div>
+
+    <h2>9. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Campos electromagnéticos:</strong> El vector de Poynting \(\vec{S} = \vec{E} \times \vec{H}\) es un producto vectorial.</li>
+            <li><strong>Antenas y propagación:</strong> La dirección de propagación de una onda se describe con vectores en el espacio.</li>
+            <li><strong>Geometría de líneas de transmisión:</strong> Las distancias entre conductores y planos de tierra se calculan con fórmulas de distancia en el espacio.</li>
+        </ul>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+
+<script>
+    // Esta unidad no requiere gráficos con Canvas, todo es teórico.
+    // No hay funciones de dibujo.
+</script>
+</body>
+</html>
