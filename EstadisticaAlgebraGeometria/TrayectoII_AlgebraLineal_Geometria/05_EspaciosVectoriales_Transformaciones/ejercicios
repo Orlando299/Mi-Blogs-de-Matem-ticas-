@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Espacios Vectoriales y Transformaciones Lineales</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Espacios Vectoriales y Transformaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <h2>1. Espacios vectoriales y subespacios</h2>
+    <div class="ejercicio"><strong>1.</strong> Verifica si el conjunto \(W = \{(x,y) \in \mathbb{R}^2 \mid x + y = 0\}\) es un subespacio de \(\mathbb{R}^2\).</div>
+    <div class="ejercicio"><strong>2.</strong> Determina si \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x = 2y\}\) es un subespacio de \(\mathbb{R}^3\).</div>
+    <div class="ejercicio"><strong>3.</strong> ¿El conjunto de matrices \(2\times2\) con determinante cero forma un subespacio de \(\mathcal{M}_{2\times2}\)? Justifica.</div>
+
+    <h2>2. Combinación lineal, dependencia e independencia lineal</h2>
+    <div class="ejercicio"><strong>4.</strong> Expresa el vector \((5,7)\) como combinación lineal de \(v_1 = (1,2)\) y \(v_2 = (3,4)\).</div>
+    <div class="ejercicio"><strong>5.</strong> Determina si los vectores \((1,0,1)\), \((0,1,1)\), \((1,1,0)\) son linealmente independientes.</div>
+    <div class="ejercicio"><strong>6.</strong> Encuentra una relación de dependencia lineal para los vectores \(v_1 = (1,2,3)\), \(v_2 = (2,4,6)\), \(v_3 = (3,6,9)\).</div>
+
+    <h2>3. Base y dimensión</h2>
+    <div class="ejercicio"><strong>7.</strong> Encuentra una base para el subespacio \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x + y + z = 0\}\).</div>
+    <div class="ejercicio"><strong>8.</strong> Determina la dimensión del espacio de polinomios de grado menor o igual a 3 que tienen término independiente nulo.</div>
+    <div class="ejercicio"><strong>9.</strong> ¿Cuál es la dimensión de \(\mathcal{M}_{2\times3}\)? Encuentra una base para este espacio.</div>
+
+    <h2>4. Transformaciones lineales</h2>
+    <div class="ejercicio"><strong>10.</strong> Verifica si \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x,y) = (2x + y, x - y)\) es lineal.</div>
+    <div class="ejercicio"><strong>11.</strong> Encuentra la matriz asociada a la transformación \(T(x,y,z) = (2x + y, z - x)\).</div>
+    <div class="ejercicio"><strong>12.</strong> Dada \(T: \mathbb{R}^3 \to \mathbb{R}^2\) con \(T(x,y,z) = (x + y, y - z)\), encuentra el núcleo y la imagen.</div>
+
+    <h2>5. Teorema de la dimensión (rango-nulidad)</h2>
+    <div class="ejercicio"><strong>13.</strong> Para la transformación \(T(x,y,z) = (x + y, y + z, x - z)\), calcula el rango y la nulidad. Verifica el teorema de la dimensión.</div>
+
+    <h2>6. Aplicaciones</h2>
+    <div class="ejercicio"><strong>14.</strong> En un sistema de coordenadas, se aplica una rotación de \(45^\circ\) en el plano. Escribe la matriz de la transformación.</div>
+    <div class="ejercicio"><strong>15.</strong> En el análisis de componentes simétricas de sistemas trifásicos, se usa la transformación de Fortescue. ¿Qué tipo de transformación lineal es?</div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
