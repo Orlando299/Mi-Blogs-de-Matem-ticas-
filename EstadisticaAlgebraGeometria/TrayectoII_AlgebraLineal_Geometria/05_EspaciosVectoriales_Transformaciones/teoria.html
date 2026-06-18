@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 5: Espacios Vectoriales y Transformaciones Lineales</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 5: Espacios Vectoriales y Transformaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Definición de Espacio Vectorial</h2>
+    <div class="definicion">
+        Un <strong>espacio vectorial</strong> sobre un cuerpo \(\mathbb{K}\) (normalmente \(\mathbb{R}\) o \(\mathbb{C}\)) es un conjunto \(V\) no vacío, con dos operaciones:
+        <ul>
+            <li><strong>Suma:</strong> \(+: V \times V \to V\)</li>
+            <li><strong>Producto por escalar:</strong> \(\cdot: \mathbb{K} \times V \to V\)</li>
+        </ul>
+        que cumplen 8 axiomas (asociatividad, conmutatividad, existencia de neutro, inverso, distributividad, etc.).
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplos de espacios vectoriales:</strong>
+        <ul>
+            <li>\(\mathbb{R}^2 = \{(x,y) \mid x,y \in \mathbb{R}\}\) con suma y producto por escalar usuales.</li>
+            <li>\(\mathbb{R}^3 = \{(x,y,z) \mid x,y,z \in \mathbb{R}\}\).</li>
+            <li>\(\mathcal{P}_n\): espacio de polinomios de grado \(\leq n\).</li>
+            <li>\(\mathcal{M}_{m \times n}\): espacio de matrices de \(m\) filas y \(n\) columnas.</li>
+        </ul>
+    </div>
+
+    <h2>2. Subespacios Vectoriales</h2>
+    <div class="definicion">
+        Un <strong>subespacio vectorial</strong> \(W\) de \(V\) es un subconjunto no vacío de \(V\) que es cerrado bajo la suma y el producto por escalar, y que contiene al vector nulo. Es decir, \(W\) es en sí mismo un espacio vectorial.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> En \(\mathbb{R}^3\), el conjunto \(W = \{(x,y,0) \mid x,y \in \mathbb{R}\}\) es un subespacio (el plano \(z=0\)).
+    </div>
+
+    <h2>3. Combinación Lineal, Dependencia e Independencia Lineal</h2>
+    <div class="definicion">
+        Dados los vectores \(v_1, v_2, \dots, v_n \in V\) y escalares \(\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{K}\), la expresión
+        \[
+        \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_n v_n
+        \]
+        se llama <strong>combinación lineal</strong> de esos vectores.
+    </div>
+    <div class="definicion">
+        Los vectores son <strong>linealmente independientes</strong> si la única combinación lineal que da el vector nulo es aquella en la que todos los escalares son cero.
+        <br>
+        Si existe alguna combinación lineal no trivial que da el vector nulo, entonces son <strong>linealmente dependientes</strong>.
+    </div>
+    <div class="ejemplo">
+        En \(\mathbb{R}^3\), los vectores \((1,0,0)\), \((0,1,0)\), \((0,0,1)\) son linealmente independientes.
+        <br>
+        Los vectores \((1,2,3)\), \((2,4,6)\) son linealmente dependientes (el segundo es el doble del primero).
+    </div>
+
+    <h2>4. Base y Dimensión</h2>
+    <div class="definicion">
+        Un conjunto \(B = \{v_1, v_2, \dots, v_n\}\) de vectores de \(V\) es una <strong>base</strong> de \(V\) si:
+        <ul>
+            <li>Los vectores son linealmente independientes.</li>
+            <li>Todo vector de \(V\) se puede expresar como combinación lineal de ellos (es decir, generan \(V\)).</li>
+        </ul>
+        La <strong>dimensión</strong> de \(V\) es el número de elementos de una base (todas las bases tienen el mismo número de elementos).
+    </div>
+    <div class="ejemplo">
+        \(\mathbb{R}^2\) tiene dimensión 2. Una base es \(\{(1,0), (0,1)\}\) (base canónica).
+        <br>
+        \(\mathbb{R}^3\) tiene dimensión 3. Su base canónica es \(\{(1,0,0), (0,1,0), (0,0,1)\}\).
+    </div>
+
+    <h2>5. Transformaciones Lineales</h2>
+    <div class="definicion">
+        Una <strong>transformación lineal</strong> \(T: V \to W\) entre dos espacios vectoriales sobre el mismo cuerpo es una función que satisface:
+        <ul>
+            <li>\(T(u+v) = T(u) + T(v)\) (preserva la suma).</li>
+            <li>\(T(\alpha v) = \alpha T(v)\) (preserva el producto por escalar).</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x,y) = (2x + y, x - 3y)\) es una transformación lineal.
+    </div>
+
+    <h2>6. Núcleo e Imagen</h2>
+    <div class="definicion">
+        Dada \(T: V \to W\) lineal:
+        <ul>
+            <li>El <strong>núcleo</strong> de \(T\) es \(\ker(T) = \{v \in V \mid T(v) = 0_W\}\). Es un subespacio de \(V\).</li>
+            <li>La <strong>imagen</strong> de \(T\) es \(\operatorname{Im}(T) = \{T(v) \mid v \in V\}\). Es un subespacio de \(W\).</li>
+        </ul>
+    </div>
+    <div class="teorema">
+        <strong>Teorema de la dimensión (rango-nulidad):</strong>
+        \[
+        \dim(V) = \dim(\ker(T)) + \dim(\operatorname{Im}(T))
+        \]
+    </div>
+
+    <h2>7. Representación Matricial de una Transformación Lineal</h2>
+    <div class="definicion">
+        Toda transformación lineal \(T: \mathbb{R}^n \to \mathbb{R}^m\) se puede representar por una matriz \(A\) de tamaño \(m \times n\) tal que:
+        \[
+        T(v) = A v
+        \]
+        donde \(v\) se escribe como vector columna.
+    </div>
+    <div class="ejemplo">
+        La transformación \(T(x,y) = (2x + y, x - 3y)\) tiene matriz asociada:
+        \[
+        A = \begin{pmatrix} 2 & 1 \\ 1 & -3 \end{pmatrix}
+        \]
+    </div>
+
+    <h2>8. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Cambios de base:</strong> En análisis de circuitos, a veces conviene trabajar en bases diferentes (por ejemplo, componentes simétricas en sistemas trifásicos).</li>
+            <li><strong>Sistemas de coordenadas:</strong> Transformaciones lineales permiten pasar de un sistema de coordenadas a otro.</li>
+            <li><strong>Filtrado de señales:</strong> Las transformaciones lineales se usan en procesamiento de señales (filtros lineales).</li>
+        </ul>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
