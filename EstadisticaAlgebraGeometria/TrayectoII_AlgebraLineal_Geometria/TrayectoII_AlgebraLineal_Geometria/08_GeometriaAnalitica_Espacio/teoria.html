@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1100px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 15px 0; font-family: monospace; background: #f9f2e0; padding: 12px; border-radius: 8px; font-size: 1.1em; }
+        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
+        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .grafico-img { max-width: 100%; height: auto; display: none; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf { display: none; }
+            canvas { display: none !important; }
+            .grafico-img { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
+    <div class="definicion">
+        Un <strong>vector en \(\mathbb{R}^3\)</strong> es una terna ordenada \(v = (v_1, v_2, v_3)\). Geométricamente, representa una magnitud con dirección y sentido en el espacio tridimensional.
+    </div>
+    <div class="definicion">
+        <strong>Operaciones:</strong>
+        <ul>
+            <li><strong>Suma:</strong> \(u + v = (u_1+v_1, u_2+v_2, u_3+v_3)\)</li>
+            <li><strong>Producto por escalar:</strong> \(\alpha v = (\alpha v_1, \alpha v_2, \alpha v_3)\)</li>
+            <li><strong>Norma (módulo):</strong> \(\|v\| = \sqrt{v_1^2 + v_2^2 + v_3^2}\)</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). Suma: \(u+v = (3, 3, 1)\). Norma de \(u\): \(\|u\| = \sqrt{2^2+(-1)^2+3^2} = \sqrt{14}\).
+    </div>
+
+    <h2>2. Producto escalar (punto) en \(\mathbb{R}^3\)</h2>
+    <div class="definicion">
+        El <strong>producto escalar</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
+        \[
+        u \cdot v = u_1 v_1 + u_2 v_2 + u_3 v_3 = \|u\| \|v\| \cos\theta
+        \]
+        donde \(\theta\) es el ángulo entre ellos.
+    </div>
+    <div class="teorema">
+        <strong>Consecuencias:</strong>
+        <ul>
+            <li>Si \(u \cdot v = 0\), los vectores son <strong>ortogonales</strong> (perpendiculares).</li>
+            <li>Si \(u \cdot v > 0\), el ángulo es agudo.</li>
+            <li>Si \(u \cdot v < 0\), el ángulo es obtuso.</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, 3, 1)\), \(v = (-1, 0, 2)\). \(u \cdot v = 2(-1) + 3(0) + 1(2) = -2 + 0 + 2 = 0\) → son ortogonales.
+    </div>
+
+    <h2>3. Producto vectorial (cruz) en \(\mathbb{R}^3\)</h2>
+    <div class="definicion">
+        El <strong>producto vectorial</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
+        \[
+        u \times v = (u_2 v_3 - u_3 v_2,\; u_3 v_1 - u_1 v_3,\; u_1 v_2 - u_2 v_1)
+        \]
+        El vector resultante es perpendicular a ambos vectores.
+    </div>
+    <div class="teorema">
+        <strong>Propiedades:</strong>
+        <ul>
+            <li>\(\|u \times v\| = \|u\| \|v\| \sin\theta\)</li>
+            <li>El área del paralelogramo formado por \(u\) y \(v\) es \(\|u \times v\|\).</li>
+            <li>\(u \times v = 0\) si y solo si \(u\) y \(v\) son paralelos.</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (1, 2, 3)\), \(v = (4, 5, 6)\).<br>
+        \(u \times v = (2\cdot6 - 3\cdot5,\; 3\cdot4 - 1\cdot6,\; 1\cdot5 - 2\cdot4) = (12-15,\; 12-6,\; 5-8) = (-3, 6, -3)\).<br>
+        Norma: \(\|u \times v\| = \sqrt{9+36+9} = \sqrt{54} = 3\sqrt{6}\).
+    </div>
+
+    <h2>4. Triple producto escalar</h2>
+    <div class="definicion">
+        El <strong>triple producto escalar</strong> de tres vectores \(u, v, w \in \mathbb{R}^3\) es:
+        \[
+        u \cdot (v \times w)
+        \]
+        Es igual al determinante de la matriz cuyas filas (o columnas) son los vectores.
+    </div>
+    <div class="teorema">
+        <strong>Interpretación geométrica:</strong> El valor absoluto del triple producto escalar es el <strong>volumen del paralelepípedo</strong> formado por los tres vectores.
+    </div>
+    <div class="ejemplo">
+        \(u = (1, 0, 0)\), \(v = (0, 1, 0)\), \(w = (0, 0, 1)\).<br>
+        \(u \cdot (v \times w) = 1\) (volumen del cubo unitario).
+    </div>
+
+    <h2>5. Recta en el espacio</h2>
+    <div class="definicion">
+        Una recta en el espacio se puede expresar mediante un <strong>punto de paso</strong> \(P_0 = (x_0, y_0, z_0)\) y un <strong>vector director</strong> \(d = (a, b, c)\):
+        \[
+        P = P_0 + t d, \quad t \in \mathbb{R}
+        \]
+        Es decir, \((x, y, z) = (x_0, y_0, z_0) + t(a, b, c)\).
+    </div>
+    <div class="ejemplo">
+        Recta que pasa por \(P_0 = (1, -2, 3)\) con vector director \(d = (2, 1, -1)\):
+        \[
+        (x, y, z) = (1, -2, 3) + t(2, 1, -1) \Rightarrow \begin{cases} x = 1 + 2t \\ y = -2 + t \\ z = 3 - t \end{cases}
+        \]
+    </div>
+    <div class="definicion">
+        <strong>Ecuación simétrica de la recta:</strong>
+        \[
+        \frac{x - x_0}{a} = \frac{y - y_0}{b} = \frac{z - z_0}{c}
+        \]
+        (si \(a, b, c \neq 0\)).
+    </div>
+
+    <h2>6. Plano en el espacio</h2>
+    <div class="definicion">
+        Un plano en el espacio puede definirse mediante un <strong>punto \(P_0\)</strong> y un <strong>vector normal \(n = (A, B, C)\)</strong>:
+        \[
+        n \cdot (P - P_0) = 0
+        \]
+        Es decir,
+        \[
+        A(x - x_0) + B(y - y_0) + C(z - z_0) = 0
+        \]
+        o en forma general:
+        \[
+        Ax + By + Cz + D = 0
+        \]
+    </div>
+    <div class="ejemplo">
+        Plano que pasa por \(P_0 = (1, 2, 3)\) con normal \(n = (2, -1, 4)\):
+        \[
+        2(x-1) - 1(y-2) + 4(z-3) = 0 \Rightarrow 2x - y + 4z - 2 - 2 + 12 = 0 \Rightarrow 2x - y + 4z + 8 = 0
+        \]
+    </div>
+
+    <h2>7. Distancias en el espacio</h2>
+
+    <h3>7.1 Distancia entre dos puntos</h3>
+    <div class="formula">
+        \[
+        d(P_1, P_2) = \|P_2 - P_1\| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}
+        \]
+    </div>
+
+    <h3>7.2 Distancia de un punto a un plano</h3>
+    <div class="formula">
+        \[
+        d(P_0, \Pi) = \frac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}
+        \]
+    </div>
+    <div class="ejemplo">
+        Distancia de \(P = (1, 2, 3)\) al plano \(2x - y + 4z + 8 = 0\):
+        \[
+        d = \frac{|2(1) - 1(2) + 4(3) + 8|}{\sqrt{2^2 + (-1)^2 + 4^2}} = \frac{|2 - 2 + 12 + 8|}{\sqrt{4+1+16}} = \frac{20}{\sqrt{21}}
+        \]
+    </div>
+
+    <h3>7.3 Distancia de un punto a una recta</h3>
+    <div class="formula">
+        Si la recta tiene punto \(P_0\) y vector director \(d\), la distancia del punto \(P\) a la recta es:
+        \[
+        d = \frac{\|(P - P_0) \times d\|}{\|d\|}
+        \]
+    </div>
+
+    <h3>7.4 Distancia entre rectas</h3>
+    <div class="definicion">
+        Si las rectas tienen puntos \(P_1, P_2\) y directores \(d_1, d_2\):
+        \[
+        d = \frac{|(P_2 - P_1) \cdot (d_1 \times d_2)|}{\|d_1 \times d_2\|}
+        \]
+    </div>
+
+    <h2>8. Superficies en el espacio</h2>
+
+    <h3>8.1 Esfera</h3>
+    <div class="definicion">
+        La <strong>esfera</strong> de centro \(C = (h, k, l)\) y radio \(r\):
+        \[
+        (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
+        \]
+        o en forma general:
+        \[
+        x^2 + y^2 + z^2 + Dx + Ey + Fz + G = 0
+        \]
+    </div>
+
+    <h3>8.2 Cilindro</h3>
+    <div class="definicion">
+        Un <strong>cilindro circular recto</strong> de radio \(r\) y eje el eje \(z\):
+        \[
+        x^2 + y^2 = r^2
+        \]
+    </div>
+
+    <h3>8.3 Cono</h3>
+    <div class="definicion">
+        Un <strong>cono circular recto</strong> con vértice en el origen y eje el eje \(z\):
+        \[
+        x^2 + y^2 = k z^2
+        \]
+    </div>
+
+    <h2>9. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Campos eléctricos y magnéticos:</strong> Los campos vectoriales se representan en \(\mathbb{R}^3\) con vectores.</li>
+            <li><strong>Líneas de transmisión:</strong> La geometría de torres y cables se modela en el espacio tridimensional.</li>
+            <li><strong>Antenas:</strong> La dirección de radiación de una antena se describe con vectores en el espacio.</li>
+            <li><strong>Robótica:</strong> Los movimientos de robots se describen con vectores y transformaciones en \(\mathbb{R}^3\).</li>
+        </ul>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+
+<script>
+    // La teoría de la Unidad 8 no incluye gráficos 3D porque serían muy complejos de dibujar en 2D con Canvas.
+    // En su lugar, se incluyen descripciones detalladas y ejemplos numéricos.
+    // Si se desea, se pueden agregar visualizaciones 3D con Three.js, pero esto requeriría una librería externa.
+    console.log("Unidad 8: Geometría Analítica en el Espacio - Teoría cargada.");
+</script>
+</body>
+</html>
