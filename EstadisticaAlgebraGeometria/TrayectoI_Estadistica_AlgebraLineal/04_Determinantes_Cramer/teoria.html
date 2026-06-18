@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 4: Determinantes y Regla de Cramer</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 4: Determinantes y Regla de Cramer</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto I</div>
+
+    <h2>1. Definición de Determinante</h2>
+    <div class="definicion">
+        El <strong>determinante</strong> es una función que asigna un número escalar a una matriz cuadrada. Se denota como \(\det(A)\) o \(|A|\).
+    </div>
+
+    <h3>1.1 Determinante de orden 2</h3>
+    <div class="formula">
+        \[
+        \det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc
+        \]
+    </div>
+    <div class="ejemplo">
+        \(\det\begin{pmatrix} 2 & 5 \\ -1 & 3 \end{pmatrix} = 2\cdot3 - 5\cdot(-1) = 6 + 5 = 11\)
+    </div>
+
+    <h3>1.2 Determinante de orden 3 (Regla de Sarrus)</h3>
+    <div class="formula">
+        \[
+        \det\begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix} = aei + bfg + cdh - ceg - bdi - afh
+        \]
+    </div>
+    <div class="ejemplo">
+        \(\det\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 5 & 6 & 0 \end{pmatrix} = 1(1\cdot0-4\cdot6) - 2(0\cdot0-4\cdot5) + 3(0\cdot6-1\cdot5) = -24 + 40 - 15 = 1\)
+    </div>
+
+    <h3>1.3 Determinante de orden 4 o superior (Desarrollo por cofactores)</h3>
+    <div class="definicion">
+        El determinante se calcula expandiendo por una fila o columna:
+        \[
+        \det(A) = \sum_{j=1}^n a_{ij} C_{ij}
+        \]
+        donde \(C_{ij} = (-1)^{i+j} M_{ij}\) es el cofactor, y \(M_{ij}\) es el menor (determinante de la submatriz eliminando fila i y columna j).
+    </div>
+
+    <h2>2. Propiedades de los determinantes</h2>
+    <ul>
+        <li>Si una fila o columna es toda ceros, el determinante es cero.</li>
+        <li>Si se intercambian dos filas o columnas, el determinante cambia de signo.</li>
+        <li>Si se multiplica una fila o columna por un escalar \(k\), el determinante se multiplica por \(k\).</li>
+        <li>Si dos filas o columnas son iguales o proporcionales, el determinante es cero.</li>
+        <li>\(\det(AB) = \det(A)\det(B)\).</li>
+        <li>\(\det(A^T) = \det(A)\).</li>
+    </ul>
+
+    <h2>3. Regla de Cramer</h2>
+    <div class="definicion">
+        Para un sistema de \(n\) ecuaciones con \(n\) incógnitas \(A\mathbf{x} = \mathbf{b}\), la Regla de Cramer establece que:
+        \[
+        x_i = \frac{\det(A_i)}{\det(A)}
+        \]
+        donde \(A_i\) es la matriz obtenida al reemplazar la columna \(i\) de \(A\) por el vector \(\mathbf{b}\).
+    </div>
+    <div class="ejemplo">
+        Resolver \(\begin{cases} x + 2y = 8 \\ 3x - y = 3 \end{cases}\)<br>
+        \(A = \begin{pmatrix}1 & 2 \\ 3 & -1\end{pmatrix}\), \(\det(A) = 1(-1) - 2(3) = -7\).<br>
+        \(A_x = \begin{pmatrix}8 & 2 \\ 3 & -1\end{pmatrix}\), \(\det(A_x) = 8(-1) - 2(3) = -14\) → \(x = \frac{-14}{-7} = 2\).<br>
+        \(A_y = \begin{pmatrix}1 & 8 \\ 3 & 3\end{pmatrix}\), \(\det(A_y) = 1(3) - 8(3) = -21\) → \(y = \frac{-21}{-7} = 3\).<br>
+        Solución: \((2,3)\).
+    </div>
+
+    <h2>4. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        Los determinantes se usan en el análisis de redes eléctricas para resolver sistemas de ecuaciones de mallas y nodos.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
