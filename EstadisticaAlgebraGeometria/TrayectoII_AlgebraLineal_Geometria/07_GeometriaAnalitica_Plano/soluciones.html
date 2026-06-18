@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Geometría Analítica en el Plano</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .grafica-descripcion { background: #e8f0fe; padding: 6px; border-left: 4px solid #1a3e6f; margin: 4px 0; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Geometría Analítica en el Plano</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+
+        <div class="solucion-item"><strong>1.</strong> \(u+v = (4,2)\), \(2u-v = (6-1, -4-4) = (5, -8)\), \(\|u\| = \sqrt{13}\), \(\|v\| = \sqrt{17}\).</div>
+        <div class="solucion-item"><strong>2.</strong> \(u\cdot v = 2(4)+3(-1)=8-3=5\). \(\|u\|=\sqrt{13}\), \(\|v\|=\sqrt{17}\). \(\cos\theta = \frac{5}{\sqrt{13}\sqrt{17}} \approx 0.336\) → \(\theta \approx 70.3^\circ\).</div>
+        <div class="solucion-item"><strong>3.</strong> Vectorial: \((x,y) = (2,-1) + t(3,2)\). Paramétricas: \(x=2+3t, y=-1+2t\). General: \(2x-3y-7=0\).</div>
+        <div class="solucion-item"><strong>4.</strong> \(d = \frac{|2(1)-3(3)+5|}{\sqrt{2^2+(-3)^2}} = \frac{|2-9+5|}{\sqrt{13}} = \frac{2}{\sqrt{13}}\).</div>
+
+        <div class="solucion-item"><strong>5.</strong> Ordinaria: \((x-3)^2+(y+2)^2=25\). General: \(x^2+y^2-6x+4y-12=0\).</div>
+        <div class="solucion-item"><strong>6.</strong> Completando: \((x-3)^2+(y+2)^2=16\). Centro \((3,-2)\), radio \(4\). <div class="grafica-descripcion">📈 Gráfica: Circunferencia centrada en \((3,-2)\) que pasa por \((7,-2)\), \((3,2)\), \((-1,-2)\), \((3,-6)\).</div></div>
+        <div class="solucion-item"><strong>7.</strong> \(x^2+y^2=16\). Centro \((0,0)\), radio \(4\). Intersecciones: \((\pm4,0)\), \((0,\pm4)\). <div class="grafica-descripcion">📈 Gráfica: Circunferencia centrada en el origen que pasa por esos cuatro puntos.</div></div>
+        <div class="solucion-item"><strong>8.</strong> Centro \((1,-2)\), radio \(3\). Intersecciones: \((4,-2)\), \((-2,-2)\), \((1,1)\), \((1,-5)\). <div class="grafica-descripcion">📈 Gráfica: Circunferencia con centro en \((1,-2)\) y radio 3.</div></div>
+
+        <div class="solucion-item"><strong>9.</strong> \(x^2=12y\) → \(4p=12\) → \(p=3\). Vértice \((0,0)\), foco \((0,3)\), directriz \(y=-3\). <div class="grafica-descripcion">📈 Gráfica: Parábola que abre hacia arriba con vértice en el origen.</div></div>
+        <div class="solucion-item"><strong>10.</strong> \((y-2)^2=8(x+1)\) → \(4p=8\) → \(p=2\). Vértice \((-1,2)\), foco \((1,2)\), directriz \(x=-3\). <div class="grafica-descripcion">📈 Gráfica: Parábola que abre hacia la derecha con vértice en \((-1,2)\).</div></div>
+        <div class="solucion-item"><strong>11.</strong> \(y^2=-6x\) → \(4p=-6\) → \(p=-1.5\). Vértice \((0,0)\), foco \((-1.5,0)\), directriz \(x=1.5\). <div class="grafica-descripcion">📈 Gráfica: Parábola que abre hacia la izquierda.</div></div>
+        <div class="solucion-item"><strong>12.</strong> \((x-3)^2=4(y+1)\) → \(4p=4\) → \(p=1\). Vértice \((3,-1)\), foco \((3,0)\), directriz \(y=-2\). <div class="grafica-descripcion">📈 Gráfica: Parábola que abre hacia arriba con vértice en \((3,-1)\).</div></div>
+        <div class="solucion-item"><strong>13.</strong> \(y^2-8y = 6x-10\) → \((y-4)^2-16 = 6x-10\) → \((y-4)^2 = 6x+6 = 6(x+1)\). Vértice \((-1,4)\), \(4p=6\) → \(p=1.5\). Foco \((0.5,4)\), directriz \(x=-2.5\).</div>
+
+        <div class="solucion-item"><strong>14.</strong> \(\frac{x^2}{25}+\frac{y^2}{9}=1\). \(a=5\), \(b=3\), \(c=\sqrt{25-9}=4\). Centro \((0,0)\), focos \((\pm4,0)\), vértices \((\pm5,0)\), \((0,\pm3)\). <div class="grafica-descripcion">📈 Gráfica: Elipse horizontal centrada en el origen.</div></div>
+        <div class="solucion-item"><strong>15.</strong> \(\frac{(x-2)^2}{16}+\frac{(y+1)^2}{4}=1\). Centro \((2,-1)\), \(a=4\), \(b=2\), \(c=\sqrt{16-4}=2\sqrt{3}\). Focos \((2\pm2\sqrt{3},-1)\), vértices \((6,-1)\), \((-2,-1)\), \((2,1)\), \((2,-3)\). <div class="grafica-descripcion">📈 Gráfica: Elipse horizontal centrada en \((2,-1)\).</div></div>
+        <div class="solucion-item"><strong>16.</strong> \(\frac{x^2}{9}+\frac{y^2}{16}=1\). Centro \((0,0)\), \(a=4\) (vertical), \(b=3\), \(c=\sqrt{16-9}=\sqrt{7}\). Vértices \((0,\pm4)\), \((\pm3,0)\), focos \((0,\pm\sqrt{7})\). <div class="grafica-descripcion">📈 Gráfica: Elipse vertical centrada en el origen.</div></div>
+        <div class="solucion-item"><strong>17.</strong> \(4x^2+9y^2-24x+36y+36=0\) → \(4(x-3)^2+9(y+2)^2=36\) → \(\frac{(x-3)^2}{9}+\frac{(y+2)^2}{4}=1\). Centro \((3,-2)\), \(a=3\), \(b=2\), \(c=\sqrt{5}\). <div class="grafica-descripcion">📈 Gráfica: Elipse horizontal centrada en \((3,-2)\).</div></div>
+
+        <div class="solucion-item"><strong>18.</strong> \(\frac{x^2}{16}-\frac{y^2}{9}=1\). \(a=4\), \(b=3\), \(c=5\). Centro \((0,0)\), focos \((\pm5,0)\), vértices \((\pm4,0)\), asíntotas \(y=\pm\frac{3}{4}x\). <div class="grafica-descripcion">📈 Gráfica: Hipérbola horizontal centrada en el origen.</div></div>
+        <div class="solucion-item"><strong>19.</strong> \(\frac{(y-1)^2}{9}-\frac{(x+2)^2}{16}=1\). Centro \((-2,1)\), \(a=3\), \(b=4\), \(c=5\). Focos \((-2,6)\), \((-2,-4)\), vértices \((-2,4)\), \((-2,-2)\), asíntotas \(y-1 = \pm \frac{3}{4}(x+2)\). <div class="grafica-descripcion">📈 Gráfica: Hipérbola vertical centrada en \((-2,1)\).</div></div>
+        <div class="solucion-item"><strong>20.</strong> \(\frac{y^2}{4}-\frac{x^2}{9}=1\). Centro \((0,0)\), \(a=2\) (vertical), \(b=3\), \(c=\sqrt{13}\). Vértices \((0,\pm2)\), focos \((0,\pm\sqrt{13})\), asíntotas \(y=\pm\frac{2}{3}x\). <div class="grafica-descripcion">📈 Gráfica: Hipérbola vertical centrada en el origen.</div></div>
+        <div class="solucion-item"><strong>21.</strong> \(9x^2-16y^2-54x+64y-127=0\) → \(9(x-3)^2-16(y-2)^2=144\) → \(\frac{(x-3)^2}{16}-\frac{(y-2)^2}{9}=1\). Centro \((3,2)\), \(a=4\), \(b=3\), \(c=5\). Focos \((8,2)\), \((-2,2)\), vértices \((7,2)\), \((-1,2)\), asíntotas \(y-2 = \pm\frac{3}{4}(x-3)\). <div class="grafica-descripcion">📈 Gráfica: Hipérbola horizontal centrada en \((3,2)\).</div></div>
+
+        <div class="solucion-item"><strong>22.</strong> \(x^2+y^2-4x+6y-12=0\) → \((x-2)^2+(y+3)^2=25\). Circunferencia con centro \((2,-3)\), radio \(5\). <div class="grafica-descripcion">📈 Gráfica: Circunferencia centrada en \((2,-3)\) con radio 5.</div></div>
+        <div class="solucion-item"><strong>23.</strong> \(4x^2-9y^2-16x-36y-56=0\) → \(4(x-2)^2-9(y+2)^2=36\) → \(\frac{(x-2)^2}{9}-\frac{(y+2)^2}{4}=1\). Hipérbola horizontal con centro \((2,-2)\), \(a=3\), \(b=2\), \(c=\sqrt{13}\). <div class="grafica-descripcion">📈 Gráfica: Hipérbola centrada en \((2,-2)\).</div></div>
+        <div class="solucion-item"><strong>24.</strong> \(x^2+4y^2+2x-8y+1=0\) → \((x+1)^2+4(y-1)^2=4\) → \(\frac{(x+1)^2}{4}+(y-1)^2=1\). Elipse horizontal con centro \((-1,1)\), \(a=2\), \(b=1\), \(c=\sqrt{3}\). <div class="grafica-descripcion">📈 Gráfica: Elipse centrada en \((-1,1)\).</div></div>
+        <div class="solucion-item"><strong>25.</strong> \(y^2-4x-2y+5=0\) → \((y-1)^2=4(x-1)\). Parábola horizontal con vértice \((1,1)\), \(4p=4\) → \(p=1\), foco \((2,1)\), directriz \(x=0\). <div class="grafica-descripcion">📈 Gráfica: Parábola que abre hacia la derecha con vértice en \((1,1)\).</div></div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(x-4y-9=0\); 2. Centro \((2,-3)\), radio 4; 3. Vértice \((2,-1)\), foco \((2,2)\), directriz \(y=-4\); 4. Centro \((-1,3)\), \(a=5\), \(b=3\), \(c=4\); 5. Centro \((1,-2)\), \(a=3\), \(b=4\), \(c=5\); 6. Circunferencia.</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(d=4\); 2. Centro \((1,-3)\), radio 5; 3. Vértice \((0,0)\), foco \((-2,0)\), directriz \(x=2\); 4. \(\frac{(x-3)^2}{9}+\frac{(y+1)^2}{4}=1\); 5. \(\frac{(x-2)^2}{16}-\frac{(y+1)^2}{9}=1\); 6. Elipse.</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
