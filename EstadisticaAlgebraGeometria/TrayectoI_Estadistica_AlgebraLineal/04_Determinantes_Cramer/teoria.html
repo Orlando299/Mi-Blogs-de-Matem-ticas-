@@ -50,16 +50,68 @@
         \(\det\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 4 \\ 5 & 6 & 0 \end{pmatrix} = 1(1\cdot0-4\cdot6) - 2(0\cdot0-4\cdot5) + 3(0\cdot6-1\cdot5) = -24 + 40 - 15 = 1\)
     </div>
 
-    <h3>1.3 Determinante de orden 4 o superior (Desarrollo por cofactores)</h3>
+    <h2>2. Desarrollo por cofactores (reducción de orden)</h2>
     <div class="definicion">
-        El determinante se calcula expandiendo por una fila o columna:
+        Este método permite calcular el determinante de una matriz de orden \(n\) reduciéndolo a una combinación de determinantes de orden \(n-1\).
         \[
         \det(A) = \sum_{j=1}^n a_{ij} C_{ij}
         \]
-        donde \(C_{ij} = (-1)^{i+j} M_{ij}\) es el cofactor, y \(M_{ij}\) es el menor (determinante de la submatriz eliminando fila i y columna j).
+        donde \(C_{ij} = (-1)^{i+j} M_{ij}\) es el <strong>cofactor</strong>, y \(M_{ij}\) es el <strong>menor</strong> (determinante de la submatriz que se obtiene al eliminar la fila \(i\) y la columna \(j\)).
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo para matriz 3×3:</strong> Calcular \(\det\begin{pmatrix} 2 & 4 & -1 \\ 0 & 3 & 2 \\ -5 & 1 & 4 \end{pmatrix}\) desarrollando por la primera fila.<br>
+        \[
+        \begin{vmatrix}
+        2 & 4 & -1 \\
+        0 & 3 & 2 \\
+        -5 & 1 & 4
+        \end{vmatrix}
+        = 2 \cdot \begin{vmatrix} 3 & 2 \\ 1 & 4 \end{vmatrix}
+        - 4 \cdot \begin{vmatrix} 0 & 2 \\ -5 & 4 \end{vmatrix}
+        + (-1) \cdot \begin{vmatrix} 0 & 3 \\ -5 & 1 \end{vmatrix}
+        \]
+        Calculando los menores:
+        \[
+        = 2(12 - 2) - 4(0 - (-10)) - 1(0 - (-15))
+        = 2(10) - 4(10) - 1(15) = 20 - 40 - 15 = -35
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo para matriz 4×4:</strong> Calcular \(\det\begin{pmatrix} 2 & 1 & 0 & 4 \\ 0 & -1 & 2 & -1 \\ 5 & 4 & -3 & 2 \\ 1 & 0 & 6 & -2 \end{pmatrix}\) desarrollando por la primera fila.<br>
+        \[
+        = 2 \cdot \begin{vmatrix} -1 & 2 & -1 \\ 4 & -3 & 2 \\ 0 & 6 & -2 \end{vmatrix}
+        - 1 \cdot \begin{vmatrix} 0 & 2 & -1 \\ 5 & -3 & 2 \\ 1 & 6 & -2 \end{vmatrix}
+        + 0 \cdot \cdots
+        - 4 \cdot \begin{vmatrix} 0 & -1 & 2 \\ 5 & 4 & -3 \\ 1 & 0 & 6 \end{vmatrix}
+        \]
+        (Se continúa calculando los determinantes 3×3 con Sarrus o cofactores). Este proceso es laborioso, por lo que a menudo se usa el método de triangularización.
     </div>
 
-    <h2>2. Propiedades de los determinantes</h2>
+    <h2>3. Método de triangularización (eliminación gaussiana)</h2>
+    <div class="definicion">
+        Este método utiliza operaciones elementales por filas para transformar la matriz en una <strong>matriz triangular superior</strong> (o inferior). El determinante se obtiene multiplicando los elementos de la diagonal y aplicando las siguientes reglas:
+        <ul>
+            <li>Intercambiar dos filas → el determinante cambia de signo.</li>
+            <li>Multiplicar una fila por un escalar \(k\) → el determinante se multiplica por \(k\).</li>
+            <li>Sumar a una fila un múltiplo de otra → el determinante no cambia.</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Calcular \(\det\begin{pmatrix} 2 & 1 & 0 \\ 1 & -1 & 2 \\ 0 & 3 & 1 \end{pmatrix}\) mediante triangularización.<br>
+        \[
+        A = \begin{pmatrix} 2 & 1 & 0 \\ 1 & -1 & 2 \\ 0 & 3 & 1 \end{pmatrix}
+        \]
+        Operaciones:
+        <br>
+        \(F_2 \leftarrow F_2 - \frac{1}{2}F_1\) → \(\begin{pmatrix} 2 & 1 & 0 \\ 0 & -\frac{3}{2} & 2 \\ 0 & 3 & 1 \end{pmatrix}\)
+        <br>
+        \(F_3 \leftarrow F_3 + 2F_2\) → \(\begin{pmatrix} 2 & 1 & 0 \\ 0 & -\frac{3}{2} & 2 \\ 0 & 0 & 5 \end{pmatrix}\)
+        <br>
+        Ahora la matriz es triangular superior. El determinante es el producto de la diagonal: \(2 \cdot (-\frac{3}{2}) \cdot 5 = -15\).<br>
+        (Ninguna operación cambió el signo, por lo que el determinante es \(-15\)).
+    </div>
+
+    <h2>4. Propiedades de los determinantes</h2>
     <ul>
         <li>Si una fila o columna es toda ceros, el determinante es cero.</li>
         <li>Si se intercambian dos filas o columnas, el determinante cambia de signo.</li>
@@ -67,9 +119,10 @@
         <li>Si dos filas o columnas son iguales o proporcionales, el determinante es cero.</li>
         <li>\(\det(AB) = \det(A)\det(B)\).</li>
         <li>\(\det(A^T) = \det(A)\).</li>
+        <li>Si una fila (o columna) es combinación lineal de otras, el determinante es cero.</li>
     </ul>
 
-    <h2>3. Regla de Cramer</h2>
+    <h2>5. Regla de Cramer</h2>
     <div class="definicion">
         Para un sistema de \(n\) ecuaciones con \(n\) incógnitas \(A\mathbf{x} = \mathbf{b}\), la Regla de Cramer establece que:
         \[
@@ -85,9 +138,9 @@
         Solución: \((2,3)\).
     </div>
 
-    <h2>4. Aplicaciones en Ingeniería Eléctrica</h2>
+    <h2>6. Aplicaciones en Ingeniería Eléctrica</h2>
     <div class="ejemplo">
-        Los determinantes se usan en el análisis de redes eléctricas para resolver sistemas de ecuaciones de mallas y nodos.
+        Los determinantes se usan en el análisis de redes eléctricas para resolver sistemas de ecuaciones de mallas y nodos mediante la Regla de Cramer, especialmente en circuitos con múltiples mallas.
     </div>
 
     <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
