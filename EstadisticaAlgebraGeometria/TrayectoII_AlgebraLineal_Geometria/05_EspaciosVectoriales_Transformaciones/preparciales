@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre‑parcial - Espacios Vectoriales y Transformaciones Lineales</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
+        .pregunta { margin: 15px 0; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre‑parcial: Espacios Vectoriales y Transformaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <div class="examen">
+        <h2>Pre‑parcial 1</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> Verifica si \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x = y = z\}\) es un subespacio de \(\mathbb{R}^3\).</div>
+        <div class="pregunta"><strong>2. (10 puntos)</strong> Determina si los vectores \((1,2,-1)\), \((0,1,3)\), \((2,5,1)\) son linealmente independientes.</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Encuentra una base y la dimensión del subespacio \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x - 2y + z = 0\}\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Dada \(T(x,y,z) = (x - y, 2y + z)\), verifica que es lineal y encuentra su matriz asociada.</div>
+        <div class="pregunta"><strong>5. (10 puntos)</strong> Para la transformación \(T(x,y) = (x + y, x - y, 2x)\), encuentra el núcleo y la imagen.</div>
+    </div>
+
+    <div class="examen">
+        <h2>Pre‑parcial 2</h2>
+        <div class="pregunta"><strong>1. (10 puntos)</strong> ¿El conjunto de polinomios de grado ≤ 2 que tienen raíz en \(x=1\) forma un subespacio? Justifica.</div>
+        <div class="pregunta"><strong>2. (10 puntos)</strong> Encuentra una combinación lineal de \(v_1 = (1,0,1)\) y \(v_2 = (2,1,3)\) que dé el vector \((5,2,7)\).</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Encuentra la dimensión del espacio generado por los vectores \((1,1,1)\), \((1,0,2)\), \((0,1,1)\).</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> Dada la matriz \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\), interpreta la transformación lineal asociada y encuentra su imagen.</div>
+        <div class="pregunta"><strong>5. (10 puntos)</strong> Encuentra la matriz de la transformación lineal \(T: \mathbb{R}^3 \to \mathbb{R}^3\) que rota un vector \(30^\circ\) alrededor del eje \(z\).</div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Teoría</a> | <a href="ejercicios.html">📝 Ejercicios</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
