@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Espacios Vectoriales y Transformaciones Lineales</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Espacios Vectoriales y Transformaciones Lineales</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item"><strong>1.</strong> Sí, es subespacio. Contiene al (0,0), es cerrado bajo suma y producto escalar.</div>
+        <div class="solucion-item"><strong>2.</strong> Sí, es subespacio.</div>
+        <div class="solucion-item"><strong>3.</strong> No, porque la suma de dos matrices con det cero puede tener det no cero. Ejemplo: \(A = \begin{pmatrix}1&0\\0&0\end{pmatrix}\), \(B = \begin{pmatrix}0&0\\0&1\end{pmatrix}\), ambas det=0, pero suma tiene det=1.</div>
+        <div class="solucion-item"><strong>4.</strong> Resolviendo \(\alpha(1,2)+\beta(3,4)=(5,7)\) → \(\alpha+3\beta=5\), \(2\alpha+4\beta=7\). Solución: \(\alpha=-1, \beta=2\).</div>
+        <div class="solucion-item"><strong>5.</strong> Determinante de \(\begin{pmatrix}1&0&1\\0&1&1\\1&1&0\end{pmatrix} = -2 \neq 0\) → independientes.</div>
+        <div class="solucion-item"><strong>6.</strong> \(v_2 = 2v_1, v_3 = 3v_1\) → dependientes. Relación: \(2v_1 - v_2 = 0\) o \(3v_1 - v_3 = 0\).</div>
+        <div class="solucion-item"><strong>7.</strong> \(x+y+z=0\) → \(z=-x-y\). Vectores base: \((1,0,-1)\), \((0,1,-1)\).</div>
+        <div class="solucion-item"><strong>8.</strong> Polinomios de grado ≤3 sin término independiente: \(ax^3+bx^2+cx\). Dimensión 3.</div>
+        <div class="solucion-item"><strong>9.</strong> Dimensión \(2\cdot3=6\). Base: matrices con un 1 en una posición y 0 en el resto.</div>
+        <div class="solucion-item"><strong>10.</strong> Sí, preserva suma y producto escalar.</div>
+        <div class="solucion-item"><strong>11.</strong> \(A = \begin{pmatrix}2&1&0\\-1&0&1\end{pmatrix}\)</div>
+        <div class="solucion-item"><strong>12.</strong> \(\ker(T) = \{(0,0,0)\}\) (solo la trivial), \(\operatorname{Im}(T) = \mathbb{R}^2\).</div>
+        <div class="solucion-item"><strong>13.</strong> Matriz \(A = \begin{pmatrix}1&1&0\\0&1&1\\1&0&-1\end{pmatrix}\). Rango=3, nulidad=0. \(3+0=3 = \dim(\mathbb{R}^3)\).</div>
+        <div class="solucion-item"><strong>14.</strong> \(\begin{pmatrix}\cos45&-\sin45\\ \sin45&\cos45\end{pmatrix} = \begin{pmatrix}\sqrt{2}/2&-\sqrt{2}/2\\ \sqrt{2}/2&\sqrt{2}/2\end{pmatrix}\)</div>
+        <div class="solucion-item"><strong>15.</strong> Es una transformación lineal que cambia de base en el espacio de fasores trifásicos.</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. Sí; 2. Determinante = 0 → dependientes; 3. Base: \((2,1,0),(-1,0,1)\), dim=2; 4. \(A = \begin{pmatrix}1&-1&0\\0&2&1\end{pmatrix}\); 5. \(\ker(T)=\{0\}\), imagen: todos los \((x+y,x-y,2x)\) → plano.</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. Sí, forma un subespacio (cerrado bajo suma y producto escalar); 2. \(\alpha=1, \beta=2\); 3. rango=2 → dim=2; 4. imagen = \(\mathbb{R}^2\) (ya que det(A)≠0); 5. \(A = \begin{pmatrix}\cos30&-\sin30&0\\ \sin30&\cos30&0\\0&0&1\end{pmatrix}\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
