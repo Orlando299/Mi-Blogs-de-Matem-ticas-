@@ -36,6 +36,8 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
+    <!-- ========== SECCIONES DE TEORÍA CON GRÁFICOS ========== -->
+
     <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
     <div class="definicion">
         Un <strong>vector en \(\mathbb{R}^3\)</strong> es una terna ordenada \(v = (v_1, v_2, v_3)\). Geométricamente, representa una magnitud con dirección y sentido en el espacio tridimensional.
@@ -61,10 +63,7 @@
         donde \(\theta\) es el ángulo entre ellos.
     </div>
     <div class="teorema">
-        <strong>Consecuencias:</strong>
-        <ul>
-            <li>Si \(u \cdot v = 0\), los vectores son <strong>ortogonales</strong>.</li>
-        </ul>
+        Si \(u \cdot v = 0\), los vectores son <strong>ortogonales</strong>.
     </div>
     <div class="ejemplo">
         \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). \(u \cdot v = 2(1) + (-1)(4) + 3(-2) = 2 - 4 - 6 = -8 \neq 0\) → no son ortogonales.
@@ -72,7 +71,7 @@
 
     <h2>3. Producto vectorial</h2>
     <div class="definicion">
-        El <strong>producto vectorial</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
+        El <strong>producto vectorial</strong> de dos vectores \(u\) y \(v\) es un vector perpendicular a ambos:
         \[
         u \times v = \begin{vmatrix}
         \mathbf{i} & \mathbf{j} & \mathbf{k} \\
@@ -81,33 +80,31 @@
         \end{vmatrix}
         = (u_2 v_3 - u_3 v_2, \, u_3 v_1 - u_1 v_3, \, u_1 v_2 - u_2 v_1)
         \]
-        Este vector es perpendicular a ambos vectores.
     </div>
     <div class="ejemplo">
-        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\):
-        \[
-        u \times v = ((-1)(-2) - 3(4), \, 3(1) - 2(-2), \, 2(4) - (-1)(1)) = (2-12, \, 3+4, \, 8+1) = (-10, 7, 9)
-        \]
+        \(u = (2, -1, 3)\), \(v = (1, 4, -2)\): \(u \times v = (-10, 7, 9)\).
     </div>
 
     <h2>4. Triple producto escalar</h2>
     <div class="definicion">
-        El <strong>triple producto escalar</strong> de \(u, v, w\) es \(u \cdot (v \times w)\). Su valor absoluto es el volumen del paralelepípedo formado por los tres vectores.
+        El <strong>triple producto escalar</strong> \(u \cdot (v \times w)\) da el volumen del paralelepípedo formado por los tres vectores.
     </div>
 
     <h2>5. Recta en el espacio</h2>
     <div class="definicion">
-        Una recta en el espacio se puede expresar mediante un <strong>vector director</strong> \(d\) y un <strong>punto de paso</strong> \(P_0\):
+        Una recta en el espacio se expresa mediante un <strong>punto</strong> \(P_0\) y un <strong>vector director</strong> \(d\):
         \[
         P = P_0 + t d, \quad t \in \mathbb{R}
         \]
         \((x, y, z) = (x_0, y_0, z_0) + t(a, b, c)\).
     </div>
     <div class="ejemplo">
-        Recta que pasa por \(P_0 = (1, -2, 3)\) con \(d = (2, 1, -3)\):
-        \[
-        (x, y, z) = (1, -2, 3) + t(2, 1, -3)
-        \]
+        <strong>Ejemplo:</strong> Recta que pasa por \(P_0 = (1, -2, 3)\) con \(d = (2, 1, -3)\).
+        <div class="canvas-container">
+            <canvas id="recta3d" width="500" height="400"></canvas>
+            <img id="img-recta3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Recta en el espacio: punto (1,-2,3) y dirección (2,1,-3).</p>
+        </div>
     </div>
     <div class="definicion">
         <strong>Ecuaciones paramétricas:</strong>
@@ -119,7 +116,7 @@
 
     <h2>6. Plano en el espacio</h2>
     <div class="definicion">
-        Un plano puede definirse mediante un <strong>punto</strong> \(P_0\) y un <strong>vector normal</strong> \(n = (A, B, C)\):
+        Un plano se define mediante un <strong>punto</strong> \(P_0\) y un <strong>vector normal</strong> \(n = (A, B, C)\):
         \[
         A(x-x_0) + B(y-y_0) + C(z-z_0) = 0
         \]
@@ -129,10 +126,12 @@
         \]
     </div>
     <div class="ejemplo">
-        Plano que pasa por \(P_0 = (1, -1, 2)\) y tiene normal \(n = (3, -2, 4)\):
-        \[
-        3(x-1) - 2(y+1) + 4(z-2) = 0 \Rightarrow 3x - 2y + 4z - 13 = 0
-        \]
+        <strong>Ejemplo:</strong> Plano que pasa por \(P_0 = (1, -1, 2)\) con normal \(n = (3, -2, 4)\): \(3x - 2y + 4z - 13 = 0\).
+        <div class="canvas-container">
+            <canvas id="plano3d" width="500" height="400"></canvas>
+            <img id="img-plano3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Plano en R3 con normal (3,-2,4).</p>
+        </div>
     </div>
 
     <h2>7. Distancias en el espacio</h2>
@@ -143,17 +142,12 @@
         \]
     </div>
     <div class="ejemplo">
-        Distancia de \(P = (2, 3, -1)\) al plano \(3x - 2y + 4z - 13 = 0\):
-        \[
-        d = \frac{|3(2) - 2(3) + 4(-1) - 13|}{\sqrt{9+4+16}} = \frac{|6-6-4-13|}{\sqrt{29}} = \frac{17}{\sqrt{29}}
-        \]
-    </div>
-
-    <h3>7.2 Distancia entre dos puntos</h3>
-    <div class="formula">
-        \[
-        d = \|P_2 - P_1\| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}
-        \]
+        Distancia de \(P = (2, 3, -1)\) al plano \(3x - 2y + 4z - 13 = 0\) es \(d = \frac{17}{\sqrt{29}}\).
+        <div class="canvas-container">
+            <canvas id="distancia3d" width="500" height="400"></canvas>
+            <img id="img-distancia3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Distancia del punto P al plano.</p>
+        </div>
     </div>
 
     <h2>8. Superficies</h2>
@@ -165,6 +159,11 @@
     </div>
     <div class="ejemplo">
         Esfera con centro \((1, -2, 3)\) y radio \(5\): \((x-1)^2 + (y+2)^2 + (z-3)^2 = 25\).
+        <div class="canvas-container">
+            <canvas id="esfera3d" width="500" height="400"></canvas>
+            <img id="img-esfera3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Esfera centrada en (1,-2,3) con radio 5.</p>
+        </div>
     </div>
 
     <h3>8.2 Cilindro circular recto</h3>
@@ -174,6 +173,14 @@
         \]
         (en el espacio, la variable \(z\) es libre)
     </div>
+    <div class="ejemplo">
+        Cilindro de radio \(3\) con eje paralelo al eje Z y centro en \((0,0,0)\): \(x^2 + y^2 = 9\).
+        <div class="canvas-container">
+            <canvas id="cilindro3d" width="500" height="400"></canvas>
+            <img id="img-cilindro3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Cilindro circular recto: x²+y²=9.</p>
+        </div>
+    </div>
 
     <h3>8.3 Cono circular recto</h3>
     <div class="formula">
@@ -181,13 +188,21 @@
         (x-h)^2 + (y-k)^2 = \frac{r^2}{h^2}(z-l)^2
         \]
     </div>
+    <div class="ejemplo">
+        Cono con vértice en el origen y radio \(3\) en \(z=4\): \(x^2 + y^2 = \frac{9}{16}z^2\).
+        <div class="canvas-container">
+            <canvas id="cono3d" width="500" height="400"></canvas>
+            <img id="img-cono3d" class="grafico-img" />
+            <p style="font-size:0.9rem;">Cono circular recto: x²+y² = (9/16)z².</p>
+        </div>
+    </div>
 
     <h2>9. Aplicaciones en Ingeniería Eléctrica</h2>
     <div class="ejemplo">
         <ul>
-            <li><strong>Campos electromagnéticos:</strong> El vector de Poynting \(\vec{S} = \vec{E} \times \vec{H}\) es un producto vectorial.</li>
-            <li><strong>Antenas y propagación:</strong> La dirección de propagación de una onda se describe con vectores en el espacio.</li>
-            <li><strong>Geometría de líneas de transmisión:</strong> Las distancias entre conductores y planos de tierra se calculan con fórmulas de distancia en el espacio.</li>
+            <li><strong>Campos electromagnéticos:</strong> El vector de Poynting \(\vec{S} = \vec{E} \times \vec{H}\) usa producto vectorial.</li>
+            <li><strong>Antenas y propagación:</strong> Dirección de propagación de ondas en el espacio.</li>
+            <li><strong>Geometría de líneas de transmisión:</strong> Distancias entre conductores y planos de tierra.</li>
         </ul>
     </div>
 
@@ -199,8 +214,470 @@
 </div>
 
 <script>
-    // Esta unidad no requiere gráficos con Canvas, todo es teórico.
-    // No hay funciones de dibujo.
+// ======== FUNCIONES DE PROYECCIÓN 3D ========
+// Proyección isométrica simple (ángulos 30° y 30°)
+function proyeccion(x, y, z, angX, angY, scale, centerX, centerY) {
+    // Rotación alrededor del eje X y Y para vista isométrica
+    let cosA = Math.cos(angX), sinA = Math.sin(angX);
+    let cosB = Math.cos(angY), sinB = Math.sin(angY);
+    // Rotar alrededor de X
+    let y1 = y * cosA - z * sinA;
+    let z1 = y * sinA + z * cosA;
+    // Rotar alrededor de Y
+    let x1 = x * cosB + z1 * sinB;
+    let z2 = -x * sinB + z1 * cosB;
+    // Proyección paralela (ignoramos z2)
+    return {
+        px: centerX + x1 * scale,
+        py: centerY - y1 * scale
+    };
+}
+
+function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, label) {
+    const ejes = [
+        { x: 5, y: 0, z: 0, color: "#e74c3c", label: "x" },
+        { x: 0, y: 5, z: 0, color: "#2ecc71", label: "y" },
+        { x: 0, y: 0, z: 5, color: "#3498db", label: "z" }
+    ];
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 1;
+    // Origen
+    let o = proyeccion(0, 0, 0, angX, angY, scale, centerX, centerY);
+    for (let e of ejes) {
+        let p = proyeccion(e.x, e.y, e.z, angX, angY, scale, centerX, centerY);
+        ctx.beginPath();
+        ctx.moveTo(o.px, o.py);
+        ctx.lineTo(p.px, p.py);
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = e.color;
+        ctx.font = "14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(e.label, p.px + 4, p.py - 4);
+    }
+    // Etiqueta del sistema de referencia
+    if (label) {
+        ctx.fillStyle = "#333";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(label, 10, 20);
+    }
+}
+
+// ======== DIBUJO DE FIGURAS ========
+function dibujarRecta3D() {
+    const canvas = document.getElementById('recta3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 50;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Recta en R3");
+    // Punto P0 = (1,-2,3)
+    let p0 = proyeccion(1, -2, 3, angX, angY, scale, centerX, centerY);
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(p0.px, p0.py, 5, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("P0 (1,-2,3)", p0.px + 8, p0.py - 4);
+    // Vector director d = (2,1,-3)
+    let d = proyeccion(2, 1, -3, angX, angY, scale, centerX, centerY);
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(p0.px, p0.py);
+    ctx.lineTo(p0.px + (d.px - p0.px)*0.8, p0.py + (d.py - p0.py)*0.8);
+    ctx.stroke();
+    // Etiqueta del vector
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    let vLabel = proyeccion(1+2*0.7, -2+1*0.7, 3-3*0.7, angX, angY, scale, centerX, centerY);
+    ctx.fillText("d = (2,1,-3)", vLabel.px + 8, vLabel.py - 4);
+    // Línea extendida (recta)
+    let t1 = -2, t2 = 2;
+    let p1 = proyeccion(1 + t1*2, -2 + t1*1, 3 + t1*(-3), angX, angY, scale, centerX, centerY);
+    let p2 = proyeccion(1 + t2*2, -2 + t2*1, 3 + t2*(-3), angX, angY, scale, centerX, centerY);
+    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = "#888";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(p1.px, p1.py);
+    ctx.lineTo(p2.px, p2.py);
+    ctx.stroke();
+    ctx.setLineDash([]);
+}
+
+function dibujarPlano3D() {
+    const canvas = document.getElementById('plano3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 50;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Plano en R3");
+    // Plano: 3(x-1) -2(y+1) +4(z-2)=0  ->  3x -2y +4z -13=0
+    // Dibujar una malla de puntos del plano en un rango
+    let puntos = [];
+    for (let x = -3; x <= 4; x += 0.5) {
+        for (let y = -3; y <= 4; y += 0.5) {
+            let z = (13 - 3*x + 2*y)/4;
+            if (z > -3 && z < 6) {
+                puntos.push({x, y, z});
+            }
+        }
+    }
+    // Ordenar por profundidad (z) para dibujar correctamente (más simple: dibujar todos)
+    ctx.fillStyle = "rgba(78, 205, 196, 0.2)";
+    ctx.strokeStyle = "rgba(78, 205, 196, 0.5)";
+    ctx.lineWidth = 0.5;
+    // Dibujar líneas de cuadrícula (conexión entre puntos)
+    // Para simplificar, dibujamos algunos contornos
+    let pts = [];
+    for (let x = -2; x <= 3; x += 1) {
+        for (let y = -2; y <= 3; y += 1) {
+            let z = (13 - 3*x + 2*y)/4;
+            if (z > -2 && z < 5) {
+                pts.push(proyeccion(x, y, z, angX, angY, scale, centerX, centerY));
+            }
+        }
+    }
+    // Dibujar líneas (conexión por filas)
+    for (let i = 0; i < pts.length - 6; i += 6) {
+        for (let j = 0; j < 5; j++) {
+            let idx = i + j;
+            if (idx < pts.length - 1 && (idx+1)%6 !== 0) {
+                ctx.beginPath();
+                ctx.moveTo(pts[idx].px, pts[idx].py);
+                ctx.lineTo(pts[idx+1].px, pts[idx+1].py);
+                ctx.stroke();
+            }
+        }
+    }
+    for (let i = 0; i < pts.length - 6; i += 6) {
+        for (let j = 0; j < 6; j++) {
+            let idx = i + j;
+            if (idx < pts.length - 6) {
+                ctx.beginPath();
+                ctx.moveTo(pts[idx].px, pts[idx].py);
+                ctx.lineTo(pts[idx+6].px, pts[idx+6].py);
+                ctx.stroke();
+            }
+        }
+    }
+    // Marcar punto P0 = (1,-1,2)
+    let p0 = proyeccion(1, -1, 2, angX, angY, scale, centerX, centerY);
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(p0.px, p0.py, 5, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("P0(1,-1,2)", p0.px + 8, p0.py - 4);
+    // Dibujar normal n = (3,-2,4)
+    let n = proyeccion(3, -2, 4, angX, angY, scale, centerX, centerY);
+    ctx.strokeStyle = "#c96b1a";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(p0.px, p0.py);
+    ctx.lineTo(p0.px + (n.px - p0.px)*0.6, p0.py + (n.py - p0.py)*0.6);
+    ctx.stroke();
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    let nLabel = proyeccion(1+3*0.5, -1-2*0.5, 2+4*0.5, angX, angY, scale, centerX, centerY);
+    ctx.fillText("n=(3,-2,4)", nLabel.px + 8, nLabel.py - 4);
+}
+
+function dibujarDistancia3D() {
+    const canvas = document.getElementById('distancia3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 50;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Distancia punto-plano");
+    // Plano: 3x -2y +4z -13 =0
+    // Punto P = (2,3,-1)
+    let P = proyeccion(2, 3, -1, angX, angY, scale, centerX, centerY);
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(P.px, P.py, 5, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("P(2,3,-1)", P.px + 8, P.py - 4);
+    // Proyección ortogonal del punto sobre el plano (aproximada)
+    // Normal n = (3,-2,4), calcular punto Q en el plano más cercano a P
+    let x0=1, y0=-1, z0=2; // punto del plano
+    let A=3, B=-2, C=4, D=-13;
+    let t = -(A*x0 + B*y0 + C*z0 + D)/(A*A+B*B+C*C); // pero para el punto P, t = (A*Px+B*Py+C*Pz+D)/(A^2+B^2+C^2)
+    let denom = A*A+B*B+C*C;
+    let val = A*2 + B*3 + C*(-1) + D;
+    let t2 = -val/denom;
+    let Qx = 2 + t2*A;
+    let Qy = 3 + t2*B;
+    let Qz = -1 + t2*C;
+    let Q = proyeccion(Qx, Qy, Qz, angX, angY, scale, centerX, centerY);
+    ctx.fillStyle = "#c96b1a";
+    ctx.beginPath();
+    ctx.arc(Q.px, Q.py, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Q (proyección)", Q.px + 8, Q.py - 4);
+    // Línea de distancia
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = "#e74c3c";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(P.px, P.py);
+    ctx.lineTo(Q.px, Q.py);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#e74c3c";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    let midX = (P.px + Q.px)/2, midY = (P.py + Q.py)/2;
+    ctx.fillText("d = 17/√29", midX, midY - 12);
+}
+
+function dibujarEsfera3D() {
+    const canvas = document.getElementById('esfera3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Esfera");
+    // Centro (1,-2,3), radio 5
+    let cx = 1, cy = -2, cz = 3, r = 5;
+    // Dibujar esfera como círculo con sombreado (proyección)
+    let c = proyeccion(cx, cy, cz, angX, angY, scale, centerX, centerY);
+    // Radio proyectado (aproximado)
+    let rProj = r * scale * 0.8; // factor de escala para proyección
+    // Gradiente radial
+    let grad = ctx.createRadialGradient(c.px-10, c.py-10, 2, c.px, c.py, rProj);
+    grad.addColorStop(0, "rgba(52, 152, 219, 0.6)");
+    grad.addColorStop(1, "rgba(52, 152, 219, 0.1)");
+    ctx.fillStyle = grad;
+    ctx.strokeStyle = "#3498db";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, rProj, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.stroke();
+    // Centro
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C(1,-2,3)", c.px + 8, c.py - 4);
+    // Radio
+    let rEnd = proyeccion(cx + r, cy, cz, angX, angY, scale, centerX, centerY);
+    ctx.strokeStyle = "#e74c3c";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(c.px, c.py);
+    ctx.lineTo(rEnd.px, rEnd.py);
+    ctx.stroke();
+    ctx.fillStyle = "#e74c3c";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    let midR = proyeccion(cx + r/2, cy, cz, angX, angY, scale, centerX, centerY);
+    ctx.fillText("r=5", midR.px, midR.py - 8);
+}
+
+function dibujarCilindro3D() {
+    const canvas = document.getElementById('cilindro3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Cilindro");
+    // Cilindro: x^2 + y^2 = 9, z libre
+    let r = 3;
+    let hc = 4;
+    // Dibujar círculos superior e inferior
+    let pts = [];
+    let steps = 20;
+    for (let i = 0; i <= steps; i++) {
+        let theta = (i/steps)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        pts.push({x, y, z: -hc});
+    }
+    // Dibujar base inferior
+    ctx.strokeStyle = "#2ecc71";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let p = proyeccion(pts[i].x, pts[i].y, pts[i].z, angX, angY, scale, centerX, centerY);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    // Superior
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let p = proyeccion(pts[i].x, pts[i].y, hc, angX, angY, scale, centerX, centerY);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    // Líneas verticales
+    ctx.strokeStyle = "rgba(46, 204, 113, 0.5)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 8; i++) {
+        let theta = (i/8)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p1 = proyeccion(x, y, -hc, angX, angY, scale, centerX, centerY);
+        let p2 = proyeccion(x, y, hc, angX, angY, scale, centerX, centerY);
+        ctx.beginPath();
+        ctx.moveTo(p1.px, p1.py);
+        ctx.lineTo(p2.px, p2.py);
+        ctx.stroke();
+    }
+    // Etiqueta
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x² + y² = 9", 10, 30);
+}
+
+function dibujarCono3D() {
+    const canvas = document.getElementById('cono3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const centerX = w/2, centerY = h/2;
+    const angX = 0.5, angY = 0.5;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, angX, angY, "Cono");
+    // Cono: x² + y² = (9/16)z², z en [0,4]
+    let r = 3, hc = 4;
+    let steps = 20;
+    // Dibujar base (círculo en z=hc)
+    ctx.strokeStyle = "#e67e22";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let theta = (i/steps)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p = proyeccion(x, y, hc, angX, angY, scale, centerX, centerY);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    // Líneas generatrices desde el vértice (0,0,0) a la base
+    let vert = proyeccion(0, 0, 0, angX, angY, scale, centerX, centerY);
+    ctx.strokeStyle = "rgba(230, 126, 34, 0.5)";
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < 8; i++) {
+        let theta = (i/8)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p = proyeccion(x, y, hc, angX, angY, scale, centerX, centerY);
+        ctx.beginPath();
+        ctx.moveTo(vert.px, vert.py);
+        ctx.lineTo(p.px, p.py);
+        ctx.stroke();
+    }
+    // Vértice
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(vert.px, vert.py, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Vértice (0,0,0)", vert.px + 8, vert.py - 4);
+    // Etiqueta
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x² + y² = (9/16)z²", 10, 30);
+}
+
+// ======== CONVERSIÓN A IMAGEN Y EJECUCIÓN ========
+function convertirCanvasAImagen(canvasId, imgId) {
+    const canvas = document.getElementById(canvasId);
+    const img = document.getElementById(imgId);
+    if (!canvas || !img) return;
+    setTimeout(function() {
+        img.src = canvas.toDataURL("image/png");
+    }, 100);
+}
+
+window.onload = function() {
+    // Dibujar todos los gráficos
+    dibujarRecta3D();
+    dibujarPlano3D();
+    dibujarDistancia3D();
+    dibujarEsfera3D();
+    dibujarCilindro3D();
+    dibujarCono3D();
+
+    // Convertir a imágenes para PDF
+    setTimeout(function() {
+        convertirCanvasAImagen("recta3d", "img-recta3d");
+        convertirCanvasAImagen("plano3d", "img-plano3d");
+        convertirCanvasAImagen("distancia3d", "img-distancia3d");
+        convertirCanvasAImagen("esfera3d", "img-esfera3d");
+        convertirCanvasAImagen("cilindro3d", "img-cilindro3d");
+        convertirCanvasAImagen("cono3d", "img-cono3d");
+    }, 200);
+};
 </script>
 </body>
 </html>
