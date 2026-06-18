@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 7: Geometría Analítica con Enfoque Vectorial en el Plano</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 15px 0; font-family: monospace; background: #f9f2e0; padding: 12px; border-radius: 8px; font-size: 1.1em; }
+        .grafica-descripcion { background: #e8f0fe; padding: 12px; border-radius: 8px; margin: 10px 0; border: 1px dashed #1a3e6f; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 7: Geometría Analítica con Enfoque Vectorial en el Plano</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
+
+    <h2>1. Vectores en el plano \(\mathbb{R}^2\)</h2>
+    <div class="definicion">
+        Un <strong>vector en \(\mathbb{R}^2\)</strong> es un par ordenado \(v = (v_1, v_2)\). Geométricamente, representa una magnitud con dirección y sentido.
+    </div>
+    <div class="definicion">
+        <strong>Operaciones:</strong>
+        <ul>
+            <li><strong>Suma:</strong> \(u + v = (u_1+v_1, u_2+v_2)\)</li>
+            <li><strong>Producto por escalar:</strong> \(\alpha v = (\alpha v_1, \alpha v_2)\)</li>
+            <li><strong>Norma (módulo):</strong> \(\|v\| = \sqrt{v_1^2 + v_2^2}\)</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, 3)\), \(v = (1, -4)\). Suma: \(u+v = (3, -1)\). Norma de \(u\): \(\|u\| = \sqrt{2^2+3^2} = \sqrt{13}\).
+    </div>
+
+    <h2>2. Producto escalar (punto)</h2>
+    <div class="definicion">
+        El <strong>producto escalar</strong> de dos vectores \(u = (u_1, u_2)\) y \(v = (v_1, v_2)\) es:
+        \[
+        u \cdot v = u_1 v_1 + u_2 v_2 = \|u\| \|v\| \cos\theta
+        \]
+        donde \(\theta\) es el ángulo entre ellos.
+    </div>
+    <div class="teorema">
+        <strong>Consecuencias:</strong>
+        <ul>
+            <li>Si \(u \cdot v = 0\), los vectores son <strong>ortogonales</strong> (perpendiculares).</li>
+            <li>Si \(u \cdot v > 0\), el ángulo es agudo.</li>
+            <li>Si \(u \cdot v < 0\), el ángulo es obtuso.</li>
+        </ul>
+    </div>
+    <div class="ejemplo">
+        \(u = (2, 3)\), \(v = (-3, 2)\). \(u \cdot v = 2(-3) + 3(2) = -6 + 6 = 0\) → son ortogonales.
+    </div>
+
+    <h2>3. Ecuación vectorial de la recta</h2>
+    <div class="definicion">
+        Una recta en el plano puede expresarse mediante un <strong>vector director</strong> \(d\) y un <strong>punto de paso</strong> \(P_0\):
+        \[
+        P = P_0 + t d, \quad t \in \mathbb{R}
+        \]
+        Es decir, \((x, y) = (x_0, y_0) + t (a, b)\).
+    </div>
+    <div class="ejemplo">
+        Recta que pasa por \(P_0 = (1, 2)\) con vector director \(d = (3, -1)\):
+        \[
+        (x, y) = (1, 2) + t (3, -1) \Rightarrow \begin{cases} x = 1 + 3t \\ y = 2 - t \end{cases}
+        \]
+    </div>
+
+    <h2>4. Ecuaciones paramétricas y general de la recta</h2>
+    <div class="definicion">
+        De la ecuación vectorial se obtienen las <strong>ecuaciones paramétricas</strong>:
+        \[
+        x = x_0 + a t, \quad y = y_0 + b t
+        \]
+        Eliminando \(t\) se obtiene la <strong>ecuación general</strong>:
+        \[
+        A x + B y + C = 0
+        \]
+        donde \(A = b\), \(B = -a\), \(C = a y_0 - b x_0\).
+    </div>
+    <div class="ejemplo">
+        De \((x,y) = (1,2) + t(3,-1)\):
+        <br>
+        \(x = 1 + 3t\), \(y = 2 - t\) → \(t = \frac{x-1}{3} = 2 - y\) → \(x - 1 = 6 - 3y\) → \(x + 3y - 7 = 0\).
+    </div>
+
+    <h2>5. Distancia de un punto a una recta</h2>
+    <div class="definicion">
+        La distancia del punto \(P = (x_1, y_1)\) a la recta \(Ax + By + C = 0\) es:
+        \[
+        d = \frac{|A x_1 + B y_1 + C|}{\sqrt{A^2 + B^2}}
+        \]
+    </div>
+    <div class="ejemplo">
+        Distancia de \(P = (2, 3)\) a la recta \(x + 3y - 7 = 0\):
+        \[
+        d = \frac{|2 + 3(3) - 7|}{\sqrt{1^2 + 3^2}} = \frac{|2+9-7|}{\sqrt{10}} = \frac{4}{\sqrt{10}} = \frac{2\sqrt{10}}{5}
+        \]
+    </div>
+
+    <h2>6. Circunferencia</h2>
+    <div class="definicion">
+        La <strong>circunferencia</strong> de centro \(C = (h, k)\) y radio \(r\) es el conjunto de puntos \(P\) tales que \(\|P - C\| = r\).
+    </div>
+
+    <h3>6.1 Ecuación ordinaria (centro en \((h,k)\))</h3>
+    <div class="formula">
+        \[
+        (x-h)^2 + (y-k)^2 = r^2
+        \]
+    </div>
+
+    <h3>6.2 Ecuación ordinaria (centro en el origen, \((0,0)\))</h3>
+    <div class="formula">
+        \[
+        x^2 + y^2 = r^2
+        \]
+    </div>
+
+    <h3>6.3 Ecuación general</h3>
+    <div class="formula">
+        \[
+        x^2 + y^2 + Dx + Ey + F = 0
+        \]
+        donde el centro es \(C = \left(-\frac{D}{2}, -\frac{E}{2}\right)\) y \(r = \sqrt{\frac{D^2+E^2}{4} - F}\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1:</strong> Circunferencia con centro en el origen y radio \(r=3\):
+        \[
+        x^2 + y^2 = 9
+        \]
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Circunferencia centrada en \((0,0)\) que pasa por los puntos \((3,0)\), \((0,3)\), \((-3,0)\), \((0,-3)\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2:</strong> Circunferencia con centro en \((2,-1)\) y radio \(r=4\):
+        \[
+        (x-2)^2 + (y+1)^2 = 16
+        \]
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Circunferencia centrada en \((2,-1)\) que pasa por \((6,-1)\), \((2,3)\), \((-2,-1)\), \((2,-5)\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(x^2 + y^2 - 4x + 6y - 3 = 0\)<br>
+        Completando cuadrados:
+        \[
+        (x^2 - 4x) + (y^2 + 6y) = 3
+        \]
+        \[
+        (x-2)^2 - 4 + (y+3)^2 - 9 = 3
+        \]
+        \[
+        (x-2)^2 + (y+3)^2 = 16
+        \]
+        Centro \((2,-3)\), radio \(r=4\).
+    </div>
+
+    <h2>7. Parábola</h2>
+    <div class="definicion">
+        La <strong>parábola</strong> es el conjunto de puntos que equidistan de un punto fijo llamado <strong>foco</strong> \(F\) y una recta fija llamada <strong>directriz</strong>.
+    </div>
+
+    <h3>7.1 Parábola vertical con vértice en el origen \((0,0)\)</h3>
+    <div class="formula">
+        \[
+        x^2 = 4p y
+        \]
+        <ul>
+            <li>Vértice: \((0,0)\)</li>
+            <li>Foco: \((0,p)\)</li>
+            <li>Directriz: \(y = -p\)</li>
+            <li>Abre hacia arriba si \(p>0\), hacia abajo si \(p<0\).</li>
+        </ul>
+    </div>
+
+    <h3>7.2 Parábola horizontal con vértice en el origen \((0,0)\)</h3>
+    <div class="formula">
+        \[
+        y^2 = 4p x
+        \]
+        <ul>
+            <li>Vértice: \((0,0)\)</li>
+            <li>Foco: \((p,0)\)</li>
+            <li>Directriz: \(x = -p\)</li>
+            <li>Abre hacia la derecha si \(p>0\), hacia la izquierda si \(p<0\).</li>
+        </ul>
+    </div>
+
+    <h3>7.3 Parábola vertical con vértice en \((h,k)\)</h3>
+    <div class="formula">
+        \[
+        (x-h)^2 = 4p(y-k)
+        \]
+        <ul>
+            <li>Vértice: \((h,k)\)</li>
+            <li>Foco: \((h,k+p)\)</li>
+            <li>Directriz: \(y = k-p\)</li>
+        </ul>
+    </div>
+
+    <h3>7.4 Parábola horizontal con vértice en \((h,k)\)</h3>
+    <div class="formula">
+        \[
+        (y-k)^2 = 4p(x-h)
+        \]
+        <ul>
+            <li>Vértice: \((h,k)\)</li>
+            <li>Foco: \((h+p,k)\)</li>
+            <li>Directriz: \(x = h-p\)</li>
+        </ul>
+    </div>
+
+    <h3>7.5 Ecuación general de la parábola</h3>
+    <div class="formula">
+        \[
+        Ax^2 + Dx + Ey + F = 0 \quad (\text{vertical})
+        \]
+        \[
+        Cy^2 + Dx + Ey + F = 0 \quad (\text{horizontal})
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1:</strong> \(x^2 = 8y\) (vértice en el origen, \(p=2\))<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Parábola que abre hacia arriba con vértice en \((0,0)\), foco en \((0,2)\) y directriz \(y=-2\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2:</strong> \((x-3)^2 = 12(y+1)\) (vértice en \((3,-1)\), \(p=3\))<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Parábola que abre hacia arriba con vértice en \((3,-1)\), foco en \((3,2)\) y directriz \(y=-4\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(y^2 - 6y - 8x + 1 = 0\)<br>
+        Completando:
+        \[
+        y^2 - 6y = 8x - 1
+        \]
+        \[
+        (y-3)^2 - 9 = 8x - 1
+        \]
+        \[
+        (y-3)^2 = 8x + 8 = 8(x+1)
+        \]
+        \[
+        (y-3)^2 = 8(x+1)
+        \]
+        Vértice \((-1,3)\), \(4p=8\) → \(p=2\), abre hacia la derecha.
+    </div>
+
+    <h2>8. Elipse</h2>
+    <div class="definicion">
+        La <strong>elipse</strong> es el conjunto de puntos cuya suma de distancias a dos puntos fijos (focos \(F_1\) y \(F_2\)) es constante.
+    </div>
+
+    <h3>8.1 Elipse con centro en el origen \((0,0)\)</h3>
+    <div class="formula">
+        \[
+        \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+        \]
+        <ul>
+            <li>Centro: \((0,0)\)</li>
+            <li>Semieje mayor: \(a\) (en el eje \(x\) si \(a>b\), en el eje \(y\) si \(b>a\))</li>
+            <li>Semieje menor: \(b\)</li>
+            <li>Focos: \((\pm c, 0)\) si \(a>b\), donde \(c^2 = a^2 - b^2\)</li>
+        </ul>
+    </div>
+
+    <h3>8.2 Elipse con centro en \((h,k)\)</h3>
+    <div class="formula">
+        \[
+        \frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1
+        \]
+        <ul>
+            <li>Centro: \((h,k)\)</li>
+            <li>Focos: \((h\pm c, k)\) si \(a>b\)</li>
+        </ul>
+    </div>
+
+    <h3>8.3 Elipse vertical (centro en el origen)</h3>
+    <div class="formula">
+        \[
+        \frac{x^2}{b^2} + \frac{y^2}{a^2} = 1
+        \]
+        <ul>
+            <li>Semieje mayor: \(a\) en el eje \(y\)</li>
+            <li>Focos: \((0, \pm c)\), \(c^2 = a^2 - b^2\)</li>
+        </ul>
+    </div>
+
+    <h3>8.4 Elipse vertical con centro en \((h,k)\)</h3>
+    <div class="formula">
+        \[
+        \frac{(x-h)^2}{b^2} + \frac{(y-k)^2}{a^2} = 1
+        \]
+    </div>
+
+    <h3>8.5 Ecuación general de la elipse</h3>
+    <div class="formula">
+        \[
+        Ax^2 + Cy^2 + Dx + Ey + F = 0 \quad (A \neq C, \text{ mismos signos})
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1:</strong> \(\frac{x^2}{16} + \frac{y^2}{9} = 1\)<br>
+        \(a=4\), \(b=3\), \(c = \sqrt{16-9} = \sqrt{7}\)<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Elipse centrada en \((0,0)\) con vértices en \((\pm4,0)\) y \((0,\pm3)\), focos en \((\pm\sqrt{7},0)\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2:</strong> \(\frac{(x-2)^2}{25} + \frac{(y+1)^2}{9} = 1\)<br>
+        Centro \((2,-1)\), \(a=5\), \(b=3\), \(c=4\)<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Elipse centrada en \((2,-1)\) con vértices en \((7,-1)\), \((-3,-1)\), \((2,2)\), \((2,-4)\), focos en \((6,-1)\) y \((-2,-1)\).
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3:</strong> Pasar a la forma ordinaria: \(4x^2 + 9y^2 - 16x + 18y - 11 = 0\)<br>
+        Completando:
+        \[
+        4(x^2 - 4x) + 9(y^2 + 2y) = 11
+        \]
+        \[
+        4[(x-2)^2 - 4] + 9[(y+1)^2 - 1] = 11
+        \]
+        \[
+        4(x-2)^2 + 9(y+1)^2 - 16 - 9 = 11
+        \]
+        \[
+        4(x-2)^2 + 9(y+1)^2 = 36
+        \]
+        \[
+        \frac{(x-2)^2}{9} + \frac{(y+1)^2}{4} = 1
+        \]
+        Centro \((2,-1)\), \(a=3\), \(b=2\), \(c=\sqrt{5}\).
+    </div>
+
+    <h2>9. Hipérbola</h2>
+    <div class="definicion">
+        La <strong>hipérbola</strong> es el conjunto de puntos cuya diferencia de distancias a dos puntos fijos (focos \(F_1\) y \(F_2\)) es constante.
+    </div>
+
+    <h3>9.1 Hipérbola con centro en el origen \((0,0)\)</h3>
+    <div class="formula">
+        \[
+        \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1
+        \]
+        <ul>
+            <li>Centro: \((0,0)\)</li>
+            <li>Vértices: \((\pm a, 0)\)</li>
+            <li>Focos: \((\pm c, 0)\), \(c^2 = a^2 + b^2\)</li>
+            <li>Asíntotas: \(y = \pm \frac{b}{a}x\)</li>
+        </ul>
+    </div>
+
+    <h3>9.2 Hipérbola vertical (centro en el origen)</h3>
+    <div class="formula">
+        \[
+        \frac{y^2}{a^2} - \frac{x^2}{b^2} = 1
+        \]
+        <ul>
+            <li>Vértices: \((0, \pm a)\)</li>
+            <li>Focos: \((0, \pm c)\), \(c^2 = a^2 + b^2\)</li>
+            <li>Asíntotas: \(y = \pm \frac{a}{b}x\)</li>
+        </ul>
+    </div>
+
+    <h3>9.3 Hipérbola con centro en \((h,k)\)</h3>
+    <div class="formula">
+        \[
+        \frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1
+        \]
+        \[
+        \frac{(y-k)^2}{a^2} - \frac{(x-h)^2}{b^2} = 1
+        \]
+    </div>
+
+    <h3>9.4 Ecuación general de la hipérbola</h3>
+    <div class="formula">
+        \[
+        Ax^2 + Cy^2 + Dx + Ey + F = 0 \quad (A \neq C, \text{ signos opuestos})
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1:</strong> \(\frac{x^2}{16} - \frac{y^2}{9} = 1\)<br>
+        \(a=4\), \(b=3\), \(c=\sqrt{16+9}=5\)<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Hipérbola centrada en \((0,0)\) con vértices en \((\pm4,0)\), focos en \((\pm5,0)\), asíntotas \(y = \pm \frac{3}{4}x\). Ramas abren hacia la derecha e izquierda.
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2:</strong> \(\frac{(y-2)^2}{9} - \frac{(x+1)^2}{16} = 1\)<br>
+        Centro \((-1,2)\), \(a=3\), \(b=4\), \(c=5\)<br>
+        <div class="grafica-descripcion">
+            <strong>📈 Gráfica:</strong> Hipérbola vertical centrada en \((-1,2)\) con vértices en \((-1,5)\) y \((-1,-1)\), focos en \((-1,7)\) y \((-1,-3)\), asíntotas \(y-2 = \pm \frac{3}{4}(x+1)\).
+        </div>
+    </div>
+
+    <h2>10. Aplicaciones en Ingeniería Eléctrica</h2>
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Antenas parabólicas:</strong> La forma de un reflector parabólico concentra ondas electromagnéticas en el foco.</li>
+            <li><strong>Líneas de transmisión:</strong> La trayectoria de un haz de luz o de una onda electromagnética puede modelarse con rectas y cónicas.</li>
+            <li><strong>Campos eléctricos:</strong> Las líneas de campo eléctrico en un dipolo se representan mediante curvas cónicas (elipses e hipérbolas).</li>
+            <li><strong>Circuitos resonantes:</strong> En el plano complejo, las curvas de resonancia se describen mediante elipses.</li>
+            <li><strong>Órbitas de satélites:</strong> Las órbitas elípticas se describen mediante la ecuación de la elipse.</li>
+        </ul>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
