@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Determinantes y Regla de Cramer</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Determinantes y Regla de Cramer</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item"><strong>1.</strong> \(3\cdot4 - 5\cdot(-2) = 12 + 10 = 22\)</div>
+        <div class="solucion-item"><strong>2.</strong> \((-1)\cdot0 - 2\cdot3 = -6\)</div>
+        <div class="solucion-item"><strong>3.</strong> 0 (fila de ceros)</div>
+        <div class="solucion-item"><strong>4.</strong> \(2(3\cdot4 - 2\cdot1) - 4(0\cdot4 - 2\cdot(-5)) + (-1)(0\cdot1 - 3\cdot(-5)) = 2(12-2) - 4(0+10) -1(0+15) = 20 - 40 - 15 = -35\)</div>
+        <div class="solucion-item"><strong>5.</strong> \(-20\) (calculado por cofactores)</div>
+        <div class="solucion-item"><strong>6.</strong> \(-16\) (calculado por cofactores)</div>
+        <div class="solucion-item"><strong>7.</strong> \(x=1,\ y=3,\ z=-1\)</div>
+        <div class="solucion-item"><strong>8.</strong> \(x=2,\ y=1,\ z=1\)</div>
+        <div class="solucion-item"><strong>9.</strong> \(x=3,\ y=2,\ z=4\)</div>
+        <div class="solucion-item"><strong>10.</strong> \(x=1,\ y=2,\ z=3\)</div>
+        <div class="solucion-item"><strong>11.</strong> \(x=1,\ y=1,\ z=1\)</div>
+        <div class="solucion-item"><strong>12.</strong> \(x=1,\ y=2,\ z=1\)</div>
+        <div class="solucion-item"><strong>13.</strong> \(I_1 = 2.5,\ I_2 = 1.5\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. 22; 2. -35; 3. \(x=1,y=3,z=-1\); 4. \(x=2,y=1,z=1\); 5. \(I_1=2.5,\ I_2=1.5\)</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. -6; 2. 0; 3. \(x=3,y=2,z=4\); 4. \(x=1,y=2,z=3\); 5. \(x=1,y=2,z=1\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'admin') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
