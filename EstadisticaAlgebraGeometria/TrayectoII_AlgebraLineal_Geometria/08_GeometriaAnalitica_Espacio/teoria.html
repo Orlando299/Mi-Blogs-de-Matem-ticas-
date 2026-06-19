@@ -220,16 +220,12 @@
 </div>
 
 <script>
-// ======== NUEVA FUNCIÓN DE PROYECCIÓN ISOMÉTRICA ========
-// Direcciones de los ejes:
-// X: (0.866, -0.5)  → derecha y abajo
-// Y: (-0.866, -0.5) → izquierda y abajo
-// Z: (0, 1)         → arriba
+// ======== FUNCIÓN DE PROYECCIÓN (X → DERECHA, Y → IZQUIERDA/ABAJO, Z → ARRIBA) ========
 function proyeccion(x, y, z, scale, centerX, centerY) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
-    let px = centerX + scale * (x * cos30 - y * cos30);
-    let py = centerY - scale * (x * sin30 + y * sin30 - z);
+    let px = centerX + scale * (x - y * cos30);
+    let py = centerY - scale * (y * sin30 - z);
     return { px, py };
 }
 
@@ -254,7 +250,13 @@ function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
         ctx.font = "14px sans-serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "bottom";
-        ctx.fillText(e.label, p.px + 4, p.py - 4);
+        // Para Z (arriba), la etiqueta va sobre el extremo
+        if (e.label === "z") {
+            ctx.textBaseline = "bottom";
+            ctx.fillText(e.label, p.px + 4, p.py - 6);
+        } else {
+            ctx.fillText(e.label, p.px + 4, p.py - 4);
+        }
     }
     // Origen
     ctx.fillStyle = "#333";
@@ -272,7 +274,6 @@ function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
 }
 
 // ======== GRÁFICOS ========
-
 function dibujarRecta3D() {
     const canvas = document.getElementById('recta3d');
     if (!canvas) return;
@@ -335,11 +336,9 @@ function dibujarPlano3D() {
     ctx.fillRect(0, 0, w, h);
     dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Plano en R3");
     // Plano: 4x + 3y + 6z - 12 = 0
-    // Intersecciones: A(3,0,0), B(0,4,0), C(0,0,2)
     let A = proyeccion(3, 0, 0, scale, centerX, centerY);
     let B = proyeccion(0, 4, 0, scale, centerX, centerY);
     let C = proyeccion(0, 0, 2, scale, centerX, centerY);
-    // Triángulo
     ctx.strokeStyle = "#4ecdc4";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -352,7 +351,6 @@ function dibujarPlano3D() {
     ctx.fill();
     // Líneas internas (paralelas a los lados)
     for (let t = 0.1; t < 1; t += 0.1) {
-        // Línea desde punto en AB hasta punto en AC (ambos a la misma fracción)
         let pAB = proyeccion(3*(1-t), 4*t, 0, scale, centerX, centerY);
         let pAC = proyeccion(3*(1-t), 0, 2*t, scale, centerX, centerY);
         ctx.strokeStyle = "rgba(78, 205, 196, 0.3)";
@@ -361,14 +359,13 @@ function dibujarPlano3D() {
         ctx.moveTo(pAB.px, pAB.py);
         ctx.lineTo(pAC.px, pAC.py);
         ctx.stroke();
-        // Línea desde punto en AB hasta punto en BC
         let pBC = proyeccion(0, 4*(1-t), 2*t, scale, centerX, centerY);
         ctx.beginPath();
         ctx.moveTo(pAB.px, pAB.py);
         ctx.lineTo(pBC.px, pBC.py);
         ctx.stroke();
     }
-    // Marcar intersecciones
+    // Intersecciones
     let ints = [
         { x: 3, y: 0, z: 0, label: "(3,0,0)" },
         { x: 0, y: 4, z: 0, label: "(0,4,0)" },
@@ -386,7 +383,7 @@ function dibujarPlano3D() {
         ctx.textBaseline = "bottom";
         ctx.fillText(i.label, p.px + 6, p.py - 4);
     }
-    // Punto P = (1, 1, 5/6) sobre el plano
+    // Punto P = (1,1,5/6)
     let P = proyeccion(1, 1, 5/6, scale, centerX, centerY);
     ctx.fillStyle = "#e74c3c";
     ctx.beginPath();
@@ -410,7 +407,7 @@ function dibujarDistancia3D() {
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
     dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Distancia punto-plano");
-    // Plano: 4x + 3y + 6z - 12 = 0 (se dibuja solo el triángulo)
+    // Plano
     let A = proyeccion(3, 0, 0, scale, centerX, centerY);
     let B = proyeccion(0, 4, 0, scale, centerX, centerY);
     let C = proyeccion(0, 0, 2, scale, centerX, centerY);
@@ -433,7 +430,7 @@ function dibujarDistancia3D() {
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
     ctx.fillText("P(2,3,-1)", P.px + 8, P.py - 4);
-    // Proyección Q sobre el plano
+    // Proyección Q
     let A2=4, B2=3, C2=6, D=-12;
     let denom = A2*A2+B2*B2+C2*C2;
     let val = A2*2 + B2*3 + C2*(-1) + D;
@@ -479,7 +476,6 @@ function dibujarEsfera3D() {
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
     dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Esfera");
-    // Centro C(1,-2,3), radio 5
     let cx = 1, cy = -2, cz = 3, r = 5;
     let c = proyeccion(cx, cy, cz, scale, centerX, centerY);
     let rProj = r * scale * 0.8;
