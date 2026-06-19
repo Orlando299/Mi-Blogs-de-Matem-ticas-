@@ -36,7 +36,7 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
-    <!-- ========== SECCIONES DE TEORÍA CON GRÁFICOS ========== -->
+    <!-- ========== TEORÍA ========== -->
 
     <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
     <div class="definicion">
@@ -90,23 +90,7 @@
         El <strong>triple producto escalar</strong> \(u \cdot (v \times w)\) da el volumen del paralelepípedo formado por los tres vectores.
     </div>
 
-    <h2>5. Recta en el espacio</h2>
-    <div class="definicion">
-        Una recta en el espacio se expresa mediante un <strong>punto</strong> \(P_0\) y un <strong>vector director</strong> \(d\):
-        \[
-        P = P_0 + t d, \quad t \in \mathbb{R}
-        \]
-        \((x, y, z) = (x_0, y_0, z_0) + t(a, b, c)\).
-    </div>
-    <div class="definicion">
-        <strong>Ecuaciones paramétricas:</strong>
-        \[
-        x = x_0 + at, \quad y = y_0 + bt, \quad z = z_0 + ct
-        \]
-        <strong>Ecuación continua (simétrica):</strong> \(\frac{x-x_0}{a} = \frac{y-y_0}{b} = \frac{z-z_0}{c}\).
-    </div>
-
-    <h2>6. Plano en el espacio</h2>
+    <h2>5. Plano en el espacio</h2>
     <div class="definicion">
         Un plano se define mediante un <strong>punto</strong> \(P_0\) y un <strong>vector normal</strong> \(n = (A, B, C)\):
         \[
@@ -125,26 +109,12 @@
         <div class="canvas-container">
             <canvas id="plano3d" width="500" height="400"></canvas>
             <img id="img-plano3d" class="grafico-img" />
-            <p style="font-size:0.9rem;">Plano con intersecciones en (3,0,0), (0,4,0), (0,0,2) y punto P(1,1,5/6).</p>
+            <p style="font-size:0.9rem;">Plano con intersecciones en (3,0,0), (0,4,0), (0,0,2).</p>
         </div>
     </div>
 
-    <h2>7. Distancias en el espacio</h2>
-    <h3>7.1 Distancia de un punto a un plano</h3>
-    <div class="formula">
-        \[
-        d = \frac{|Ax_1 + By_1 + Cz_1 + D|}{\sqrt{A^2 + B^2 + C^2}}
-        \]
-    </div>
-    <div class="ejemplo">
-        Distancia de \(P = (2, 3, -1)\) al plano \(4x + 3y + 6z - 12 = 0\) es:
-        \[
-        d = \frac{|4(2)+3(3)+6(-1)-12|}{\sqrt{16+9+36}} = \frac{|8+9-6-12|}{\sqrt{61}} = \frac{1}{\sqrt{61}}
-        \]
-    </div>
-
-    <h2>8. Superficies</h2>
-    <h3>8.1 Esfera</h3>
+    <h2>6. Superficies</h2>
+    <h3>6.1 Esfera</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
@@ -155,11 +125,11 @@
         <div class="canvas-container">
             <canvas id="esfera3d" width="500" height="400"></canvas>
             <img id="img-esfera3d" class="grafico-img" />
-            <p style="font-size:0.9rem;">Esfera centrada en (1,-2,3) con radio 5.</p>
+            <p style="font-size:0.9rem;">Esfera centrada en (1,-2,3) con radio 5 (origen en esquina inferior izquierda).</p>
         </div>
     </div>
 
-    <h3>8.2 Cilindro circular recto</h3>
+    <h3>6.2 Cilindro circular recto</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 = r^2
@@ -175,7 +145,7 @@
         </div>
     </div>
 
-    <h3>8.3 Cono circular recto</h3>
+    <h3>6.3 Cono circular recto</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 = \frac{r^2}{h^2}(z-l)^2
@@ -190,7 +160,7 @@
         </div>
     </div>
 
-    <h2>9. Aplicaciones en Ingeniería Eléctrica</h2>
+    <h2>7. Aplicaciones en Ingeniería Eléctrica</h2>
     <div class="ejemplo">
         <ul>
             <li><strong>Campos electromagnéticos:</strong> El vector de Poynting \(\vec{S} = \vec{E} \times \vec{H}\) usa producto vectorial.</li>
@@ -207,19 +177,27 @@
 </div>
 
 <script>
-// ======== FUNCIÓN DE PROYECCIÓN (Z HACIA ABAJO) ========
-// X: (1, 0) → derecha
-// Y: (-0.866, -0.5) → izquierda y abajo (30°)
-// Z: (0, 1) → abajo (pantalla)
-function proyeccion(x, y, z, scale, centerX, centerY) {
+// ======== PROYECCIÓN CENTRADA (para plano, cilindro, cono) ========
+// X → derecha, Y → izquierda/abajo, Z → abajo
+function proyeccionCentro(x, y, z, scale, cx, cy) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
-    let px = centerX + scale * (x - y * cos30);
-    let py = centerY - scale * (y * sin30 + z);  // +z para que Z vaya hacia abajo
+    let px = cx + scale * (x - y * cos30);
+    let py = cy - scale * (y * sin30 + z);
     return { px, py };
 }
 
-function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
+// ======== PROYECCIÓN PARA ESFERA (origen en esquina inferior izquierda) ========
+function proyeccionEsquina(x, y, z, scale, cx, cy) {
+    const cos30 = 0.86602540378;
+    const sin30 = 0.5;
+    let px = cx + scale * (x - y * cos30);
+    let py = cy + scale * (y * sin30 + z);
+    return { px, py };
+}
+
+// ======== DIBUJAR EJES CENTRADOS ========
+function dibujarEjesCentro(ctx, w, h, scale, cx, cy, label) {
     const ejes = [
         { x: 5, y: 0, z: 0, color: "#e74c3c", label: "x" },
         { x: 0, y: 5, z: 0, color: "#2ecc71", label: "y" },
@@ -227,9 +205,9 @@ function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
     ];
     ctx.strokeStyle = "#333";
     ctx.lineWidth = 1;
-    let o = proyeccion(0, 0, 0, scale, centerX, centerY);
+    let o = proyeccionCentro(0, 0, 0, scale, cx, cy);
     for (let e of ejes) {
-        let p = proyeccion(e.x, e.y, e.z, scale, centerX, centerY);
+        let p = proyeccionCentro(e.x, e.y, e.z, scale, cx, cy);
         ctx.beginPath();
         ctx.moveTo(o.px, o.py);
         ctx.lineTo(p.px, p.py);
@@ -247,7 +225,6 @@ function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
             ctx.fillText(e.label, p.px + 4, p.py - 4);
         }
     }
-    // Origen
     ctx.fillStyle = "#333";
     ctx.font = "12px sans-serif";
     ctx.textAlign = "left";
@@ -262,7 +239,50 @@ function dibujarEjes3D(ctx, w, h, scale, centerX, centerY, label) {
     }
 }
 
-// ======== GRÁFICOS (el resto es igual, solo cambia la proyección) ========
+// ======== DIBUJAR EJES PARA ESFERA (origen en esquina inferior izquierda) ========
+function dibujarEjesEsquina(ctx, w, h, scale, cx, cy, label) {
+    const ejes = [
+        { x: 5, y: 0, z: 0, color: "#e74c3c", label: "x" },
+        { x: 0, y: 5, z: 0, color: "#2ecc71", label: "y" },
+        { x: 0, y: 0, z: 5, color: "#3498db", label: "z" }
+    ];
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 1;
+    let o = proyeccionEsquina(0, 0, 0, scale, cx, cy);
+    for (let e of ejes) {
+        let p = proyeccionEsquina(e.x, e.y, e.z, scale, cx, cy);
+        ctx.beginPath();
+        ctx.moveTo(o.px, o.py);
+        ctx.lineTo(p.px, p.py);
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = e.color;
+        ctx.font = "14px sans-serif";
+        ctx.textAlign = "center";
+        if (e.label === "z") {
+            ctx.textBaseline = "top";
+            ctx.fillText(e.label, p.px + 4, p.py + 6);
+        } else {
+            ctx.textBaseline = "bottom";
+            ctx.fillText(e.label, p.px + 4, p.py - 4);
+        }
+    }
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("O", o.px + 4, o.py + 4);
+    if (label) {
+        ctx.fillStyle = "#333";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(label, 10, 20);
+    }
+}
+
+// ======== GRÁFICOS ========
 
 function dibujarPlano3D() {
     const canvas = document.getElementById('plano3d');
@@ -270,16 +290,15 @@ function dibujarPlano3D() {
     const ctx = canvas.getContext('2d');
     const w = 500, h = 400;
     const scale = 40;
-    const centerX = 0;          // Origen en esquina inferior izquierda
-    const centerY = h;
+    const cx = w/2, cy = h/2;
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
-    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Plano en R3");
+    dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Plano en R3");
     // Plano: 4x + 3y + 6z - 12 = 0
-    let A = proyeccion(3, 0, 0, scale, centerX, centerY);
-    let B = proyeccion(0, 4, 0, scale, centerX, centerY);
-    let C = proyeccion(0, 0, 2, scale, centerX, centerY);
+    let A = proyeccionCentro(3, 0, 0, scale, cx, cy);
+    let B = proyeccionCentro(0, 4, 0, scale, cx, cy);
+    let C = proyeccionCentro(0, 0, 2, scale, cx, cy);
     ctx.strokeStyle = "#4ecdc4";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -291,15 +310,15 @@ function dibujarPlano3D() {
     ctx.fillStyle = "rgba(78, 205, 196, 0.1)";
     ctx.fill();
     for (let t = 0.1; t < 1; t += 0.1) {
-        let pAB = proyeccion(3*(1-t), 4*t, 0, scale, centerX, centerY);
-        let pAC = proyeccion(3*(1-t), 0, 2*t, scale, centerX, centerY);
+        let pAB = proyeccionCentro(3*(1-t), 4*t, 0, scale, cx, cy);
+        let pAC = proyeccionCentro(3*(1-t), 0, 2*t, scale, cx, cy);
         ctx.strokeStyle = "rgba(78, 205, 196, 0.3)";
         ctx.lineWidth = 0.5;
         ctx.beginPath();
         ctx.moveTo(pAB.px, pAB.py);
         ctx.lineTo(pAC.px, pAC.py);
         ctx.stroke();
-        let pBC = proyeccion(0, 4*(1-t), 2*t, scale, centerX, centerY);
+        let pBC = proyeccionCentro(0, 4*(1-t), 2*t, scale, cx, cy);
         ctx.beginPath();
         ctx.moveTo(pAB.px, pAB.py);
         ctx.lineTo(pBC.px, pBC.py);
@@ -311,7 +330,7 @@ function dibujarPlano3D() {
         { x: 0, y: 0, z: 2, label: "(0,0,2)" }
     ];
     for (let i of ints) {
-        let p = proyeccion(i.x, i.y, i.z, scale, centerX, centerY);
+        let p = proyeccionCentro(i.x, i.y, i.z, scale, cx, cy);
         ctx.fillStyle = "#2e7d32";
         ctx.beginPath();
         ctx.arc(p.px, p.py, 4, 0, 2*Math.PI);
@@ -322,16 +341,6 @@ function dibujarPlano3D() {
         ctx.textBaseline = "bottom";
         ctx.fillText(i.label, p.px + 6, p.py - 4);
     }
-    let P = proyeccion(1, 1, 5/6, scale, centerX, centerY);
-    ctx.fillStyle = "#e74c3c";
-    ctx.beginPath();
-    ctx.arc(P.px, P.py, 5, 0, 2*Math.PI);
-    ctx.fill();
-    ctx.fillStyle = "#e74c3c";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("P(1,1,5/6)", P.px + 8, P.py - 4);
 }
 
 function dibujarEsfera3D() {
@@ -340,36 +349,26 @@ function dibujarEsfera3D() {
     const ctx = canvas.getContext('2d');
     const w = 500, h = 400;
     const scale = 40;
-    const centerX = 0;          // Origen en esquina inferior izquierda
-    const centerY = h;
-
+    const cx = 0, cy = h;   // origen en esquina inferior izquierda
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
-
-    // Ejes (usando la misma función que ya tienes)
-    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Esfera");
-
-    // Centro de la esfera: (1, -2, 3) y radio 5
-    const cx = 1, cy = -2, cz = 3, r = 5;
-    const c = proyeccion(cx, cy, cz, scale, centerX, centerY);
-
-    // === LÍNEAS DE LATITUD Y LONGITUD ===
-    const meridianos = 12;
-    const paralelos = 8;
-    const steps = 24;
-
-    // Meridianos (líneas verticales)
+    dibujarEjesEsquina(ctx, w, h, scale, cx, cy, "Esfera (origen en esquina)");
+    // Centro de la esfera: (4, -2, -4) para que quede centrada en el canvas
+    const centroX = 4, centroY = -2, centroZ = -4, radio = 5;
+    const c = proyeccionEsquina(centroX, centroY, centroZ, scale, cx, cy);
+    const meridianos = 12, paralelos = 8, steps = 24;
+    // Meridianos
     for (let j = 0; j < meridianos; j++) {
         let theta = (j / meridianos) * 2 * Math.PI;
         ctx.beginPath();
         let first = true;
         for (let i = 0; i <= steps; i++) {
             let v = -Math.PI/2 + (i / steps) * Math.PI;
-            let px = cx + r * Math.cos(v) * Math.cos(theta);
-            let py = cy + r * Math.cos(v) * Math.sin(theta);
-            let pz = cz + r * Math.sin(v);
-            let p = proyeccion(px, py, pz, scale, centerX, centerY);
+            let px = centroX + radio * Math.cos(v) * Math.cos(theta);
+            let py = centroY + radio * Math.cos(v) * Math.sin(theta);
+            let pz = centroZ + radio * Math.sin(v);
+            let p = proyeccionEsquina(px, py, pz, scale, cx, cy);
             if (first) { ctx.moveTo(p.px, p.py); first = false; }
             else ctx.lineTo(p.px, p.py);
         }
@@ -377,20 +376,19 @@ function dibujarEsfera3D() {
         ctx.lineWidth = 1.2;
         ctx.stroke();
     }
-
-    // Paralelos (círculos horizontales)
+    // Paralelos
     for (let j = 1; j < paralelos; j++) {
         let lat = -Math.PI/2 + (j / paralelos) * Math.PI;
-        let radioLat = r * Math.cos(lat);
-        let zLat = cz + r * Math.sin(lat);
+        let radioLat = radio * Math.cos(lat);
+        let zLat = centroZ + radio * Math.sin(lat);
         ctx.beginPath();
         let first = true;
         for (let i = 0; i <= steps; i++) {
             let lon = (i / steps) * 2 * Math.PI;
-            let px = cx + radioLat * Math.cos(lon);
-            let py = cy + radioLat * Math.sin(lon);
+            let px = centroX + radioLat * Math.cos(lon);
+            let py = centroY + radioLat * Math.sin(lon);
             let pz = zLat;
-            let p = proyeccion(px, py, pz, scale, centerX, centerY);
+            let p = proyeccionEsquina(px, py, pz, scale, cx, cy);
             if (first) { ctx.moveTo(p.px, p.py); first = false; }
             else ctx.lineTo(p.px, p.py);
         }
@@ -398,13 +396,9 @@ function dibujarEsfera3D() {
         ctx.lineWidth = 1.2;
         ctx.stroke();
     }
-
-    // Sombreado (relleno suave)
-    let radioProj = r * scale * 0.85;
-    let grad = ctx.createRadialGradient(
-        c.px - 10, c.py - 10, 5,
-        c.px, c.py, radioProj
-    );
+    // Sombreado
+    let radioProj = radio * scale * 0.85;
+    let grad = ctx.createRadialGradient(c.px-10, c.py-10, 5, c.px, c.py, radioProj);
     grad.addColorStop(0, "rgba(52, 152, 219, 0.25)");
     grad.addColorStop(0.7, "rgba(52, 152, 219, 0.10)");
     grad.addColorStop(1, "rgba(52, 152, 219, 0.02)");
@@ -412,7 +406,6 @@ function dibujarEsfera3D() {
     ctx.beginPath();
     ctx.arc(c.px, c.py, radioProj, 0, 2 * Math.PI);
     ctx.fill();
-
     // Centro
     ctx.fillStyle = "#2e7d32";
     ctx.beginPath();
@@ -422,10 +415,9 @@ function dibujarEsfera3D() {
     ctx.font = "12px sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
-    ctx.fillText("C(1,-2,3)", c.px + 8, c.py - 4);
-
+    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
     // Radio
-    let rEnd = proyeccion(cx + r, cy, cz, scale, centerX, centerY);
+    let rEnd = proyeccionEsquina(centroX + radio, centroY, centroZ, scale, cx, cy);
     ctx.strokeStyle = "#e74c3c";
     ctx.lineWidth = 1.5;
     ctx.setLineDash([4, 4]);
@@ -438,7 +430,7 @@ function dibujarEsfera3D() {
     ctx.font = "12px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
-    let midR = proyeccion(cx + r/2, cy, cz, scale, centerX, centerY);
+    let midR = proyeccionEsquina(centroX + radio/2, centroY, centroZ, scale, cx, cy);
     ctx.fillText("r=5", midR.px, midR.py - 8);
 }
 
@@ -448,14 +440,12 @@ function dibujarCilindro3D() {
     const ctx = canvas.getContext('2d');
     const w = 500, h = 400;
     const scale = 40;
-    const centerX = 0;          // Origen en esquina inferior izquierda
-    const centerY = h;
+    const cx = w/2, cy = h/2;
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
-    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Cilindro");
-    let r = 3, hc = 4;
-    let steps = 20;
+    dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Cilindro");
+    let r = 3, hc = 4, steps = 20;
     let pts = [];
     for (let i = 0; i <= steps; i++) {
         let theta = (i/steps)*2*Math.PI;
@@ -467,14 +457,14 @@ function dibujarCilindro3D() {
     ctx.lineWidth = 2;
     ctx.beginPath();
     for (let i = 0; i <= steps; i++) {
-        let p = proyeccion(pts[i].x, pts[i].y, pts[i].z, scale, centerX, centerY);
+        let p = proyeccionCentro(pts[i].x, pts[i].y, pts[i].z, scale, cx, cy);
         if (i===0) ctx.moveTo(p.px, p.py);
         else ctx.lineTo(p.px, p.py);
     }
     ctx.stroke();
     ctx.beginPath();
     for (let i = 0; i <= steps; i++) {
-        let p = proyeccion(pts[i].x, pts[i].y, hc, scale, centerX, centerY);
+        let p = proyeccionCentro(pts[i].x, pts[i].y, hc, scale, cx, cy);
         if (i===0) ctx.moveTo(p.px, p.py);
         else ctx.lineTo(p.px, p.py);
     }
@@ -485,8 +475,8 @@ function dibujarCilindro3D() {
         let theta = (i/8)*2*Math.PI;
         let x = r*Math.cos(theta);
         let y = r*Math.sin(theta);
-        let p1 = proyeccion(x, y, -hc, scale, centerX, centerY);
-        let p2 = proyeccion(x, y, hc, scale, centerX, centerY);
+        let p1 = proyeccionCentro(x, y, -hc, scale, cx, cy);
+        let p2 = proyeccionCentro(x, y, hc, scale, cx, cy);
         ctx.beginPath();
         ctx.moveTo(p1.px, p1.py);
         ctx.lineTo(p2.px, p2.py);
@@ -505,14 +495,12 @@ function dibujarCono3D() {
     const ctx = canvas.getContext('2d');
     const w = 500, h = 400;
     const scale = 40;
-    const centerX = 0;          // Origen en esquina inferior izquierda
-    const centerY = h;
+    const cx = w/2, cy = h/2;
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
-    dibujarEjes3D(ctx, w, h, scale, centerX, centerY, "Cono");
-    let r = 3, hc = 4;
-    let steps = 20;
+    dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Cono");
+    let r = 3, hc = 4, steps = 20;
     ctx.strokeStyle = "#e67e22";
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -520,19 +508,19 @@ function dibujarCono3D() {
         let theta = (i/steps)*2*Math.PI;
         let x = r*Math.cos(theta);
         let y = r*Math.sin(theta);
-        let p = proyeccion(x, y, hc, scale, centerX, centerY);
+        let p = proyeccionCentro(x, y, hc, scale, cx, cy);
         if (i===0) ctx.moveTo(p.px, p.py);
         else ctx.lineTo(p.px, p.py);
     }
     ctx.stroke();
-    let vert = proyeccion(0, 0, 0, scale, centerX, centerY);
+    let vert = proyeccionCentro(0, 0, 0, scale, cx, cy);
     ctx.strokeStyle = "rgba(230, 126, 34, 0.5)";
     ctx.lineWidth = 1.5;
     for (let i = 0; i < 8; i++) {
         let theta = (i/8)*2*Math.PI;
         let x = r*Math.cos(theta);
         let y = r*Math.sin(theta);
-        let p = proyeccion(x, y, hc, scale, centerX, centerY);
+        let p = proyeccionCentro(x, y, hc, scale, cx, cy);
         ctx.beginPath();
         ctx.moveTo(vert.px, vert.py);
         ctx.lineTo(p.px, p.py);
@@ -554,6 +542,7 @@ function dibujarCono3D() {
     ctx.fillText("x² + y² = (9/16)z²", 10, 30);
 }
 
+// ======== CONVERSIÓN A IMAGEN ========
 function convertirCanvasAImagen(canvasId, imgId) {
     const canvas = document.getElementById(canvasId);
     const img = document.getElementById(imgId);
