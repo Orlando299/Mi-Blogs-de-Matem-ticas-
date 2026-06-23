@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios - Geometría Analítica en el Espacio</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1100px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        .author { text-align: center; font-size: 14px; }
+        .ejercicio { margin: 15px 0; padding: 12px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
+        .grafica-descripcion { background: #e8f0fe; padding: 8px; border-left: 4px solid #1a3e6f; margin: 8px 0; }
+        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
+        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; color: #0a0c10; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Geometría Analítica en el Espacio</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 1: VECTORES EN R3                                      -->
+    <!-- ============================================================ -->
+    <h2>1. Vectores en \(\mathbb{R}^3\)</h2>
+    <div class="ejercicio"><strong>1.</strong> Dados \(u = (2, -1, 3)\) y \(v = (1, 4, -2)\), calcula:<br>
+        a) \(u + v\)<br>
+        b) \(2u - v\)<br>
+        c) \(\|u\|\) y \(\|v\|\)<br>
+        d) El ángulo entre \(u\) y \(v\).</div>
+
+    <div class="ejercicio"><strong>2.</strong> Encuentra un vector unitario en la dirección de \(w = (3, -6, 2)\).</div>
+
+    <div class="ejercicio"><strong>3.</strong> Determina si los vectores \(u = (2, -1, 3)\) y \(v = (4, -2, 6)\) son paralelos, ortogonales o ninguno.</div>
+
+    <div class="ejercicio"><strong>4.</strong> Dados \(a = (1, 2, 3)\), \(b = (2, -1, 0)\), \(c = (0, 1, -2)\), calcula el triple producto escalar \(a \cdot (b \times c)\). ¿Qué representa geométricamente?</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 2: RECTA EN EL ESPACIO                                -->
+    <!-- ============================================================ -->
+    <h2>2. Recta en el espacio</h2>
+    <div class="ejercicio"><strong>5.</strong> Encuentra las ecuaciones vectorial, paramétrica y simétrica de la recta que pasa por \(P_0 = (1, -2, 3)\) con dirección \(d = (2, 1, -3)\).</div>
+
+    <div class="ejercicio"><strong>6.</strong> Determina si el punto \(Q = (5, 0, -3)\) pertenece a la recta del ejercicio anterior.</div>
+
+    <div class="ejercicio"><strong>7.</strong> Encuentra la ecuación de la recta que pasa por los puntos \(A(2, -1, 4)\) y \(B(3, 1, -2)\).</div>
+
+    <div class="ejercicio"><strong>8.</strong> ¿Son paralelas las rectas \(L_1: (x,y,z) = (1,2,3) + t(2,-1,1)\) y \(L_2: (x,y,z) = (0,1,0) + s(-4,2,-2)\)? Justifica.</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 3: PLANO EN EL ESPACIO                                -->
+    <!-- ============================================================ -->
+    <h2>3. Plano en el espacio</h2>
+    <div class="ejercicio"><strong>9.</strong> Encuentra la ecuación del plano que pasa por \(P_0 = (2, -1, 3)\) y tiene normal \(n = (4, -2, 1)\).</div>
+
+    <div class="ejercicio"><strong>10.</strong> Halla la ecuación del plano que pasa por los puntos \(A(1,0,0)\), \(B(0,2,0)\), \(C(0,0,3)\).</div>
+
+    <div class="ejercicio"><strong>11.</strong> Determina si el punto \(P = (3, 2, -1)\) pertenece al plano \(2x - y + 3z - 4 = 0\).</div>
+
+    <div class="ejercicio"><strong>12.</strong> Encuentra la intersección de la recta \(L: (x,y,z) = (1, -1, 2) + t(3, 1, -2)\) con el plano \(x + y + z = 4\).</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 4: DISTANCIAS                                         -->
+    <!-- ============================================================ -->
+    <h2>4. Distancias en el espacio</h2>
+    <div class="ejercicio"><strong>13.</strong> Calcula la distancia del punto \(P = (2, 3, -1)\) al plano \(4x + 3y + 6z - 12 = 0\).</div>
+
+    <div class="ejercicio"><strong>14.</strong> Halla la distancia del punto \(Q = (1, -2, 3)\) a la recta \(L: (x,y,z) = (0,1,2) + t(2, -1, 1)\).</div>
+
+    <div class="ejercicio"><strong>15.</strong> Calcula la distancia entre los planos paralelos \(2x - y + 3z = 5\) y \(2x - y + 3z = -7\).</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 5: SUPERFICIES (ESFERA, CILINDRO, CONO)              -->
+    <!-- ============================================================ -->
+    <h2>5. Superficies</h2>
+    <div class="ejercicio"><strong>16.</strong> Identifica y grafica la superficie: \(x^2 + y^2 + z^2 - 4x + 6y - 2z - 2 = 0\). (Completa cuadrados y halla centro y radio).</div>
+
+    <div class="ejercicio"><strong>17.</strong> Identifica la superficie: \(x^2 + y^2 = 9\) en el espacio tridimensional. ¿Qué nombre recibe?</div>
+
+    <div class="ejercicio"><strong>18.</strong> Identifica la superficie: \(x^2 + y^2 - z^2 = 0\). ¿Qué tipo de cono es? Encuentra su vértice.</div>
+
+    <div class="ejercicio"><strong>19.</strong> Comprueba si el punto \(P = (1, 2, -1)\) pertenece a la esfera \((x-2)^2 + (y+1)^2 + (z-3)^2 = 25\).</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 6: INTERSECCIÓN PLANO-ESFERA CON PREGUNTAS GENERADORAS -->
+    <!-- ============================================================ -->
+    <h2>6. Intersección plano-esfera</h2>
+    <div class="ejemplo" style="background:#f9f9f9; padding:10px; border-left:4px solid #c96b1a; margin-bottom:20px;">
+        <strong>🌐 Visualización interactiva:</strong> Observa cómo un plano corta a una esfera. La sección resultante es una circunferencia. A continuación, responde las preguntas.
+    </div>
+
+    <!-- Gráfico Canvas: Plano cortando esfera -->
+    <div class="canvas-container">
+        <canvas id="planoEsferaCanvas" width="500" height="400"></canvas>
+        <p style="font-size:0.9rem;">Plano \(4x + 3y + 6z - 12 = 0\) cortando la esfera \( (x-4)^2 + (y+2)^2 + (z+4)^2 = 25\).</p>
+    </div>
+
+    <div class="ejercicio"><strong>20.</strong> Considera la esfera \( (x-4)^2 + (y+2)^2 + (z+4)^2 = 25\) y el plano \(4x + 3y + 6z - 12 = 0\).<br>
+        a) (2 pt) Calcula la distancia del centro de la esfera al plano.<br>
+        b) (3 pt) ¿El plano interseca la esfera? Justifica.<br>
+        c) (3 pt) Si la interseca, ¿cuál es el radio de la circunferencia de intersección? (Ayuda: \(r_{\text{sección}} = \sqrt{R^2 - d^2}\)).<br>
+        d) (2 pt) ¿Qué tipo de sección cónica se obtiene al cortar una esfera con un plano? ¿En qué caso la sección es un punto?</div>
+
+    <div class="ejercicio"><strong>21.</strong> Dada la esfera \(x^2 + y^2 + z^2 = 16\) y el plano \(z = 2\).<br>
+        a) Halla la circunferencia de intersección (centro y radio).<br>
+        b) ¿Cuál es la ecuación de esa circunferencia en el plano \(z=2\)?<br>
+        c) Si el plano fuera \(z = 5\), ¿qué ocurriría?</div>
+
+    <div class="ejercicio"><strong>22.</strong> (Pregunta generadora) ¿Qué condición debe cumplir la distancia del centro de una esfera a un plano para que la intersección sea:
+        <br>a) una circunferencia? <br>b) un punto? <br>c) vacía? <br>Justifica con una fórmula general.</div>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN 7: PROBLEMAS INTEGRADORES                             -->
+    <!-- ============================================================ -->
+    <h2>7. Problemas integradores</h2>
+    <div class="ejercicio"><strong>23.</strong> Una esfera tiene centro en \(C(1,2,3)\) y radio \(4\). Un plano \(2x - y + 2z = 1\) la corta. Encuentra el radio de la circunferencia de intersección.</div>
+
+    <div class="ejercicio"><strong>24.</strong> Un cono circular recto tiene vértice en el origen, eje sobre el eje \(z\) y radio \(3\) en \(z=4\). Escribe su ecuación y determina si el punto \(P = (2, 1, 2)\) está sobre la superficie.</div>
+
+    <div class="ejercicio"><strong>25.</strong> Un cilindro circular recto tiene radio \(2\) y eje paralelo al eje \(z\), pasando por el punto \((1, -1, 0)\). Escribe su ecuación.</div>
+
+    <div class="ejercicio"><strong>26.</strong> (Aplicación eléctrica) Un campo eléctrico radial en el espacio está descrito por el vector \(\vec{E}(x,y,z) = (x, y, z)\). Calcula el flujo a través de la esfera \(x^2+y^2+z^2=9\) usando el teorema de la divergencia. (Sugerencia: div \(\vec{E} = 3\)).</div>
+
+    <!-- ============================================================ -->
+    <!-- BOTÓN PARA PDF                                               -->
+    <!-- ============================================================ -->
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+
+<script>
+// ======== GRÁFICO: PLANO CORTANDO ESFERA ========
+// Esta función dibuja una proyección isométrica de un plano cortando una esfera.
+// Se usa un canvas de 500x400 con origen en el centro para la proyección isométrica.
+// Se dibujan ejes, la esfera como un círculo con sombreado y el plano como una línea/región.
+
+function dibujarPlanoEsfera() {
+    const canvas = document.getElementById('planoEsferaCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 30; // unidades por pixel
+    const cx = w/2, cy = h/2;
+    // Definir proyección isométrica (X: derecha+abajo, Y: izquierda+abajo, Z: arriba)
+    function proj(x, y, z) {
+        const cos30 = 0.86602540378;
+        const sin30 = 0.5;
+        let px = cx + scale * (x * cos30 - y * cos30);
+        let py = cy - scale * (x * sin30 + y * sin30 - z);
+        return { px, py };
+    }
+
+    // Limpiar
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+
+    // Ejes (simples)
+    function dibujarEjes() {
+        const ejes = [
+            { x: 6, y: 0, z: 0, color: "#e74c3c", label: "x" },
+            { x: 0, y: 6, z: 0, color: "#2ecc71", label: "y" },
+            { x: 0, y: 0, z: 6, color: "#3498db", label: "z" }
+        ];
+        let o = proj(0, 0, 0);
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 1;
+        for (let e of ejes) {
+            let p = proj(e.x, e.y, e.z);
+            ctx.beginPath();
+            ctx.moveTo(o.px, o.py);
+            ctx.lineTo(p.px, p.py);
+            ctx.strokeStyle = e.color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.fillStyle = e.color;
+            ctx.font = "14px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(e.label, p.px + 4, p.py - 4);
+        }
+        ctx.fillStyle = "#333";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("O", o.px + 4, o.py + 4);
+    }
+
+    // Esfera: centro (4, -2, -4), radio 5
+    const cxS = 4, cyS = -2, czS = -4, rS = 5;
+    // Dibujar círculo de la esfera (proyección)
+    let c = proj(cxS, cyS, czS);
+    let rProj = rS * scale * 0.85;
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, rProj, 0, 2*Math.PI);
+    ctx.strokeStyle = "rgba(52, 152, 219, 0.6)";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(52, 152, 219, 0.08)";
+    ctx.fill();
+
+    // Plano: 4x + 3y + 6z - 12 = 0 → 4x + 3y + 6z = 12
+    // Dibujar una malla del plano (triángulo de intersección con ejes)
+    let pA = proj(3, 0, 0);
+    let pB = proj(0, 4, 0);
+    let pC = proj(0, 0, 2);
+    ctx.beginPath();
+    ctx.moveTo(pA.px, pA.py);
+    ctx.lineTo(pB.px, pB.py);
+    ctx.lineTo(pC.px, pC.py);
+    ctx.closePath();
+    ctx.strokeStyle = "#e67e22";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(230, 126, 34, 0.1)";
+    ctx.fill();
+
+    // Marcar intersecciones con ejes
+    let ints = [
+        { x: 3, y: 0, z: 0, label: "(3,0,0)" },
+        { x: 0, y: 4, z: 0, label: "(0,4,0)" },
+        { x: 0, y: 0, z: 2, label: "(0,0,2)" }
+    ];
+    for (let i of ints) {
+        let p = proj(i.x, i.y, i.z);
+        ctx.fillStyle = "#2e7d32";
+        ctx.beginPath();
+        ctx.arc(p.px, p.py, 4, 0, 2*Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "#2e7d32";
+        ctx.font = "10px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(i.label, p.px + 6, p.py - 4);
+    }
+
+    // Marcar centro de la esfera
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
+
+    // Pregunta generadora: añadir un texto flotante
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText("Plano corta a la esfera", w/2, 10);
+
+    // Dibujar ejes después (para que queden encima)
+    dibujarEjes();
+}
+
+window.onload = function() {
+    dibujarPlanoEsfera();
+};
+</script>
+</body>
+</html>
