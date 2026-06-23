@@ -121,11 +121,14 @@
         \]
     </div>
     <div class="ejemplo">
-        Esfera con centro \((1, -2, 3)\) y radio \(5\): \((x-1)^2 + (y+2)^2 + (z-3)^2 = 25\).
+        <strong>Ejemplo:</strong> Esfera con centro \((4, -2, -4)\) y radio \(5\). Su ecuación es:
+        \[
+        (x-4)^2 + (y+2)^2 + (z+4)^2 = 25
+        \]
         <div class="canvas-container">
             <canvas id="esfera3d" width="500" height="400"></canvas>
             <img id="img-esfera3d" class="grafico-img" />
-            <p style="font-size:0.9rem;">Esfera centrada en (1,-2,3) con radio 5 (origen en esquina inferior izquierda).</p>
+            <p style="font-size:0.9rem;">Esfera centrada en (4,-2,-4) con radio 5 (origen en esquina inferior izquierda).</p>
         </div>
     </div>
 
@@ -178,7 +181,6 @@
 
 <script>
 // ======== PROYECCIÓN CENTRADA (para plano, cilindro, cono) ========
-// X → derecha, Y → izquierda/abajo, Z → abajo
 function proyeccionCentro(x, y, z, scale, cx, cy) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
@@ -295,7 +297,6 @@ function dibujarPlano3D() {
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
     dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Plano en R3");
-    // Plano: 4x + 3y + 6z - 12 = 0
     let A = proyeccionCentro(3, 0, 0, scale, cx, cy);
     let B = proyeccionCentro(0, 4, 0, scale, cx, cy);
     let C = proyeccionCentro(0, 0, 2, scale, cx, cy);
@@ -542,7 +543,6 @@ function dibujarCono3D() {
     ctx.fillText("x² + y² = (9/16)z²", 10, 30);
 }
 
-// ======== CONVERSIÓN A IMAGEN ========
 function convertirCanvasAImagen(canvasId, imgId) {
     const canvas = document.getElementById(canvasId);
     const img = document.getElementById(imgId);
