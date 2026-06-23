@@ -41,7 +41,7 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
-    <!-- ========== TEORÍA EXISTENTE ========== -->
+    <!-- ========== 1. VECTORES EN R3 ========== -->
     <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
     <div class="definicion">
         Un <strong>vector en \(\mathbb{R}^3\)</strong> es una terna ordenada \(v = (v_1, v_2, v_3)\). Geométricamente, representa una magnitud con dirección y sentido en el espacio tridimensional.
@@ -58,6 +58,7 @@
         \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). Suma: \(u+v = (3, 3, 1)\). Norma de \(u\): \(\|u\| = \sqrt{2^2+(-1)^2+3^2} = \sqrt{14}\).
     </div>
 
+    <!-- ========== 2. PRODUCTO ESCALAR ========== -->
     <h2>2. Producto escalar (punto)</h2>
     <div class="definicion">
         El <strong>producto escalar</strong> de dos vectores \(u = (u_1, u_2, u_3)\) y \(v = (v_1, v_2, v_3)\) es:
@@ -73,6 +74,7 @@
         \(u = (2, -1, 3)\), \(v = (1, 4, -2)\). \(u \cdot v = 2(1) + (-1)(4) + 3(-2) = 2 - 4 - 6 = -8 \neq 0\) → no son ortogonales.
     </div>
 
+    <!-- ========== 3. PRODUCTO VECTORIAL Y ÁREA ========== -->
     <h2>3. Producto vectorial</h2>
     <div class="definicion">
         El <strong>producto vectorial</strong> de dos vectores \(u\) y \(v\) es un vector perpendicular a ambos:
@@ -89,12 +91,64 @@
         \(u = (2, -1, 3)\), \(v = (1, 4, -2)\): \(u \times v = (-10, 7, 9)\).
     </div>
 
+    <!-- NUEVO EJEMPLO: Área del paralelogramo -->
+    <div class="ejemplo">
+        <strong>Ejemplo 3.1 (Área del paralelogramo).</strong> Dados \(u = (2, -1, 3)\) y \(v = (1, 4, -2)\), calcula el área del paralelogramo formado por estos vectores.<br><br>
+        <strong>Solución:</strong> El área del paralelogramo es el módulo del producto vectorial:
+        \[
+        \text{Área} = \|u \times v\| = \|(-10, 7, 9)\| = \sqrt{(-10)^2 + 7^2 + 9^2} = \sqrt{100 + 49 + 81} = \sqrt{230}
+        \]
+        Por lo tanto, el área es \(\sqrt{230}\) unidades cuadradas.
+    </div>
+
+    <!-- ========== 4. TRIPLE PRODUCTO ESCALAR ========== -->
     <h2>4. Triple producto escalar</h2>
     <div class="definicion">
         El <strong>triple producto escalar</strong> \(u \cdot (v \times w)\) da el volumen del paralelepípedo formado por los tres vectores.
     </div>
+    <!-- NUEVO EJEMPLO: Triple producto y volumen -->
+    <div class="ejemplo">
+        <strong>Ejemplo 4.1.</strong> Dados \(a = (1, 2, 3)\), \(b = (2, -1, 0)\), \(c = (0, 1, -2)\), calcula el triple producto escalar \(a \cdot (b \times c)\) e interpreta su significado.<br><br>
+        <strong>Solución:</strong>
+        \[
+        b \times c = (2,-1,0) \times (0,1,-2) = ((-1)(-2) - 0(1), \, 0(0) - 2(-2), \, 2(1) - (-1)(0)) = (2, 4, 2)
+        \]
+        \[
+        a \cdot (b \times c) = 1(2) + 2(4) + 3(2) = 2 + 8 + 6 = 16
+        \]
+        El valor obtenido es \(16\). El volumen del paralelepípedo formado por los tres vectores es el valor absoluto: \(|16| = 16\) unidades cúbicas.
+    </div>
 
-    <h2>5. Plano en el espacio</h2>
+    <!-- ========== 5. RECTA EN EL ESPACIO ========== -->
+    <h2>5. Recta en el espacio</h2>
+    <div class="definicion">
+        Una recta en el espacio se expresa mediante un <strong>punto</strong> \(P_0\) y un <strong>vector director</strong> \(d\):
+        \[
+        P = P_0 + t d, \quad t \in \mathbb{R}
+        \]
+        \((x, y, z) = (x_0, y_0, z_0) + t(a, b, c)\).
+    </div>
+    <div class="definicion">
+        <strong>Ecuaciones paramétricas:</strong>
+        \[
+        x = x_0 + at, \quad y = y_0 + bt, \quad z = z_0 + ct
+        \]
+        <strong>Ecuación simétrica:</strong> \(\frac{x-x_0}{a} = \frac{y-y_0}{b} = \frac{z-z_0}{c}\) (si \(a,b,c \neq 0\)).
+    </div>
+    <!-- NUEVO EJEMPLO: Recta dados dos puntos -->
+    <div class="ejemplo">
+        <strong>Ejemplo 5.1.</strong> Encuentra las ecuaciones paramétricas y simétrica de la recta que pasa por los puntos \(A(1, -2, 3)\) y \(B(2, 0, -1)\).<br><br>
+        <strong>Solución:</strong> Vector director \(d = B - A = (1, 2, -4)\). Tomando \(P_0 = A(1, -2, 3)\):
+        <br>
+        Ecuación vectorial: \((x,y,z) = (1,-2,3) + t(1,2,-4)\).
+        <br>
+        Paramétricas: \(x = 1 + t,\; y = -2 + 2t,\; z = 3 - 4t\).
+        <br>
+        Simétrica: \(x - 1 = \frac{y+2}{2} = \frac{z-3}{-4}\).
+    </div>
+
+    <!-- ========== 6. PLANO EN EL ESPACIO ========== -->
+    <h2>6. Plano en el espacio</h2>
     <div class="definicion">
         Un plano se define mediante un <strong>punto</strong> \(P_0\) y un <strong>vector normal</strong> \(n = (A, B, C)\):
         \[
@@ -106,7 +160,7 @@
         \]
     </div>
     <div class="ejemplo">
-        <strong>Ejemplo:</strong> Plano con intersecciones en los ejes en \(x=3\), \(y=4\), \(z=2\). Ecuación:
+        <strong>Ejemplo 6.1 (Plano con intersecciones en ejes).</strong> Plano con intersecciones en \(x=3\), \(y=4\), \(z=2\):
         \[
         \frac{x}{3} + \frac{y}{4} + \frac{z}{2} = 1 \quad \Longrightarrow \quad 4x + 3y + 6z - 12 = 0
         \]
@@ -117,8 +171,53 @@
         </div>
     </div>
 
-    <h2>6. Superficies</h2>
-    <h3>6.1 Esfera</h3>
+    <!-- NUEVO EJEMPLO: Plano que contiene una recta y un punto -->
+    <div class="ejemplo">
+        <strong>Ejemplo 6.2.</strong> Halla la ecuación del plano que contiene a la recta \(L: (x,y,z) = (1,2,3) + t(2,-1,1)\) y al punto \(P = (0,1,4)\).<br><br>
+        <strong>Solución:</strong> Un punto de la recta es \(P_0 = (1,2,3)\). Su vector director es \(d = (2,-1,1)\). El vector \(P_0P = (0-1, 1-2, 4-3) = (-1,-1,1)\).<br>
+        El vector normal al plano es \(n = d \times P_0P\):
+        \[
+        n = (2,-1,1) \times (-1,-1,1) = ((-1)(1) - 1(-1),\; 1(-1) - 2(1),\; 2(-1) - (-1)(-1)) = (0, -3, -3)
+        \]
+        Podemos usar \(n = (0, 1, 1)\) (dividiendo entre \(-3\)). Usando \(P_0 = (1,2,3)\):
+        \[
+        0(x-1) + 1(y-2) + 1(z-3) = 0 \Rightarrow y + z - 5 = 0
+        \]
+        Por lo tanto, la ecuación del plano es \(y + z - 5 = 0\).
+    </div>
+
+    <!-- ========== 7. DISTANCIAS ========== -->
+    <h2>7. Distancias en el espacio</h2>
+
+    <h3>7.1 Distancia de un punto a un plano</h3>
+    <div class="formula">
+        \[
+        d = \frac{|Ax_1 + By_1 + Cz_1 + D|}{\sqrt{A^2 + B^2 + C^2}}
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 7.1.</strong> Calcula la distancia del punto \(Q = (1, 2, -1)\) al plano \(2x - y + 3z - 6 = 0\).<br><br>
+        <strong>Solución:</strong>
+        \[
+        d = \frac{|2(1) - 1(2) + 3(-1) - 6|}{\sqrt{2^2 + (-1)^2 + 3^2}} = \frac{|2 - 2 - 3 - 6|}{\sqrt{14}} = \frac{9}{\sqrt{14}}
+        \]
+        La distancia es \(\frac{9}{\sqrt{14}}\) unidades.
+    </div>
+
+    <!-- NUEVO EJEMPLO: Distancia entre planos paralelos -->
+    <div class="ejemplo">
+        <strong>Ejemplo 7.2.</strong> Calcula la distancia entre los planos paralelos \(3x - y + 2z = 5\) y \(3x - y + 2z = -3\).<br><br>
+        <strong>Solución:</strong> Tomamos un punto en el primer plano, por ejemplo, si \(x=0, y=0 \Rightarrow 2z = 5 \Rightarrow z = 2.5\). El punto es \(P(0,0,2.5)\). Calculamos la distancia de este punto al segundo plano \(3x - y + 2z + 3 = 0\):
+        \[
+        d = \frac{|3(0) - 0 + 2(2.5) + 3|}{\sqrt{9+1+4}} = \frac{|5 + 3|}{\sqrt{14}} = \frac{8}{\sqrt{14}}
+        \]
+        La distancia entre los planos es \(\frac{8}{\sqrt{14}}\) unidades.
+    </div>
+
+    <!-- ========== 8. SUPERFICIES ========== -->
+    <h2>8. Superficies</h2>
+
+    <h3>8.1 Esfera</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 + (z-l)^2 = r^2
@@ -126,7 +225,7 @@
     </div>
 
     <div class="ejemplo">
-        <strong>Ejemplo (estático):</strong> Esfera con centro \((4, -2, -4)\) y radio \(5\):
+        <strong>Ejemplo 8.1 (estático).</strong> Esfera con centro \((4, -2, -4)\) y radio \(5\):
         \[
         (x-4)^2 + (y+2)^2 + (z+4)^2 = 25
         \]
@@ -137,8 +236,31 @@
         </div>
     </div>
 
+    <!-- NUEVO EJEMPLO: Completación de cuadrados y pertenencia de punto -->
     <div class="ejemplo">
-        <strong>Ejemplo interactivo:</strong> Gira la esfera con los controles para observar su forma tridimensional.
+        <strong>Ejemplo 8.2 (Completación de cuadrados).</strong> Dada la ecuación \(x^2 + y^2 + z^2 - 4x + 6y - 2z - 2 = 0\):
+        <br>a) Completa cuadrados y escribe la ecuación en forma ordinaria.
+        <br>b) Identifica su centro y radio.
+        <br>c) ¿El punto \(P = (1, -1, 3)\) pertenece a la esfera?<br><br>
+        <strong>Solución:</strong>
+        <br>a) Agrupamos: \((x^2 - 4x) + (y^2 + 6y) + (z^2 - 2z) = 2\).
+        <br>Completamos cuadrados:
+        \[
+        (x-2)^2 - 4 + (y+3)^2 - 9 + (z-1)^2 - 1 = 2
+        \]
+        \[
+        (x-2)^2 + (y+3)^2 + (z-1)^2 = 16
+        \]
+        <br>b) Centro \(C(2, -3, 1)\), radio \(R = 4\).
+        <br>c) Calculamos la distancia de \(P(1, -1, 3)\) al centro:
+        \[
+        d = \sqrt{(1-2)^2 + (-1+3)^2 + (3-1)^2} = \sqrt{1 + 4 + 4} = 3
+        \]
+        Como \(d = 3 < R = 4\), el punto \(P\) está <strong>dentro</strong> de la esfera, no sobre la superficie.
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 8.3 (interactivo).</strong> Gira la esfera con los controles para observar su forma tridimensional.
         <div class="canvas-container">
             <canvas id="esferaInteractiva" width="500" height="400"></canvas>
             <div class="controls">
@@ -150,120 +272,46 @@
         </div>
     </div>
 
-    <!-- ========== NUEVA SECCIÓN: INTERSECCIÓN PLANO-ESFERA ========== -->
-    <h3>6.2 Intersección de un plano con una esfera</h3>
+    <!-- ========== 9. INTERSECCIÓN PLANO-ESFERA ========== -->
+    <h3>8.2 Intersección de un plano con una esfera</h3>
     <div class="nota">
         La intersección de un plano con una esfera puede ser:
         <ul>
-            <li>Una <strong>circunferencia</strong> (si el plano corta la esfera).</li>
-            <li>Un <strong>punto</strong> (si el plano es tangente a la esfera).</li>
-            <li><strong>Vacía</strong> (si el plano no toca la esfera).</li>
+            <li>Una <strong>circunferencia</strong> (si \(d < R\)).</li>
+            <li>Un <strong>punto</strong> (si \(d = R\), tangencia).</li>
+            <li><strong>Vacía</strong> (si \(d > R\)).</li>
         </ul>
-        La clave está en comparar la distancia del centro de la esfera al plano con el radio de la esfera.
+        donde \(d\) es la distancia del centro de la esfera al plano.
     </div>
 
     <div class="teorema">
-        <strong>Fórmula de la distancia del centro de la esfera \(C(h,k,l)\) al plano \(Ax+By+Cz+D=0\):</strong>
         \[
-        d = \frac{|Ah + Bk + Cl + D|}{\sqrt{A^2 + B^2 + C^2}}
+        d = \frac{|Ah + Bk + Cl + D|}{\sqrt{A^2 + B^2 + C^2}}, \qquad r_{\text{sección}} = \sqrt{R^2 - d^2}
         \]
-        <strong>Radio de la circunferencia de intersección:</strong>
-        \[
-        r_{\text{sección}} = \sqrt{R^2 - d^2}
-        \]
-        donde \(R\) es el radio de la esfera.
     </div>
 
-    <!-- ========== EJEMPLO 20 (DETALLADO) ========== -->
     <div class="ejemplo">
-        <strong>Ejemplo 20:</strong> Considera la esfera \((x-4)^2 + (y+2)^2 + (z+4)^2 = 25\) y el plano \(4x + 3y + 6z - 12 = 0\).<br><br>
-
-        <strong>Paso 1:</strong> Identificar el centro y el radio de la esfera.<br>
-        Centro: \(C(4, -2, -4)\). Radio: \(R = 5\).<br><br>
-
-        <strong>Paso 2:</strong> Calcular la distancia del centro al plano usando la fórmula:<br>
-        \[
-        d = \frac{|4(4) + 3(-2) + 6(-4) - 12|}{\sqrt{4^2 + 3^2 + 6^2}}
-        = \frac{|16 - 6 - 24 - 12|}{\sqrt{16 + 9 + 36}}
-        = \frac{|-26|}{\sqrt{61}}
-        = \frac{26}{\sqrt{61}} \approx 3.329
-        \]<br><br>
-
-        <strong>Paso 3:</strong> Comparar \(d\) con \(R\):<br>
-        \(d \approx 3.329 < R = 5\). Por lo tanto, el plano corta la esfera y la intersección es una circunferencia.<br><br>
-
-        <strong>Paso 4:</strong> Calcular el radio de la circunferencia de intersección:<br>
-        \[
-        r = \sqrt{R^2 - d^2}
-        = \sqrt{25 - \left(\frac{26}{\sqrt{61}}\right)^2}
-        = \sqrt{25 - \frac{676}{61}}
-        = \sqrt{\frac{1525 - 676}{61}}
-        = \sqrt{\frac{849}{61}}
-        \approx \sqrt{13.918}
-        \approx 3.731
-        \]
+        <strong>Ejemplo 9.1.</strong> Esfera \((x-4)^2 + (y+2)^2 + (z+4)^2 = 25\) y plano \(4x + 3y + 6z - 12 = 0\).
+        <br>Centro \(C(4,-2,-4)\), radio \(R=5\).
+        <br>Distancia: \(d = \frac{26}{\sqrt{61}} \approx 3.329 < R=5\) → circunferencia.
+        <br>Radio de la sección: \(r = \sqrt{25 - \frac{676}{61}} = \sqrt{\frac{849}{61}} \approx 3.731\).
         <div class="canvas-container">
             <canvas id="planoEsferaCanvas" width="500" height="400"></canvas>
-            <p style="font-size:0.9rem;">Gráfico interactivo: Plano \(4x+3y+6z-12=0\) cortando la esfera \((x-4)^2+(y+2)^2+(z+4)^2=25\). La intersección es una circunferencia (marcada en rojo).</p>
+            <div class="controls" style="margin-top:5px;">
+                <label>Rotación X: <input type="range" id="rotXPlano" min="0" max="6.28" step="0.01" value="0.8"></label>
+                <label>Rotación Y: <input type="range" id="rotYPlano" min="0" max="6.28" step="0.01" value="0.8"></label>
+                <button id="resetViewPlano" style="background:#1a3e6f;color:white;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;">Resetear</button>
+            </div>
+            <p style="font-size:0.9rem;">Plano cortando la esfera: la intersección es una circunferencia (rojo).</p>
         </div>
-        <div class="controls" style="margin-top:5px;">
-            <label>Rotación X: <input type="range" id="rotXPlano" min="0" max="6.28" step="0.01" value="0.8"></label>
-            <label>Rotación Y: <input type="range" id="rotYPlano" min="0" max="6.28" step="0.01" value="0.8"></label>
-            <button id="resetViewPlano" style="background:#1a3e6f;color:white;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;">Resetear</button>
-        </div>
-        <p><strong>Conclusión:</strong> La intersección es una circunferencia de radio \(r \approx 3.731\).</p>
     </div>
 
-    <!-- ========== EJEMPLO 21 (DETALLADO) ========== -->
     <div class="ejemplo">
-        <strong>Ejemplo 21:</strong> Considera la esfera \(x^2 + y^2 + z^2 = 16\) y el plano \(z = 2\).<br><br>
-
-        <strong>Paso 1:</strong> Identificar el centro y el radio de la esfera.<br>
-        Centro: \(C(0,0,0)\). Radio: \(R = 4\).<br><br>
-
-        <strong>Paso 2:</strong> Escribir el plano en forma general: \(z - 2 = 0\) → \(0x + 0y + 1z - 2 = 0\).<br>
-        Calcular la distancia del centro al plano:<br>
-        \[
-        d = \frac{|0(0) + 0(0) + 1(0) - 2|}{\sqrt{0^2 + 0^2 + 1^2}} = \frac{2}{1} = 2
-        \]<br><br>
-
-        <strong>Paso 3:</strong> Comparar \(d\) con \(R\):<br>
-        \(d = 2 < R = 4\). La intersección es una circunferencia.<br><br>
-
-        <strong>Paso 4:</strong> Calcular el radio de la circunferencia de intersección:<br>
-        \[
-        r = \sqrt{R^2 - d^2} = \sqrt{16 - 4} = \sqrt{12} = 2\sqrt{3}
-        \]<br><br>
-
-        <strong>Paso 5:</strong> Ecuación de la circunferencia de intersección. Como el plano es \(z=2\), la circunferencia está en ese plano y su centro es la proyección del centro de la esfera sobre el plano: \(C' = (0,0,2)\). La ecuación en el plano \(z=2\) es:
-        \[
-        x^2 + y^2 + 4 = 16 \quad \Rightarrow \quad x^2 + y^2 = 12, \quad z = 2
-        \]
-        <br>
-
-        <strong>Paso 6 (pregunta adicional):</strong> Si el plano fuera \(z = 5\), la distancia sería \(d = 5 > R = 4\). Por lo tanto, no hay intersección (el plano está por fuera de la esfera).
+        <strong>Ejemplo 9.2 (Tangencia).</strong> Si la distancia del centro al plano es \(d = R\), la intersección es un punto (el plano es tangente a la esfera).
     </div>
 
-    <!-- ========== EJEMPLO 22 (DETALLADO) ========== -->
-    <div class="ejemplo">
-        <strong>Ejemplo 22:</strong> ¿Qué condición debe cumplir la distancia del centro de una esfera a un plano para que la intersección sea:<br>
-        a) una circunferencia?<br>
-        b) un punto?<br>
-        c) vacía?<br><br>
-
-        <strong>Solución:</strong> Sea \(R\) el radio de la esfera y \(d\) la distancia del centro al plano.<br>
-        <ul>
-            <li><strong>Circunferencia:</strong> \(d < R\). La intersección es una circunferencia de radio \(r = \sqrt{R^2 - d^2}\).</li>
-            <li><strong>Punto (tangencia):</strong> \(d = R\). El plano es tangente a la esfera y la intersección es un solo punto.</li>
-            <li><strong>Vacía (sin intersección):</strong> \(d > R\). El plano está fuera de la esfera y no la toca.</li>
-        </ul>
-        <div class="nota">
-            <strong>Importante:</strong> Si \(d = 0\), el centro de la esfera está en el plano y la intersección es una circunferencia máxima (radio igual al de la esfera).
-        </div>
-    </div>
-
-    <!-- ========== CONTINUACIÓN DE SUPERFICIES (Cilindro, Cono) ========== -->
-    <h3>6.3 Cilindro circular recto</h3>
+    <!-- ========== 10. CILINDRO Y CONO ========== -->
+    <h3>8.3 Cilindro circular recto</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 = r^2
@@ -279,7 +327,7 @@
         </div>
     </div>
 
-    <h3>6.4 Cono circular recto</h3>
+    <h3>8.4 Cono circular recto</h3>
     <div class="formula">
         \[
         (x-h)^2 + (y-k)^2 = \frac{r^2}{h^2}(z-l)^2
@@ -294,7 +342,8 @@
         </div>
     </div>
 
-    <h2>7. Aplicaciones en Ingeniería Eléctrica</h2>
+    <!-- ========== 11. APLICACIONES ========== -->
+    <h2>9. Aplicaciones en Ingeniería Eléctrica</h2>
     <div class="ejemplo">
         <ul>
             <li><strong>Campos electromagnéticos:</strong> El vector de Poynting \(\vec{S} = \vec{E} \times \vec{H}\) usa producto vectorial.</li>
@@ -311,7 +360,7 @@
 </div>
 
 <script>
-// ======== FUNCIONES DE PROYECCIÓN Y DIBUJO ========
+// ======== FUNCIONES DE PROYECCIÓN Y DIBUJO (igual que antes, con las mejoras) ========
 function proyeccionCentro(x, y, z, scale, cx, cy) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
@@ -468,7 +517,7 @@ function dibujarEjesRotacion(ctx, w, h, scale, cx, cy, rotX, rotY, label) {
     }
 }
 
-// ======== DIBUJO DE GRÁFICOS ========
+// ======== GRÁFICOS ESTÁTICOS ========
 
 function dibujarPlano3D() {
     const canvas = document.getElementById('plano3d');
@@ -613,278 +662,6 @@ function dibujarEsfera3D() {
     ctx.fillText("r=5", midR.px, midR.py - 8);
 }
 
-function dibujarEsferaInteractiva(rotX, rotY) {
-    const canvas = document.getElementById('esferaInteractiva');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const w = 500, h = 400;
-    const scale = 40;
-    const cx = w/2, cy = h/2;
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "#fafafa";
-    ctx.fillRect(0, 0, w, h);
-    dibujarEjesRotacion(ctx, w, h, scale, cx, cy, rotX, rotY, "Esfera interactiva");
-    const centroX = 4, centroY = -2, centroZ = -4, radio = 5;
-    const c = proyeccionRotacion(centroX, centroY, centroZ, scale, cx, cy, rotX, rotY);
-    const meridianos = 12, paralelos = 8, steps = 24;
-    for (let j = 0; j < meridianos; j++) {
-        let theta = (j / meridianos) * 2 * Math.PI;
-        ctx.beginPath();
-        let first = true;
-        for (let i = 0; i <= steps; i++) {
-            let v = -Math.PI/2 + (i / steps) * Math.PI;
-            let px = centroX + radio * Math.cos(v) * Math.cos(theta);
-            let py = centroY + radio * Math.cos(v) * Math.sin(theta);
-            let pz = centroZ + radio * Math.sin(v);
-            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
-            if (first) { ctx.moveTo(p.px, p.py); first = false; }
-            else ctx.lineTo(p.px, p.py);
-        }
-        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-    }
-    for (let j = 1; j < paralelos; j++) {
-        let lat = -Math.PI/2 + (j / paralelos) * Math.PI;
-        let radioLat = radio * Math.cos(lat);
-        let zLat = centroZ + radio * Math.sin(lat);
-        ctx.beginPath();
-        let first = true;
-        for (let i = 0; i <= steps; i++) {
-            let lon = (i / steps) * 2 * Math.PI;
-            let px = centroX + radioLat * Math.cos(lon);
-            let py = centroY + radioLat * Math.sin(lon);
-            let pz = zLat;
-            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
-            if (first) { ctx.moveTo(p.px, p.py); first = false; }
-            else ctx.lineTo(p.px, p.py);
-        }
-        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-    }
-    let radioProj = radio * scale * 0.85;
-    let grad = ctx.createRadialGradient(c.px-10, c.py-10, 5, c.px, c.py, radioProj);
-    grad.addColorStop(0, "rgba(52, 152, 219, 0.25)");
-    grad.addColorStop(0.7, "rgba(52, 152, 219, 0.10)");
-    grad.addColorStop(1, "rgba(52, 152, 219, 0.02)");
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(c.px, c.py, radioProj, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.fillStyle = "#2e7d32";
-    ctx.beginPath();
-    ctx.arc(c.px, c.py, 4, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.fillStyle = "#2e7d32";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
-    let rEnd = proyeccionRotacion(centroX + radio, centroY, centroZ, scale, cx, cy, rotX, rotY);
-    ctx.strokeStyle = "#e74c3c";
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([4, 4]);
-    ctx.beginPath();
-    ctx.moveTo(c.px, c.py);
-    ctx.lineTo(rEnd.px, rEnd.py);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle = "#e74c3c";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    let midR = proyeccionRotacion(centroX + radio/2, centroY, centroZ, scale, cx, cy, rotX, rotY);
-    ctx.fillText("r=5", midR.px, midR.py - 8);
-}
-
-// ======== GRÁFICO: PLANO CORTANDO ESFERA (interactivo) ========
-function dibujarPlanoEsfera(rotX, rotY) {
-    const canvas = document.getElementById('planoEsferaCanvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const w = 500, h = 400;
-    const scale = 30;
-    const cx = w/2, cy = h/2;
-
-    function proj(x, y, z) {
-        let cosA = Math.cos(rotX), sinA = Math.sin(rotX);
-        let cosB = Math.cos(rotY), sinB = Math.sin(rotY);
-        let y1 = y * cosA - z * sinA;
-        let z1 = y * sinA + z * cosA;
-        let x1 = x * cosB + z1 * sinB;
-        let z2 = -x * sinB + z1 * cosB;
-        const cos30 = 0.86602540378;
-        const sin30 = 0.5;
-        let px = cx + scale * (x1 * cos30 - y1 * cos30);
-        let py = cy - scale * (x1 * sin30 + y1 * sin30 - z2);
-        return { px, py };
-    }
-
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "#f0f4f8";
-    ctx.fillRect(0, 0, w, h);
-
-    // Ejes
-    function dibujarEjes() {
-        const ejes = [
-            { x: 6, y: 0, z: 0, color: "#e74c3c", label: "x" },
-            { x: 0, y: 6, z: 0, color: "#2ecc71", label: "y" },
-            { x: 0, y: 0, z: 6, color: "#3498db", label: "z" }
-        ];
-        let o = proj(0, 0, 0);
-        ctx.strokeStyle = "#333";
-        ctx.lineWidth = 1;
-        for (let e of ejes) {
-            let p = proj(e.x, e.y, e.z);
-            ctx.beginPath();
-            ctx.moveTo(o.px, o.py);
-            ctx.lineTo(p.px, p.py);
-            ctx.strokeStyle = e.color;
-            ctx.lineWidth = 2.5;
-            ctx.stroke();
-            ctx.fillStyle = e.color;
-            ctx.font = "14px sans-serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "bottom";
-            ctx.fillText(e.label, p.px + 4, p.py - 4);
-        }
-        ctx.fillStyle = "#333";
-        ctx.font = "12px sans-serif";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "top";
-        ctx.fillText("O", o.px + 4, o.py + 4);
-    }
-
-    // Esfera: centro (4, -2, -4), radio 5
-    const cxS = 4, cyS = -2, czS = -4, rS = 5;
-    let c = proj(cxS, cyS, czS);
-    let rProj = rS * scale * 0.85;
-    ctx.beginPath();
-    ctx.arc(c.px, c.py, rProj, 0, 2 * Math.PI);
-    ctx.strokeStyle = "rgba(52, 152, 219, 0.8)";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    ctx.fillStyle = "rgba(52, 152, 219, 0.08)";
-    ctx.fill();
-
-    // Plano: 4x + 3y + 6z - 12 = 0
-    let pA = proj(3, 0, 0);
-    let pB = proj(0, 4, 0);
-    let pC = proj(0, 0, 2);
-    ctx.beginPath();
-    ctx.moveTo(pA.px, pA.py);
-    ctx.lineTo(pB.px, pB.py);
-    ctx.lineTo(pC.px, pC.py);
-    ctx.closePath();
-    ctx.strokeStyle = "#e67e22";
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-    ctx.fillStyle = "rgba(230, 126, 34, 0.15)";
-    ctx.fill();
-
-    // Marcar intersecciones con ejes
-    let ints = [
-        { x: 3, y: 0, z: 0, label: "(3,0,0)" },
-        { x: 0, y: 4, z: 0, label: "(0,4,0)" },
-        { x: 0, y: 0, z: 2, label: "(0,0,2)" }
-    ];
-    for (let i of ints) {
-        let p = proj(i.x, i.y, i.z);
-        ctx.fillStyle = "#2e7d32";
-        ctx.beginPath();
-        ctx.arc(p.px, p.py, 5, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = "#2e7d32";
-        ctx.font = "11px sans-serif";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "bottom";
-        ctx.fillText(i.label, p.px + 8, p.py - 4);
-    }
-
-    // Centro de la esfera
-    ctx.fillStyle = "#2e7d32";
-    ctx.beginPath();
-    ctx.arc(c.px, c.py, 5, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.fillStyle = "#2e7d32";
-    ctx.font = "12px sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("C(4,-2,-4)", c.px + 10, c.py - 6);
-
-    // Círculo de intersección (si existe)
-    let d = Math.abs(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / Math.sqrt(4 * 4 + 3 * 3 + 6 * 6);
-    let rCorte = Math.sqrt(25 - d * d);
-    if (rCorte > 0) {
-        let t = -(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / (4 * 4 + 3 * 3 + 6 * 6);
-        let cxC = 4 + t * 4;
-        let cyC = -2 + t * 3;
-        let czC = -4 + t * 6;
-        let n = { x: 4, y: 3, z: 6 };
-        let v1 = { x: 1, y: 0, z: 0 };
-        if (Math.abs(n.x) > 0.9) v1 = { x: 0, y: 1, z: 0 };
-        let dot = v1.x * n.x + v1.y * n.y + v1.z * n.z;
-        let norm2 = n.x * n.x + n.y * n.y + n.z * n.z;
-        let ux = v1.x - (dot / norm2) * n.x;
-        let uy = v1.y - (dot / norm2) * n.y;
-        let uz = v1.z - (dot / norm2) * n.z;
-        let len = Math.sqrt(ux * ux + uy * uy + uz * uz);
-        if (len === 0) { ux = 0; uy = 1; uz = 0; len = 1; }
-        ux /= len;
-        uy /= len;
-        uz /= len;
-        let v2x = n.y * uz - n.z * uy;
-        let v2y = n.z * ux - n.x * uz;
-        let v2z = n.x * uy - n.y * ux;
-        let len2 = Math.sqrt(v2x * v2x + v2y * v2y + v2z * v2z);
-        if (len2 === 0) { v2x = 0; v2y = 1; v2z = 0; len2 = 1; }
-        v2x /= len2;
-        v2y /= len2;
-        v2z /= len2;
-
-        let steps = 30;
-        ctx.beginPath();
-        let first = true;
-        for (let i = 0; i <= steps; i++) {
-            let theta = (i / steps) * 2 * Math.PI;
-            let px = cxC + rCorte * (Math.cos(theta) * ux + Math.sin(theta) * v2x);
-            let py = cyC + rCorte * (Math.cos(theta) * uy + Math.sin(theta) * v2y);
-            let pz = czC + rCorte * (Math.cos(theta) * uz + Math.sin(theta) * v2z);
-            let p = proj(px, py, pz);
-            if (first) { ctx.moveTo(p.px, p.py);
-                first = false; } else ctx.lineTo(p.px, p.py);
-        }
-        ctx.strokeStyle = "#e74c3c";
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        let pc = proj(cxC, cyC, czC);
-        ctx.fillStyle = "#e74c3c";
-        ctx.beginPath();
-        ctx.arc(pc.px, pc.py, 5, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.fillStyle = "#e74c3c";
-        ctx.font = "11px sans-serif";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "bottom";
-        ctx.fillText("Círculo de intersección", pc.px + 10, pc.py - 6);
-    } else {
-        ctx.fillStyle = "#e74c3c";
-        ctx.font = "14px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "top";
-        ctx.fillText("El plano no corta la esfera", w / 2, 10);
-    }
-
-    ctx.fillStyle = "#1a3e6f";
-    ctx.font = "14px sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    ctx.fillText("Plano 4x+3y+6z-12=0 cortando la esfera", w / 2, h - 10);
-
-    dibujarEjes();
-}
-
 function dibujarCilindro3D() {
     const canvas = document.getElementById('cilindro3d');
     if (!canvas) return;
@@ -993,6 +770,274 @@ function dibujarCono3D() {
     ctx.fillText("x² + y² = (9/16)z²", 10, 30);
 }
 
+// ======== ESFERA INTERACTIVA (sin plano) ========
+function dibujarEsferaInteractiva(rotX, rotY) {
+    const canvas = document.getElementById('esferaInteractiva');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const cx = w/2, cy = h/2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjesRotacion(ctx, w, h, scale, cx, cy, rotX, rotY, "Esfera interactiva");
+    const centroX = 4, centroY = -2, centroZ = -4, radio = 5;
+    const c = proyeccionRotacion(centroX, centroY, centroZ, scale, cx, cy, rotX, rotY);
+    const meridianos = 12, paralelos = 8, steps = 24;
+    for (let j = 0; j < meridianos; j++) {
+        let theta = (j / meridianos) * 2 * Math.PI;
+        ctx.beginPath();
+        let first = true;
+        for (let i = 0; i <= steps; i++) {
+            let v = -Math.PI/2 + (i / steps) * Math.PI;
+            let px = centroX + radio * Math.cos(v) * Math.cos(theta);
+            let py = centroY + radio * Math.cos(v) * Math.sin(theta);
+            let pz = centroZ + radio * Math.sin(v);
+            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
+            if (first) { ctx.moveTo(p.px, p.py); first = false; }
+            else ctx.lineTo(p.px, p.py);
+        }
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+    }
+    for (let j = 1; j < paralelos; j++) {
+        let lat = -Math.PI/2 + (j / paralelos) * Math.PI;
+        let radioLat = radio * Math.cos(lat);
+        let zLat = centroZ + radio * Math.sin(lat);
+        ctx.beginPath();
+        let first = true;
+        for (let i = 0; i <= steps; i++) {
+            let lon = (i / steps) * 2 * Math.PI;
+            let px = centroX + radioLat * Math.cos(lon);
+            let py = centroY + radioLat * Math.sin(lon);
+            let pz = zLat;
+            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
+            if (first) { ctx.moveTo(p.px, p.py); first = false; }
+            else ctx.lineTo(p.px, p.py);
+        }
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+    }
+    let radioProj = radio * scale * 0.85;
+    let grad = ctx.createRadialGradient(c.px-10, c.py-10, 5, c.px, c.py, radioProj);
+    grad.addColorStop(0, "rgba(52, 152, 219, 0.25)");
+    grad.addColorStop(0.7, "rgba(52, 152, 219, 0.10)");
+    grad.addColorStop(1, "rgba(52, 152, 219, 0.02)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, radioProj, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, 4, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
+    let rEnd = proyeccionRotacion(centroX + radio, centroY, centroZ, scale, cx, cy, rotX, rotY);
+    ctx.strokeStyle = "#e74c3c";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(c.px, c.py);
+    ctx.lineTo(rEnd.px, rEnd.py);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#e74c3c";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    let midR = proyeccionRotacion(centroX + radio/2, centroY, centroZ, scale, cx, cy, rotX, rotY);
+    ctx.fillText("r=5", midR.px, midR.py - 8);
+}
+
+// ======== GRÁFICO: PLANO CORTANDO ESFERA (interactivo) ========
+function dibujarPlanoEsfera(rotX, rotY) {
+    const canvas = document.getElementById('planoEsferaCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 30;
+    const cx = w/2, cy = h/2;
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#f0f4f8";
+    ctx.fillRect(0, 0, w, h);
+
+    function proj(x, y, z) {
+        let cosA = Math.cos(rotX), sinA = Math.sin(rotX);
+        let cosB = Math.cos(rotY), sinB = Math.sin(rotY);
+        let y1 = y * cosA - z * sinA;
+        let z1 = y * sinA + z * cosA;
+        let x1 = x * cosB + z1 * sinB;
+        let z2 = -x * sinB + z1 * cosB;
+        const cos30 = 0.86602540378;
+        const sin30 = 0.5;
+        let px = cx + scale * (x1 * cos30 - y1 * cos30);
+        let py = cy - scale * (x1 * sin30 + y1 * sin30 - z2);
+        return { px, py };
+    }
+
+    function dibujarEjes() {
+        const ejes = [
+            { x: 6, y: 0, z: 0, color: "#e74c3c", label: "x" },
+            { x: 0, y: 6, z: 0, color: "#2ecc71", label: "y" },
+            { x: 0, y: 0, z: 6, color: "#3498db", label: "z" }
+        ];
+        let o = proj(0, 0, 0);
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 1;
+        for (let e of ejes) {
+            let p = proj(e.x, e.y, e.z);
+            ctx.beginPath();
+            ctx.moveTo(o.px, o.py);
+            ctx.lineTo(p.px, p.py);
+            ctx.strokeStyle = e.color;
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+            ctx.fillStyle = e.color;
+            ctx.font = "14px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(e.label, p.px + 4, p.py - 4);
+        }
+        ctx.fillStyle = "#333";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("O", o.px + 4, o.py + 4);
+    }
+
+    const cxS = 4, cyS = -2, czS = -4, rS = 5;
+    let c = proj(cxS, cyS, czS);
+    let rProj = rS * scale * 0.85;
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, rProj, 0, 2 * Math.PI);
+    ctx.strokeStyle = "rgba(52, 152, 219, 0.8)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(52, 152, 219, 0.08)";
+    ctx.fill();
+
+    let pA = proj(3, 0, 0);
+    let pB = proj(0, 4, 0);
+    let pC = proj(0, 0, 2);
+    ctx.beginPath();
+    ctx.moveTo(pA.px, pA.py);
+    ctx.lineTo(pB.px, pB.py);
+    ctx.lineTo(pC.px, pC.py);
+    ctx.closePath();
+    ctx.strokeStyle = "#e67e22";
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.fillStyle = "rgba(230, 126, 34, 0.15)";
+    ctx.fill();
+
+    let ints = [
+        { x: 3, y: 0, z: 0, label: "(3,0,0)" },
+        { x: 0, y: 4, z: 0, label: "(0,4,0)" },
+        { x: 0, y: 0, z: 2, label: "(0,0,2)" }
+    ];
+    for (let i of ints) {
+        let p = proj(i.x, i.y, i.z);
+        ctx.fillStyle = "#2e7d32";
+        ctx.beginPath();
+        ctx.arc(p.px, p.py, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "#2e7d32";
+        ctx.font = "11px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(i.label, p.px + 8, p.py - 4);
+    }
+
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, 5, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C(4,-2,-4)", c.px + 10, c.py - 6);
+
+    let d = Math.abs(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / Math.sqrt(4 * 4 + 3 * 3 + 6 * 6);
+    let rCorte = Math.sqrt(25 - d * d);
+    if (rCorte > 0) {
+        let t = -(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / (4 * 4 + 3 * 3 + 6 * 6);
+        let cxC = 4 + t * 4;
+        let cyC = -2 + t * 3;
+        let czC = -4 + t * 6;
+        let n = { x: 4, y: 3, z: 6 };
+        let v1 = { x: 1, y: 0, z: 0 };
+        if (Math.abs(n.x) > 0.9) v1 = { x: 0, y: 1, z: 0 };
+        let dot = v1.x * n.x + v1.y * n.y + v1.z * n.z;
+        let norm2 = n.x * n.x + n.y * n.y + n.z * n.z;
+        let ux = v1.x - (dot / norm2) * n.x;
+        let uy = v1.y - (dot / norm2) * n.y;
+        let uz = v1.z - (dot / norm2) * n.z;
+        let len = Math.sqrt(ux * ux + uy * uy + uz * uz);
+        if (len === 0) { ux = 0; uy = 1; uz = 0; len = 1; }
+        ux /= len;
+        uy /= len;
+        uz /= len;
+        let v2x = n.y * uz - n.z * uy;
+        let v2y = n.z * ux - n.x * uz;
+        let v2z = n.x * uy - n.y * ux;
+        let len2 = Math.sqrt(v2x * v2x + v2y * v2y + v2z * v2z);
+        if (len2 === 0) { v2x = 0; v2y = 1; v2z = 0; len2 = 1; }
+        v2x /= len2;
+        v2y /= len2;
+        v2z /= len2;
+
+        let steps = 30;
+        ctx.beginPath();
+        let first = true;
+        for (let i = 0; i <= steps; i++) {
+            let theta = (i / steps) * 2 * Math.PI;
+            let px = cxC + rCorte * (Math.cos(theta) * ux + Math.sin(theta) * v2x);
+            let py = cyC + rCorte * (Math.cos(theta) * uy + Math.sin(theta) * v2y);
+            let pz = czC + rCorte * (Math.cos(theta) * uz + Math.sin(theta) * v2z);
+            let p = proj(px, py, pz);
+            if (first) { ctx.moveTo(p.px, p.py);
+                first = false; } else ctx.lineTo(p.px, p.py);
+        }
+        ctx.strokeStyle = "#e74c3c";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        let pc = proj(cxC, cyC, czC);
+        ctx.fillStyle = "#e74c3c";
+        ctx.beginPath();
+        ctx.arc(pc.px, pc.py, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillStyle = "#e74c3c";
+        ctx.font = "11px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText("Círculo de intersección", pc.px + 10, pc.py - 6);
+    } else {
+        ctx.fillStyle = "#e74c3c";
+        ctx.font = "14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.fillText("El plano no corta la esfera", w / 2, 10);
+    }
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "14px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Plano 4x+3y+6z-12=0 cortando la esfera", w / 2, h - 10);
+
+    dibujarEjes();
+}
+
+// ======== CONVERSIÓN A IMAGEN Y CONTROLES ========
 function convertirCanvasAImagen(canvasId, imgId) {
     const canvas = document.getElementById(canvasId);
     const img = document.getElementById(imgId);
@@ -1002,8 +1047,8 @@ function convertirCanvasAImagen(canvasId, imgId) {
     }, 100);
 }
 
-// ======== CONTROLES Y CARGA INICIAL ========
 window.onload = function() {
+    // Estáticos
     dibujarPlano3D();
     dibujarEsfera3D();
     dibujarCilindro3D();
@@ -1016,7 +1061,7 @@ window.onload = function() {
         convertirCanvasAImagen("cono3d", "img-cono3d");
     }, 200);
 
-    // ======== ESFERA INTERACTIVA (sin plano) ========
+    // Esfera interactiva (sin plano)
     let rotX = 0.8, rotY = 0.8;
     const rotXControl = document.getElementById('rotX');
     const rotYControl = document.getElementById('rotY');
@@ -1042,7 +1087,7 @@ window.onload = function() {
     });
     actualizarInteractiva();
 
-    // ======== PLANO-ESFERA INTERACTIVO ========
+    // Plano-esfera interactivo
     let rotXPlano = 0.8, rotYPlano = 0.8;
     const rotXPlanoControl = document.getElementById('rotXPlano');
     const rotYPlanoControl = document.getElementById('rotYPlano');
@@ -1068,8 +1113,6 @@ window.onload = function() {
             actualizarPlanoEsfera();
         });
         actualizarPlanoEsfera();
-    } else {
-        console.error('Controles de plano-esfera no encontrados');
     }
 };
 </script>
