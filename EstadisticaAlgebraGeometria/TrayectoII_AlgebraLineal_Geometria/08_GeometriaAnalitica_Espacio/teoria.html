@@ -41,7 +41,7 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
-    <!-- ========== TEORÍA EXISTENTE (Vectores, producto escalar, vectorial, triple producto, plano) ========== -->
+    <!-- ========== TEORÍA EXISTENTE ========== -->
     <h2>1. Vectores en el espacio \(\mathbb{R}^3\)</h2>
     <div class="definicion">
         Un <strong>vector en \(\mathbb{R}^3\)</strong> es una terna ordenada \(v = (v_1, v_2, v_3)\). Geométricamente, representa una magnitud con dirección y sentido en el espacio tridimensional.
@@ -311,7 +311,7 @@
 </div>
 
 <script>
-// ======== FUNCIONES DE PROYECCIÓN Y DIBUJO (igual que antes) ========
+// ======== FUNCIONES DE PROYECCIÓN Y DIBUJO ========
 function proyeccionCentro(x, y, z, scale, cx, cy) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
@@ -707,11 +707,6 @@ function dibujarPlanoEsfera(rotX, rotY) {
     const scale = 30;
     const cx = w/2, cy = h/2;
 
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "#fafafa";
-    ctx.fillRect(0, 0, w, h);
-
-    // Función de proyección con rotación para este gráfico
     function proj(x, y, z) {
         let cosA = Math.cos(rotX), sinA = Math.sin(rotX);
         let cosB = Math.cos(rotY), sinB = Math.sin(rotY);
@@ -726,7 +721,11 @@ function dibujarPlanoEsfera(rotX, rotY) {
         return { px, py };
     }
 
-    // Ejes (simples)
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#f0f4f8";
+    ctx.fillRect(0, 0, w, h);
+
+    // Ejes
     function dibujarEjes() {
         const ejes = [
             { x: 6, y: 0, z: 0, color: "#e74c3c", label: "x" },
@@ -742,7 +741,7 @@ function dibujarPlanoEsfera(rotX, rotY) {
             ctx.moveTo(o.px, o.py);
             ctx.lineTo(p.px, p.py);
             ctx.strokeStyle = e.color;
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 2.5;
             ctx.stroke();
             ctx.fillStyle = e.color;
             ctx.font = "14px sans-serif";
@@ -759,18 +758,17 @@ function dibujarPlanoEsfera(rotX, rotY) {
 
     // Esfera: centro (4, -2, -4), radio 5
     const cxS = 4, cyS = -2, czS = -4, rS = 5;
-    // Dibujar círculo de la esfera (proyección)
     let c = proj(cxS, cyS, czS);
     let rProj = rS * scale * 0.85;
     ctx.beginPath();
-    ctx.arc(c.px, c.py, rProj, 0, 2*Math.PI);
-    ctx.strokeStyle = "rgba(52, 152, 219, 0.6)";
-    ctx.lineWidth = 1.5;
+    ctx.arc(c.px, c.py, rProj, 0, 2 * Math.PI);
+    ctx.strokeStyle = "rgba(52, 152, 219, 0.8)";
+    ctx.lineWidth = 2;
     ctx.stroke();
     ctx.fillStyle = "rgba(52, 152, 219, 0.08)";
     ctx.fill();
 
-    // Plano: 4x + 3y + 6z - 12 = 0 → 4x + 3y + 6z = 12
+    // Plano: 4x + 3y + 6z - 12 = 0
     let pA = proj(3, 0, 0);
     let pB = proj(0, 4, 0);
     let pC = proj(0, 0, 2);
@@ -780,9 +778,9 @@ function dibujarPlanoEsfera(rotX, rotY) {
     ctx.lineTo(pC.px, pC.py);
     ctx.closePath();
     ctx.strokeStyle = "#e67e22";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2.5;
     ctx.stroke();
-    ctx.fillStyle = "rgba(230, 126, 34, 0.1)";
+    ctx.fillStyle = "rgba(230, 126, 34, 0.15)";
     ctx.fill();
 
     // Marcar intersecciones con ejes
@@ -795,55 +793,56 @@ function dibujarPlanoEsfera(rotX, rotY) {
         let p = proj(i.x, i.y, i.z);
         ctx.fillStyle = "#2e7d32";
         ctx.beginPath();
-        ctx.arc(p.px, p.py, 4, 0, 2*Math.PI);
+        ctx.arc(p.px, p.py, 5, 0, 2 * Math.PI);
         ctx.fill();
         ctx.fillStyle = "#2e7d32";
-        ctx.font = "10px sans-serif";
+        ctx.font = "11px sans-serif";
         ctx.textAlign = "left";
         ctx.textBaseline = "bottom";
-        ctx.fillText(i.label, p.px + 6, p.py - 4);
+        ctx.fillText(i.label, p.px + 8, p.py - 4);
     }
 
-    // Marcar centro de la esfera
+    // Centro de la esfera
     ctx.fillStyle = "#2e7d32";
     ctx.beginPath();
-    ctx.arc(c.px, c.py, 4, 0, 2*Math.PI);
+    ctx.arc(c.px, c.py, 5, 0, 2 * Math.PI);
     ctx.fill();
     ctx.fillStyle = "#2e7d32";
     ctx.font = "12px sans-serif";
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
-    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
+    ctx.fillText("C(4,-2,-4)", c.px + 10, c.py - 6);
 
-    // Dibujar el círculo de intersección (solo si existe)
-    // Calcular distancia
-    let d = Math.abs(4*4 + 3*(-2) + 6*(-4) - 12) / Math.sqrt(4*4+3*3+6*6);
-    let rCorte = Math.sqrt(25 - d*d);
+    // Círculo de intersección (si existe)
+    let d = Math.abs(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / Math.sqrt(4 * 4 + 3 * 3 + 6 * 6);
+    let rCorte = Math.sqrt(25 - d * d);
     if (rCorte > 0) {
-        // Encontrar centro de la circunferencia de intersección: proyección del centro sobre el plano
-        let t = -(4*4 + 3*(-2) + 6*(-4) - 12) / (4*4+3*3+6*6);
-        let cxC = 4 + t*4;
-        let cyC = -2 + t*3;
-        let czC = -4 + t*6;
-        // Vectores base en el plano (ortonormales)
-        let n = {x:4, y:3, z:6};
-        let v1 = {x:1, y:0, z:0};
-        if (Math.abs(n.x) > 0.9) v1 = {x:0, y:1, z:0};
-        let dot = v1.x*n.x + v1.y*n.y + v1.z*n.z;
-        let norm2 = n.x*n.x + n.y*n.y + n.z*n.z;
-        let ux = v1.x - (dot/norm2)*n.x;
-        let uy = v1.y - (dot/norm2)*n.y;
-        let uz = v1.z - (dot/norm2)*n.z;
-        let len = Math.sqrt(ux*ux + uy*uy + uz*uz);
+        let t = -(4 * 4 + 3 * (-2) + 6 * (-4) - 12) / (4 * 4 + 3 * 3 + 6 * 6);
+        let cxC = 4 + t * 4;
+        let cyC = -2 + t * 3;
+        let czC = -4 + t * 6;
+        let n = { x: 4, y: 3, z: 6 };
+        let v1 = { x: 1, y: 0, z: 0 };
+        if (Math.abs(n.x) > 0.9) v1 = { x: 0, y: 1, z: 0 };
+        let dot = v1.x * n.x + v1.y * n.y + v1.z * n.z;
+        let norm2 = n.x * n.x + n.y * n.y + n.z * n.z;
+        let ux = v1.x - (dot / norm2) * n.x;
+        let uy = v1.y - (dot / norm2) * n.y;
+        let uz = v1.z - (dot / norm2) * n.z;
+        let len = Math.sqrt(ux * ux + uy * uy + uz * uz);
         if (len === 0) { ux = 0; uy = 1; uz = 0; len = 1; }
-        ux /= len; uy /= len; uz /= len;
-        let v2x = n.y*uz - n.z*uy;
-        let v2y = n.z*ux - n.x*uz;
-        let v2z = n.x*uy - n.y*ux;
-        let len2 = Math.sqrt(v2x*v2x + v2y*v2y + v2z*v2z);
+        ux /= len;
+        uy /= len;
+        uz /= len;
+        let v2x = n.y * uz - n.z * uy;
+        let v2y = n.z * ux - n.x * uz;
+        let v2z = n.x * uy - n.y * ux;
+        let len2 = Math.sqrt(v2x * v2x + v2y * v2y + v2z * v2z);
         if (len2 === 0) { v2x = 0; v2y = 1; v2z = 0; len2 = 1; }
-        v2x /= len2; v2y /= len2; v2z /= len2;
-        // Dibujar el círculo
+        v2x /= len2;
+        v2y /= len2;
+        v2z /= len2;
+
         let steps = 30;
         ctx.beginPath();
         let first = true;
@@ -853,29 +852,147 @@ function dibujarPlanoEsfera(rotX, rotY) {
             let py = cyC + rCorte * (Math.cos(theta) * uy + Math.sin(theta) * v2y);
             let pz = czC + rCorte * (Math.cos(theta) * uz + Math.sin(theta) * v2z);
             let p = proj(px, py, pz);
-            if (first) { ctx.moveTo(p.px, p.py); first = false; }
-            else ctx.lineTo(p.px, p.py);
+            if (first) { ctx.moveTo(p.px, p.py);
+                first = false; } else ctx.lineTo(p.px, p.py);
         }
         ctx.strokeStyle = "#e74c3c";
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = 3;
         ctx.stroke();
-        // Marcar centro de la circunferencia
         let pc = proj(cxC, cyC, czC);
         ctx.fillStyle = "#e74c3c";
         ctx.beginPath();
-        ctx.arc(pc.px, pc.py, 4, 0, 2*Math.PI);
+        ctx.arc(pc.px, pc.py, 5, 0, 2 * Math.PI);
         ctx.fill();
         ctx.fillStyle = "#e74c3c";
-        ctx.font = "10px sans-serif";
+        ctx.font = "11px sans-serif";
         ctx.textAlign = "left";
         ctx.textBaseline = "bottom";
-        ctx.fillText("Centro de la sección", pc.px + 8, pc.py - 4);
+        ctx.fillText("Círculo de intersección", pc.px + 10, pc.py - 6);
+    } else {
+        ctx.fillStyle = "#e74c3c";
+        ctx.font = "14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.fillText("El plano no corta la esfera", w / 2, 10);
     }
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "14px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Plano 4x+3y+6z-12=0 cortando la esfera", w / 2, h - 10);
 
     dibujarEjes();
 }
 
-// ======== CONVERSIÓN A IMAGEN Y CONTROLES ========
+function dibujarCilindro3D() {
+    const canvas = document.getElementById('cilindro3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const cx = w/2, cy = h/2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Cilindro");
+    let r = 3, hc = 4, steps = 20;
+    let pts = [];
+    for (let i = 0; i <= steps; i++) {
+        let theta = (i/steps)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        pts.push({x, y, z: -hc});
+    }
+    ctx.strokeStyle = "#2ecc71";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let p = proyeccionCentro(pts[i].x, pts[i].y, pts[i].z, scale, cx, cy);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let p = proyeccionCentro(pts[i].x, pts[i].y, hc, scale, cx, cy);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    ctx.strokeStyle = "rgba(46, 204, 113, 0.5)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 8; i++) {
+        let theta = (i/8)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p1 = proyeccionCentro(x, y, -hc, scale, cx, cy);
+        let p2 = proyeccionCentro(x, y, hc, scale, cx, cy);
+        ctx.beginPath();
+        ctx.moveTo(p1.px, p1.py);
+        ctx.lineTo(p2.px, p2.py);
+        ctx.stroke();
+    }
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x² + y² = 9", 10, 30);
+}
+
+function dibujarCono3D() {
+    const canvas = document.getElementById('cono3d');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const cx = w/2, cy = h/2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjesCentro(ctx, w, h, scale, cx, cy, "Cono");
+    let r = 3, hc = 4, steps = 20;
+    ctx.strokeStyle = "#e67e22";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+        let theta = (i/steps)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p = proyeccionCentro(x, y, hc, scale, cx, cy);
+        if (i===0) ctx.moveTo(p.px, p.py);
+        else ctx.lineTo(p.px, p.py);
+    }
+    ctx.stroke();
+    let vert = proyeccionCentro(0, 0, 0, scale, cx, cy);
+    ctx.strokeStyle = "rgba(230, 126, 34, 0.5)";
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < 8; i++) {
+        let theta = (i/8)*2*Math.PI;
+        let x = r*Math.cos(theta);
+        let y = r*Math.sin(theta);
+        let p = proyeccionCentro(x, y, hc, scale, cx, cy);
+        ctx.beginPath();
+        ctx.moveTo(vert.px, vert.py);
+        ctx.lineTo(p.px, p.py);
+        ctx.stroke();
+    }
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(vert.px, vert.py, 4, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("Vértice (0,0,0)", vert.px + 8, vert.py - 4);
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x² + y² = (9/16)z²", 10, 30);
+}
+
 function convertirCanvasAImagen(canvasId, imgId) {
     const canvas = document.getElementById(canvasId);
     const img = document.getElementById(imgId);
@@ -885,13 +1002,13 @@ function convertirCanvasAImagen(canvasId, imgId) {
     }, 100);
 }
 
+// ======== CONTROLES Y CARGA INICIAL ========
 window.onload = function() {
     dibujarPlano3D();
     dibujarEsfera3D();
     dibujarCilindro3D();
     dibujarCono3D();
 
-    // Convertir los estáticos a imagen para PDF
     setTimeout(function() {
         convertirCanvasAImagen("plano3d", "img-plano3d");
         convertirCanvasAImagen("esfera3d", "img-esfera3d");
@@ -935,21 +1052,25 @@ window.onload = function() {
         dibujarPlanoEsfera(rotXPlano, rotYPlano);
     }
 
-    rotXPlanoControl.addEventListener('input', function() {
-        rotXPlano = parseFloat(this.value);
+    if (rotXPlanoControl && rotYPlanoControl) {
+        rotXPlanoControl.addEventListener('input', function() {
+            rotXPlano = parseFloat(this.value);
+            actualizarPlanoEsfera();
+        });
+        rotYPlanoControl.addEventListener('input', function() {
+            rotYPlano = parseFloat(this.value);
+            actualizarPlanoEsfera();
+        });
+        resetBtnPlano.addEventListener('click', function() {
+            rotXPlano = 0.8; rotYPlano = 0.8;
+            rotXPlanoControl.value = rotXPlano;
+            rotYPlanoControl.value = rotYPlano;
+            actualizarPlanoEsfera();
+        });
         actualizarPlanoEsfera();
-    });
-    rotYPlanoControl.addEventListener('input', function() {
-        rotYPlano = parseFloat(this.value);
-        actualizarPlanoEsfera();
-    });
-    resetBtnPlano.addEventListener('click', function() {
-        rotXPlano = 0.8; rotYPlano = 0.8;
-        rotXPlanoControl.value = rotXPlano;
-        rotYPlanoControl.value = rotYPlano;
-        actualizarPlanoEsfera();
-    });
-    actualizarPlanoEsfera();
+    } else {
+        console.error('Controles de plano-esfera no encontrados');
+    }
 };
 </script>
 </body>
