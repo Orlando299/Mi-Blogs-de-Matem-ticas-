@@ -22,11 +22,15 @@
         .grafico-img { max-width: 100%; height: auto; display: none; margin: 0 auto; border: 1px solid #ddd; border-radius: 4px; }
         .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
         .btn-pdf:hover { background: #e8c97a; }
+        .controls { margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-items: center; }
+        .controls label { font-weight: bold; color: #1a3e6f; }
+        .controls input[type="range"] { width: 150px; }
         @media print {
             .latex-container { margin: 0; padding: 20px; box-shadow: none; }
             .btn-pdf { display: none; }
             canvas { display: none !important; }
             .grafico-img { display: block !important; }
+            .controls { display: none !important; }
         }
     </style>
 </head>
@@ -121,7 +125,7 @@
         \]
     </div>
     <div class="ejemplo">
-        <strong>Ejemplo:</strong> Esfera con centro \((4, -2, -4)\) y radio \(5\). Su ecuación es:
+        <strong>Ejemplo (estático):</strong> Esfera con centro \((4, -2, -4)\) y radio \(5\):
         \[
         (x-4)^2 + (y+2)^2 + (z+4)^2 = 25
         \]
@@ -129,6 +133,19 @@
             <canvas id="esfera3d" width="500" height="400"></canvas>
             <img id="img-esfera3d" class="grafico-img" />
             <p style="font-size:0.9rem;">Esfera centrada en (4,-2,-4) con radio 5 (origen en esquina inferior izquierda).</p>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo interactivo:</strong> Gira la esfera con los controles para observar su forma tridimensional.
+        <div class="canvas-container">
+            <canvas id="esferaInteractiva" width="500" height="400"></canvas>
+            <div class="controls">
+                <label>Rotación X: <input type="range" id="rotX" min="0" max="6.28" step="0.01" value="0.8"></label>
+                <label>Rotación Y: <input type="range" id="rotY" min="0" max="6.28" step="0.01" value="0.8"></label>
+                <button id="resetView" style="background:#1a3e6f;color:white;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;">Resetear</button>
+            </div>
+            <p style="font-size:0.9rem;">Esfera centrada en (4,-2,-4) con radio 5 · Ejes: X (rojo), Y (verde), Z (azul).</p>
         </div>
     </div>
 
@@ -189,12 +206,27 @@ function proyeccionCentro(x, y, z, scale, cx, cy) {
     return { px, py };
 }
 
-// ======== PROYECCIÓN PARA ESFERA (origen en esquina inferior izquierda) ========
+// ======== PROYECCIÓN PARA ESFERA ESTÁTICA (origen en esquina inferior izquierda) ========
 function proyeccionEsquina(x, y, z, scale, cx, cy) {
     const cos30 = 0.86602540378;
     const sin30 = 0.5;
     let px = cx + scale * (x - y * cos30);
     let py = cy + scale * (y * sin30 + z);
+    return { px, py };
+}
+
+// ======== PROYECCIÓN PARA ESFERA INTERACTIVA (con rotación) ========
+function proyeccionRotacion(x, y, z, scale, cx, cy, rotX, rotY) {
+    let cosA = Math.cos(rotX), sinA = Math.sin(rotX);
+    let cosB = Math.cos(rotY), sinB = Math.sin(rotY);
+    let y1 = y * cosA - z * sinA;
+    let z1 = y * sinA + z * cosA;
+    let x1 = x * cosB + z1 * sinB;
+    let z2 = -x * sinB + z1 * cosB;
+    const cos30 = 0.86602540378;
+    const sin30 = 0.5;
+    let px = cx + scale * (x1 * cos30 - y1 * cos30);
+    let py = cy - scale * (x1 * sin30 + y1 * sin30 - z2);
     return { px, py };
 }
 
@@ -241,7 +273,7 @@ function dibujarEjesCentro(ctx, w, h, scale, cx, cy, label) {
     }
 }
 
-// ======== DIBUJAR EJES PARA ESFERA (origen en esquina inferior izquierda) ========
+// ======== DIBUJAR EJES PARA ESFERA ESTÁTICA (origen en esquina) ========
 function dibujarEjesEsquina(ctx, w, h, scale, cx, cy, label) {
     const ejes = [
         { x: 5, y: 0, z: 0, color: "#e74c3c", label: "x" },
@@ -253,6 +285,49 @@ function dibujarEjesEsquina(ctx, w, h, scale, cx, cy, label) {
     let o = proyeccionEsquina(0, 0, 0, scale, cx, cy);
     for (let e of ejes) {
         let p = proyeccionEsquina(e.x, e.y, e.z, scale, cx, cy);
+        ctx.beginPath();
+        ctx.moveTo(o.px, o.py);
+        ctx.lineTo(p.px, p.py);
+        ctx.strokeStyle = e.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = e.color;
+        ctx.font = "14px sans-serif";
+        ctx.textAlign = "center";
+        if (e.label === "z") {
+            ctx.textBaseline = "top";
+            ctx.fillText(e.label, p.px + 4, p.py + 6);
+        } else {
+            ctx.textBaseline = "bottom";
+            ctx.fillText(e.label, p.px + 4, p.py - 4);
+        }
+    }
+    ctx.fillStyle = "#333";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("O", o.px + 4, o.py + 4);
+    if (label) {
+        ctx.fillStyle = "#333";
+        ctx.font = "12px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(label, 10, 20);
+    }
+}
+
+// ======== DIBUJAR EJES CON ROTACIÓN PARA ESFERA INTERACTIVA ========
+function dibujarEjesRotacion(ctx, w, h, scale, cx, cy, rotX, rotY, label) {
+    const ejes = [
+        { x: 5, y: 0, z: 0, color: "#e74c3c", label: "x" },
+        { x: 0, y: 5, z: 0, color: "#2ecc71", label: "y" },
+        { x: 0, y: 0, z: 5, color: "#3498db", label: "z" }
+    ];
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 1;
+    let o = proyeccionRotacion(0, 0, 0, scale, cx, cy, rotX, rotY);
+    for (let e of ejes) {
+        let p = proyeccionRotacion(e.x, e.y, e.z, scale, cx, cy, rotX, rotY);
         ctx.beginPath();
         ctx.moveTo(o.px, o.py);
         ctx.lineTo(p.px, p.py);
@@ -350,16 +425,14 @@ function dibujarEsfera3D() {
     const ctx = canvas.getContext('2d');
     const w = 500, h = 400;
     const scale = 40;
-    const cx = 0, cy = h;   // origen en esquina inferior izquierda
+    const cx = 0, cy = h;
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, w, h);
     dibujarEjesEsquina(ctx, w, h, scale, cx, cy, "Esfera (origen en esquina)");
-    // Centro de la esfera: (4, -2, -4) para que quede centrada en el canvas
     const centroX = 4, centroY = -2, centroZ = -4, radio = 5;
     const c = proyeccionEsquina(centroX, centroY, centroZ, scale, cx, cy);
     const meridianos = 12, paralelos = 8, steps = 24;
-    // Meridianos
     for (let j = 0; j < meridianos; j++) {
         let theta = (j / meridianos) * 2 * Math.PI;
         ctx.beginPath();
@@ -377,7 +450,6 @@ function dibujarEsfera3D() {
         ctx.lineWidth = 1.2;
         ctx.stroke();
     }
-    // Paralelos
     for (let j = 1; j < paralelos; j++) {
         let lat = -Math.PI/2 + (j / paralelos) * Math.PI;
         let radioLat = radio * Math.cos(lat);
@@ -397,7 +469,6 @@ function dibujarEsfera3D() {
         ctx.lineWidth = 1.2;
         ctx.stroke();
     }
-    // Sombreado
     let radioProj = radio * scale * 0.85;
     let grad = ctx.createRadialGradient(c.px-10, c.py-10, 5, c.px, c.py, radioProj);
     grad.addColorStop(0, "rgba(52, 152, 219, 0.25)");
@@ -407,7 +478,6 @@ function dibujarEsfera3D() {
     ctx.beginPath();
     ctx.arc(c.px, c.py, radioProj, 0, 2 * Math.PI);
     ctx.fill();
-    // Centro
     ctx.fillStyle = "#2e7d32";
     ctx.beginPath();
     ctx.arc(c.px, c.py, 4, 0, 2 * Math.PI);
@@ -417,7 +487,6 @@ function dibujarEsfera3D() {
     ctx.textAlign = "left";
     ctx.textBaseline = "bottom";
     ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
-    // Radio
     let rEnd = proyeccionEsquina(centroX + radio, centroY, centroZ, scale, cx, cy);
     ctx.strokeStyle = "#e74c3c";
     ctx.lineWidth = 1.5;
@@ -432,6 +501,92 @@ function dibujarEsfera3D() {
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
     let midR = proyeccionEsquina(centroX + radio/2, centroY, centroZ, scale, cx, cy);
+    ctx.fillText("r=5", midR.px, midR.py - 8);
+}
+
+// ======== ESFERA INTERACTIVA (con rotación) ========
+function dibujarEsferaInteractiva(rotX, rotY) {
+    const canvas = document.getElementById('esferaInteractiva');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = 500, h = 400;
+    const scale = 40;
+    const cx = w/2, cy = h/2;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "#fafafa";
+    ctx.fillRect(0, 0, w, h);
+    dibujarEjesRotacion(ctx, w, h, scale, cx, cy, rotX, rotY, "Esfera interactiva");
+    const centroX = 4, centroY = -2, centroZ = -4, radio = 5;
+    const c = proyeccionRotacion(centroX, centroY, centroZ, scale, cx, cy, rotX, rotY);
+    const meridianos = 12, paralelos = 8, steps = 24;
+    for (let j = 0; j < meridianos; j++) {
+        let theta = (j / meridianos) * 2 * Math.PI;
+        ctx.beginPath();
+        let first = true;
+        for (let i = 0; i <= steps; i++) {
+            let v = -Math.PI/2 + (i / steps) * Math.PI;
+            let px = centroX + radio * Math.cos(v) * Math.cos(theta);
+            let py = centroY + radio * Math.cos(v) * Math.sin(theta);
+            let pz = centroZ + radio * Math.sin(v);
+            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
+            if (first) { ctx.moveTo(p.px, p.py); first = false; }
+            else ctx.lineTo(p.px, p.py);
+        }
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+    }
+    for (let j = 1; j < paralelos; j++) {
+        let lat = -Math.PI/2 + (j / paralelos) * Math.PI;
+        let radioLat = radio * Math.cos(lat);
+        let zLat = centroZ + radio * Math.sin(lat);
+        ctx.beginPath();
+        let first = true;
+        for (let i = 0; i <= steps; i++) {
+            let lon = (i / steps) * 2 * Math.PI;
+            let px = centroX + radioLat * Math.cos(lon);
+            let py = centroY + radioLat * Math.sin(lon);
+            let pz = zLat;
+            let p = proyeccionRotacion(px, py, pz, scale, cx, cy, rotX, rotY);
+            if (first) { ctx.moveTo(p.px, p.py); first = false; }
+            else ctx.lineTo(p.px, p.py);
+        }
+        ctx.strokeStyle = "rgba(52, 152, 219, 0.5)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+    }
+    let radioProj = radio * scale * 0.85;
+    let grad = ctx.createRadialGradient(c.px-10, c.py-10, 5, c.px, c.py, radioProj);
+    grad.addColorStop(0, "rgba(52, 152, 219, 0.25)");
+    grad.addColorStop(0.7, "rgba(52, 152, 219, 0.10)");
+    grad.addColorStop(1, "rgba(52, 152, 219, 0.02)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, radioProj, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.beginPath();
+    ctx.arc(c.px, c.py, 4, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = "#2e7d32";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("C(4,-2,-4)", c.px + 8, c.py - 4);
+    let rEnd = proyeccionRotacion(centroX + radio, centroY, centroZ, scale, cx, cy, rotX, rotY);
+    ctx.strokeStyle = "#e74c3c";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(c.px, c.py);
+    ctx.lineTo(rEnd.px, rEnd.py);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#e74c3c";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    let midR = proyeccionRotacion(centroX + radio/2, centroY, centroZ, scale, cx, cy, rotX, rotY);
     ctx.fillText("r=5", midR.px, midR.py - 8);
 }
 
@@ -552,17 +707,48 @@ function convertirCanvasAImagen(canvasId, imgId) {
     }, 100);
 }
 
+// ======== CONTROL DE ROTACIÓN PARA ESFERA INTERACTIVA ========
 window.onload = function() {
     dibujarPlano3D();
     dibujarEsfera3D();
     dibujarCilindro3D();
     dibujarCono3D();
+
+    // Convertir los estáticos a imagen para PDF
     setTimeout(function() {
         convertirCanvasAImagen("plano3d", "img-plano3d");
         convertirCanvasAImagen("esfera3d", "img-esfera3d");
         convertirCanvasAImagen("cilindro3d", "img-cilindro3d");
         convertirCanvasAImagen("cono3d", "img-cono3d");
     }, 200);
+
+    // Configurar la esfera interactiva
+    let rotX = 0.8, rotY = 0.8;
+    const rotXControl = document.getElementById('rotX');
+    const rotYControl = document.getElementById('rotY');
+    const resetBtn = document.getElementById('resetView');
+
+    function actualizarInteractiva() {
+        dibujarEsferaInteractiva(rotX, rotY);
+    }
+
+    rotXControl.addEventListener('input', function() {
+        rotX = parseFloat(this.value);
+        actualizarInteractiva();
+    });
+    rotYControl.addEventListener('input', function() {
+        rotY = parseFloat(this.value);
+        actualizarInteractiva();
+    });
+    resetBtn.addEventListener('click', function() {
+        rotX = 0.8; rotY = 0.8;
+        rotXControl.value = rotX;
+        rotYControl.value = rotY;
+        actualizarInteractiva();
+    });
+
+    // Dibujar la esfera interactiva inicial
+    actualizarInteractiva();
 };
 </script>
 </body>
