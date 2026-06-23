@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Geometría Analítica en el Espacio</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Geometría Analítica en el Espacio</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Pre‑parcial 1</h2>
+        <div class="solucion-item"><strong>1.</strong> a) \(u \cdot v = 2(1) + (-1)(4) + 3(-2) = 2 - 4 - 6 = -8 \neq 0\) → no son ortogonales.<br>
+            b) \(u \times v = (-10, 7, 9)\)<br>
+            c) Área = \(\|u \times v\| = \sqrt{(-10)^2 + 7^2 + 9^2} = \sqrt{230}\).</div>
+
+        <div class="solucion-item"><strong>2.</strong> Vectorial: \((x,y,z) = (2,-1,3) + t(-1,2,1)\).<br>
+            Paramétricas: \(x = 2 - t, y = -1 + 2t, z = 3 + t\).<br>
+            Simétrica: \(\frac{x-2}{-1} = \frac{y+1}{2} = \frac{z-3}{1}\).</div>
+
+        <div class="solucion-item"><strong>3.</strong> Vector director de la recta: \(d = (2,-1,1)\). Punto de la recta: \(P_0 = (1,2,3)\). Vector \(P_0P = (-1,-1,1)\). Normal al plano: \(n = d \times P_0P = (2,-1,1) \times (-1,-1,1) = (0, -3, -3)\) (o su opuesto).<br>
+            Usando \(n = (0,1,1)\) y el punto \(P_0\): \(0(x-1) + 1(y-2) + 1(z-3) = 0 \Rightarrow y + z - 5 = 0\).</div>
+
+        <div class="solucion-item"><strong>4.</strong> \(d = \frac{|2(1) - 1(2) + 3(-1) - 6|}{\sqrt{2^2 + (-1)^2 + 3^2}} = \frac{|2 - 2 - 3 - 6|}{\sqrt{14}} = \frac{9}{\sqrt{14}}\).</div>
+
+        <div class="solucion-item"><strong>5.</strong> a) \(x^2 - 4x + y^2 + 6y + z^2 - 2z = 2\). Completando: \((x-2)^2 - 4 + (y+3)^2 - 9 + (z-1)^2 - 1 = 2\) → \((x-2)^2 + (y+3)^2 + (z-1)^2 = 16\).<br>
+            b) Centro \(C(2,-3,1)\), radio \(R = 4\).<br>
+            c) Distancia de \(P(1,-1,3)\) al centro: \(d = \sqrt{(1-2)^2 + (-1+3)^2 + (3-1)^2} = \sqrt{1+4+4} = 3 < 4\) → \(P\) está dentro de la esfera, no pertenece a la superficie.</div>
+
+        <div class="solucion-item"><strong>6.</strong> Para que la intersección sea un punto (tangencia), la distancia del centro de la esfera al plano debe ser igual al radio de la esfera: \(d = R\).</div>
+
+        <h2>📝 Soluciones - Pre‑parcial 2</h2>
+        <div class="solucion-item"><strong>1.</strong> a) \(b \times c = (2,-1,0) \times (0,1,-2) = (2, 4, 2)\).<br>
+            \(a \cdot (b \times c) = 1(2) + 2(4) + 3(2) = 2 + 8 + 6 = 16\).<br>
+            b) Representa el volumen del paralelepípedo formado por los tres vectores (valor absoluto \(= 16\)).</div>
+
+        <div class="solucion-item"><strong>2.</strong> Vector director: \(d = B - A = (1, 2, -4)\).<br>
+            Vectorial: \((x,y,z) = (1,-2,3) + t(1,2,-4)\).<br>
+            Paramétricas: \(x = 1 + t, y = -2 + 2t, z = 3 - 4t\).<br>
+            Simétrica: \(x-1 = \frac{y+2}{2} = \frac{z-3}{-4}\).</div>
+
+        <div class="solucion-item"><strong>3.</strong> Plano con intersecciones en los ejes: \(\frac{x}{1} + \frac{y}{2} + \frac{z}{3} = 1 \Rightarrow 6x + 3y + 2z - 6 = 0\).<br>
+            Para \(S(1,1,1)\): \(6(1)+3(1)+2(1)-6 = 6+3+2-6 = 5 \neq 0\) → No pertenece.</div>
+
+        <div class="solucion-item"><strong>4.</strong> Planos \(3x - y + 2z = 5\) y \(3x - y + 2z = -3\).<br>
+            Tomanos un punto del primer plano (por ejemplo, \(x=0, y=0 \Rightarrow z = 2.5\)).<br>
+            Distancia al segundo: \(d = \frac{|3(0) - 0 + 2(2.5) + 3|}{\sqrt{9+1+4}} = \frac{|5+3|}{\sqrt{14}} = \frac{8}{\sqrt{14}}\).</div>
+
+        <div class="solucion-item"><strong>5.</strong> a) Sí, porque \(d = 4 < R = 6\).<br>
+            b) \(r = \sqrt{R^2 - d^2} = \sqrt{36 - 16} = \sqrt{20} = 2\sqrt{5}\).</div>
+
+        <div class="solucion-item"><strong>6.</strong> La distancia de un punto \(P(x_1,y_1,z_1)\) al plano \(Ax+By+Cz+D=0\) es: \(d = \frac{|Ax_1 + By_1 + Cz_1 + D|}{\sqrt{A^2+B^2+C^2}}\).<br>
+            El numerador es el valor absoluto de la evaluación del plano en el punto, y el denominador es la norma del vector normal.</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
