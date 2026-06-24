@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 2: EDO - Métodos Avanzados de Primer Orden</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 2: EDO - Métodos Avanzados de Primer Orden</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto I</div>
+
+    <h2>1. Ecuaciones Lineales de Primer Orden</h2>
+    <div class="definicion">
+        Una EDO lineal de primer orden tiene la forma:
+        \[
+        \frac{dy}{dx} + P(x)y = Q(x)
+        \]
+        donde \(P(x)\) y \(Q(x)\) son funciones continuas en un intervalo.
+    </div>
+
+    <h3>Método del factor integrante</h3>
+    <div class="teorema">
+        El <strong>factor integrante</strong> es:
+        \[
+        \mu(x) = e^{\int P(x)\,dx}
+        \]
+        Multiplicando la EDO por \(\mu(x)\), obtenemos:
+        \[
+        \frac{d}{dx}\left(\mu(x) y\right) = \mu(x) Q(x)
+        \]
+        Integrando:
+        \[
+        y = \frac{1}{\mu(x)} \left(\int \mu(x) Q(x)\,dx + C\right)
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Resolver \(y' + 2xy = x\).<br>
+        \(P(x) = 2x\) → \(\mu = e^{\int 2x dx} = e^{x^2}\).<br>
+        Multiplicando: \(e^{x^2}y' + 2xe^{x^2}y = x e^{x^2}\) → \(\frac{d}{dx}(e^{x^2}y) = x e^{x^2}\).<br>
+        Integrando: \(e^{x^2}y = \int x e^{x^2}dx = \frac{1}{2}e^{x^2} + C\).<br>
+        Solución: \(y = \frac{1}{2} + C e^{-x^2}\).
+    </div>
+
+    <h2>2. Ecuación de Bernoulli</h2>
+    <div class="definicion">
+        La ecuación de Bernoulli tiene la forma:
+        \[
+        \frac{dy}{dx} + P(x)y = Q(x)y^n
+        \]
+        donde \(n \neq 0,1\). Se resuelve mediante el cambio de variable:
+        \[
+        z = y^{1-n}
+        \]
+        que transforma la ecuación en una EDO lineal de primer orden.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Resolver \(y' + y = xy^2\).<br>
+        \(n=2\) → \(z = y^{-1}\) → \(y = z^{-1}\).<br>
+        \(y' = -z^{-2}z'\). Sustituyendo: \(-z^{-2}z' + z^{-1} = x z^{-2}\).<br>
+        Multiplicando por \(-z^2\): \(z' - z = -x\).<br>
+        Resolviendo la lineal: \(z' - z = -x\). Factor integrante: \(\mu = e^{-x}\).<br>
+        \(e^{-x}z' - e^{-x}z = -xe^{-x}\) → \(\frac{d}{dx}(e^{-x}z) = -xe^{-x}\).<br>
+        Integrando: \(e^{-x}z = e^{-x}(x+1) + C\) → \(z = x+1 + C e^{x}\).<br>
+        Solución: \(y = \frac{1}{x+1 + C e^{x}}\).
+    </div>
+
+    <h2>3. Aplicación a Circuitos RL</h2>
+    <div class="definicion">
+        Un circuito RL (resistencia-inductor) satisface la EDO:
+        \[
+        L\frac{di}{dt} + Ri = v(t)
+        \]
+        donde \(L\) es la inductancia, \(R\) la resistencia, \(i(t)\) la corriente y \(v(t)\) la tensión aplicada.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Circuito RL con \(v(t) = V_0\) constante.<br>
+        \(L\frac{di}{dt} + Ri = V_0\). Dividiendo entre \(L\): \(\frac{di}{dt} + \frac{R}{L}i = \frac{V_0}{L}\).<br>
+        Es una EDO lineal de primer orden con \(P(t) = \frac{R}{L}\), \(Q(t) = \frac{V_0}{L}\).<br>
+        Factor integrante: \(\mu = e^{\int \frac{R}{L}dt} = e^{Rt/L}\).<br>
+        Solución: \(i(t) = \frac{V_0}{R} + C e^{-Rt/L}\).<br>
+        Si \(i(0) = 0\): \(C = -\frac{V_0}{R}\) → \(i(t) = \frac{V_0}{R}(1 - e^{-Rt/L})\).
+    </div>
+
+    <h2>4. Aplicación a Circuitos RC</h2>
+    <div class="definicion">
+        Un circuito RC (resistencia-condensador) satisface la EDO:
+        \[
+        RC\frac{dv_c}{dt} + v_c = v(t)
+        \]
+        donde \(v_c(t)\) es la tensión en el condensador.
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo:</strong> Circuito RC con \(v(t) = V_0\) constante.<br>
+        \(RC\frac{dv_c}{dt} + v_c = V_0\). Dividiendo entre \(RC\): \(\frac{dv_c}{dt} + \frac{1}{RC}v_c = \frac{V_0}{RC}\).<br>
+        Factor integrante: \(\mu = e^{t/(RC)}\).<br>
+        Solución: \(v_c(t) = V_0 + C e^{-t/(RC)}\).<br>
+        Si \(v_c(0) = 0\): \(C = -V_0\) → \(v_c(t) = V_0(1 - e^{-t/(RC)})\).
+    </div>
+
+    <h2>5. Resumen de métodos</h2>
+    <ul>
+        <li><strong>EDO lineal de primer orden:</strong> \(y' + P(x)y = Q(x)\) → factor integrante \(\mu = e^{\int P dx}\).</li>
+        <li><strong>Bernoulli:</strong> \(y' + P(x)y = Q(x)y^n\) → cambio \(z = y^{1-n}\).</li>
+        <li><strong>Circuito RL:</strong> \(L i' + R i = v(t)\) → lineal en \(i\).</li>
+        <li><strong>Circuito RC:</strong> \(RC v_c' + v_c = v(t)\) → lineal en \(v_c\).</li>
+    </ul>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div>
+        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+</body>
+</html>
