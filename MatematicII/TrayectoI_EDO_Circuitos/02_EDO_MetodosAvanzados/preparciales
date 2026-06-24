@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre‑parcial - EDO: Métodos Avanzados de Primer Orden</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
+        .pregunta { margin: 15px 0; }
+        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre‑parcial: EDO - Métodos Avanzados de Primer Orden</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+
+    <div class="examen">
+        <h2>Pre‑parcial 1</h2>
+        <div class="pregunta"><strong>1. (12 puntos)</strong> Resuelve usando factor integrante: \(y' + 2y = 4x\)</div>
+        <div class="pregunta"><strong>2. (12 puntos)</strong> Resuelve la ecuación de Bernoulli: \(y' + y = xy^2\)</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Resuelve el PVI: \(y' - y = e^{2x}\), \(y(0)=0\)</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> En un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante, encuentra \(i(t)\) si \(i(0)=0\).</div>
+        <div class="pregunta"><strong>5. (6 puntos)</strong> Enuncia el método del factor integrante para una EDO lineal de primer orden.</div>
+    </div>
+
+    <div class="examen">
+        <h2>Pre‑parcial 2</h2>
+        <div class="pregunta"><strong>1. (12 puntos)</strong> Resuelve usando factor integrante: \(x\frac{dy}{dx} + y = x^3\)</div>
+        <div class="pregunta"><strong>2. (12 puntos)</strong> Resuelve la ecuación de Bernoulli: \(y' + \frac{1}{x}y = y^2\)</div>
+        <div class="pregunta"><strong>3. (10 puntos)</strong> Resuelve el PVI: \(y' + 2y = 4x\), \(y(0)=1\)</div>
+        <div class="pregunta"><strong>4. (10 puntos)</strong> En un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante, encuentra \(v_c(t)\) si \(v_c(0)=0\).</div>
+        <div class="pregunta"><strong>5. (6 puntos)</strong> Explica el cambio de variable para resolver la ecuación de Bernoulli.</div>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div><a href="teoria.html">← Teoría</a> | <a href="ejercicios.html">📝 Ejercicios</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+</div>
+</body>
+</html>
