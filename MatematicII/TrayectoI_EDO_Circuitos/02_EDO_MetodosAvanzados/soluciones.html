@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - EDO: Métodos Avanzados de Primer Orden</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
+        @media print { .btn-pdf { display: none; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: EDO - Métodos Avanzados de Primer Orden</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        <div class="solucion-item">1. \(y = 2x - 1 + C e^{-2x}\)</div>
+        <div class="solucion-item">2. \(y = e^{2x} + C e^{x}\)</div>
+        <div class="solucion-item">3. \(y = \frac{x^3}{4} + \frac{C}{x}\)</div>
+        <div class="solucion-item">4. \(y = \sin x + C \csc x\)</div>
+        <div class="solucion-item">5. \(y = -\frac{1}{3}e^{2x} + C e^{3x}\)</div>
+        <div class="solucion-item">6. \(y = \frac{x^2}{4} + \frac{C}{x^2}\)</div>
+        <div class="solucion-item">7. \(y = \frac{1}{x+1+C e^{x}}\)</div>
+        <div class="solucion-item">8. \(y = \frac{1}{x + C x}\)</div>
+        <div class="solucion-item">9. \(y = \frac{1}{\sqrt{C e^{4x} + 1}}\)</div>
+        <div class="solucion-item">10. \(y = \frac{1}{1 + C e^{2x}}\)</div>
+        <div class="solucion-item">11. \(y = \frac{1}{x^2(3x + C)}\)</div>
+        <div class="solucion-item">12. \(y = 2x - 1 + 2e^{-2x}\)</div>
+        <div class="solucion-item">13. \(y = e^{2x} - e^{x}\)</div>
+        <div class="solucion-item">14. \(y = \frac{x^3}{4} + \frac{7}{4x}\)</div>
+        <div class="solucion-item">15. \(y = \frac{1}{4}e^{x} + \frac{7}{4}e^{-3x}\)</div>
+        <div class="solucion-item">16. \(i(t) = 3(1 - e^{-2t})\)</div>
+        <div class="solucion-item">17. \(v_c(t) = 5(1 - e^{-10t})\)</div>
+        <div class="solucion-item">18. \(i(t) = \frac{10}{\sqrt{4^2+16}}\sin(2t - \arctan(4)) + C e^{-4t}\)</div>
+        <div class="solucion-item">19. \(y = \frac{1}{C e^{x} - e^{x} + 1}\)</div>
+        <div class="solucion-item">20. \(y = \frac{1}{x^2 + C x^2}\)</div>
+        <div class="solucion-item">21. \(i(t) = \frac{V_0}{\sqrt{R^2 + (\omega L)^2}}\sin(\omega t - \phi) + C e^{-Rt/L}\), \(\phi = \arctan(\omega L/R)\)</div>
+
+        <h2>📝 Soluciones - Pre‑parciales</h2>
+        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(y = 2x - 1 + C e^{-2x}\); 2. \(y = \frac{1}{x+1+C e^{x}}\); 3. \(y = e^{2x} - e^{x}\); 4. \(i(t) = 3(1 - e^{-2t})\); 5. Ver teoría.</div>
+        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(y = \frac{x^3}{4} + \frac{C}{x}\); 2. \(y = \frac{1}{x + C x}\); 3. \(y = 2x - 1 + 2e^{-2x}\); 4. \(v_c(t) = 5(1 - e^{-10t})\); 5. Ver teoría.</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
