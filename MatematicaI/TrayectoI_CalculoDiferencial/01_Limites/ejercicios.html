@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios: Límites y Continuidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        /* Lista de ejercicios */
+        ol.lista-ejercicios {
+            counter-reset: ej;
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+        ol.lista-ejercicios > li {
+            counter-increment: ej;
+            margin: 18px 0;
+            padding: 12px 16px 12px 55px;
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+        ol.lista-ejercicios > li::before {
+            content: counter(ej) ".";
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            font-weight: bold;
+            color: #1a3e6f;
+            font-size: 16px;
+        }
+        ol.lista-ejercicios > li:hover {
+            background: #f3f7fd;
+            border-color: #c9d8ec;
+        }
+
+        /* Etiquetas de dificultad */
+        .nivel {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        .menor    { background: #d4edda; color: #155724; }
+        .intermedio { background: #fff3cd; color: #856404; }
+        .mayor    { background: #f8d7da; color: #721c24; }
+
+        /* Canvas para gráficos de continuidad */
+        .canvas-grande {
+            text-align: center;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .canvas-grande canvas {
+            max-width: 100%;
+            height: auto;
+            background: white;
+            border-radius: 4px;
+        }
+        .canvas-grande p {
+            font-size: 13px;
+            color: #555;
+            margin: 8px 0 0 0;
+            font-style: italic;
+        }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a {
+            display: inline-block;
+            background: #1a3e6f;
+            color: white;
+            padding: 8px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .nav-footer a:hover { background: #2a5a9a; }
+
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; }
+            .canvas-grande { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Límites y Continuidad</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <div class="intro">
+        <strong>Instrucciones.</strong> Calcula los siguientes límites. En los casos de indeterminación, indica claramente el tipo de indeterminación y aplica la técnica correspondiente (<em>factorización, racionalización, conjugado, común denominador, división por la mayor potencia, logaritmo neperiano, etc.</em>).
+        <br><br>
+        <strong>Dificultad:</strong>
+        <span class="nivel menor">🟢 Menor</span>
+        <span class="nivel intermedio">🟡 Intermedio</span>
+        <span class="nivel mayor">🔴 Mayor</span>
+    </div>
+
+    <div class="nota">
+        Las soluciones están en <strong>soluciones.html</strong> (contraseña requerida).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== A. LÍMITES POR SUSTITUCIÓN DIRECTA ========== -->
+    <!-- ============================================================ -->
+    <h2>A. Límites por sustitución directa</h2>
+    <p>En estos casos la función está bien definida en el punto y basta sustituir.</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 3}\big(2x^2 - 5x + 1\big)\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to -1}\big(x^3 + 2x^2 - x + 4\big)\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 4}\sqrt{2x + 1}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 2}\frac{3x^2 - x + 1}{x + 3}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 0}\frac{\sin x + \cos x}{2 - x}\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== B. INDETERMINACIÓN 0/0 ========== -->
+    <!-- ============================================================ -->
+    <h2>B. Indeterminación \(\dfrac{0}{0}\)</h2>
+    <p>Al sustituir aparece \(\frac{0}{0}\). Se rompe la indeterminación factorizando, racionalizando o usando identidades trigonométricas.</p>
+
+    <h3>B.1 Por factorización</h3>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 2}\frac{x^2 - 4}{x - 2}\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to -3}\frac{x^2 - 9}{x + 3}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 1}\frac{x^3 - 1}{x - 1}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 2}\frac{x^2 - 5x + 6}{x^2 - 4}\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to -1}\frac{x^4 - 1}{x^3 + 1}\)
+        </li>
+    </ol>
+
+    <h3>B.2 Por racionalización</h3>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 0}\frac{\sqrt{x+4} - 2}{x}\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 9}\frac{\sqrt{x} - 3}{x - 9}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 0}\frac{\sqrt{1+x} - \sqrt{1-x}}{x}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 5}\frac{\sqrt{x+4} - 3}{x - 5}\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to 1}\frac{\sqrt[3]{x} - 1}{x - 1}\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== C. INDETERMINACIÓN ∞/∞ ========== -->
+    <!-- ============================================================ -->
+    <h2>C. Indeterminación \(\dfrac{\infty}{\infty}\)</h2>
+    <p>Se resuelve dividiendo numerador y denominador entre la mayor potencia de \(x\).</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty}\frac{3x + 1}{2x - 5}\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty}\frac{5x^2 - 2x + 1}{3x^2 + x}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to\infty}\frac{4x^3 - x}{2x^2 + 7}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to\infty}\frac{2x^2 + x - 1}{x^3 + 5}\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to\infty}\frac{\sqrt{4x^2 + 3x}}{x + 2}\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== D. INDETERMINACIÓN ∞ - ∞ ========== -->
+    <!-- ============================================================ -->
+    <h2>D. Indeterminación \(\infty - \infty\)</h2>
+    <p>Se resuelve usando el conjugado (si hay raíces) o buscando común denominador (si hay fracciones).</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty}\big(\sqrt{x^2 + x} - x\big)\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty}\big(\sqrt{x^2 + 5x} - x\big)\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to\infty}\big(\sqrt{x^2 + 3x} - \sqrt{x^2 - x}\big)\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 1}\left(\frac{1}{x - 1} - \frac{2}{x^2 - 1}\right)\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to 2}\left(\frac{3}{x - 2} - \frac{6}{x^2 - 4}\right)\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== E. INDETERMINACIÓN 0 · ∞ ========== -->
+    <!-- ============================================================ -->
+    <h2>E. Indeterminación \(0 \cdot \infty\)</h2>
+    <p>Se reescribe el producto como cociente para transformarlo en \(\frac{0}{0}\) o \(\frac{\infty}{\infty}\).</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to 0^+} x \cdot \ln x\)
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty} x \cdot \sin\!\left(\frac{1}{x}\right)\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to\infty} x \cdot \left(e^{1/x} - 1\right)\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 0^+} x^2 \cdot \ln x\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to\infty} x \cdot \left(\sqrt{1 + \frac{1}{x}} - 1\right)\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== F. INDETERMINACIONES 1^∞, 0^0, ∞^0 ========== -->
+    <!-- ============================================================ -->
+    <h2>F. Indeterminaciones \(1^\infty\), \(0^0\), \(\infty^0\)</h2>
+    <p>Se aplica logaritmo neperiano: si \(y = f(x)^{g(x)}\), entonces \(\ln y = g(x)\ln f(x)\), y luego \(L = e^{\lim \ln y}\).</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(\displaystyle\lim_{x\to\infty}\left(1 + \frac{1}{x}\right)^{x}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to\infty}\left(1 + \frac{3}{x}\right)^{x}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(\displaystyle\lim_{x\to 0^+} x^{x}\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to 0^+} (1 + x)^{1/x}\)
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(\displaystyle\lim_{x\to\infty} x^{1/x}\)
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== G. CONTINUIDAD ========== -->
+    <!-- ============================================================ -->
+    <h2>G. Continuidad</h2>
+    <p>Una función \(f\) es <strong>continua</strong> en \(x=a\) si se cumplen las tres condiciones:</p>
+    <ol>
+        <li>\(f(a)\) está definida.</li>
+        <li>\(\displaystyle\lim_{x\to a} f(x)\) existe (los límites laterales coinciden).</li>
+        <li>\(\displaystyle\lim_{x\to a} f(x) = f(a)\).</li>
+    </ol>
+
+    <h3>G.1 Análisis algebraico de continuidad</h3>
+    <p>Determina si la función es continua en el punto indicado. Si no lo es, indica qué condición falla.</p>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            \(f(x) = \dfrac{x^2 - 9}{x - 3}\) en \(x = 3\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            \(f(x) = \begin{cases} 2x + 1 & x < 1 \\ 4 & x = 1 \\ x^2 + 3 & x > 1 \end{cases}\) en \(x = 1\).
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            \(f(x) = \begin{cases} \dfrac{\sin x}{x} & x \neq 0 \\ 0 & x = 0 \end{cases}\) en \(x = 0\).
+        </li>
+    </ol>
+
+    <h3>G.2 Identificación visual del tipo de discontinuidad</h3>
+    <p>Observa cada gráfica y responde las preguntas. Los tres tipos de discontinuidad son:</p>
+    <ul>
+        <li><strong>Evitable:</strong> el límite existe, pero no coincide con \(f(a)\) (o \(f(a)\) no está definida).</li>
+        <li><strong>De salto:</strong> los límites laterales existen pero son diferentes.</li>
+        <li><strong>Infinita (esencial):</strong> algún límite lateral es \(\pm\infty\).</li>
+    </ul>
+
+    <ol class="lista-ejercicios">
+
+        <!-- G.2.1 Evitable -->
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            <strong>Discontinuidad evitable.</strong> Considera la función
+            \[
+            f(x) = \begin{cases} \dfrac{x^2 - 4}{x - 2} & x \neq 2 \\ 1 & x = 2 \end{cases}
+            \]
+            <div class="canvas-grande">
+                <canvas id="gc1" width="480" height="320"></canvas>
+                <p>La curva se acerca a \(y=4\) cuando \(x\to 2\), pero el punto marcado está en \(y=1\).</p>
+            </div>
+            <strong>Preguntas:</strong>
+            <br>a) ¿Cuánto vale \(f(2)\)?
+            <br>b) ¿Cuánto vale \(\displaystyle\lim_{x\to 2} f(x)\)?
+            <br>c) ¿Es \(f\) continua en \(x = 2\)? ¿Qué tipo de discontinuidad presenta?
+            <br>d) ¿Cómo redefinirías \(f(2)\) para que la función sea continua?
+        </li>
+
+        <!-- G.2.2 De salto -->
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            <strong>Discontinuidad de salto.</strong> Considera
+            \[
+            f(x) = \begin{cases} x^2 & x < 2 \\ x + 1 & x \geq 2 \end{cases}
+            \]
+            <div class="canvas-grande">
+                <canvas id="gc2" width="480" height="320"></canvas>
+                <p>En \(x=2\) la gráfica brinca: por la izquierda llega a 4, pero el valor por la derecha es 3.</p>
+            </div>
+            <strong>Preguntas:</strong>
+            <br>a) Calcula \(\displaystyle\lim_{x\to 2^-} f(x)\) y \(\displaystyle\lim_{x\to 2^+} f(x)\).
+            <br>b) ¿Existe \(\displaystyle\lim_{x\to 2} f(x)\)? Justifica.
+            <br>c) ¿Qué tipo de discontinuidad tiene en \(x=2\)?
+        </li>
+
+        <!-- G.2.3 Infinita -->
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            <strong>Discontinuidad infinita.</strong> Considera
+            \[
+            f(x) = \frac{1}{x - 3}
+            \]
+            <div class="canvas-grande">
+                <canvas id="gc3" width="480" height="320"></canvas>
+                <p>Cuando \(x\) se acerca a 3, la función se dispara a \(\pm\infty\).</p>
+            </div>
+            <strong>Preguntas:</strong>
+            <br>a) Calcula \(\displaystyle\lim_{x\to 3^-} f(x)\) y \(\displaystyle\lim_{x\to 3^+} f(x)\).
+            <br>b) ¿Existe \(\displaystyle\lim_{x\to 3} f(x)\)?
+            <br>c) ¿Qué tipo de discontinuidad presenta?
+            <br>d) ¿Cuál es la ecuación de la asíntota vertical?
+        </li>
+
+        <!-- G.2.4 Evitable con punto desplazado -->
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            <strong>Discontinuidad evitable con punto desplazado.</strong> Considera
+            \[
+            f(x) = \begin{cases} x + 1 & x < 0 \\ 5 & x = 0 \\ x^2 + 1 & x > 0 \end{cases}
+            \]
+            <div class="canvas-grande">
+                <canvas id="gc4" width="480" height="320"></canvas>
+                <p>Los límites laterales coinciden en \(y=1\), pero el punto aislado está en \(y=5\).</p>
+            </div>
+            <strong>Preguntas:</strong>
+            <br>a) ¿Cuánto vale \(f(0)\)?
+            <br>b) Calcula \(\displaystyle\lim_{x\to 0^-} f(x)\) y \(\displaystyle\lim_{x\to 0^+} f(x)\). ¿Coinciden?
+            <br>c) ¿Existe \(\displaystyle\lim_{x\to 0} f(x)\)?
+            <br>d) ¿Es \(f\) continua en \(x = 0\)? Si no, ¿qué tipo de discontinuidad es?
+            <br>e) ¿Qué valor debería tomar \(f(0)\) para que la función fuera continua?
+        </li>
+    </ol>
+
+    <div class="nota">
+        <strong>Recuerda:</strong> antes de aplicar cualquier técnica, <em>sustituye siempre primero</em> para identificar el tipo de límite o de indeterminación. Muchos de estos ejercicios se resuelven simplemente observando el tipo.
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// ===== UTILIDADES DE DIBUJO =====
+// ============================================================
+function crearDibujante(canvasId, xmin, xmax, ymin, ymax) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    const pad = 25;
+    const X = (x) => pad + ((x - xmin) / (xmax - xmin)) * (w - 2*pad);
+    const Y = (y) => h - pad - ((y - ymin) / (ymax - ymin)) * (h - 2*pad);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+
+    // Cuadrícula
+    ctx.strokeStyle = "#ececec";
+    ctx.lineWidth = 0.5;
+    for (let x = Math.ceil(xmin); x <= xmax; x++) {
+        ctx.beginPath();
+        ctx.moveTo(X(x), pad);
+        ctx.lineTo(X(x), h - pad);
+        ctx.stroke();
+    }
+    for (let y = Math.ceil(ymin); y <= ymax; y++) {
+        ctx.beginPath();
+        ctx.moveTo(pad, Y(y));
+        ctx.lineTo(w - pad, Y(y));
+        ctx.stroke();
+    }
+
+    // Ejes
+    ctx.strokeStyle = "#888";
+    ctx.lineWidth = 1.2;
+    if (ymin <= 0 && ymax >= 0) {
+        ctx.beginPath();
+        ctx.moveTo(pad, Y(0));
+        ctx.lineTo(w - pad, Y(0));
+        ctx.stroke();
+    }
+    if (xmin <= 0 && xmax >= 0) {
+        ctx.beginPath();
+        ctx.moveTo(X(0), pad);
+        ctx.lineTo(X(0), h - pad);
+        ctx.stroke();
+    }
+
+    // Marcas
+    ctx.fillStyle = "#666";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    for (let x = Math.ceil(xmin); x <= xmax; x++) {
+        if (x === 0) continue;
+        ctx.fillText(x.toString(), X(x), Y(0) + 3);
+    }
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (let y = Math.ceil(ymin); y <= ymax; y++) {
+        if (y === 0) continue;
+        ctx.fillText(y.toString(), X(0) - 4, Y(y));
+    }
+
+    return { ctx, X, Y, w, h, pad };
+}
+
+// ===== G.2.1: Discontinuidad evitable =====
+function dibujarGC1() {
+    const d = crearDibujante('gc1', -1, 5, -1, 6);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Función (x²-4)/(x-2) = x+2 para x≠2
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let first = true;
+    for (let x = -1; x <= 5; x += 0.02) {
+        if (Math.abs(x - 2) < 0.03) { first = true; continue; }
+        const y = x + 2;
+        if (first) { ctx.moveTo(X(x), Y(y)); first = false; }
+        else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+
+    // Hueco en (2,4)
+    ctx.beginPath();
+    ctx.arc(X(2), Y(4), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2.5; ctx.stroke();
+
+    // Punto f(2)=1
+    ctx.beginPath();
+    ctx.arc(X(2), Y(1), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#2e7d32"; ctx.fill();
+    ctx.strokeStyle = "#2e7d32"; ctx.lineWidth = 2; ctx.stroke();
+
+    // Etiquetas
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("límite = 4 (hueco)", X(2) + 10, Y(4) - 4);
+    ctx.fillStyle = "#2e7d32";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(2) = 1", X(2) + 10, Y(1) + 4);
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Discontinuidad evitable en x = 2", 30, 12);
+}
+
+// ===== G.2.2: Discontinuidad de salto =====
+function dibujarGC2() {
+    const d = crearDibujante('gc2', -1, 5, -1, 6);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Rama x<2 : x²
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let first = true;
+    for (let x = -1; x < 2; x += 0.02) {
+        const y = x*x;
+        if (first) { ctx.moveTo(X(x), Y(y)); first = false; }
+        else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+
+    // Rama x≥2 : x+1
+    ctx.beginPath();
+    first = true;
+    for (let x = 2; x <= 5; x += 0.02) {
+        const y = x + 1;
+        if (first) { ctx.moveTo(X(x), Y(y)); first = false; }
+        else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+
+    // Hueco en (2,4)
+    ctx.beginPath();
+    ctx.arc(X(2), Y(4), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2.5; ctx.stroke();
+
+    // Punto relleno en (2,3)
+    ctx.beginPath();
+    ctx.arc(X(2), Y(3), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#2e7d32"; ctx.fill();
+
+    // Etiquetas
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("límite por izq = 4", X(2) - 130, Y(4) - 4);
+    ctx.fillStyle = "#2e7d32";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(2) = 3", X(2) + 10, Y(3) + 4);
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Discontinuidad de salto en x = 2", 30, 12);
+}
+
+// ===== G.2.3: Discontinuidad infinita =====
+function dibujarGC3() {
+    const d = crearDibujante('gc3', -1, 7, -6, 6);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // f(x)=1/(x-3)
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    const pasos = 900;
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i <= pasos; i++) {
+        const x = -1 + (i/pasos) * 8;
+        if (Math.abs(x - 3) < 0.03) { first = true; continue; }
+        const y = 1 / (x - 3);
+        if (!isFinite(y) || y < -8 || y > 8) { first = true; continue; }
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Asíntota vertical x=3
+    ctx.strokeStyle = "#c96b1a";
+    ctx.setLineDash([6, 6]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(X(3), Y(-6));
+    ctx.lineTo(X(3), Y(6));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("x = 3 (asíntota)", X(3) + 6, Y(5));
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Discontinuidad infinita en x = 3", 30, 12);
+}
+
+// ===== G.2.4: Evitable con punto desplazado =====
+function dibujarGC4() {
+    const d = crearDibujante('gc4', -3, 3, -1, 6);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Rama x<0 : x+1
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let first = true;
+    for (let x = -3; x < 0; x += 0.02) {
+        const y = x + 1;
+        if (first) { ctx.moveTo(X(x), Y(y)); first = false; }
+        else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+
+    // Rama x>0 : x²+1
+    ctx.beginPath();
+    first = true;
+    for (let x = 0.02; x <= 3; x += 0.02) {
+        const y = x*x + 1;
+        if (first) { ctx.moveTo(X(x), Y(y)); first = false; }
+        else ctx.lineTo(X(x), Y(y));
+    }
+    ctx.stroke();
+
+    // Hueco en (0,1)
+    ctx.beginPath();
+    ctx.arc(X(0), Y(1), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2.5; ctx.stroke();
+
+    // Punto f(0)=5
+    ctx.beginPath();
+    ctx.arc(X(0), Y(5), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#2e7d32"; ctx.fill();
+
+    // Etiquetas
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "12px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("límite = 1 (hueco)", X(0) + 10, Y(1) - 4);
+    ctx.fillStyle = "#2e7d32";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(0) = 5", X(0) + 10, Y(5) + 4);
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Discontinuidad evitable en x = 0", 30, 12);
+}
+
+// ============================================================
+// ===== DIBUJAR TODO AL CARGAR =====
+// ============================================================
+window.addEventListener('load', function() {
+    dibujarGC1();
+    dibujarGC2();
+    dibujarGC3();
+    dibujarGC4();
+});
+</script>
+</body>
+</html>
