@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 1: Límites y Continuidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 1px solid #ccc; padding-bottom: 6px; }
+        h3 { border-bottom: 1px solid #eee; padding-bottom: 4px; margin-top: 1.8em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px 14px; border-left: 4px solid #1a3e6f; background: #f5f5f5; border-radius: 0 4px 4px 0; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
+        .btn-pdf:hover { background: #e8c97a; }
+
+        /* Grid de gráficas del Bloque 0 */
+        .grid-graficas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .grafica-card {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .grafica-card h4 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            color: #1a3e6f;
+            border: none;
+            padding: 0;
+        }
+        .canvas-mini {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0;
+        }
+        .canvas-mini canvas {
+            max-width: 100%;
+            height: auto;
+            background: white;
+            border-radius: 4px;
+        }
+        .obs {
+            font-size: 13px;
+            color: #333;
+            margin: 8px 0 0 0;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        /* Canvas grandes para las gráficas principales */
+        .canvas-grande {
+            text-align: center;
+            margin: 20px 0;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .canvas-grande canvas {
+            max-width: 100%;
+            height: auto;
+            background: white;
+            border-radius: 4px;
+        }
+        .canvas-grande p {
+            font-size: 13px;
+            color: #555;
+            margin: 8px 0 0 0;
+            font-style: italic;
+        }
+
+        /* Tabla de valores */
+        .tabla-valores {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+        .tabla-valores th, .tabla-valores td {
+            border: 1px solid #ccc;
+            padding: 6px 8px;
+        }
+        .tabla-valores th {
+            background: #e8eef7;
+            color: #1a3e6f;
+        }
+        .tabla-valores td {
+            background: #fafafa;
+        }
+        .tabla-valores .flecha {
+            background: #f9f2e0;
+            font-weight: bold;
+            color: #c96b1a;
+        }
+
+        /* Cajas de pasos */
+        .pasos {
+            background: #f0f7ff;
+            border: 1px solid #d0e0f0;
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin: 12px 0;
+        }
+        .pasos ol {
+            margin: 6px 0;
+            padding-left: 20px;
+        }
+        .pasos li {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 700px) {
+            .grid-graficas { grid-template-columns: 1fr; }
+        }
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf { display: none; }
+            .grid-graficas { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 1: Límites y Continuidad</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <!-- ============================================================ -->
+    <!-- ========== BLOQUE 0: PRELIMINARES ========== -->
+    <!-- ============================================================ -->
+    <h2>0. Preliminares: concepto de función y sus gráficas</h2>
+
+    <div class="definicion">
+        Una <strong>función</strong> \(f\) es una regla que asigna a cada valor de entrada \(x\) (del <em>dominio</em>) un único valor de salida \(y = f(x)\) (del <em>rango</em> o recorrido). Escribimos:
+        \[
+        f: A \subseteq \mathbb{R} \longrightarrow \mathbb{R}, \qquad x \longmapsto y = f(x)
+        \]
+        El <strong>dominio</strong> es el conjunto de todos los \(x\) para los cuales la fórmula tiene sentido. El <strong>rango</strong> es el conjunto de todos los valores \(y\) que la función puede tomar.
+    </div>
+
+    <div class="nota">
+        <strong>¿Cómo leer una gráfica?</strong> Antes de calcular límites, conviene <em>mirar</em> las funciones. En las gráficas de abajo observa con atención:
+        <ul>
+            <li>¿Hay <strong>huecos</strong> (puntos donde la curva se rompe)?</li>
+            <li>¿Hay <strong>picos</strong> (cambios bruscos de dirección)?</li>
+            <li>¿Hay <strong>saltos</strong> (la curva se corta y continúa en otro nivel)?</li>
+            <li>¿Hay <strong>cortes verticales</strong> (la curva se dispara al infinito)?</li>
+            <li>¿Qué valores de \(x\) <strong>no tienen punto</strong> en la gráfica (restricciones del dominio)?</li>
+        </ul>
+    </div>
+
+    <div class="grid-graficas">
+
+        <div class="grafica-card">
+            <h4>1. Función lineal: \(f(x) = x\)</h4>
+            <div class="canvas-mini"><canvas id="g01" width="320" height="240"></canvas></div>
+            <p class="obs">Línea recta que pasa por el origen. Sin huecos, sin picos, sin saltos. Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>2. Función cuadrática: \(f(x) = x^2\)</h4>
+            <div class="canvas-mini"><canvas id="g02" width="320" height="240"></canvas></div>
+            <p class="obs">Parábola que abre hacia arriba. Curva suave, sin interrupciones. Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>3. Función cúbica: \(f(x) = x^3\)</h4>
+            <div class="canvas-mini"><canvas id="g03" width="320" height="240"></canvas></div>
+            <p class="obs">Curva suave que cruza el origen. Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>4. Raíz cuadrada: \(f(x) = \sqrt{x}\)</h4>
+            <div class="canvas-mini"><canvas id="g04" width="320" height="240"></canvas></div>
+            <p class="obs">Solo existe para \(x \geq 0\). Empieza en \((0,0)\). Dominio: \([0, +\infty)\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>5. Valor absoluto: \(f(x) = |x|\)</h4>
+            <div class="canvas-mini"><canvas id="g05" width="320" height="240"></canvas></div>
+            <p class="obs">Forma una "V". Observa el <strong>pico</strong> en \(x = 0\): la curva cambia bruscamente de dirección. Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>6. Racional: \(f(x) = \dfrac{1}{x}\)</h4>
+            <div class="canvas-mini"><canvas id="g06" width="320" height="240"></canvas></div>
+            <p class="obs">Dos ramas separadas. En \(x = 0\) hay un <strong>hueco</strong>: la función no está definida y la curva se dispara al infinito. Dominio: \(\mathbb{R}\setminus\{0\}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>7. Racional simplificable: \(f(x) = \dfrac{x^2 - 1}{x - 1}\)</h4>
+            <div class="canvas-mini"><canvas id="g07" width="320" height="240"></canvas></div>
+            <p class="obs">Parece la recta \(y = x + 1\), pero en \(x = 1\) hay un <strong>hueco</strong> (círculo vacío). Dominio: \(\mathbb{R}\setminus\{1\}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>8. Racional cuadrática: \(f(x) = \dfrac{1}{x^2}\)</h4>
+            <div class="canvas-mini"><canvas id="g08" width="320" height="240"></canvas></div>
+            <p class="obs">Ambas ramas suben al infinito. <strong>Hueco</strong> en \(x = 0\). Dominio: \(\mathbb{R}\setminus\{0\}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>9. Función a trozos</h4>
+            <p>\(f(x) = \begin{cases} x+1 & x<0 \\ x^2 & x \geq 0 \end{cases}\)</p>
+            <div class="canvas-mini"><canvas id="g09" width="320" height="240"></canvas></div>
+            <p class="obs">En \(x = 0\) la curva <strong>salta</strong>: por la izquierda llega a \(1\), pero el valor de la función es \(0\). Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>10. Seno: \(f(x) = \sin(x)\)</h4>
+            <div class="canvas-mini"><canvas id="g10" width="320" height="240"></canvas></div>
+            <p class="obs">Ondulación suave y periódica. Sin huecos ni picos. Dominio: \(\mathbb{R}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>11. Tangente: \(f(x) = \tan(x)\)</h4>
+            <div class="canvas-mini"><canvas id="g11" width="320" height="240"></canvas></div>
+            <p class="obs">Ramas que se disparan al infinito. <strong>Cortes verticales</strong> en \(x = \pm\pi/2\). Dominio: \(\mathbb{R}\setminus\{\pi/2 + k\pi\}\).</p>
+        </div>
+
+        <div class="grafica-card">
+            <h4>12. Logaritmo: \(f(x) = \ln(x)\)</h4>
+            <div class="canvas-mini"><canvas id="g12" width="320" height="240"></canvas></div>
+            <p class="obs">Solo existe para \(x > 0\). Al acercarse a \(x = 0^+\), la curva cae a \(-\infty\). Dominio: \((0, +\infty)\).</p>
+        </div>
+
+    </div>
+
+    <div class="nota">
+        <strong>Reflexión.</strong> Todas estas funciones son "candidatas" a estudiar con límites. Algunas se comportan "bien" (recta, parábola, seno), otras tienen <em>huecos</em>, <em>picos</em>, <em>saltos</em> o <em>cortes verticales</em>. En las secciones siguientes aprenderemos a analizar matemáticamente estos fenómenos con el concepto de <strong>límite</strong>.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 1: DEFINICIÓN INTUITIVA ========== -->
+    <!-- ============================================================ -->
+    <h2>1. Definición intuitiva de límite</h2>
+
+    <div class="definicion">
+        El <strong>límite</strong> de una función \(f(x)\) cuando \(x\) se aproxima a un valor \(a\), escrito como \(\lim_{x \to a} f(x) = L\), significa que \(f(x)\) se acerca arbitrariamente a \(L\) cuando \(x\) se acerca suficientemente a \(a\) (por ambos lados), <em>sin importar lo que ocurra exactamente en \(x=a\)</em>.
+    </div>
+
+    <div class="formula">
+        \[
+        \lim_{x \to a} f(x) = L
+        \]
+    </div>
+
+    <h3>1.1 Ejemplo visual: acercándonos a un valor</h3>
+
+    <div class="ejemplo">
+        Consideremos la función
+        \[
+        f(x) = \frac{x^2 - 1}{x - 1}
+        \]
+        que <strong>no está definida en \(x=1\)</strong> (porque el denominador se anula), pero podemos preguntarnos: ¿a qué valor se acerca \(f(x)\) cuando \(x \to 1\)?
+        <br><br>
+        Factorizando el numerador: \(x^2 - 1 = (x-1)(x+1)\), entonces
+        \[
+        f(x) = \frac{(x-1)(x+1)}{x-1} = x+1 \quad \text{para } x \neq 1
+        \]
+        Así que <strong>cerca</strong> de \(x=1\) la función se comporta como \(x+1\), y por lo tanto se acerca a \(2\). Escribimos:
+        \[
+        \lim_{x\to 1} \frac{x^2-1}{x-1} = 2
+        \]
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gLim1" width="500" height="350"></canvas>
+        <p>La función \(f(x)=\frac{x^2-1}{x-1}\) tiene un hueco en \(x=1\), pero la curva se acerca a \(y=2\) por ambos lados.</p>
+    </div>
+
+    <h3>1.2 Tabla de valores</h3>
+    <p>Acercándonos a \(x=1\) por la izquierda (valores menores que 1) y por la derecha (valores mayores que 1):</p>
+
+    <table class="tabla-valores">
+        <thead>
+            <tr>
+                <th>\(x\)</th>
+                <th>0.9</th>
+                <th>0.99</th>
+                <th>0.999</th>
+                <th class="flecha">→ 1 ←</th>
+                <th>1.001</th>
+                <th>1.01</th>
+                <th>1.1</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>\(f(x)\)</td>
+                <td>1.9</td>
+                <td>1.99</td>
+                <td>1.999</td>
+                <td class="flecha">2</td>
+                <td>2.001</td>
+                <td>2.01</td>
+                <td>2.1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="nota">
+        Observa que <strong>por ambos lados</strong> los valores de \(f(x)\) se acercan a \(2\), aunque \(f(1)\) no existe. <em>El límite describe el comportamiento cerca del punto, no en el punto</em>.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 2: LÍMITES LATERALES ========== -->
+    <!-- ============================================================ -->
+    <h2>2. Límites laterales</h2>
+
+    <div class="definicion">
+        <ul>
+            <li><strong>Límite por la izquierda:</strong> \(\displaystyle\lim_{x \to a^-} f(x)\) — nos acercamos a \(a\) con valores <em>menores</em> que \(a\).</li>
+            <li><strong>Límite por la derecha:</strong> \(\displaystyle\lim_{x \to a^+} f(x)\) — nos acercamos a \(a\) con valores <em>mayores</em> que \(a\).</li>
+        </ul>
+        El límite <strong>existe</strong> si y solo si ambos límites laterales existen y son <strong>iguales</strong>:
+        \[
+        \lim_{x\to a} f(x) = L \iff \lim_{x\to a^-} f(x) = \lim_{x\to a^+} f(x) = L
+        \]
+    </div>
+
+    <h3>2.1 Ejemplo visual: límite que NO existe</h3>
+
+    <div class="ejemplo">
+        Consideremos la función a trozos
+        \[
+        f(x) = \begin{cases} x + 2 & x < 1 \\ 3x - 2 & x > 1 \end{cases}
+        \]
+        (definida para todo \(x \neq 1\)). Calculemos los límites laterales en \(x=1\):
+        <div class="pasos">
+            <ol>
+                <li><strong>Por la izquierda</strong> (\(x < 1\)): usamos la rama \(f(x) = x+2\):
+                    \[
+                    \lim_{x\to 1^-} f(x) = 1 + 2 = 3
+                    \]
+                </li>
+                <li><strong>Por la derecha</strong> (\(x > 1\)): usamos la rama \(f(x) = 3x-2\):
+                    \[
+                    \lim_{x\to 1^+} f(x) = 3(1) - 2 = 1
+                    \]
+                </li>
+                <li>Como \(3 \neq 1\), los límites laterales <strong>no coinciden</strong>.</li>
+            </ol>
+        </div>
+        <strong>Conclusión:</strong> \(\displaystyle\lim_{x\to 1} f(x)\) <strong>no existe</strong>.
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gLim2" width="500" height="350"></canvas>
+        <p>En \(x=1\) la gráfica tiene un <strong>salto</strong>: por la izquierda se acerca a 3 y por la derecha a 1. Los límites laterales son distintos.</p>
+    </div>
+
+    <h3>2.2 Tabla de valores</h3>
+
+    <table class="tabla-valores">
+        <thead>
+            <tr>
+                <th>\(x\)</th>
+                <th>0.9</th>
+                <th>0.99</th>
+                <th>0.999</th>
+                <th class="flecha">→ 1 ←</th>
+                <th>1.001</th>
+                <th>1.01</th>
+                <th>1.1</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>\(f(x)\)</td>
+                <td>2.9</td>
+                <td>2.99</td>
+                <td>2.999</td>
+                <td class="flecha">—</td>
+                <td>1.003</td>
+                <td>1.03</td>
+                <td>1.3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="nota">
+        Por la izquierda la tabla se acerca a <strong>3</strong>, y por la derecha a <strong>1</strong>. Como los valores no se encuentran, el límite no existe.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 3: PROPIEDADES ========== -->
+    <!-- ============================================================ -->
+    <h2>3. Propiedades de los límites</h2>
+
+    <div class="teorema">
+        Si \(\displaystyle\lim_{x\to a} f(x) = L\) y \(\displaystyle\lim_{x\to a} g(x) = M\), entonces:
+        <ul>
+            <li><strong>Suma/resta:</strong> \(\displaystyle\lim_{x\to a}\big[f(x) \pm g(x)\big] = L \pm M\)</li>
+            <li><strong>Producto:</strong> \(\displaystyle\lim_{x\to a}\big[f(x) \cdot g(x)\big] = L \cdot M\)</li>
+            <li><strong>Cociente:</strong> \(\displaystyle\lim_{x\to a} \frac{f(x)}{g(x)} = \frac{L}{M}\) &nbsp; (si \(M \neq 0\))</li>
+            <li><strong>Escalar:</strong> \(\displaystyle\lim_{x\to a}\big[c \cdot f(x)\big] = c \cdot L\)</li>
+            <li><strong>Potencia:</strong> \(\displaystyle\lim_{x\to a}\big[f(x)\big]^n = L^n\)</li>
+            <li><strong>Raíz:</strong> \(\displaystyle\lim_{x\to a}\sqrt[n]{f(x)} = \sqrt[n]{L}\) &nbsp; (si la raíz está definida)</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.1.</strong> Sean \(f(x) = 2x + 1\) y \(g(x) = x^2\). Sabemos que
+        \[
+        \lim_{x\to 3} f(x) = 7, \qquad \lim_{x\to 3} g(x) = 9
+        \]
+        Apliquemos las propiedades:
+        <div class="pasos">
+            <ol>
+                <li><strong>Suma:</strong> \(\displaystyle\lim_{x\to 3}\big[f(x) + g(x)\big] = 7 + 9 = 16\)</li>
+                <li><strong>Producto:</strong> \(\displaystyle\lim_{x\to 3}\big[f(x) \cdot g(x)\big] = 7 \cdot 9 = 63\)</li>
+                <li><strong>Cociente:</strong> \(\displaystyle\lim_{x\to 3}\frac{f(x)}{g(x)} = \frac{7}{9}\) &nbsp; (pues \(M=9\neq 0\))</li>
+                <li><strong>Escalar:</strong> \(\displaystyle\lim_{x\to 3}\big[5\, f(x)\big] = 5 \cdot 7 = 35\)</li>
+                <li><strong>Potencia:</strong> \(\displaystyle\lim_{x\to 3}\big[g(x)\big]^2 = 9^2 = 81\)</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="nota">
+        Estas propiedades permiten calcular límites <em>"sustituyendo"</em> cuando la función es un polinomio, una raíz, o un cociente con denominador no nulo. Pero <strong>fallan</strong> en casos donde aparece una forma indeterminada, como veremos en la Sección 5.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 4: LÍMITES NOTABLES ========== -->
+    <!-- ============================================================ -->
+    <h2>4. Límites notables</h2>
+
+    <div class="definicion">
+        Estos tres límites aparecen con frecuencia y conviene memorizarlos:
+    </div>
+
+    <div class="formula">
+        \[
+        \lim_{x\to 0} \frac{\sin x}{x} = 1, \qquad
+        \lim_{x\to 0} \frac{1-\cos x}{x} = 0, \qquad
+        \lim_{x\to\infty} \left(1+\frac{1}{x}\right)^x = e
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4.1.</strong> Calculemos \(\displaystyle\lim_{x\to 0}\frac{\sin(3x)}{x}\). Hacemos el cambio \(u = 3x\); cuando \(x \to 0\), también \(u \to 0\) y \(x = u/3\):
+        \[
+        \lim_{x\to 0}\frac{\sin(3x)}{x} = \lim_{u\to 0}\frac{\sin u}{u/3} = 3 \lim_{u\to 0}\frac{\sin u}{u} = 3\cdot 1 = 3
+        \]
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 5: INDETERMINACIONES ========== -->
+    <!-- ============================================================ -->
+    <h2>5. Cálculo de límites indeterminados</h2>
+
+    <div class="definicion">
+        Una <strong>indeterminación</strong> (o <em>forma indeterminada</em>) es una expresión que aparece al sustituir directamente en un límite y <strong>no permite decidir el resultado</strong>. Las siete indeterminaciones clásicas son:
+        \[
+        \frac{0}{0}, \qquad \frac{\infty}{\infty}, \qquad \infty - \infty, \qquad 0 \cdot \infty, \qquad 1^\infty, \qquad 0^0, \qquad \infty^0
+        \]
+        Cada una requiere una <strong>técnica algebraica</strong> para "romper" la indeterminación.
+    </div>
+
+    <!-- ---------- 5.1 ---------- -->
+    <h3>5.1 Indeterminación \(\dfrac{0}{0}\)</h3>
+    <p>Aparece cuando numerador y denominador se anulan en \(x=a\). Se resuelve <strong>factorizando</strong>, <strong>racionalizando</strong> o usando <strong>identidades trigonométricas</strong>.</p>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.1 (factorización).</strong> Calcular \(\displaystyle\lim_{x\to 2}\frac{x^2-4}{x-2}\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\frac{2^2-4}{2-2} = \frac{0}{0}\) → indeterminación.</li>
+                <li>Factorizamos el numerador: \(x^2 - 4 = (x-2)(x+2)\).</li>
+                <li>Simplificamos (válido para \(x \neq 2\)):
+                    \[
+                    \frac{x^2-4}{x-2} = \frac{(x-2)(x+2)}{x-2} = x + 2
+                    \]
+                </li>
+                <li>Sustituimos: \(\displaystyle\lim_{x\to 2}(x+2) = 4\).</li>
+            </ol>
+        </div>
+        Por lo tanto, \(\displaystyle\lim_{x\to 2}\frac{x^2-4}{x-2} = 4\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.2 (racionalización).</strong> Calcular \(\displaystyle\lim_{x\to 0}\frac{\sqrt{x+4}-2}{x}\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\frac{\sqrt{4}-2}{0} = \frac{0}{0}\) → indeterminación.</li>
+                <li>Multiplicamos por el conjugado \(\sqrt{x+4}+2\):
+                    \[
+                    \frac{\sqrt{x+4}-2}{x} \cdot \frac{\sqrt{x+4}+2}{\sqrt{x+4}+2}
+                    = \frac{(x+4)-4}{x(\sqrt{x+4}+2)} = \frac{x}{x(\sqrt{x+4}+2)}
+                    \]
+                </li>
+                <li>Simplificamos la \(x\):
+                    \[
+                    = \frac{1}{\sqrt{x+4}+2}
+                    \]
+                </li>
+                <li>Sustituimos \(x=0\): \(\displaystyle\frac{1}{\sqrt{4}+2} = \frac{1}{4}\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.3 (trigonométrico).</strong> Calcular \(\displaystyle\lim_{x\to 0}\frac{\tan x}{x}\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\frac{0}{0}\) → indeterminación.</li>
+                <li>Escribimos \(\tan x = \dfrac{\sin x}{\cos x}\):
+                    \[
+                    \frac{\tan x}{x} = \frac{\sin x}{x \cos x} = \frac{\sin x}{x} \cdot \frac{1}{\cos x}
+                    \]
+                </li>
+                <li>Usamos el límite notable \(\displaystyle\lim_{x\to 0}\frac{\sin x}{x}=1\) y que \(\cos 0 = 1\):
+                    \[
+                    \lim_{x\to 0}\frac{\tan x}{x} = 1 \cdot \frac{1}{1} = 1
+                    \]
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ---------- 5.2 ---------- -->
+    <h3>5.2 Indeterminación \(\dfrac{\infty}{\infty}\)</h3>
+    <p>Aparece en límites al infinito con polinomios o funciones que crecen. Se resuelve <strong>dividiendo numerador y denominador por la mayor potencia de \(x\)</strong>.</p>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.4.</strong> Calcular \(\displaystyle\lim_{x\to \infty}\frac{3x^2+5x-1}{2x^2-x+4}\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\frac{\infty}{\infty}\) → indeterminación.</li>
+                <li>Dividimos todo entre \(x^2\) (la mayor potencia):
+                    \[
+                    \frac{3 + \frac{5}{x} - \frac{1}{x^2}}{2 - \frac{1}{x} + \frac{4}{x^2}}
+                    \]
+                </li>
+                <li>Cuando \(x\to\infty\), \(\frac{1}{x}\to 0\) y \(\frac{1}{x^2}\to 0\):
+                    \[
+                    \lim_{x\to\infty}\frac{3x^2+5x-1}{2x^2-x+4} = \frac{3}{2}
+                    \]
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.5.</strong> Calcular \(\displaystyle\lim_{x\to \infty}\frac{2x^3 - x}{x^2 + 1}\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\frac{\infty}{\infty}\) → indeterminación.</li>
+                <li>Dividimos entre \(x^3\) (la mayor potencia en el numerador):
+                    \[
+                    \frac{2 - \frac{1}{x^2}}{\frac{1}{x} + \frac{1}{x^3}}
+                    \]
+                </li>
+                <li>Cuando \(x\to\infty\): numerador \(\to 2\), denominador \(\to 0^+\):
+                    \[
+                    \lim_{x\to\infty}\frac{2x^3 - x}{x^2 + 1} = +\infty
+                    \]
+                </li>
+            </ol>
+        </div>
+        Regla práctica: si el grado del numerador es mayor que el del denominador, el límite es \(\pm\infty\).
+    </div>
+
+    <!-- ---------- 5.3 ---------- -->
+    <h3>5.3 Indeterminación \(\infty - \infty\)</h3>
+    <p>Aparece cuando restamos dos expresiones que tienden a infinito. Se resuelve <strong>usando el conjugado</strong> (si hay raíces) o <strong>común denominador</strong> (si hay fracciones).</p>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.6 (conjugado).</strong> Calcular \(\displaystyle\lim_{x\to\infty}\big(\sqrt{x^2+x} - x\big)\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\infty - \infty\) → indeterminación.</li>
+                <li>Multiplicamos por el conjugado \(\sqrt{x^2+x}+x\):
+                    \[
+                    \frac{(\sqrt{x^2+x}-x)(\sqrt{x^2+x}+x)}{\sqrt{x^2+x}+x}
+                    = \frac{x^2+x - x^2}{\sqrt{x^2+x}+x}
+                    = \frac{x}{\sqrt{x^2+x}+x}
+                    \]
+                </li>
+                <li>Dividimos entre \(x\):
+                    \[
+                    = \frac{1}{\sqrt{1+\frac{1}{x}}+1}
+                    \]
+                </li>
+                <li>Cuando \(x\to\infty\): \(\displaystyle\frac{1}{\sqrt{1+0}+1} = \frac{1}{2}\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.7 (común denominador).</strong> Calcular \(\displaystyle\lim_{x\to 1}\left(\frac{1}{x-1} - \frac{2}{x^2-1}\right)\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(\infty - \infty\) → indeterminación.</li>
+                <li>Factorizamos \(x^2-1 = (x-1)(x+1)\) y usamos común denominador \((x-1)(x+1)\):
+                    \[
+                    \frac{1}{x-1} - \frac{2}{(x-1)(x+1)} = \frac{(x+1)-2}{(x-1)(x+1)} = \frac{x-1}{(x-1)(x+1)} = \frac{1}{x+1}
+                    \]
+                </li>
+                <li>Sustituimos \(x=1\): \(\displaystyle\frac{1}{1+1} = \frac{1}{2}\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ---------- 5.4 ---------- -->
+    <h3>5.4 Indeterminación \(0 \cdot \infty\)</h3>
+    <p>Aparece en productos donde un factor va a 0 y el otro a infinito. Se resuelve <strong>reescribiendo el producto como cociente</strong> para convertirlo en \(\frac{0}{0}\) o \(\frac{\infty}{\infty}\).</p>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.8.</strong> Calcular \(\displaystyle\lim_{x\to 0^+} x \cdot \ln x\).
+        <div class="pasos">
+            <ol>
+                <li>Sustituyendo: \(0 \cdot (-\infty)\) → indeterminación.</li>
+                <li>Reescribimos: \(x \ln x = \dfrac{\ln x}{1/x}\).</li>
+                <li>Ahora es \(\dfrac{-\infty}{\infty}\), que es indeterminación \(\frac{\infty}{\infty}\).</li>
+                <li>Reescribiendo convenientemente o aplicando crecimiento comparado (el logaritmo crece más lento que cualquier potencia), el resultado es
+                    \[
+                    \lim_{x\to 0^+} x \ln x = 0
+                    \]
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ---------- 5.5 ---------- -->
+    <h3>5.5 Indeterminaciones \(1^\infty\), \(0^0\), \(\infty^0\)</h3>
+    <p>Aparecen en límites de la forma \(f(x)^{g(x)}\). Se resuelven tomando <strong>logaritmo natural</strong> para bajar el exponente:
+    \[
+    y = f(x)^{g(x)} \implies \ln y = g(x) \cdot \ln f(x)
+    \]
+    y luego se calcula \(\displaystyle L = e^{\lim \ln y}\).</p>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.9 (caso \(1^\infty\)).</strong> Calcular \(\displaystyle\lim_{x\to\infty}\left(1+\frac{2}{x}\right)^{x}\).
+        <div class="pasos">
+            <ol>
+                <li>Al sustituir: \(1^\infty\) → indeterminación.</li>
+                <li>Sea \(y = \left(1+\frac{2}{x}\right)^x\). Entonces
+                    \[
+                    \ln y = x \ln\left(1+\frac{2}{x}\right)
+                    \]
+                </li>
+                <li>Hacemos \(u = 2/x\); cuando \(x\to\infty\), \(u\to 0\), y \(x = 2/u\):
+                    \[
+                    \ln y = \frac{2}{u}\ln(1+u) = 2 \cdot \frac{\ln(1+u)}{u} \to 2 \cdot 1 = 2
+                    \]
+                    (usando el límite notable \(\lim_{u\to 0}\frac{\ln(1+u)}{u}=1\)).
+                </li>
+                <li>Por lo tanto \(L = e^{2}\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.10 (caso \(0^0\)).</strong> Calcular \(\displaystyle\lim_{x\to 0^+} x^{x}\).
+        <div class="pasos">
+            <ol>
+                <li>Al sustituir: \(0^0\) → indeterminación.</li>
+                <li>Sea \(y = x^x\). Entonces \(\ln y = x \ln x\).</li>
+                <li>Por el Ejemplo 5.8, \(\displaystyle\lim_{x\to 0^+} x\ln x = 0\).</li>
+                <li>Por lo tanto \(\displaystyle\lim_{x\to 0^+} x^x = e^0 = 1\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.11 (caso \(\infty^0\)).</strong> Calcular \(\displaystyle\lim_{x\to\infty} x^{1/x}\).
+        <div class="pasos">
+            <ol>
+                <li>Al sustituir: \(\infty^0\) → indeterminación.</li>
+                <li>Sea \(y = x^{1/x}\). Entonces \(\ln y = \dfrac{\ln x}{x}\).</li>
+                <li>Cuando \(x\to\infty\), \(\dfrac{\ln x}{x} \to 0\) (el logaritmo crece más lento que \(x\)).</li>
+                <li>Por lo tanto \(\displaystyle\lim_{x\to\infty} x^{1/x} = e^0 = 1\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="nota">
+        <strong>Resumen de técnicas:</strong>
+        <ul>
+            <li>\(\frac{0}{0}\) → factorizar, racionalizar, identidades trigonométricas.</li>
+            <li>\(\frac{\infty}{\infty}\) → dividir entre la mayor potencia.</li>
+            <li>\(\infty - \infty\) → conjugado o común denominador.</li>
+            <li>\(0 \cdot \infty\) → reescribir como cociente.</li>
+            <li>\(1^\infty, 0^0, \infty^0\) → aplicar \(\ln\) y usar \(L = e^{\lim \ln y}\).</li>
+        </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 6: ASÍNTOTAS ========== -->
+    <!-- ============================================================ -->
+    <h2>6. Límites al infinito y asíntotas</h2>
+
+    <div class="definicion">
+        <ul>
+            <li><strong>Asíntota horizontal:</strong> Si \(\displaystyle\lim_{x\to +\infty} f(x) = L\) o \(\displaystyle\lim_{x\to -\infty} f(x) = L\), entonces la recta \(y=L\) es una <em>asíntota horizontal</em>.</li>
+            <li><strong>Asíntota vertical:</strong> Si \(\displaystyle\lim_{x\to a^+} f(x) = \pm\infty\) o \(\displaystyle\lim_{x\to a^-} f(x) = \pm\infty\), entonces la recta \(x=a\) es una <em>asíntota vertical</em>.</li>
+        </ul>
+    </div>
+
+    <h3>6.1 Ejemplo visual: asíntota horizontal</h3>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 6.1.</strong> Consideremos \(f(x) = \dfrac{2x^2+3}{x^2-1}\). Calculamos los límites al infinito:
+        \[
+        \lim_{x\to \infty}\frac{2x^2+3}{x^2-1} = \lim_{x\to \infty}\frac{2+\frac{3}{x^2}}{1-\frac{1}{x^2}} = \frac{2}{1} = 2
+        \]
+        Lo mismo ocurre cuando \(x\to -\infty\). Por lo tanto, la recta \(y=2\) es una <strong>asíntota horizontal</strong>.
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gLim3" width="500" height="350"></canvas>
+        <p>La función se acerca a \(y=2\) cuando \(x\to\pm\infty\) (asíntota horizontal punteada). Además tiene asíntotas verticales en \(x=\pm 1\).</p>
+    </div>
+
+    <h3>6.2 Ejemplo visual: asíntota vertical</h3>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 6.2.</strong> Consideremos \(f(x) = \dfrac{1}{(x-2)^2}\). Veamos qué pasa cerca de \(x=2\):
+        \[
+        \lim_{x\to 2^-}\frac{1}{(x-2)^2} = +\infty, \qquad \lim_{x\to 2^+}\frac{1}{(x-2)^2} = +\infty
+        \]
+        Por lo tanto, la recta \(x=2\) es una <strong>asíntota vertical</strong>.
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gLim4" width="500" height="350"></canvas>
+        <p>Cuando \(x\) se acerca a \(2\), la función crece sin límite. La recta \(x=2\) es una asíntota vertical.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 7: CONTINUIDAD ========== -->
+    <!-- ============================================================ -->
+    <h2>7. Continuidad</h2>
+
+    <div class="definicion">
+        Una función \(f\) es <strong>continua</strong> en \(x=a\) si se cumplen tres condiciones:
+        <ol>
+            <li>\(f(a)\) está definida.</li>
+            <li>\(\displaystyle\lim_{x\to a} f(x)\) existe (es decir, los laterales coinciden).</li>
+            <li>\(\displaystyle\lim_{x\to a} f(x) = f(a)\).</li>
+        </ol>
+    </div>
+
+    <div class="teorema">
+        <strong>Tipos de discontinuidad:</strong>
+        <ul>
+            <li><strong>Evitable:</strong> el límite existe pero no coincide con \(f(a)\), o \(f(a)\) no existe. La gráfica tiene un "hueco".</li>
+            <li><strong>De salto:</strong> los límites laterales existen pero son diferentes. La gráfica "brinca".</li>
+            <li><strong>Esencial (infinita):</strong> al menos uno de los límites laterales es infinito. La gráfica tiene una asíntota vertical.</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 7.1 (discontinuidad evitable).</strong> \(f(x) = \dfrac{x^2-1}{x-1}\) no está definida en \(x=1\), pero \(\displaystyle\lim_{x\to 1}f(x) = 2\). La discontinuidad es <strong>evitable</strong>: bastaría definir \(f(1)=2\) para "arreglarla".
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 7.2 (discontinuidad de salto).</strong> \(f(x) = \begin{cases} x+2 & x<1 \\ 3x-2 & x>1 \end{cases}\). Los límites laterales son 3 y 1: distintos. Es una discontinuidad <strong>de salto</strong>.
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 7.3 (discontinuidad infinita).</strong> \(f(x) = \dfrac{1}{(x-2)^2}\) tiene \(\displaystyle\lim_{x\to 2}f(x) = +\infty\). Es una discontinuidad <strong>infinita</strong> (asíntota vertical).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== SECCIÓN 8: TVI ========== -->
+    <!-- ============================================================ -->
+    <h2>8. Teorema del valor intermedio</h2>
+
+    <div class="teorema">
+        Si \(f\) es continua en el intervalo cerrado \([a,b]\) y \(k\) es un número cualquiera entre \(f(a)\) y \(f(b)\), entonces existe al menos un número \(c \in (a,b)\) tal que \(f(c) = k\).
+        <br><br>
+        Es decir, una función continua en un intervalo <strong>toma todos los valores intermedios</strong> entre \(f(a)\) y \(f(b)\).
+    </div>
+
+    <div class="nota">
+        <strong>Interpretación geométrica.</strong> Si puedes dibujar la gráfica de \(f\) en \([a,b]\) <em>sin levantar el lápiz</em>, entonces cualquier altura entre \(f(a)\) y \(f(b)\) es alcanzada por la curva.
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div style="margin-top: 15px;">
+        <a href="ejercicios.html" style="background:#1a3e6f; color:white; padding:8px 16px; text-decoration:none; border-radius:5px;">➡️ Ejercicios</a>
+        <a href="preparciales.html" style="background:#1a3e6f; color:white; padding:8px 16px; text-decoration:none; border-radius:5px; margin-left:10px;">📝 Pre‑parciales</a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// ===== UTILIDADES DE DIBUJO =====
+// ============================================================
+function crearDibujante(canvasId, xmin, xmax, ymin, ymax) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    const pad = 25;
+    const X = (x) => pad + ((x - xmin) / (xmax - xmin)) * (w - 2*pad);
+    const Y = (y) => h - pad - ((y - ymin) / (ymax - ymin)) * (h - 2*pad);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+
+    // Cuadrícula
+    ctx.strokeStyle = "#ececec";
+    ctx.lineWidth = 0.5;
+    for (let x = Math.ceil(xmin); x <= xmax; x++) {
+        ctx.beginPath();
+        ctx.moveTo(X(x), pad);
+        ctx.lineTo(X(x), h - pad);
+        ctx.stroke();
+    }
+    for (let y = Math.ceil(ymin); y <= ymax; y++) {
+        ctx.beginPath();
+        ctx.moveTo(pad, Y(y));
+        ctx.lineTo(w - pad, Y(y));
+        ctx.stroke();
+    }
+
+    // Ejes
+    ctx.strokeStyle = "#888";
+    ctx.lineWidth = 1.2;
+    if (ymin <= 0 && ymax >= 0) {
+        ctx.beginPath();
+        ctx.moveTo(pad, Y(0));
+        ctx.lineTo(w - pad, Y(0));
+        ctx.stroke();
+    }
+    if (xmin <= 0 && xmax >= 0) {
+        ctx.beginPath();
+        ctx.moveTo(X(0), pad);
+        ctx.lineTo(X(0), h - pad);
+        ctx.stroke();
+    }
+
+    // Marcas en ejes
+    ctx.fillStyle = "#666";
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    for (let x = Math.ceil(xmin); x <= xmax; x++) {
+        if (x === 0) continue;
+        ctx.fillText(x.toString(), X(x), Y(0) + 3);
+    }
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (let y = Math.ceil(ymin); y <= ymax; y++) {
+        if (y === 0) continue;
+        ctx.fillText(y.toString(), X(0) - 4, Y(y));
+    }
+
+    return { ctx, X, Y, w, h, pad };
+}
+
+function dibujarFuncion(canvasId, f, xmin, xmax, ymin, ymax, discontinuidades = []) {
+    const d = crearDibujante(canvasId, xmin, xmax, ymin, ymax);
+    if (!d) return;
+    const { ctx, X, Y, w, h, pad } = d;
+
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    const pasos = w * 2;
+    let lapizArriba = true;
+
+    for (let i = 0; i <= pasos; i++) {
+        const x = xmin + (i / pasos) * (xmax - xmin);
+        let saltar = false;
+        for (const disc of discontinuidades) {
+            if (Math.abs(x - disc) < (xmax - xmin) / pasos * 1.5) { saltar = true; break; }
+        }
+        if (saltar) { lapizArriba = true; continue; }
+
+        const y = f(x);
+        if (!isFinite(y) || isNaN(y)) { lapizArriba = true; continue; }
+        if (y < ymin - 1 || y > ymax + 1) { lapizArriba = true; continue; }
+
+        const px = X(x), py = Y(y);
+        if (lapizArriba) { ctx.moveTo(px, py); lapizArriba = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Círculos huecos en discontinuidades evitables
+    for (const disc of discontinuidades) {
+        const yDisc = f(disc + 1e-6);
+        if (isFinite(yDisc) && yDisc >= ymin && yDisc <= ymax) {
+            ctx.beginPath();
+            ctx.arc(X(disc), Y(yDisc), 5, 0, 2*Math.PI);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.strokeStyle = "#c96b1a";
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+        }
+    }
+}
+
+// ============================================================
+// ===== DIBUJOS ESPECÍFICOS DE LAS GRÁFICAS GRANDES =====
+// ============================================================
+
+// G1: f(x) = (x^2-1)/(x-1) con hueco en x=1
+function dibujarG1() {
+    const d = crearDibujante('gLim1', -1, 4, -1, 5);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+    // Función
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let first = true;
+    for (let x = -1; x <= 4; x += 0.01) {
+        if (Math.abs(x - 1) < 0.02) { first = true; continue; }
+        const y = x + 1;
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Asíntota horizontal y=2 (punteada)
+    ctx.strokeStyle = "#c96b1a";
+    ctx.setLineDash([6, 6]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(X(-1), Y(2));
+    ctx.lineTo(X(4), Y(2));
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("y = 2", X(3.3), Y(2) - 4);
+
+    // Hueco en x=1
+    ctx.beginPath();
+    ctx.arc(X(1), Y(2), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.strokeStyle = "#c96b1a";
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("hueco en (1,2)", X(1) + 12, Y(2) - 6);
+
+    // Puntos de la tabla (bolitas azules)
+    const puntosX = [0.9, 0.99, 0.999, 1.001, 1.01, 1.1];
+    ctx.fillStyle = "#2e7d32";
+    for (const px0 of puntosX) {
+        const py0 = px0 + 1;
+        ctx.beginPath();
+        ctx.arc(X(px0), Y(py0), 3.5, 0, 2*Math.PI);
+        ctx.fill();
+    }
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(x) = (x² − 1)/(x − 1)", 30, 15);
+}
+
+// G2: función a trozos con límites laterales distintos
+function dibujarG2() {
+    const d = crearDibujante('gLim2', -1, 3, -1, 5);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+    // Rama izquierda: x+2 para x<1
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    let first = true;
+    for (let x = -1; x < 1; x += 0.01) {
+        const y = x + 2;
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    // Rama derecha: 3x-2 para x>1
+    ctx.beginPath();
+    first = true;
+    for (let x = 1.01; x <= 3; x += 0.01) {
+        const y = 3*x - 2;
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Huecos en ambos lados
+    ctx.beginPath();
+    ctx.arc(X(1), Y(3), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2.5; ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(X(1), Y(1), 6, 0, 2*Math.PI);
+    ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2.5; ctx.stroke();
+
+    // Líneas punteadas horizontales hacia los huecos
+    ctx.strokeStyle = "#c96b1a";
+    ctx.setLineDash([5, 5]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(X(-1), Y(3)); ctx.lineTo(X(1), Y(3));
+    ctx.moveTo(X(-1), Y(1)); ctx.lineTo(X(1), Y(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Etiquetas
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("límite lateral izquierdo = 3", X(-0.9), Y(3) - 6);
+    ctx.textBaseline = "top";
+    ctx.fillText("límite lateral derecho = 1", X(1.1), Y(1) + 6);
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(x) = x+2  (x<1),  3x−2  (x>1)", 30, 15);
+}
+
+// G3: asíntota horizontal
+function dibujarG3() {
+    const d = crearDibujante('gLim3', -5, 5, -3, 6);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Función (2x^2+3)/(x^2-1) con discontinuidades en ±1
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    const disc = [-1, 1];
+    const w = 500;
+    const pasos = w * 2;
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i <= pasos; i++) {
+        const x = -5 + (i/pasos) * 10;
+        let saltar = false;
+        for (const D of disc) if (Math.abs(x - D) < 0.05) { saltar = true; break; }
+        if (saltar) { first = true; continue; }
+        const y = (2*x*x + 3) / (x*x - 1);
+        if (!isFinite(y) || y < -5 || y > 10) { first = true; continue; }
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Asíntotas verticales
+    ctx.strokeStyle = "#c96b1a";
+    ctx.setLineDash([6, 6]);
+    ctx.lineWidth = 1.5;
+    for (const D of disc) {
+        ctx.beginPath();
+        ctx.moveTo(X(D), Y(-3));
+        ctx.lineTo(X(D), Y(6));
+        ctx.stroke();
+    }
+    // Asíntota horizontal y=2
+    ctx.beginPath();
+    ctx.moveTo(X(-5), Y(2));
+    ctx.lineTo(X(5), Y(2));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("y = 2 (asíntota horizontal)", X(-4.8), Y(2) - 4);
+    ctx.fillText("x = −1", X(-1) + 4, Y(5));
+    ctx.fillText("x = 1", X(1) + 4, Y(5));
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(x) = (2x² + 3)/(x² − 1)", 30, 15);
+}
+
+// G4: asíntota vertical
+function dibujarG4() {
+    const d = crearDibujante('gLim4', -3, 7, -1, 8);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Función 1/(x-2)^2 con discontinuidad en x=2
+    ctx.strokeStyle = "#1a3e6f";
+    ctx.lineWidth = 2.5;
+    const pasos = 1000;
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i <= pasos; i++) {
+        const x = -3 + (i/pasos) * 10;
+        if (Math.abs(x - 2) < 0.02) { first = true; continue; }
+        const y = 1 / ((x-2)*(x-2));
+        if (!isFinite(y) || y > 10) { first = true; continue; }
+        const px = X(x), py = Y(y);
+        if (first) { ctx.moveTo(px, py); first = false; }
+        else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Asíntota vertical x=2
+    ctx.strokeStyle = "#c96b1a";
+    ctx.setLineDash([6, 6]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(X(2), Y(-1));
+    ctx.lineTo(X(2), Y(8));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText("x = 2 (asíntota vertical)", X(2) + 6, Y(7));
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("f(x) = 1/(x − 2)²", 30, 15);
+}
+
+// ============================================================
+// ===== DIBUJAR TODO AL CARGAR =====
+// ============================================================
+window.addEventListener('load', function() {
+    // Bloque 0 (12 gráficas pequeñas)
+    dibujarFuncion('g01', x => x, -4, 4, -4, 4);
+    dibujarFuncion('g02', x => x*x, -3, 3, -1, 8);
+    dibujarFuncion('g03', x => x*x*x, -2.5, 2.5, -8, 8);
+    dibujarFuncion('g04', x => x < 0 ? NaN : Math.sqrt(x), -1, 9, -1, 3.5);
+    dibujarFuncion('g05', x => Math.abs(x), -4, 4, -1, 4);
+    dibujarFuncion('g06', x => 1/x, -5, 5, -5, 5, [0]);
+    dibujarFuncion('g07', x => (x*x-1)/(x-1), -4, 4, -4, 5, [1]);
+    dibujarFuncion('g08', x => 1/(x*x), -4, 4, -1, 8, [0]);
+    dibujarFuncion('g09', x => x < 0 ? x + 1 : x*x, -3, 3, -1, 6);
+    dibujarFuncion('g10', x => Math.sin(x), -2*Math.PI, 2*Math.PI, -1.5, 1.5);
+    dibujarFuncion('g11', x => Math.tan(x), -Math.PI*1.5, Math.PI*1.5, -6, 6,
+        [-Math.PI/2, Math.PI/2, -3*Math.PI/2, 3*Math.PI/2]);
+    dibujarFuncion('g12', x => x <= 0 ? NaN : Math.log(x), -0.5, 8, -4, 3);
+
+    // Gráficas grandes (Secciones 1, 2, 6)
+    dibujarG1();
+    dibujarG2();
+    dibujarG3();
+    dibujarG4();
+});
+</script>
+</body>
+</html>
