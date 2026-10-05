@@ -7,16 +7,42 @@
     <style>
         body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
         h1 { text-align: center; font-size: 28px; }
-        h2 { border-bottom: 1px solid #ccc; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 1.8em; }
         .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
-        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px 14px; border-left: 4px solid #1a3e6f; background: #f5f5f5; border-radius: 0 4px 4px 0; }
         .teorema { border-left-color: #c96b1a; }
         .ejemplo { border-left-color: #2e7d32; }
-        .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
-        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
-        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 12px 0; font-family: monospace; background: #f9f2e0; padding: 10px; border-radius: 5px; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        .canvas-grande {
+            text-align: center;
+            margin: 20px 0;
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .canvas-grande canvas { max-width: 100%; height: auto; background: white; border-radius: 4px; }
+        .canvas-grande p { font-size: 13px; color: #555; margin: 8px 0 0 0; font-style: italic; }
+        .axiomas ol { margin: 10px 0; }
+        .axiomas li { margin: 6px 0; }
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a {
+            display: inline-block; background: #1a3e6f; color: white;
+            padding: 8px 18px; text-decoration: none; border-radius: 5px;
+            margin: 5px; font-size: 14px;
+        }
+        .nav-footer a:hover { background: #2a5a9a; }
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            .canvas-grande { page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -25,123 +51,604 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
+    <!-- ============================================================ -->
+    <!-- ========== 1. ESPACIO VECTORIAL ========== -->
+    <!-- ============================================================ -->
     <h2>1. Definición de Espacio Vectorial</h2>
+
     <div class="definicion">
-        Un <strong>espacio vectorial</strong> sobre un cuerpo \(\mathbb{K}\) (normalmente \(\mathbb{R}\) o \(\mathbb{C}\)) es un conjunto \(V\) no vacío, con dos operaciones:
+        Un <strong>espacio vectorial</strong> sobre un cuerpo \(\mathbb{K}\) (normalmente \(\mathbb{R}\) o \(\mathbb{C}\)) es un conjunto no vacío \(V\) con dos operaciones:
         <ul>
-            <li><strong>Suma:</strong> \(+: V \times V \to V\)</li>
-            <li><strong>Producto por escalar:</strong> \(\cdot: \mathbb{K} \times V \to V\)</li>
+            <li><strong>Suma:</strong> \(+\; : V \times V \to V\)</li>
+            <li><strong>Producto por escalar:</strong> \(\cdot\; : \mathbb{K} \times V \to V\)</li>
         </ul>
-        que cumplen 8 axiomas (asociatividad, conmutatividad, existencia de neutro, inverso, distributividad, etc.).
+        que cumplen los siguientes <strong>8 axiomas</strong> (con \(\mathbf{u}, \mathbf{v}, \mathbf{w} \in V\) y \(\alpha, \beta \in \mathbb{K}\)).
     </div>
+
+    <div class="teorema axiomas">
+        <strong>Axiomas de espacio vectorial</strong>
+        <ol>
+            <li><strong>Conmutatividad de la suma:</strong> \(\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}\)</li>
+            <li><strong>Asociatividad de la suma:</strong> \((\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})\)</li>
+            <li><strong>Neutro aditivo:</strong> \(\exists\, \mathbf{0} \in V\) tal que \(\mathbf{v} + \mathbf{0} = \mathbf{v}\)</li>
+            <li><strong>Inverso aditivo:</strong> \(\exists\, (-\mathbf{v}) \in V\) tal que \(\mathbf{v} + (-\mathbf{v}) = \mathbf{0}\)</li>
+            <li><strong>Asociatividad escalar:</strong> \(\alpha(\beta \mathbf{v}) = (\alpha\beta)\mathbf{v}\)</li>
+            <li><strong>Neutro escalar:</strong> \(1 \cdot \mathbf{v} = \mathbf{v}\)</li>
+            <li><strong>Distributividad escalar sobre vector:</strong> \(\alpha(\mathbf{u} + \mathbf{v}) = \alpha\mathbf{u} + \alpha\mathbf{v}\)</li>
+            <li><strong>Distributividad vector sobre escalar:</strong> \((\alpha + \beta)\mathbf{v} = \alpha\mathbf{v} + \beta\mathbf{v}\)</li>
+        </ol>
+    </div>
+
     <div class="ejemplo">
         <strong>Ejemplos de espacios vectoriales:</strong>
         <ul>
-            <li>\(\mathbb{R}^2 = \{(x,y) \mid x,y \in \mathbb{R}\}\) con suma y producto por escalar usuales.</li>
-            <li>\(\mathbb{R}^3 = \{(x,y,z) \mid x,y,z \in \mathbb{R}\}\).</li>
-            <li>\(\mathcal{P}_n\): espacio de polinomios de grado \(\leq n\).</li>
+            <li>\(\mathbb{R}^2 = \{(x, y) \mid x, y \in \mathbb{R}\}\) con suma y producto por escalar usuales.</li>
+            <li>\(\mathbb{R}^3 = \{(x, y, z) \mid x, y, z \in \mathbb{R}\}\).</li>
+            <li>\(\mathbb{R}^n = \{(x_1, x_2, \dots, x_n) \mid x_i \in \mathbb{R}\}\) con \(n\) finito.</li>
+            <li>\(\mathcal{P}_n\): espacio de polinomios de grado \(\leq n\) con coeficientes reales.</li>
             <li>\(\mathcal{M}_{m \times n}\): espacio de matrices de \(m\) filas y \(n\) columnas.</li>
+            <li>\(C[a, b]\): espacio de funciones continuas en el intervalo \([a, b]\).</li>
+            <li>El espacio de sucesiones reales \(\{(a_1, a_2, a_3, \dots)\}\).</li>
+            <li>El espacio trivial \(\{\mathbf{0}\}\) (contiene solo al vector nulo).</li>
         </ul>
     </div>
 
-    <h2>2. Subespacios Vectoriales</h2>
-    <div class="definicion">
-        Un <strong>subespacio vectorial</strong> \(W\) de \(V\) es un subconjunto no vacío de \(V\) que es cerrado bajo la suma y el producto por escalar, y que contiene al vector nulo. Es decir, \(W\) es en sí mismo un espacio vectorial.
-    </div>
-    <div class="ejemplo">
-        <strong>Ejemplo:</strong> En \(\mathbb{R}^3\), el conjunto \(W = \{(x,y,0) \mid x,y \in \mathbb{R}\}\) es un subespacio (el plano \(z=0\)).
+    <div class="nota">
+        <strong>Contraejemplos (NO son espacios vectoriales):</strong>
+        <ul>
+            <li>El conjunto de matrices \(2\times 2\) con determinante distinto de cero: la suma de dos matrices invertibles no siempre es invertible.</li>
+            <li>La recta \(y = 2x + 1\) en \(\mathbb{R}^2\): no contiene al origen \((0,0)\), y por lo tanto viola los axiomas 3 y 4.</li>
+            <li>El conjunto \(\{(x, y) \in \mathbb{R}^2 \mid x \geq 0\}\) con suma usual: no todo elemento tiene inverso aditivo (por ejemplo \((1,0) + (-1, 0) \notin V\)).</li>
+        </ul>
     </div>
 
-    <h2>3. Combinación Lineal, Dependencia e Independencia Lineal</h2>
+    <!-- ============================================================ -->
+    <!-- ========== 2. SUBESPACIOS VECTORIALES ========== -->
+    <!-- ============================================================ -->
+    <h2>2. Subespacios Vectoriales</h2>
+
     <div class="definicion">
-        Dados los vectores \(v_1, v_2, \dots, v_n \in V\) y escalares \(\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{K}\), la expresión
+        Un <strong>subespacio vectorial</strong> \(W\) de \(V\) es un subconjunto no vacío de \(V\) que es cerrado bajo la suma y el producto por escalar, y que contiene al vector nulo. Es decir, \(W\) es en sí mismo un espacio vectorial con las operaciones heredadas de \(V\).
+    </div>
+
+    <div class="teorema">
+        <strong>Criterio de subespacio.</strong> Un subconjunto \(W \subseteq V\) (con \(W \neq \varnothing\)) es un subespacio vectorial de \(V\) si y solo si se cumplen:
+        <ol>
+            <li><strong>Contiene al vector nulo:</strong> \(\mathbf{0} \in W\).</li>
+            <li><strong>Cerrado bajo la suma:</strong> si \(\mathbf{u}, \mathbf{v} \in W\), entonces \(\mathbf{u} + \mathbf{v} \in W\).</li>
+            <li><strong>Cerrado bajo el producto por escalar:</strong> si \(\alpha \in \mathbb{K}\) y \(\mathbf{v} \in W\), entonces \(\alpha\mathbf{v} \in W\).</li>
+        </ol>
+        Equivalentemente: \(W\) es subespacio sii \(\alpha\mathbf{u} + \beta\mathbf{v} \in W\) para todo \(\mathbf{u}, \mathbf{v} \in W\) y \(\alpha, \beta \in \mathbb{K}\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2.1.</strong> En \(\mathbb{R}^3\), el conjunto \(W = \{(x, y, 0) \mid x, y \in \mathbb{R}\}\) es un subespacio (es el plano \(z = 0\)).
+        <div class="canvas-grande">
+            <canvas id="gSubespacio" width="500" height="350"></canvas>
+            <p>El plano \(z=0\) pasa por el origen y es un subespacio de \(\mathbb{R}^3\).</p>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2.2 (contraejemplo gráfico).</strong> En \(\mathbb{R}^2\), la recta \(W = \{(x, y) \mid y = x + 1\}\) <strong>no</strong> es subespacio porque no pasa por el origen.
+        <div class="canvas-grande">
+            <canvas id="gNoSubespacio" width="500" height="350"></canvas>
+            <p>La recta \(y = x+1\) no pasa por \((0,0)\), por lo tanto no es subespacio.</p>
+        </div>
+    </div>
+
+    <div class="definicion">
+        <strong>Otros ejemplos de subespacios:</strong>
+        <ul>
+            <li>Conjunto de matrices \(n\times n\) con <strong>traza cero</strong>.</li>
+            <li>Conjunto de matrices \(n\times n\) <strong>simétricas</strong> (\(A^T = A\)).</li>
+            <li>Conjunto de polinomios \(p \in \mathcal{P}_n\) con \(p(1) = 0\).</li>
+            <li>Conjunto de funciones \(f \in C[a,b]\) con \(f(a) = f(b)\).</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Intersección y suma de subespacios.</strong> Sean \(W_1\) y \(W_2\) subespacios de \(V\):
+        <ul>
+            <li><strong>Intersección:</strong> \(W_1 \cap W_2\) siempre es subespacio de \(V\).</li>
+            <li><strong>Suma:</strong> \(W_1 + W_2 = \{\mathbf{w}_1 + \mathbf{w}_2 \mid \mathbf{w}_1 \in W_1, \mathbf{w}_2 \in W_2\}\) también es subespacio.</li>
+        </ul>
+        Si además \(W_1 \cap W_2 = \{\mathbf{0}\}\), decimos que la suma es <strong>directa</strong> y escribimos \(W_1 \oplus W_2\). En ese caso todo vector de \(W_1 + W_2\) se escribe de manera <em>única</em> como \(\mathbf{w}_1 + \mathbf{w}_2\).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 3. COMBINACIÓN LINEAL, DEP/INDEP ========== -->
+    <!-- ============================================================ -->
+    <h2>3. Combinación Lineal, Dependencia e Independencia Lineal</h2>
+
+    <div class="definicion">
+        Dados los vectores \(\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V\) y escalares \(\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{K}\), la expresión
         \[
-        \alpha_1 v_1 + \alpha_2 v_2 + \cdots + \alpha_n v_n
+        \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \alpha_n \mathbf{v}_n
         \]
         se llama <strong>combinación lineal</strong> de esos vectores.
     </div>
+
     <div class="definicion">
-        Los vectores son <strong>linealmente independientes</strong> si la única combinación lineal que da el vector nulo es aquella en la que todos los escalares son cero.
-        <br>
-        Si existe alguna combinación lineal no trivial que da el vector nulo, entonces son <strong>linealmente dependientes</strong>.
-    </div>
-    <div class="ejemplo">
-        En \(\mathbb{R}^3\), los vectores \((1,0,0)\), \((0,1,0)\), \((0,0,1)\) son linealmente independientes.
-        <br>
-        Los vectores \((1,2,3)\), \((2,4,6)\) son linealmente dependientes (el segundo es el doble del primero).
+        Los vectores son <strong>linealmente independientes</strong> (LI) si la única combinación lineal que da el vector nulo es aquella en la que todos los escalares son cero:
+        \[
+        \alpha_1\mathbf{v}_1 + \cdots + \alpha_n\mathbf{v}_n = \mathbf{0} \implies \alpha_1 = \alpha_2 = \cdots = \alpha_n = 0
+        \]
+        Si existe alguna combinación lineal <em>no trivial</em> que da el vector nulo, entonces son <strong>linealmente dependientes</strong> (LD).
     </div>
 
+    <div class="teorema">
+        <strong>Método algebraico para decidir LI/LD.</strong> Para saber si \(\{\mathbf{v}_1, \dots, \mathbf{v}_n\}\) es LI, planteamos la ecuación vectorial
+        \[
+        \alpha_1\mathbf{v}_1 + \alpha_2\mathbf{v}_2 + \cdots + \alpha_n\mathbf{v}_n = \mathbf{0}
+        \]
+        y resolvemos el sistema homogéneo asociado:
+        <ul>
+            <li>Si el sistema tiene <strong>solo la solución trivial</strong> \(\alpha_1 = \cdots = \alpha_n = 0\) → los vectores son <strong>LI</strong>.</li>
+            <li>Si tiene <strong>soluciones no triviales</strong> → son <strong>LD</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Regla del determinante (para \(n\) vectores en \(\mathbb{R}^n\)).</strong> Sean \(\mathbf{v}_1, \dots, \mathbf{v}_n \in \mathbb{R}^n\) y \(A\) la matriz cuyas columnas son esos vectores. Entonces:
+        \[
+        \det(A) \neq 0 \iff \{\mathbf{v}_1, \dots, \mathbf{v}_n\} \text{ es LI}
+        \]
+        \[
+        \det(A) = 0 \iff \{\mathbf{v}_1, \dots, \mathbf{v}_n\} \text{ es LD}
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.1 (LI en \(\mathbb{R}^3\)).</strong> Los vectores \((1,0,0)\), \((0,1,0)\), \((0,0,1)\) son linealmente independientes.
+        <br><br>
+        <strong>Ejemplo 3.2 (LD en \(\mathbb{R}^3\)).</strong> Los vectores \((1, 2, 3)\) y \((2, 4, 6)\) son linealmente dependientes (el segundo es el doble del primero).
+        <div class="canvas-grande">
+            <canvas id="gLD" width="500" height="350"></canvas>
+            <p>Dos vectores son LD si son paralelos (uno es múltiplo escalar del otro); son LI si no lo son.</p>
+        </div>
+    </div>
+
+    <div class="teorema">
+        <strong>Propiedad importante.</strong> En un espacio vectorial de dimensión \(n\), cualquier conjunto con <strong>más de \(n\) vectores</strong> es necesariamente linealmente dependiente.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 4. BASE Y DIMENSIÓN ========== -->
+    <!-- ============================================================ -->
     <h2>4. Base y Dimensión</h2>
+
     <div class="definicion">
-        Un conjunto \(B = \{v_1, v_2, \dots, v_n\}\) de vectores de \(V\) es una <strong>base</strong> de \(V\) si:
+        Un conjunto \(B = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}\) de vectores de \(V\) es una <strong>base</strong> de \(V\) si:
         <ul>
             <li>Los vectores son linealmente independientes.</li>
-            <li>Todo vector de \(V\) se puede expresar como combinación lineal de ellos (es decir, generan \(V\)).</li>
+            <li>Todo vector de \(V\) se puede expresar como combinación lineal de ellos (es decir, <em>generan</em> \(V\)).</li>
         </ul>
         La <strong>dimensión</strong> de \(V\) es el número de elementos de una base (todas las bases tienen el mismo número de elementos).
     </div>
+
     <div class="ejemplo">
-        \(\mathbb{R}^2\) tiene dimensión 2. Una base es \(\{(1,0), (0,1)\}\) (base canónica).
-        <br>
-        \(\mathbb{R}^3\) tiene dimensión 3. Su base canónica es \(\{(1,0,0), (0,1,0), (0,0,1)\}\).
+        <strong>Ejemplos:</strong>
+        <ul>
+            <li>\(\mathbb{R}^2\) tiene dimensión \(2\). Una base es \(\{(1,0), (0,1)\}\) (base canónica).</li>
+            <li>\(\mathbb{R}^3\) tiene dimensión \(3\). Su base canónica es \(\{(1,0,0), (0,1,0), (0,0,1)\}\).</li>
+            <li>\(\mathcal{P}_n\) tiene dimensión \(n+1\) (una base es \(\{1, x, x^2, \dots, x^n\}\)).</li>
+            <li>\(\mathcal{M}_{m \times n}\) tiene dimensión \(m \cdot n\).</li>
+        </ul>
     </div>
 
+    <div class="teorema">
+        <strong>Cómo encontrar una base de un subespacio.</strong> Si el subespacio \(W \subseteq \mathbb{R}^n\) está dado por ecuaciones lineales homogéneas, se procede así:
+        <ol>
+            <li>Se escribe el sistema y se resuelve con Gauss-Jordan.</li>
+            <li>Se identifican las <strong>variables libres</strong>.</li>
+            <li>Cada variable libre da lugar a un vector de la base (asignándole 1 y las demás 0).</li>
+        </ol>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4.1.</strong> Encontrar una base del subespacio \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x + y + z = 0\}\).
+        <br><br>
+        <strong>Solución:</strong> De la ecuación \(x + y + z = 0\) despejamos \(x = -y - z\). Las variables \(y, z\) son libres.
+        <ul>
+            <li>Si \(y = 1, z = 0\): \((x, y, z) = (-1, 1, 0)\).</li>
+            <li>Si \(y = 0, z = 1\): \((x, y, z) = (-1, 0, 1)\).</li>
+        </ul>
+        Por lo tanto, una base es \(B = \{(-1, 1, 0),\ (-1, 0, 1)\}\), y \(\dim(W) = 2\).
+    </div>
+
+    <div class="definicion">
+        <strong>Coordenadas respecto a una base.</strong> Si \(B = \{\mathbf{v}_1, \dots, \mathbf{v}_n\}\) es una base de \(V\), todo vector \(\mathbf{v} \in V\) se escribe <em>de manera única</em> como:
+        \[
+        \mathbf{v} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \cdots + c_n\mathbf{v}_n
+        \]
+        Los escalares \((c_1, c_2, \dots, c_n)\) son las <strong>coordenadas de \(\mathbf{v}\) respecto a la base \(B\)</strong>, y se denotan \([\mathbf{v}]_B\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4.2.</strong> Sea \(B = \{(1,1), (1,-1)\}\) una base de \(\mathbb{R}^2\). Encontrar las coordenadas de \(\mathbf{v} = (3, 1)\) en la base \(B\).
+        <br><br>
+        <strong>Solución:</strong> Planteamos \(c_1(1,1) + c_2(1,-1) = (3,1)\). De aquí:
+        \[
+        \begin{cases} c_1 + c_2 = 3 \\ c_1 - c_2 = 1 \end{cases} \implies c_1 = 2, \quad c_2 = 1
+        \]
+        Por lo tanto, \([\mathbf{v}]_B = (2, 1)\).
+    </div>
+
+    <div class="definicion">
+        <strong>Cambio de base.</strong> Si \(B_1\) y \(B_2\) son dos bases de \(V\), existe una <strong>matriz de transición</strong> \(P_{B_1 \to B_2}\) tal que
+        \[
+        [\mathbf{v}]_{B_2} = P_{B_1 \to B_2} \cdot [\mathbf{v}]_{B_1}
+        \]
+        Sus columnas son las coordenadas de los vectores de \(B_1\) respecto a \(B_2\).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 5. TRANSFORMACIONES LINEALES ========== -->
+    <!-- ============================================================ -->
     <h2>5. Transformaciones Lineales</h2>
+
     <div class="definicion">
         Una <strong>transformación lineal</strong> \(T: V \to W\) entre dos espacios vectoriales sobre el mismo cuerpo es una función que satisface:
         <ul>
-            <li>\(T(u+v) = T(u) + T(v)\) (preserva la suma).</li>
-            <li>\(T(\alpha v) = \alpha T(v)\) (preserva el producto por escalar).</li>
+            <li>\(T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})\) (preserva la suma).</li>
+            <li>\(T(\alpha \mathbf{v}) = \alpha T(\mathbf{v})\) (preserva el producto por escalar).</li>
         </ul>
-    </div>
-    <div class="ejemplo">
-        <strong>Ejemplo:</strong> \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x,y) = (2x + y, x - 3y)\) es una transformación lineal.
+        Equivalentemente: \(T(\alpha\mathbf{u} + \beta\mathbf{v}) = \alpha T(\mathbf{u}) + \beta T(\mathbf{v})\) para todo \(\mathbf{u}, \mathbf{v} \in V\) y \(\alpha, \beta \in \mathbb{K}\).
     </div>
 
+    <div class="teorema">
+        <strong>Propiedades inmediatas de una transformación lineal.</strong> Sea \(T: V \to W\) lineal:
+        <ul>
+            <li>\(T(\mathbf{0}_V) = \mathbf{0}_W\)</li>
+            <li>\(T(-\mathbf{v}) = -T(\mathbf{v})\)</li>
+            <li>\(T(\alpha_1\mathbf{v}_1 + \cdots + \alpha_n\mathbf{v}_n) = \alpha_1 T(\mathbf{v}_1) + \cdots + \alpha_n T(\mathbf{v}_n)\)</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.1.</strong> \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x, y) = (2x + y, x - 3y)\) es una transformación lineal.
+        <br><br>
+        <strong>Ejemplo 5.2 (rotación).</strong> La rotación de un ángulo \(\theta\) en el plano,
+        \[
+        R_\theta(x, y) = (x\cos\theta - y\sin\theta,\ x\sin\theta + y\cos\theta)
+        \]
+        es una transformación lineal.
+        <div class="canvas-grande">
+            <canvas id="gRotacion" width="500" height="350"></canvas>
+            <p>Una rotación de \(45°\) aplicada al cuadrado unitario sigue siendo una transformación lineal.</p>
+        </div>
+    </div>
+
+    <div class="definicion">
+        <strong>Tipos especiales de transformaciones lineales:</strong>
+        <ul>
+            <li><strong>Monomorfismo (inyectiva):</strong> \(T(\mathbf{u}) = T(\mathbf{v}) \implies \mathbf{u} = \mathbf{v}\).</li>
+            <li><strong>Epimorfismo (sobreyectiva):</strong> para todo \(\mathbf{w} \in W\) existe \(\mathbf{v} \in V\) con \(T(\mathbf{v}) = \mathbf{w}\).</li>
+            <li><strong>Isomorfismo (biyectiva):</strong> es inyectiva y sobreyectiva a la vez. Si existe, \(V\) y \(W\) son <em>isomorfos</em>.</li>
+        </ul>
+    </div>
+
+    <div class="nota">
+        <strong>Propiedad clave.</strong> Toda transformación lineal \(T: V \to W\) con \(\dim V = \dim W\) finitas es isomorfismo si y solo si \(\ker(T) = \{\mathbf{0}\}\), o equivalentemente si \(\det(A) \neq 0\) cuando \(A\) es su matriz asociada.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 6. NÚCLEO E IMAGEN ========== -->
+    <!-- ============================================================ -->
     <h2>6. Núcleo e Imagen</h2>
+
     <div class="definicion">
         Dada \(T: V \to W\) lineal:
         <ul>
-            <li>El <strong>núcleo</strong> de \(T\) es \(\ker(T) = \{v \in V \mid T(v) = 0_W\}\). Es un subespacio de \(V\).</li>
-            <li>La <strong>imagen</strong> de \(T\) es \(\operatorname{Im}(T) = \{T(v) \mid v \in V\}\). Es un subespacio de \(W\).</li>
+            <li>El <strong>núcleo</strong> de \(T\) es \(\ker(T) = \{\mathbf{v} \in V \mid T(\mathbf{v}) = \mathbf{0}_W\}\). Es un subespacio de \(V\).</li>
+            <li>La <strong>imagen</strong> de \(T\) es \(\text{Im}(T) = \{T(\mathbf{v}) \mid \mathbf{v} \in V\}\). Es un subespacio de \(W\).</li>
         </ul>
     </div>
+
     <div class="teorema">
-        <strong>Teorema de la dimensión (rango-nulidad):</strong>
+        <strong>Teorema de la dimensión (rango-nulidad).</strong> Si \(T: V \to W\) es lineal y \(V\) tiene dimensión finita:
         \[
-        \dim(V) = \dim(\ker(T)) + \dim(\operatorname{Im}(T))
+        \dim(V) = \dim(\ker T) + \dim(\text{Im}\, T)
         \]
+        donde \(\dim(\ker T)\) es la <strong>nulidad</strong> y \(\dim(\text{Im}\, T)\) es el <strong>rango</strong> de \(T\).
     </div>
 
+    <div class="ejemplo">
+        <strong>Ejemplo 6.1.</strong> Sea \(T: \mathbb{R}^3 \to \mathbb{R}^2\), \(T(x,y,z) = (x + y, y - z)\). Calculemos \(\ker(T)\) e \(\text{Im}(T)\).
+        <br><br>
+        <strong>Núcleo:</strong> resolvemos \(T(x,y,z) = (0,0)\):
+        \[
+        \begin{cases} x + y = 0 \\ y - z = 0 \end{cases} \implies x = -y, \ z = y
+        \]
+        Los vectores del núcleo son \((x,y,z) = (-y, y, y) = y(-1, 1, 1)\). Por lo tanto:
+        \[
+        \ker(T) = \text{gen}\{(-1, 1, 1)\}, \quad \dim(\ker T) = 1
+        \]
+        <br>
+        <strong>Imagen:</strong> la matriz asociada es
+        \[
+        A = \begin{pmatrix} 1 & 1 & 0 \\ 0 & 1 & -1 \end{pmatrix}
+        \]
+        Sus columnas \((1,0)\), \((1,1)\), \((0,-1)\) generan la imagen. Como \(\dim(\text{Im}\, T) = \text{rango}(A) = 2\), la imagen es todo \(\mathbb{R}^2\).
+        <br><br>
+        <strong>Verificación del teorema rango-nulidad:</strong> \(\dim(\mathbb{R}^3) = 3 = 1 + 2\). ✔
+    </div>
+
+    <div class="nota">
+        <strong>Interpretación geométrica.</strong> Para una transformación \(T: \mathbb{R}^3 \to \mathbb{R}^2\), el núcleo es un subespacio de \(\mathbb{R}^3\) (frecuentemente una recta o un plano por el origen), y la imagen es un subespacio de \(\mathbb{R}^2\) (una recta por el origen o todo \(\mathbb{R}^2\)).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 7. REPRESENTACIÓN MATRICIAL ========== -->
+    <!-- ============================================================ -->
     <h2>7. Representación Matricial de una Transformación Lineal</h2>
+
     <div class="definicion">
         Toda transformación lineal \(T: \mathbb{R}^n \to \mathbb{R}^m\) se puede representar por una matriz \(A\) de tamaño \(m \times n\) tal que:
         \[
-        T(v) = A v
+        T(\mathbf{v}) = A\mathbf{v}
         \]
-        donde \(v\) se escribe como vector columna.
+        donde \(\mathbf{v}\) se escribe como vector columna.
     </div>
+
+    <div class="teorema">
+        <strong>Cómo construir la matriz asociada.</strong> Si \(T: \mathbb{R}^n \to \mathbb{R}^m\) es lineal y \(\{\mathbf{e}_1, \dots, \mathbf{e}_n\}\) es la base canónica de \(\mathbb{R}^n\), la matriz asociada es:
+        \[
+        A = \big[\, T(\mathbf{e}_1) \mid T(\mathbf{e}_2) \mid \cdots \mid T(\mathbf{e}_n) \,\big]
+        \]
+        Es decir, las columnas de \(A\) son las imágenes de los vectores de la base canónica.
+    </div>
+
     <div class="ejemplo">
-        La transformación \(T(x,y) = (2x + y, x - 3y)\) tiene matriz asociada:
+        <strong>Ejemplo 7.1.</strong> La transformación \(T(x, y) = (2x + y, x - 3y)\) tiene matriz asociada:
         \[
         A = \begin{pmatrix} 2 & 1 \\ 1 & -3 \end{pmatrix}
         \]
+        porque \(T(1,0) = (2, 1)\) y \(T(0,1) = (1, -3)\).
     </div>
 
+    <div class="ejemplo">
+        <strong>Ejemplo 7.2 (matriz de rotación).</strong> La rotación de ángulo \(\theta\) en \(\mathbb{R}^2\):
+        \[
+        R_\theta = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}
+        \]
+        Por ejemplo, para \(\theta = 45°\):
+        \[
+        R_{45°} = \begin{pmatrix} \tfrac{\sqrt{2}}{2} & -\tfrac{\sqrt{2}}{2} \\[4pt] \tfrac{\sqrt{2}}{2} & \tfrac{\sqrt{2}}{2} \end{pmatrix}
+        \]
+    </div>
+
+    <div class="definicion">
+        <strong>Cambio de base en la matriz asociada.</strong> Si \(T: V \to V\) es lineal, \(A\) es su matriz en la base canónica y \(P\) es la matriz de transición a otra base \(B\), entonces la matriz de \(T\) en la nueva base es:
+        \[
+        A' = P^{-1} A P
+        \]
+        Las matrices \(A\) y \(A'\) se llaman <em>semejantes</em> o <em>equivalentes</em>.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 8. APLICACIONES ========== -->
+    <!-- ============================================================ -->
     <h2>8. Aplicaciones en Ingeniería Eléctrica</h2>
+
     <div class="ejemplo">
         <ul>
-            <li><strong>Cambios de base:</strong> En análisis de circuitos, a veces conviene trabajar en bases diferentes (por ejemplo, componentes simétricas en sistemas trifásicos).</li>
-            <li><strong>Sistemas de coordenadas:</strong> Transformaciones lineales permiten pasar de un sistema de coordenadas a otro.</li>
-            <li><strong>Filtrado de señales:</strong> Las transformaciones lineales se usan en procesamiento de señales (filtros lineales).</li>
+            <li><strong>Cambios de base:</strong> En el análisis de circuitos, conviene a veces trabajar en bases diferentes (por ejemplo, componentes simétricas en sistemas trifásicos).</li>
+            <li><strong>Sistemas de coordenadas:</strong> Las transformaciones lineales permiten pasar de un sistema de coordenadas a otro (por ejemplo, transformada de Clarke y Park en máquinas eléctricas).</li>
+            <li><strong>Filtrado de señales:</strong> Las transformaciones lineales se usan en procesamiento de señales (filtros lineales, transformada de Fourier como cambio de base).</li>
+            <li><strong>Sistemas \(A\mathbf{x} = \mathbf{b}\):</strong> Los circuitos lineales en régimen permanente se modelan con sistemas matriciales; el espacio nulo describe las corrientes nulas.</li>
+            <li><strong>Análisis de redes:</strong> La matriz de incidencia de una red eléctrica define una transformación lineal entre corrientes y voltajes nodales.</li>
         </ul>
     </div>
 
     <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-    <div>
-        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
-        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    <div class="nav-footer">
+        <a href="ejercicios.html">➡️ Ejercicios</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
     </div>
 </div>
+
+<script>
+// ============================================================
+// ===== UTILIDADES DE DIBUJO =====
+// ============================================================
+function crearDibujante(canvasId, xmin, xmax, ymin, ymax) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    const pad = 25;
+    const X = (x) => pad + ((x - xmin) / (xmax - xmin)) * (w - 2*pad);
+    const Y = (y) => h - pad - ((y - ymin) / (ymax - ymin)) * (h - 2*pad);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, w, h);
+    // Cuadrícula
+    ctx.strokeStyle = "#ececec";
+    ctx.lineWidth = 0.5;
+    for (let x = Math.ceil(xmin); x <= xmax; x++) {
+        ctx.beginPath(); ctx.moveTo(X(x), pad); ctx.lineTo(X(x), h - pad); ctx.stroke();
+    }
+    for (let y = Math.ceil(ymin); y <= ymax; y++) {
+        ctx.beginPath(); ctx.moveTo(pad, Y(y)); ctx.lineTo(w - pad, Y(y)); ctx.stroke();
+    }
+    // Ejes
+    ctx.strokeStyle = "#888"; ctx.lineWidth = 1.2;
+    if (ymin <= 0 && ymax >= 0) { ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(w - pad, Y(0)); ctx.stroke(); }
+    if (xmin <= 0 && xmax >= 0) { ctx.beginPath(); ctx.moveTo(X(0), pad); ctx.lineTo(X(0), h - pad); ctx.stroke(); }
+    return { ctx, X, Y, w, h, pad };
+}
+
+// ===== G1: Plano z = 0 (subespacio de R3, proyección axonométrica simple) =====
+function dibujarGSubespacio() {
+    const canvas = document.getElementById('gSubespacio');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    ctx.fillStyle = "#fafafa"; ctx.fillRect(0, 0, w, h);
+    const cx = w/2, cy = h/2 + 30, s = 45;
+
+    // Proyección: x horizontal, y diagonal, z vertical
+    const proj = (x, y, z) => {
+        const px = cx + s * (x - y * 0.7);
+        const py = cy - s * (z + y * 0.5);
+        return { px, py };
+    };
+
+    // Ejes
+    const drawAxis = (p1, p2, color, label) => {
+        const a = proj(...p1), b = proj(...p2);
+        ctx.strokeStyle = color; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(a.px, a.py); ctx.lineTo(b.px, b.py); ctx.stroke();
+        ctx.fillStyle = color; ctx.font = "bold 13px sans-serif";
+        ctx.fillText(label, b.px + 5, b.py + 4);
+    };
+    drawAxis([-2,0,0], [3,0,0], "#e74c3c", "x");
+    drawAxis([0,-2,0], [0,3,0], "#2ecc71", "y");
+    drawAxis([0,0,-1], [0,0,3], "#3498db", "z");
+
+    // Plano z = 0
+    const corners = [[-2,-2,0],[3,-2,0],[3,3,0],[-2,3,0]];
+    ctx.beginPath();
+    corners.forEach((c, i) => {
+        const p = proj(...c);
+        if (i === 0) ctx.moveTo(p.px, p.py); else ctx.lineTo(p.px, p.py);
+    });
+    ctx.closePath();
+    ctx.fillStyle = "rgba(78, 205, 196, 0.25)";
+    ctx.fill();
+    ctx.strokeStyle = "#4ecdc4"; ctx.lineWidth = 2; ctx.stroke();
+
+    // Etiquetas
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Plano z = 0 (subespacio de R³)", 15, 15);
+}
+
+// ===== G2: No subespacio: recta y = x + 1 (no pasa por el origen) =====
+function dibujarGNoSubespacio() {
+    const d = crearDibujante('gNoSubespacio', -3, 4, -2, 5);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Recta y = x+1
+    ctx.strokeStyle = "#e07a8f"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(X(-3), Y(-2));
+    ctx.lineTo(X(4), Y(5));
+    ctx.stroke();
+
+    // Punto (0,1) donde corta al eje y
+    ctx.beginPath(); ctx.arc(X(0), Y(1), 5, 0, 2*Math.PI);
+    ctx.fillStyle = "#e07a8f"; ctx.fill();
+
+    // Marcar origen
+    ctx.beginPath(); ctx.arc(X(0), Y(0), 4, 0, 2*Math.PI);
+    ctx.fillStyle = "#2e7d32"; ctx.fill();
+    ctx.fillStyle = "#2e7d32"; ctx.font = "12px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("(0,0)", X(0) + 8, Y(0) + 4);
+
+    // Etiqueta recta
+    ctx.fillStyle = "#e07a8f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("y = x + 1", X(2.2), Y(3.2) - 4);
+
+    // Título
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("NO es subespacio: no contiene al origen", 15, 15);
+}
+
+// ===== G3: LI vs LD en R2 =====
+function dibujarGLD() {
+    const d = crearDibujante('gLD', -3, 4, -2, 4);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Vector u = (2,1)
+    const drawVector = (x, y, color, label) => {
+        ctx.strokeStyle = color; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(x), Y(y)); ctx.stroke();
+        // punta
+        const ang = Math.atan2(Y(y)-Y(0), X(x)-X(0));
+        const px = X(x), py = Y(y);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - 10*Math.cos(ang - 0.4), py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(px - 10*Math.cos(ang + 0.4), py - 10*Math.sin(ang + 0.4));
+        ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+        ctx.fillStyle = color; ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+        ctx.fillText(label, px + 6, py - 4);
+    };
+
+    drawVector(2, 1, "#1a3e6f", "u = (2,1)");
+    drawVector(1, 2, "#2e7d32", "v = (1,2)  LI con u");
+
+    // Vector dependiente w = -1.5*u = (-3, -1.5) dibujado en gris
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 3;
+    ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(-2.5), Y(-1.25)); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#c96b1a"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("w = -1.25·u  LD con u", X(-2.5) - 60, Y(-1.25) - 6);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Independientes (no paralelos) vs. dependientes (paralelos)", 15, 15);
+}
+
+// ===== G4: Rotación de un cuadrado unitario =====
+function dibujarGRotacion() {
+    const d = crearDibujante('gRotacion', -3, 3, -3, 3);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    // Cuadrado unitario (0,0)-(1,0)-(1,1)-(0,1)
+    const sq = [[0,0],[1,0],[1,1],[0,1]];
+    // Rotar 45°
+    const ang = Math.PI/4;
+    const rot = (p) => [p[0]*Math.cos(ang) - p[1]*Math.sin(ang),
+                        p[0]*Math.sin(ang) + p[1]*Math.cos(ang)];
+
+    // Original (azul claro)
+    ctx.strokeStyle = "#9bc0ea"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    sq.forEach((p, i) => {
+        const px = X(p[0]), py = Y(p[1]);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    });
+    ctx.closePath(); ctx.stroke();
+    ctx.fillStyle = "rgba(155, 192, 234, 0.3)"; ctx.fill();
+
+    // Rotado (azul fuerte)
+    ctx.strokeStyle = "#1a3e6f"; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    sq.forEach((p, i) => {
+        const r = rot(p);
+        const px = X(r[0]), py = Y(r[1]);
+        if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    });
+    ctx.closePath(); ctx.stroke();
+    ctx.fillStyle = "rgba(26, 62, 111, 0.15)"; ctx.fill();
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Rotación de 45° aplicada al cuadrado unitario", 15, 15);
+}
+
+// ============================================================
+// ===== DIBUJAR TODO AL CARGAR =====
+// ============================================================
+window.addEventListener('load', function() {
+    dibujarGSubespacio();
+    dibujarGNoSubespacio();
+    dibujarGLD();
+    dibujarGRotacion();
+});
+</script>
 </body>
 </html>
