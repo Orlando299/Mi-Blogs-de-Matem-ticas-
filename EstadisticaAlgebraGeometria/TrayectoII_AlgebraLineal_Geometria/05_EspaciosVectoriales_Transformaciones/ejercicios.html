@@ -2,53 +2,387 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicios - Espacios Vectoriales y Transformaciones Lineales</title>
+    <title>Ejercicios: Espacios Vectoriales y Transformaciones Lineales</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     <style>
-        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #1a3e6f; }
-        .author { text-align: center; }
-        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
-        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
-        @media print { .btn-pdf { display: none; } }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        /* Lista de ejercicios */
+        ol.lista-ejercicios {
+            counter-reset: ej;
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+        ol.lista-ejercicios > li {
+            counter-increment: ej;
+            margin: 18px 0;
+            padding: 12px 16px 12px 55px;
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+        ol.lista-ejercicios > li::before {
+            content: counter(ej) ".";
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            font-weight: bold;
+            color: #1a3e6f;
+            font-size: 16px;
+        }
+        ol.lista-ejercicios > li:hover {
+            background: #f3f7fd;
+            border-color: #c9d8ec;
+        }
+
+        /* Etiquetas de dificultad */
+        .nivel {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        .menor    { background: #d4edda; color: #155724; }
+        .intermedio { background: #fff3cd; color: #856404; }
+        .mayor    { background: #f8d7da; color: #721c24; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a {
+            display: inline-block;
+            background: #1a3e6f;
+            color: white;
+            padding: 8px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .nav-footer a:hover { background: #2a5a9a; }
+
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
 <div class="latex-container">
     <h1>Ejercicios: Espacios Vectoriales y Transformaciones Lineales</h1>
     <div class="author">MSc. Orlando Silva</div>
-    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+    <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
+    <div class="intro">
+        <strong>Instrucciones.</strong> Resuelve cada ejercicio mostrando el procedimiento. Cuando se pida justificar, argumenta usando las definiciones y propiedades vistas en la teoría.
+        <br><br>
+        <strong>Dificultad:</strong>
+        <span class="nivel menor">🟢 Menor</span>
+        <span class="nivel intermedio">🟡 Intermedio</span>
+        <span class="nivel mayor">🔴 Mayor</span>
+    </div>
+
+    <div class="nota">
+        Las soluciones están en <strong>soluciones.html</strong> (contraseña requerida).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 0. PRELIMINARES: VECTORES ========== -->
+    <!-- ============================================================ -->
+    <h2>0. Preliminares: vectores en el plano y en el espacio</h2>
+
+    <h3>0.1 Módulo y normalización</h3>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Dado \(\mathbf{v} = (3, -4)\), calcula su módulo \(\|\mathbf{v}\|\) y normaliza el vector (encuentra \(\hat{\mathbf{v}}\)).
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Dado \(\mathbf{v} = (1, 2, 2)\), calcula \(\|\mathbf{v}\|\) y normaliza el vector.
+        </li>
+    </ol>
+
+    <h3>0.2 Operaciones con vectores</h3>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Sean \(\mathbf{u} = (2, -1, 3)\) y \(\mathbf{v} = (-1, 4, 2)\). Calcula:
+            <br>a) \(\mathbf{u} + \mathbf{v}\)
+            <br>b) \(\mathbf{u} - \mathbf{v}\)
+            <br>c) \(3\mathbf{u}\)
+            <br>d) \(-2\mathbf{v}\)
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Dados \(\mathbf{a} = (1, 0, -2)\) y \(\mathbf{b} = (3, -1, 1)\), encuentra el vector \(\mathbf{x}\) tal que
+            \[
+            2\mathbf{x} - 3\mathbf{a} = \mathbf{b}
+            \]
+        </li>
+    </ol>
+
+    <h3>0.3 Producto escalar y ortogonalidad</h3>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Verifica si los vectores \(\mathbf{u} = (2, 1)\) y \(\mathbf{v} = (-1, 2)\) son ortogonales.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Sean \(\mathbf{a} = (1, 2, 3)\) y \(\mathbf{b} = (2, -1, 1)\). Calcula \(\mathbf{a} \cdot \mathbf{b}\), \(\|\mathbf{a}\|\), \(\|\mathbf{b}\|\) y el ángulo \(\theta\) entre ellos.
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 1. ESPACIOS Y SUBESPACIOS ========== -->
+    <!-- ============================================================ -->
     <h2>1. Espacios vectoriales y subespacios</h2>
-    <div class="ejercicio"><strong>1.</strong> Verifica si el conjunto \(W = \{(x,y) \in \mathbb{R}^2 \mid x + y = 0\}\) es un subespacio de \(\mathbb{R}^2\).</div>
-    <div class="ejercicio"><strong>2.</strong> Determina si \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x = 2y\}\) es un subespacio de \(\mathbb{R}^3\).</div>
-    <div class="ejercicio"><strong>3.</strong> ¿El conjunto de matrices \(2\times2\) con determinante cero forma un subespacio de \(\mathcal{M}_{2\times2}\)? Justifica.</div>
 
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Verifica si el conjunto \(W = \{(x, y) \in \mathbb{R}^2 \mid x + y = 0\}\) es un subespacio de \(\mathbb{R}^2\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Determina si \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x = 2y\}\) es un subespacio de \(\mathbb{R}^3\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            ¿El conjunto de matrices \(2 \times 2\) con determinante cero forma un subespacio de \(\mathcal{M}_{2,2}\)? Justifica.
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Verifica si \(W = \{(x, y, z) \in \mathbb{R}^3 \mid z = 0\}\) es un subespacio de \(\mathbb{R}^3\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Determina si \(W = \{(x, y) \in \mathbb{R}^2 \mid x \geq 0\}\) es un subespacio de \(\mathbb{R}^2\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            ¿El conjunto de matrices \(2 \times 2\) simétricas (\(A^T = A\)) forma un subespacio de \(\mathcal{M}_{2,2}\)?
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Sean \(W_1 = \{(x, y, z) \in \mathbb{R}^3 \mid x + y = 0\}\) y \(W_2 = \{(x, y, z) \in \mathbb{R}^3 \mid z = 0\}\). Encuentra \(W_1 \cap W_2\) y determina si es subespacio.
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 2. COMBINACIÓN LINEAL, DEP/INDEP ========== -->
+    <!-- ============================================================ -->
     <h2>2. Combinación lineal, dependencia e independencia lineal</h2>
-    <div class="ejercicio"><strong>4.</strong> Expresa el vector \((5,7)\) como combinación lineal de \(v_1 = (1,2)\) y \(v_2 = (3,4)\).</div>
-    <div class="ejercicio"><strong>5.</strong> Determina si los vectores \((1,0,1)\), \((0,1,1)\), \((1,1,0)\) son linealmente independientes.</div>
-    <div class="ejercicio"><strong>6.</strong> Encuentra una relación de dependencia lineal para los vectores \(v_1 = (1,2,3)\), \(v_2 = (2,4,6)\), \(v_3 = (3,6,9)\).</div>
 
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Expresa el vector \((5, 7)\) como combinación lineal de \(v_1 = (1, 2)\) y \(v_2 = (3, 4)\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Determina si los vectores \((1, 0, 1)\), \((0, 1, 1)\), \((1, 1, 0)\) son linealmente independientes.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra una relación de dependencia lineal para los vectores \(v_1 = (1, 2, 3)\), \(v_2 = (2, 4, 6)\), \(v_3 = (3, 6, 9)\).
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            ¿Son linealmente independientes los vectores \((1, 2)\) y \((2, 4)\)? Justifica.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Determina si los vectores \((1, 1, 0)\), \((0, 1, 1)\), \((1, 0, 1)\) son linealmente independientes usando el determinante.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Encuentra el valor de \(k\) para que los vectores \((1, 2, k)\), \((2, 1, 3)\), \((0, 1, 1)\) sean linealmente dependientes.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            ¿Los polinomios \(p_1(x) = 1 + x\), \(p_2(x) = x + x^2\), \(p_3(x) = 1 + x^2\) son linealmente independientes en \(\mathcal{P}_2\)?
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 3. BASE Y DIMENSIÓN ========== -->
+    <!-- ============================================================ -->
     <h2>3. Base y dimensión</h2>
-    <div class="ejercicio"><strong>7.</strong> Encuentra una base para el subespacio \(W = \{(x,y,z) \in \mathbb{R}^3 \mid x + y + z = 0\}\).</div>
-    <div class="ejercicio"><strong>8.</strong> Determina la dimensión del espacio de polinomios de grado menor o igual a 3 que tienen término independiente nulo.</div>
-    <div class="ejercicio"><strong>9.</strong> ¿Cuál es la dimensión de \(\mathcal{M}_{2\times3}\)? Encuentra una base para este espacio.</div>
 
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra una base para el subespacio \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x + y + z = 0\}\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Determina la dimensión del espacio de polinomios de grado menor o igual a 3 que tienen término independiente nulo.
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            ¿Cuál es la dimensión de \(\mathcal{M}_{2,3}\)? Encuentra una base para este espacio.
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Encuentra la dimensión y una base del subespacio \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x = 0\}\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra las coordenadas del vector \(\mathbf{v} = (4, 2)\) respecto a la base \(B = \{(1, 1), (1, -1)\}\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra una base para el subespacio \(W = \{(x, y, z, w) \in \mathbb{R}^4 \mid x - y = 0,\ z + w = 0\}\) y determina su dimensión.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Determina la dimensión y una base del espacio generado por \(\{(1, 2, 3), (2, 4, 6), (1, 0, 1)\}\).
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 4. TRANSFORMACIONES LINEALES ========== -->
+    <!-- ============================================================ -->
     <h2>4. Transformaciones lineales</h2>
-    <div class="ejercicio"><strong>10.</strong> Verifica si \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x,y) = (2x + y, x - y)\) es lineal.</div>
-    <div class="ejercicio"><strong>11.</strong> Encuentra la matriz asociada a la transformación \(T(x,y,z) = (2x + y, z - x)\).</div>
-    <div class="ejercicio"><strong>12.</strong> Dada \(T: \mathbb{R}^3 \to \mathbb{R}^2\) con \(T(x,y,z) = (x + y, y - z)\), encuentra el núcleo y la imagen.</div>
 
-    <h2>5. Teorema de la dimensión (rango-nulidad)</h2>
-    <div class="ejercicio"><strong>13.</strong> Para la transformación \(T(x,y,z) = (x + y, y + z, x - z)\), calcula el rango y la nulidad. Verifica el teorema de la dimensión.</div>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Verifica si \(T: \mathbb{R}^2 \to \mathbb{R}^2\) definida por \(T(x, y) = (2x + y, x - y)\) es lineal.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra la matriz asociada a la transformación \(T(x, y, z) = (2x + y, z - x)\).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Dada \(T: \mathbb{R}^3 \to \mathbb{R}^2\) con \(T(x, y, z) = (x + y, y - z)\), encuentra el núcleo y la imagen.
+        </li>
+        <li>
+            <span class="nivel menor">🟢 Menor</span>
+            Verifica si \(T: \mathbb{R} \to \mathbb{R}\) con \(T(x) = 3x\) es una transformación lineal.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Verifica si \(T(x, y) = (x^2, y)\) es una transformación lineal.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra la matriz asociada a la rotación de \(90°\) en el plano \(\mathbb{R}^2\).
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Dada la transformación \(T(x, y) = (3x - y, x + 2y)\), encuentra su matriz asociada y verifica que \(T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})\) para \(\mathbf{u} = (1, 2)\), \(\mathbf{v} = (-1, 1)\).
+        </li>
+    </ol>
 
-    <h2>6. Aplicaciones</h2>
-    <div class="ejercicio"><strong>14.</strong> En un sistema de coordenadas, se aplica una rotación de \(45^\circ\) en el plano. Escribe la matriz de la transformación.</div>
-    <div class="ejercicio"><strong>15.</strong> En el análisis de componentes simétricas de sistemas trifásicos, se usa la transformación de Fortescue. ¿Qué tipo de transformación lineal es?</div>
+    <!-- ============================================================ -->
+    <!-- ========== 5. NÚCLEO E IMAGEN ========== -->
+    <!-- ============================================================ -->
+    <h2>5. Núcleo e imagen</h2>
 
-    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Dada \(T: \mathbb{R}^3 \to \mathbb{R}^2\) con \(T(x, y, z) = (x + y,\ y - z)\), encuentra el núcleo y la imagen (repaso).
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Encuentra el núcleo e imagen de la transformación \(T(x, y, z) = (x - z,\ y + z)\).
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Para \(T: \mathbb{R}^3 \to \mathbb{R}^3\) definida por \(T(x, y, z) = (x + y, y + z, x + 2y + z)\), encuentra el núcleo, la imagen y verifica el teorema de la dimensión.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Sea \(T: \mathbb{R}^4 \to \mathbb{R}^3\), \(T(x, y, z, w) = (x + y + z + w,\ x - y,\ z - w)\). Encuentra el núcleo y su dimensión.
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 6. TEOREMA DE LA DIMENSIÓN ========== -->
+    <!-- ============================================================ -->
+    <h2>6. Teorema de la dimensión (rango-nulidad)</h2>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Para la transformación \(T(x, y, z) = (x + y,\ y + z,\ x - z)\), calcula el rango y la nulidad. Verifica el teorema de la dimensión.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Sea \(T: \mathbb{R}^4 \to \mathbb{R}^2\) definida por \(T(x, y, z, w) = (x + y + z + w,\ x - y + z - w)\). Calcula el rango, la nulidad y verifica el teorema de la dimensión.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Para la transformación \(T(x, y, z) = (x + 2y - z,\ 2x + 4y - 2z)\), encuentra el rango y la nulidad sin resolver todo el sistema, usando el teorema de la dimensión.
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== 7. APLICACIONES ========== -->
+    <!-- ============================================================ -->
+    <h2>7. Aplicaciones</h2>
+
+    <ol class="lista-ejercicios">
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            En un sistema de coordenadas, se aplica una rotación de \(45°\) en el plano. Escribe la matriz de la transformación.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            En el análisis de componentes simétricas de sistemas trifásicos, se usa la transformación de Fortescue. ¿Qué tipo de transformación lineal es?
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            Dado el sistema \(A\mathbf{x} = \mathbf{b}\) con \(A = \begin{pmatrix} 1 & 2 \\ 3 & 6 \end{pmatrix}\) y \(\mathbf{b} = (1, 3)\), encuentra el espacio nulo de \(A\) y discute si el sistema tiene solución única, infinitas o ninguna.
+        </li>
+        <li>
+            <span class="nivel intermedio">🟡 Intermedio</span>
+            La transformación de Clarke (abc → αβ0) en máquinas eléctricas está dada por la matriz
+            \[
+            C = \frac{2}{3}\begin{pmatrix} 1 & -\tfrac12 & -\tfrac12 \\ 0 & \tfrac{\sqrt{3}}{2} & -\tfrac{\sqrt{3}}{2} \\ \tfrac12 & \tfrac12 & \tfrac12 \end{pmatrix}
+            \]
+            Verifica si \(C\) es invertible y calcula el rango.
+        </li>
+        <li>
+            <span class="nivel mayor">🔴 Mayor</span>
+            Un sistema de tres corrientes trifásicas \(I_a, I_b, I_c\) con \(I_a + I_b + I_c = 0\) se puede representar como un vector en un subespacio de \(\mathbb{R}^3\). Encuentra una base para este subespacio y su dimensión.
+        </li>
+    </ol>
+
+    <div class="nota">
+        <strong>Recuerda:</strong> antes de aplicar cualquier método, <em>identifica primero qué se pide</em>: ¿un subespacio?, ¿una base?, ¿el núcleo?, ¿una matriz asociada? Cada tipo de problema tiene su propio procedimiento.
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
 </div>
 </body>
 </html>
