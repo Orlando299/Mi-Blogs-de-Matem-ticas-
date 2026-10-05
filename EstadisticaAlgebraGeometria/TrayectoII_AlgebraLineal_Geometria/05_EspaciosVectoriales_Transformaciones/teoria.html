@@ -52,6 +52,217 @@
     <div class="date">Estadística, Álgebra Lineal y Geometría · PNF Electricidad · Trayecto II</div>
 
     <!-- ============================================================ -->
+    <!-- ========== 0. PRELIMINARES: VECTORES ========== -->
+    <!-- ============================================================ -->
+    <h2>0. Preliminares: vectores en el plano y en el espacio</h2>
+
+    <div class="nota">
+        Antes de definir formalmente un <em>espacio vectorial</em>, conviene recordar qué es un <strong>vector</strong> en el plano y en el espacio, cómo se opera con ellos y qué propiedades cumplen. Estos ejemplos concretos motivarán los axiomas abstractos de la Sección 1.
+    </div>
+
+    <!-- ---------- 0.1 ---------- -->
+    <h3>0.1 ¿Qué es un vector?</h3>
+
+    <div class="definicion">
+        Un <strong>vector</strong> es un objeto matemático con <strong>magnitud</strong> (o módulo), <strong>dirección</strong> y <strong>sentido</strong>. Geométricamente lo representamos con una flecha. Analíticamente, en \(\mathbb{R}^2\) y \(\mathbb{R}^3\) lo escribimos como una pareja o terna ordenada:
+        \[
+        \mathbf{v} = (v_1, v_2) \in \mathbb{R}^2, \qquad \mathbf{v} = (v_1, v_2, v_3) \in \mathbb{R}^3
+        \]
+        Los números \(v_1, v_2, v_3\) se llaman <strong>componentes</strong> del vector.
+    </div>
+
+    <div class="nota">
+        <strong>Punto vs. vector.</strong> Un punto \(P(x,y)\) indica una <em>posición</em> en el plano. Un vector \(\mathbf{v} = (x,y)\) indica un <em>desplazamiento</em>. Aunque ambos se escriban con dos números, conceptualmente son distintos: el vector no depende del punto donde se dibuje, solo de su longitud y orientación.
+    </div>
+
+    <!-- ---------- 0.2 ---------- -->
+    <h3>0.2 Vectores en el plano \(\mathbb{R}^2\)</h3>
+
+    <div class="definicion">
+        Un vector en \(\mathbb{R}^2\) es una pareja \(\mathbf{v} = (v_1, v_2)\). Su <strong>módulo</strong> (o norma) es:
+        \[
+        \|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2}
+        \]
+        La <strong>dirección</strong> está dada por el ángulo \(\theta = \arctan(v_2/v_1)\) respecto al eje \(x\), y el <strong>sentido</strong> lo indica el signo del vector.
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim1" width="500" height="350"></canvas>
+        <p>Distintos vectores en el plano, todos dibujados desde el origen.</p>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.1.</strong> Dado \(\mathbf{v} = (3, 4)\):
+        \[
+        \|\mathbf{v}\| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5
+        \]
+    </div>
+
+    <!-- ---------- 0.3 ---------- -->
+    <h3>0.3 Vectores en el espacio \(\mathbb{R}^3\)</h3>
+
+    <div class="definicion">
+        Un vector en \(\mathbb{R}^3\) es una terna \(\mathbf{v} = (v_1, v_2, v_3)\). Su <strong>módulo</strong> es:
+        \[
+        \|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2 + v_3^2}
+        \]
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim5" width="500" height="380"></canvas>
+        <p>Vector \(\mathbf{v} = (2, 3, 4)\) representado en \(\mathbb{R}^3\) con sus tres componentes.</p>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.2.</strong> Dado \(\mathbf{v} = (1, 2, 2)\):
+        \[
+        \|\mathbf{v}\| = \sqrt{1^2 + 2^2 + 2^2} = \sqrt{1 + 4 + 4} = \sqrt{9} = 3
+        \]
+    </div>
+
+    <!-- ---------- 0.4 ---------- -->
+    <h3>0.4 Operaciones con vectores</h3>
+
+    <div class="definicion">
+        Sean \(\mathbf{u} = (u_1, u_2, u_3)\) y \(\mathbf{v} = (v_1, v_2, v_3)\) vectores de \(\mathbb{R}^3\), y \(\alpha \in \mathbb{R}\):
+        <ul>
+            <li><strong>Suma:</strong> \(\mathbf{u} + \mathbf{v} = (u_1 + v_1,\ u_2 + v_2,\ u_3 + v_3)\)</li>
+            <li><strong>Resta:</strong> \(\mathbf{u} - \mathbf{v} = (u_1 - v_1,\ u_2 - v_2,\ u_3 - v_3)\)</li>
+            <li><strong>Producto por escalar:</strong> \(\alpha \mathbf{v} = (\alpha v_1,\ \alpha v_2,\ \alpha v_3)\)</li>
+        </ul>
+        Las mismas operaciones se definen de forma análoga en \(\mathbb{R}^2\).
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim2" width="500" height="350"></canvas>
+        <p><strong>Regla del paralelogramo.</strong> La suma \(\mathbf{u} + \mathbf{v}\) es la diagonal del paralelogramo formado por \(\mathbf{u}\) y \(\mathbf{v}\).</p>
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim3" width="500" height="350"></canvas>
+        <p><strong>Producto por escalar.</strong> Multiplicar por \(\alpha\) alarga o acorta el vector; si \(\alpha < 0\), invierte su sentido.</p>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.3.</strong> Sean \(\mathbf{u} = (2, -1, 3)\) y \(\mathbf{v} = (1, 4, -2)\):
+        <ul>
+            <li>\(\mathbf{u} + \mathbf{v} = (2+1,\ -1+4,\ 3-2) = (3, 3, 1)\)</li>
+            <li>\(\mathbf{u} - \mathbf{v} = (2-1,\ -1-4,\ 3+2) = (1, -5, 5)\)</li>
+            <li>\(2\mathbf{u} = (4, -2, 6)\)</li>
+            <li>\(-1.5\mathbf{v} = (-1.5, -6, 3)\)</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Propiedades de las operaciones (anticipo de los axiomas).</strong> Para todo \(\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{R}^n\) y \(\alpha, \beta \in \mathbb{R}\):
+        <ul>
+            <li><strong>Conmutatividad:</strong> \(\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}\)</li>
+            <li><strong>Asociatividad:</strong> \((\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})\)</li>
+            <li><strong>Neutro aditivo:</strong> \(\mathbf{v} + \mathbf{0} = \mathbf{v}\)</li>
+            <li><strong>Inverso aditivo:</strong> \(\mathbf{v} + (-\mathbf{v}) = \mathbf{0}\)</li>
+            <li><strong>Distributividad:</strong> \(\alpha(\mathbf{u} + \mathbf{v}) = \alpha\mathbf{u} + \alpha\mathbf{v}\)</li>
+            <li><strong>Distributividad escalar:</strong> \((\alpha + \beta)\mathbf{v} = \alpha\mathbf{v} + \beta\mathbf{v}\)</li>
+        </ul>
+        Estas propiedades son exactamente las que aparecerán en los <strong>8 axiomas</strong> de un espacio vectorial abstracto (Sección 1).
+    </div>
+
+    <!-- ---------- 0.5 ---------- -->
+    <h3>0.5 Producto escalar (producto punto)</h3>
+
+    <div class="definicion">
+        El <strong>producto escalar</strong> de dos vectores \(\mathbf{u} = (u_1, u_2, u_3)\) y \(\mathbf{v} = (v_1, v_2, v_3)\) es el número real:
+        \[
+        \mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2 + u_3 v_3
+        \]
+        También se puede expresar en términos del ángulo \(\theta\) entre ellos:
+        \[
+        \mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \, \|\mathbf{v}\| \cos\theta
+        \]
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim4" width="500" height="350"></canvas>
+        <p>El ángulo \(\theta\) entre dos vectores se puede obtener del producto escalar: \(\cos\theta = \dfrac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}\).</p>
+    </div>
+
+    <div class="teorema">
+        <strong>Ortogonalidad.</strong> Dos vectores son <strong>ortogonales</strong> (perpendiculares) si y solo si su producto escalar es cero:
+        \[
+        \mathbf{u} \perp \mathbf{v} \iff \mathbf{u} \cdot \mathbf{v} = 0
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.4.</strong> Sean \(\mathbf{u} = (2, -1, 3)\) y \(\mathbf{v} = (1, 4, -2)\):
+        \[
+        \mathbf{u} \cdot \mathbf{v} = 2(1) + (-1)(4) + 3(-2) = 2 - 4 - 6 = -8
+        \]
+        Como \(\mathbf{u} \cdot \mathbf{v} \neq 0\), los vectores <strong>no son ortogonales</strong>.
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.5 (vectores ortogonales).</strong> Los vectores \(\mathbf{a} = (1, 0)\) y \(\mathbf{b} = (0, 1)\) son ortogonales, pues:
+        \[
+        \mathbf{a} \cdot \mathbf{b} = 1(0) + 0(1) = 0
+        \]
+    </div>
+
+    <!-- ---------- 0.6 ---------- -->
+    <h3>0.6 Producto vectorial (mención)</h3>
+
+    <div class="nota">
+        En \(\mathbb{R}^3\) existe otra operación llamada <strong>producto vectorial</strong> \(\mathbf{u} \times \mathbf{v}\), cuyo resultado es un vector <em>perpendicular</em> a ambos. Se estudiará en detalle en la <strong>Unidad 8</strong> (Geometría Analítica en el espacio). Por ahora solo lo mencionamos porque aparecerá más adelante al hablar de subespacios ortogonales.
+    </div>
+
+    <div class="canvas-grande">
+        <canvas id="gPrelim6" width="500" height="380"></canvas>
+        <p>El producto \(\mathbf{u} \times \mathbf{v}\) es perpendicular al plano formado por \(\mathbf{u}\) y \(\mathbf{v}\), y su módulo es el área del paralelogramo generado por ellos.</p>
+    </div>
+
+    <!-- ---------- 0.7 ---------- -->
+    <h3>0.7 Vectores unitarios y base canónica</h3>
+
+    <div class="definicion">
+        Un <strong>vector unitario</strong> es aquel cuyo módulo es 1: \(\|\hat{\mathbf{u}}\| = 1\). Todo vector no nulo \(\mathbf{v}\) se puede <strong>normalizar</strong> dividiéndolo entre su módulo:
+        \[
+        \hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}
+        \]
+        En \(\mathbb{R}^2\) y \(\mathbb{R}^3\) existen los <strong>vectores canónicos</strong>:
+        \[
+        \mathbf{i} = (1, 0), \quad \mathbf{j} = (0, 1) \qquad \text{(en } \mathbb{R}^2\text{)}
+        \]
+        \[
+        \mathbf{i} = (1, 0, 0), \quad \mathbf{j} = (0, 1, 0), \quad \mathbf{k} = (0, 0, 1) \qquad \text{(en } \mathbb{R}^3\text{)}
+        \]
+        Todo vector se escribe como combinación lineal de ellos:
+        \[
+        \mathbf{v} = (v_1, v_2, v_3) = v_1\mathbf{i} + v_2\mathbf{j} + v_3\mathbf{k}
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 0.6.</strong> Normalizar \(\mathbf{v} = (3, 4)\):
+        \[
+        \hat{\mathbf{v}} = \frac{(3, 4)}{5} = \left(\frac{3}{5}, \frac{4}{5}\right) = (0.6, 0.8)
+        \]
+        Verificación: \(\|\hat{\mathbf{v}}\| = \sqrt{0.36 + 0.64} = \sqrt{1} = 1\) ✔
+    </div>
+
+    <!-- ---------- 0.8 ---------- -->
+    <h3>0.8 Puente hacia la definición abstracta</h3>
+
+    <div class="nota">
+        Hemos visto que los vectores de \(\mathbb{R}^2\) y \(\mathbb{R}^3\):
+        <ul>
+            <li>Se pueden <strong>sumar</strong> y <strong>multiplicar por escalares</strong>.</li>
+            <li>Cumplen propiedades como conmutatividad, asociatividad, distributividad, existencia de neutro e inverso.</li>
+            <li>Tienen una <strong>base canónica</strong> con la cual se escriben de forma única.</li>
+            <li>Poseen un <strong>producto escalar</strong> que mide ángulos y ortogonalidad.</li>
+        </ul>
+        La idea del álgebra lineal es <strong>abstraer</strong> estas propiedades: cualquier conjunto con dos operaciones que cumplan esos mismos axiomas será llamado <strong>espacio vectorial</strong>. Eso nos permitirá tratar con el mismo lenguaje a vectores, polinomios, matrices, funciones, señales eléctricas, etc.
+    </div>
+
+    <!-- ============================================================ -->
     <!-- ========== 1. ESPACIO VECTORIAL ========== -->
     <!-- ============================================================ -->
     <h2>1. Definición de Espacio Vectorial</h2>
@@ -480,7 +691,289 @@ function crearDibujante(canvasId, xmin, xmax, ymin, ymax) {
     return { ctx, X, Y, w, h, pad };
 }
 
-// ===== G1: Plano z = 0 (subespacio de R3, proyección axonométrica simple) =====
+// ===== G0.1: Vectores en R² =====
+function dibujarPrelim1() {
+    const d = crearDibujante('gPrelim1', -5, 5, -5, 5);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    const vectores = [
+        { v: [3, 2], color: "#1a3e6f", label: "v₁ = (3,2)" },
+        { v: [-4, 1], color: "#2e7d32", label: "v₂ = (-4,1)" },
+        { v: [2, -3], color: "#c96b1a", label: "v₃ = (2,-3)" },
+        { v: [-2, -4], color: "#e07a8f", label: "v₄ = (-2,-4)" }
+    ];
+
+    vectores.forEach(({ v, color, label }) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(X(0), Y(0));
+        ctx.lineTo(X(v[0]), Y(v[1]));
+        ctx.stroke();
+        const ang = Math.atan2(Y(v[1]) - Y(0), X(v[0]) - X(0));
+        const px = X(v[0]), py = Y(v[1]);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - 10*Math.cos(ang - 0.4), py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(px - 10*Math.cos(ang + 0.4), py - 10*Math.sin(ang + 0.4));
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.fillStyle = color;
+        ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "bottom";
+        ctx.fillText(label, px + 6, py - 4);
+    });
+
+    ctx.fillStyle = "#1a3e6f";
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Vectores en el plano R²", 15, 15);
+}
+
+// ===== G0.2: Suma (paralelogramo) =====
+function dibujarPrelim2() {
+    const d = crearDibujante('gPrelim2', -1, 7, -1, 7);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    const u = [4, 1], v = [1, 4];
+    const s = [u[0]+v[0], u[1]+v[1]];
+
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(0));
+    ctx.lineTo(X(u[0]), Y(u[1]));
+    ctx.lineTo(X(s[0]), Y(s[1]));
+    ctx.lineTo(X(v[0]), Y(v[1]));
+    ctx.closePath();
+    ctx.fillStyle = "rgba(78, 205, 196, 0.12)";
+    ctx.fill();
+    ctx.strokeStyle = "#4ecdc4";
+    ctx.setLineDash([5, 4]);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const flecha = (a, b, color, lw) => {
+        ctx.strokeStyle = color; ctx.lineWidth = lw;
+        ctx.beginPath(); ctx.moveTo(X(a[0]), Y(a[1])); ctx.lineTo(X(b[0]), Y(b[1])); ctx.stroke();
+        const ang = Math.atan2(Y(b[1]) - Y(a[1]), X(b[0]) - X(a[0]));
+        const px = X(b[0]), py = Y(b[1]);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - 10*Math.cos(ang - 0.4), py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(px - 10*Math.cos(ang + 0.4), py - 10*Math.sin(ang + 0.4));
+        ctx.closePath();
+        ctx.fillStyle = color; ctx.fill();
+    };
+
+    flecha([0,0], u, "#1a3e6f", 3);
+    flecha([0,0], v, "#2e7d32", 3);
+    flecha([0,0], s, "#c96b1a", 3.5);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText("u", X(u[0]) - 15, Y(u[1]) + 15);
+    ctx.fillStyle = "#2e7d32";
+    ctx.fillText("v", X(v[0]) - 5, Y(v[1]) - 8);
+    ctx.fillStyle = "#c96b1a";
+    ctx.fillText("u + v", X(s[0]) + 6, Y(s[1]) - 4);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Suma de vectores (regla del paralelogramo)", 15, 15);
+}
+
+// ===== G0.3: Producto por escalar =====
+function dibujarPrelim3() {
+    const d = crearDibujante('gPrelim3', -5, 5, -4, 4);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    const v = [1.5, 1];
+    const escalares = [
+        { k: 1, color: "#1a3e6f", label: "v" },
+        { k: 2, color: "#2e7d32", label: "2v" },
+        { k: -1.5, color: "#c96b1a", label: "-1.5v" },
+        { k: 0.5, color: "#e07a8f", label: "0.5v" }
+    ];
+
+    escalares.forEach(({ k, color, label }) => {
+        const w = [k*v[0], k*v[1]];
+        ctx.strokeStyle = color; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(w[0]), Y(w[1])); ctx.stroke();
+        const ang = Math.atan2(Y(w[1]) - Y(0), X(w[0]) - X(0));
+        const px = X(w[0]), py = Y(w[1]);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - 10*Math.cos(ang - 0.4), py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(px - 10*Math.cos(ang + 0.4), py - 10*Math.sin(ang + 0.4));
+        ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+        ctx.fillStyle = color; ctx.font = "bold 12px sans-serif";
+        ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+        ctx.fillText(label, px + 6, py - 4);
+    });
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Producto por escalar", 15, 15);
+}
+
+// ===== G0.4: Ángulo entre vectores =====
+function dibujarPrelim4() {
+    const d = crearDibujante('gPrelim4', -1, 6, -1, 5);
+    if (!d) return;
+    const { ctx, X, Y } = d;
+
+    const u = [4, 1], v = [2, 3];
+
+    ctx.beginPath();
+    const r = 50;
+    const a1 = Math.atan2(Y(u[1]) - Y(0), X(u[0]) - X(0));
+    const a2 = Math.atan2(Y(v[1]) - Y(0), X(v[0]) - X(0));
+    ctx.arc(X(0), Y(0), r, -Math.min(a1, a2), -Math.max(a1, a2), false);
+    ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 2;
+    ctx.stroke();
+
+    const flecha = (w, color, label) => {
+        ctx.strokeStyle = color; ctx.lineWidth = 3;
+        ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(w[0]), Y(w[1])); ctx.stroke();
+        const ang = Math.atan2(Y(w[1]) - Y(0), X(w[0]) - X(0));
+        const px = X(w[0]), py = Y(w[1]);
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px - 10*Math.cos(ang - 0.4), py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(px - 10*Math.cos(ang + 0.4), py - 10*Math.sin(ang + 0.4));
+        ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+        ctx.fillStyle = color; ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+        ctx.fillText(label, px + 6, py - 4);
+    };
+    flecha(u, "#1a3e6f", "u");
+    flecha(v, "#2e7d32", "v");
+
+    ctx.fillStyle = "#c96b1a";
+    ctx.font = "bold 14px sans-serif";
+    ctx.fillText("θ", X(0) + 55, Y(0) - 20);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Ángulo entre dos vectores", 15, 15);
+}
+
+// ===== G0.5: Vector en R³ =====
+function dibujarPrelim5() {
+    const canvas = document.getElementById('gPrelim5');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    ctx.fillStyle = "#fafafa"; ctx.fillRect(0, 0, w, h);
+
+    const cx = w/2, cy = h/2 + 40, s = 45;
+    const proj = (x, y, z) => {
+        const px = cx + s * (x - y * 0.7);
+        const py = cy - s * (z + y * 0.5);
+        return { px, py };
+    };
+
+    const drawAxis = (p1, p2, color, label) => {
+        const a = proj(...p1), b = proj(...p2);
+        ctx.strokeStyle = color; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(a.px, a.py); ctx.lineTo(b.px, b.py); ctx.stroke();
+        ctx.fillStyle = color; ctx.font = "bold 13px sans-serif";
+        ctx.fillText(label, b.px + 5, b.py + 4);
+    };
+    drawAxis([-1,0,0], [5,0,0], "#e74c3c", "x");
+    drawAxis([0,-1,0], [0,5,0], "#2ecc71", "y");
+    drawAxis([0,0,-1], [0,0,5], "#3498db", "z");
+
+    const v = [2, 3, 4];
+    const ov = proj(0, 0, 0);
+    const pv = proj(...v);
+    const pProj = proj(v[0], v[1], 0);
+
+    ctx.strokeStyle = "#cccccc"; ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(pv.px, pv.py); ctx.lineTo(pProj.px, pProj.py); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(pProj.px, pProj.py); ctx.lineTo(ov.px, ov.py); ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.strokeStyle = "#1a3e6f"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(ov.px, ov.py); ctx.lineTo(pv.px, pv.py); ctx.stroke();
+
+    ctx.beginPath(); ctx.arc(pv.px, pv.py, 5, 0, 2*Math.PI);
+    ctx.fillStyle = "#1a3e6f"; ctx.fill();
+
+    ctx.fillStyle = "#c96b1a"; ctx.font = "bold 12px sans-serif";
+    ctx.fillText("(2,3,4)", pv.px + 8, pv.py - 6);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Vector en R³: v = (2, 3, 4)", 15, 15);
+}
+
+// ===== G0.6: Producto vectorial (mención) =====
+function dibujarPrelim6() {
+    const canvas = document.getElementById('gPrelim6');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    ctx.fillStyle = "#fafafa"; ctx.fillRect(0, 0, w, h);
+
+    const cx = w/2, cy = h/2 + 40, s = 50;
+    const proj = (x, y, z) => {
+        const px = cx + s * (x - y * 0.7);
+        const py = cy - s * (z + y * 0.5);
+        return { px, py };
+    };
+
+    const drawAxis = (p1, p2, color, label) => {
+        const a = proj(...p1), b = proj(...p2);
+        ctx.strokeStyle = color; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(a.px, a.py); ctx.lineTo(b.px, b.py); ctx.stroke();
+        ctx.fillStyle = color; ctx.font = "bold 13px sans-serif";
+        ctx.fillText(label, b.px + 5, b.py + 4);
+    };
+    drawAxis([-1,0,0], [4,0,0], "#e74c3c", "x");
+    drawAxis([0,-1,0], [0,4,0], "#2ecc71", "y");
+    drawAxis([0,0,-1], [0,0,4], "#3498db", "z");
+
+    const u = [3, 0, 0];
+    const v = [0, 3, 0];
+    const c = [0, 0, 3];
+
+    const flecha = (a, b, color, lw) => {
+        const pa = proj(...a), pb = proj(...b);
+        ctx.strokeStyle = color; ctx.lineWidth = lw;
+        ctx.beginPath(); ctx.moveTo(pa.px, pa.py); ctx.lineTo(pb.px, pb.py); ctx.stroke();
+        const ang = Math.atan2(pb.py - pa.py, pb.px - pa.px);
+        ctx.beginPath();
+        ctx.moveTo(pb.px, pb.py);
+        ctx.lineTo(pb.px - 10*Math.cos(ang - 0.4), pb.py - 10*Math.sin(ang - 0.4));
+        ctx.lineTo(pb.px - 10*Math.cos(ang + 0.4), pb.py - 10*Math.sin(ang + 0.4));
+        ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+    };
+
+    flecha([0,0,0], u, "#1a3e6f", 3);
+    flecha([0,0,0], v, "#2e7d32", 3);
+    flecha([0,0,0], c, "#c96b1a", 3.5);
+
+    const pu = proj(...u), pv = proj(...v), pc = proj(...c);
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.fillText("u", pu.px + 6, pu.py - 4);
+    ctx.fillStyle = "#2e7d32";
+    ctx.fillText("v", pv.px + 6, pv.py - 4);
+    ctx.fillStyle = "#c96b1a";
+    ctx.fillText("u × v", pc.px + 6, pc.py - 4);
+
+    ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("Producto vectorial: perpendicular a u y v", 15, 15);
+}
+
+// ===== G1: Plano z = 0 (subespacio) =====
 function dibujarGSubespacio() {
     const canvas = document.getElementById('gSubespacio');
     if (!canvas) return;
@@ -489,14 +982,12 @@ function dibujarGSubespacio() {
     ctx.fillStyle = "#fafafa"; ctx.fillRect(0, 0, w, h);
     const cx = w/2, cy = h/2 + 30, s = 45;
 
-    // Proyección: x horizontal, y diagonal, z vertical
     const proj = (x, y, z) => {
         const px = cx + s * (x - y * 0.7);
         const py = cy - s * (z + y * 0.5);
         return { px, py };
     };
 
-    // Ejes
     const drawAxis = (p1, p2, color, label) => {
         const a = proj(...p1), b = proj(...p2);
         ctx.strokeStyle = color; ctx.lineWidth = 2;
@@ -508,7 +999,6 @@ function dibujarGSubespacio() {
     drawAxis([0,-2,0], [0,3,0], "#2ecc71", "y");
     drawAxis([0,0,-1], [0,0,3], "#3498db", "z");
 
-    // Plano z = 0
     const corners = [[-2,-2,0],[3,-2,0],[3,3,0],[-2,3,0]];
     ctx.beginPath();
     corners.forEach((c, i) => {
@@ -520,42 +1010,36 @@ function dibujarGSubespacio() {
     ctx.fill();
     ctx.strokeStyle = "#4ecdc4"; ctx.lineWidth = 2; ctx.stroke();
 
-    // Etiquetas
     ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
     ctx.textAlign = "left"; ctx.textBaseline = "top";
     ctx.fillText("Plano z = 0 (subespacio de R³)", 15, 15);
 }
 
-// ===== G2: No subespacio: recta y = x + 1 (no pasa por el origen) =====
+// ===== G2: No subespacio =====
 function dibujarGNoSubespacio() {
     const d = crearDibujante('gNoSubespacio', -3, 4, -2, 5);
     if (!d) return;
     const { ctx, X, Y } = d;
 
-    // Recta y = x+1
     ctx.strokeStyle = "#e07a8f"; ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(X(-3), Y(-2));
     ctx.lineTo(X(4), Y(5));
     ctx.stroke();
 
-    // Punto (0,1) donde corta al eje y
     ctx.beginPath(); ctx.arc(X(0), Y(1), 5, 0, 2*Math.PI);
     ctx.fillStyle = "#e07a8f"; ctx.fill();
 
-    // Marcar origen
     ctx.beginPath(); ctx.arc(X(0), Y(0), 4, 0, 2*Math.PI);
     ctx.fillStyle = "#2e7d32"; ctx.fill();
     ctx.fillStyle = "#2e7d32"; ctx.font = "12px sans-serif";
     ctx.textAlign = "left"; ctx.textBaseline = "top";
     ctx.fillText("(0,0)", X(0) + 8, Y(0) + 4);
 
-    // Etiqueta recta
     ctx.fillStyle = "#e07a8f"; ctx.font = "bold 13px sans-serif";
     ctx.textAlign = "left"; ctx.textBaseline = "bottom";
     ctx.fillText("y = x + 1", X(2.2), Y(3.2) - 4);
 
-    // Título
     ctx.fillStyle = "#1a3e6f"; ctx.font = "bold 13px sans-serif";
     ctx.textAlign = "left"; ctx.textBaseline = "top";
     ctx.fillText("NO es subespacio: no contiene al origen", 15, 15);
@@ -567,11 +1051,9 @@ function dibujarGLD() {
     if (!d) return;
     const { ctx, X, Y } = d;
 
-    // Vector u = (2,1)
     const drawVector = (x, y, color, label) => {
         ctx.strokeStyle = color; ctx.lineWidth = 3;
         ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(x), Y(y)); ctx.stroke();
-        // punta
         const ang = Math.atan2(Y(y)-Y(0), X(x)-X(0));
         const px = X(x), py = Y(y);
         ctx.beginPath();
@@ -587,7 +1069,6 @@ function dibujarGLD() {
     drawVector(2, 1, "#1a3e6f", "u = (2,1)");
     drawVector(1, 2, "#2e7d32", "v = (1,2)  LI con u");
 
-    // Vector dependiente w = -1.5*u = (-3, -1.5) dibujado en gris
     ctx.strokeStyle = "#c96b1a"; ctx.lineWidth = 3;
     ctx.setLineDash([6,4]);
     ctx.beginPath(); ctx.moveTo(X(0), Y(0)); ctx.lineTo(X(-2.5), Y(-1.25)); ctx.stroke();
@@ -601,20 +1082,17 @@ function dibujarGLD() {
     ctx.fillText("Independientes (no paralelos) vs. dependientes (paralelos)", 15, 15);
 }
 
-// ===== G4: Rotación de un cuadrado unitario =====
+// ===== G4: Rotación de un cuadrado =====
 function dibujarGRotacion() {
     const d = crearDibujante('gRotacion', -3, 3, -3, 3);
     if (!d) return;
     const { ctx, X, Y } = d;
 
-    // Cuadrado unitario (0,0)-(1,0)-(1,1)-(0,1)
     const sq = [[0,0],[1,0],[1,1],[0,1]];
-    // Rotar 45°
     const ang = Math.PI/4;
     const rot = (p) => [p[0]*Math.cos(ang) - p[1]*Math.sin(ang),
                         p[0]*Math.sin(ang) + p[1]*Math.cos(ang)];
 
-    // Original (azul claro)
     ctx.strokeStyle = "#9bc0ea"; ctx.lineWidth = 2;
     ctx.beginPath();
     sq.forEach((p, i) => {
@@ -624,7 +1102,6 @@ function dibujarGRotacion() {
     ctx.closePath(); ctx.stroke();
     ctx.fillStyle = "rgba(155, 192, 234, 0.3)"; ctx.fill();
 
-    // Rotado (azul fuerte)
     ctx.strokeStyle = "#1a3e6f"; ctx.lineWidth = 2.5;
     ctx.beginPath();
     sq.forEach((p, i) => {
@@ -644,6 +1121,14 @@ function dibujarGRotacion() {
 // ===== DIBUJAR TODO AL CARGAR =====
 // ============================================================
 window.addEventListener('load', function() {
+    // Preliminares (Sección 0)
+    dibujarPrelim1();
+    dibujarPrelim2();
+    dibujarPrelim3();
+    dibujarPrelim4();
+    dibujarPrelim5();
+    dibujarPrelim6();
+    // Secciones 2, 3, 5
     dibujarGSubespacio();
     dibujarGNoSubespacio();
     dibujarGLD();
