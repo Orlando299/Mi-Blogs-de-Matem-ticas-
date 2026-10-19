@@ -372,6 +372,84 @@
     <!-- ============================================================ -->
     <h2>3. Combinación Lineal, Dependencia e Independencia Lineal</h2>
 
+    <!-- ---------- 3.0 PRELIMINARES MATRICIALES ---------- -->
+    <h3>3.0 Preliminares: Rango, matrices y sistemas homogéneos</h3>
+    
+    <div class="nota">
+        Para dominar la dependencia e independencia lineal, necesitamos herramientas de las unidades anteriores (sistemas de ecuaciones y determinantes). El <strong>rango</strong> de una matriz será nuestro indicador clave para saber cuántos vectores son realmente independientes.
+    </div>
+
+    <div class="definicion">
+        <strong>Matriz asociada a un conjunto de vectores.</strong> Si tenemos \(k\) vectores \(\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k \in \mathbb{R}^n\), podemos formar una matriz \(A\) de tamaño \(n \times k\) colocando cada vector como una <strong>columna</strong>:
+        \[
+        A = \begin{pmatrix} \uparrow & \uparrow & & \uparrow \\ \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k \\ \downarrow & \downarrow & & \downarrow \end{pmatrix}
+        \]
+        Planteamos el sistema homogéneo \(A\mathbf{x} = \mathbf{0}\), donde \(\mathbf{x} = (\alpha_1, \alpha_2, \dots, \alpha_k)^T\) son los escalares de la combinación lineal.
+    </div>
+
+    <div class="definicion">
+        <strong>Rango de una matriz.</strong> El rango de una matriz \(A\) (denotado \(\text{rango}(A)\) o \(\text{rg}(A)\)) es el <strong>número de filas no nulas</strong> que quedan al aplicar el método de eliminación de Gauss-Jordan. Equivalentemente, es el número máximo de columnas (o filas) linealmente independientes de \(A\).
+        <br><br>
+        <em>Propiedades inmediatas:</em>
+        <ul>
+            <li>\(0 \leq \text{rango}(A) \leq \min(m, n)\) para una matriz \(m \times n\).</li>
+            <li>\(\text{rango}(A)\) es el número de <strong>pivotes</strong> en su forma escalonada.</li>
+            <li>Si \(A\) es cuadrada \(n \times n\), entonces \(\text{rango}(A) = n \iff \det(A) \neq 0\).</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Teorema del Rango (para Independencia Lineal).</strong> Dado un conjunto de \(k\) vectores en \(\mathbb{R}^n\) y su matriz asociada \(A\) (de tamaño \(n \times k\)):
+        <ul>
+            <li>Si \(\text{rango}(A) = k\) (tantos pivotes como vectores) \(\implies\) los vectores son <strong>linealmente independientes (LI)</strong>.</li>
+            <li>Si \(\text{rango}(A) < k\) (falta al menos un pivote) \(\implies\) los vectores son <strong>linealmente dependientes (LD)</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Teorema de Equivalencia (LI/LD).</strong> Para \(n\) vectores en \(\mathbb{R}^n\) (matriz cuadrada \(A\)), las siguientes afirmaciones son equivalentes:
+        <ol>
+            <li>Los vectores son linealmente independientes.</li>
+            <li>La matriz \(A\) tiene \(n\) pivotes.</li>
+            <li>\(\text{rango}(A) = n\).</li>
+            <li>\(\det(A) \neq 0\).</li>
+            <li>El sistema \(A\mathbf{x} = \mathbf{0}\) tiene <strong>solo</strong> la solución trivial.</li>
+        </ol>
+        Si alguna de estas falla, todas fallan, y los vectores son LD.
+    </div>
+
+    <div class="teorema">
+        <strong>Teorema de la Dimensión (conjuntos generadores).</strong> En \(\mathbb{R}^n\):
+        <ul>
+            <li>Cualquier conjunto con <strong>más de \(n\) vectores</strong> es necesariamente <strong>linealmente dependiente</strong> (no puedes tener 4 vectores LI en \(\mathbb{R}^3\)).</li>
+            <li>Un conjunto de \(n\) vectores en \(\mathbb{R}^n\) es LI si y solo si genera todo \(\mathbb{R}^n\).</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.0 (Cálculo de rango).</strong> Calcular el rango de \(A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ 1 & 1 & 1 \end{pmatrix}\).
+        <div class="pasos">
+            <ol>
+                <li>Aplicamos Gauss-Jordan. F2 \(\to\) F2 - 2F1 y F3 \(\to\) F3 - F1:
+                    \[
+                    \begin{pmatrix} 1 & 2 & 3 \\ 0 & 0 & 0 \\ 0 & -1 & -2 \end{pmatrix}
+                    \]
+                </li>
+                <li>Intercambiamos F2 y F3 para tener un pivote:
+                    \[
+                    \begin{pmatrix} 1 & 2 & 3 \\ 0 & -1 & -2 \\ 0 & 0 & 0 \end{pmatrix}
+                    \]
+                </li>
+                <li>El número de filas no nulas es \(2\). Por lo tanto, \(\text{rango}(A) = 2\).</li>
+            </ol>
+        </div>
+        Como el rango (2) es menor que el número de columnas (3), las columnas de \(A\) son LD.
+    </div>
+
+
+    
+    <h2>3. Combinación Lineal, Dependencia e Independencia Lineal</h2>
+
     <div class="definicion">
         Dados los vectores \(\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n \in V\) y escalares \(\alpha_1, \alpha_2, \dots, \alpha_n \in \mathbb{K}\), la expresión
         \[
