@@ -424,6 +424,104 @@
         <strong>Propiedad importante.</strong> En un espacio vectorial de dimensión \(n\), cualquier conjunto con <strong>más de \(n\) vectores</strong> es necesariamente linealmente dependiente.
     </div>
 
+        <!-- ---------- 3.3 MÉTODO MATRICIAL ---------- -->
+    <h3>3.3 Método matricial para decidir independencia lineal (Gauss-Jordan y Rango)</h3>
+
+    <div class="nota">
+        Cuando trabajamos en \(\mathbb{R}^n\), la ecuación vectorial \(\alpha_1\mathbf{v}_1 + \cdots + \alpha_k\mathbf{v}_k = \mathbf{0}\) se puede reescribir como un <strong>sistema de ecuaciones lineales homogéneo</strong>. Este sistema se resuelve fácilmente usando la matriz ampliada o simplemente analizando el rango de la matriz de coeficientes.
+    </div>
+
+    <div class="definicion">
+        <strong>Construcción de la matriz.</strong> Si tenemos \(k\) vectores en \(\mathbb{R}^n\), formamos una matriz \(A\) de tamaño \(n \times k\) colocando cada vector como una <strong>columna</strong>:
+        \[
+        A = \begin{pmatrix} \uparrow & \uparrow & & \uparrow \\ \mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k \\ \downarrow & \downarrow & & \downarrow \end{pmatrix}
+        \]
+        El sistema que debemos resolver es \(A\mathbf{x} = \mathbf{0}\), donde \(\mathbf{x} = (\alpha_1, \alpha_2, \dots, \alpha_k)^T\).
+    </div>
+
+    <div class="teorema">
+        <strong>Criterios para decidir LI/LD usando matrices:</strong>
+        <ul>
+            <li><strong>Por Gauss-Jordan:</strong> Si al escalonar la matriz \(A\) encontramos <strong>pivotes en todas las columnas</strong> (no hay variables libres), el sistema \(A\mathbf{x} = \mathbf{0}\) tiene únicamente la solución trivial. Por lo tanto, los vectores son <strong>LI</strong>. Si queda al menos una columna sin pivote (variable libre), hay soluciones no triviales y son <strong>LD</strong>.</li>
+            <li><strong>Por Rango:</strong> El número de vectores LI es exactamente el <strong>rango</strong> de la matriz \(A\) (número de filas/columnas linealmente independientes).
+                <ul>
+                    <li>Si \(\text{rango}(A) = k\) (el número de vectores) \(\implies\) los vectores son <strong>LI</strong>.</li>
+                    <li>Si \(\text{rango}(A) < k\) \(\implies\) los vectores son <strong>LD</strong>.</li>
+                </ul>
+            </li>
+            <li><strong>Por Determinante (si es matriz cuadrada):</strong> Si \(n = k\) (misma cantidad de vectores que de componentes), y \(\det(A) \neq 0\), son <strong>LI</strong>. Si \(\det(A) = 0\), son <strong>LD</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.3 (LI por Gauss-Jordan).</strong> Determinar si \(\mathbf{v}_1 = (1, 2, 3)\), \(\mathbf{v}_2 = (0, 1, 4)\) y \(\mathbf{v}_3 = (5, 6, 0)\) son linealmente independientes.
+        <div class="pasos">
+            <ol>
+                <li><strong>Armamos la matriz</strong> con los vectores como columnas:
+                    \[
+                    A = \begin{pmatrix} 1 & 0 & 5 \\ 2 & 1 & 6 \\ 3 & 4 & 0 \end{pmatrix}
+                    \]
+                </li>
+                <li><strong>Aplicamos Gauss-Jordan.</strong> Queremos escalonar la matriz:
+                    <br>Fila 2 \(\to\) Fila 2 - 2(Fila 1): \(\begin{pmatrix} 1 & 0 & 5 \\ 0 & 1 & -4 \\ 3 & 4 & 0 \end{pmatrix}\)
+                    <br>Fila 3 \(\to\) Fila 3 - 3(Fila 1): \(\begin{pmatrix} 1 & 0 & 5 \\ 0 & 1 & -4 \\ 0 & 4 & -15 \end{pmatrix}\)
+                    <br>Fila 3 \(\to\) Fila 3 - 4(Fila 2): \(\begin{pmatrix} 1 & 0 & 5 \\ 0 & 1 & -4 \\ 0 & 0 & 1 \end{pmatrix}\)
+                </li>
+                <li><strong>Análisis de pivotes.</strong> Tenemos 3 pivotes (uno en cada columna). No hay variables libres.</li>
+                <li><strong>Conclusión:</strong> El sistema \(A\mathbf{x} = \mathbf{0}\) solo tiene la solución trivial. Los vectores son <strong>LI</strong>.</li>
+            </ol>
+        </div>
+        (Verificación rápida con determinante: \(\det(A) = 1(0 - 24) - 0 + 5(8 - 3) = -24 + 25 = 1 \neq 0 \implies LI\)).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.4 (LD por variable libre).</strong> Determinar si \(\mathbf{u}_1 = (1, -1, 2)\), \(\mathbf{u}_2 = (2, 1, 3)\) y \(\mathbf{u}_3 = (5, -1, 7)\) son linealmente independientes.
+        <div class="pasos">
+            <ol>
+                <li><strong>Armamos la matriz:</strong>
+                    \[
+                    A = \begin{pmatrix} 1 & 2 & 5 \\ -1 & 1 & -1 \\ 2 & 3 & 7 \end{pmatrix}
+                    \]
+                </li>
+                <li><strong>Gauss-Jordan:</strong>
+                    <br>F2 \(\to\) F2 + F1: \(\begin{pmatrix} 1 & 2 & 5 \\ 0 & 3 & 4 \\ 2 & 3 & 7 \end{pmatrix}\)
+                    <br>F3 \(\to\) F3 - 2F1: \(\begin{pmatrix} 1 & 2 & 5 \\ 0 & 3 & 4 \\ 0 & -1 & -3 \end{pmatrix}\)
+                    <br>F3 \(\to\) F3 + (1/3)F2: \(\begin{pmatrix} 1 & 2 & 5 \\ 0 & 3 & 4 \\ 0 & 0 & -5/3 \end{pmatrix}\)
+                </li>
+                <li>Espera... en este caso hay 3 pivotes, así que serían LI. <strong>Vamos a corregir el ejemplo para que sea LD:</strong> Usemos \(\mathbf{u}_1 = (1, 2, 3)\), \(\mathbf{u}_2 = (2, 4, 6)\) y \(\mathbf{u}_3 = (1, 1, 1)\).</li>
+                <li><strong>Nueva matriz:</strong>
+                    \[
+                    A = \begin{pmatrix} 1 & 2 & 1 \\ 2 & 4 & 1 \\ 3 & 6 & 1 \end{pmatrix}
+                    \]
+                </li>
+                <li><strong>Gauss-Jordan:</strong>
+                    <br>F2 \(\to\) F2 - 2F1: \(\begin{pmatrix} 1 & 2 & 1 \\ 0 & 0 & -1 \\ 3 & 6 & 1 \end{pmatrix}\)
+                    <br>F3 \(\to\) F3 - 3F1: \(\begin{pmatrix} 1 & 2 & 1 \\ 0 & 0 & -1 \\ 0 & 0 & -2 \end{pmatrix}\)
+                    <br>Intercambiamos F2 y F3 (o simplemente observamos): \(\begin{pmatrix} 1 & 2 & 1 \\ 0 & 0 & -1 \\ 0 & 0 & -2 \end{pmatrix}\).
+                    <br>F3 \(\to\) F3 - 2F2: \(\begin{pmatrix} 1 & 2 & 1 \\ 0 & 0 & -1 \\ 0 & 0 & 0 \end{pmatrix}\)
+                </li>
+                <li><strong>Análisis:</strong> La segunda columna no tiene pivote (hay una variable libre, \(\alpha_2\)). Esto significa que existen infinitas soluciones (soluciones no triviales).</li>
+                <li><strong>Conclusión:</strong> Son <strong>LD</strong>. De hecho, se ve a simple vista que \(\mathbf{u}_2 = 2\mathbf{u}_1\), por lo que no pueden ser independientes.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3.5 (Vectores en \(\mathbb{R}^2\) y Rango).</strong> Determinar si \(\mathbf{a} = (1, 2)\), \(\mathbf{b} = (2, 4)\) y \(\mathbf{c} = (3, 5)\) son linealmente independientes.
+        <div class="pasos">
+            <ol>
+                <li>La matriz es de \(2 \times 3\):
+                    \[
+                    A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 5 \end{pmatrix}
+                    \]
+                </li>
+                <li>Como la matriz tiene 3 columnas pero solo 2 filas, el número máximo de pivotes (rango) es 2. Por lo tanto, <strong>es imposible</strong> que tenga 3 pivotes.</li>
+                <li>Al menos una columna quedará sin pivote. Por el teorema del rango, el sistema tendrá variables libres.</li>
+                <li><strong>Conclusión:</strong> Cualquier conjunto de 3 vectores en \(\mathbb{R}^2\) es siempre <strong>LD</strong>. (Esto es una regla general: en \(\mathbb{R}^n\), más de \(n\) vectores siempre son LD).</li>
+            </ol>
+        </div>
+    </div>
+
     <!-- ============================================================ -->
     <!-- ========== 4. BASE Y DIMENSIÓN ========== -->
     <!-- ============================================================ -->
