@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre-parciales: Límites y Continuidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a3e6f; text-align: center; font-size: 28px; margin-bottom: 5px; }
+        h2 { color: #1a3e6f; border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; page-break-before: always; }
+        h2:first-of-type { page-break-before: avoid; }
+        
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; color: #555; }
+        
+        .nota {
+            background: #fef9f9; 
+            border-left: 4px solid #e07a8f; 
+            padding: 10px 14px; 
+            margin: 20px 0; 
+            border-radius: 0 4px 4px 0; 
+            font-size: 14px;
+        }
+
+        ol.lista-preguntas {
+            list-style: none;
+            counter-reset: pregunta;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        ol.lista-preguntas > li {
+            counter-increment: pregunta;
+            margin: 25px 0;
+            padding: 15px 15px 15px 55px;
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            line-height: 1.6;
+            page-break-inside: avoid;
+        }
+        ol.lista-preguntas > li::before {
+            content: counter(pregunta) ".";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-weight: bold;
+            color: #1a3e6f;
+            font-size: 18px;
+        }
+        .puntos {
+            float: right;
+            font-weight: bold;
+            color: #c96b1a;
+            font-size: 14px;
+            background: #f9f2e0;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .sub-ejercicio {
+            margin-top: 15px;
+            padding-left: 10px;
+            border-left: 2px solid #ccc;
+        }
+
+        .btn-pdf { 
+            display: inline-block; 
+            margin-top: 40px; 
+            background: #c9a84c; 
+            color: #0a0c10; 
+            padding: 10px 24px; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            border: none; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        .btn-pdf:hover { background: #e8c97a; }
+        
+        .nav-footer { margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid #ccc; }
+        .nav-footer a { color: #1a3e6f; text-decoration: none; font-weight: bold; margin: 0 10px;}
+        
+        /* Estilos específicos para la cuadrícula de graficación */
+        .graficacion-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .eje-cartesiano {
+            width: 180px;
+            height: 180px;
+            border-left: 2px solid #333;
+            border-bottom: 2px solid #333;
+            position: relative;
+            margin: 20px auto;
+            background: #fff;
+        }
+        .eje-cartesiano::after {
+            content: "x";
+            position: absolute;
+            right: -15px;
+            bottom: -10px;
+            font-weight: bold;
+        }
+        .eje-cartesiano::before {
+            content: "y";
+            position: absolute;
+            left: -15px;
+            top: -10px;
+            font-weight: bold;
+        }
+        
+        @media print { 
+            .btn-pdf, .nav-footer { display: none; } 
+            .latex-container { box-shadow: none; padding: 0; margin: 0; max-width: 100%; }
+            body { background: white; }
+            h2 { page-break-before: always; }
+            h2:first-of-type { page-break-before: avoid; }
+            .eje-cartesiano { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre-parciales: Límites y Continuidad</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <div class="nota">
+        Las soluciones están en <strong>soluciones.html</strong> (contraseña requerida).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ================== PRE-PARCIAL 1 (TIPO A) ================== -->
+    <!-- ============================================================ -->
+    <h2>Pre-parcial 1 (Tipo A)</h2>
+
+    <ol class="lista-preguntas">
+        <!-- PREGUNTA 1: GRAFICACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Graficación, Dominio y Rango.</strong> Dada la función elemental:
+            \[
+            f(x) = |x - 2|
+            \]
+            a) Realiza la gráfica de la función en el plano cartesiano.
+            b) Determina su dominio y su rango.
+            <div style="display: flex; justify-content: center;">
+                <div class="eje-cartesiano"></div>
+            </div>
+        </li>
+
+        <!-- PREGUNTA 2: LÍMITES LATERALES -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Límites laterales y existencia.</strong> Dada la función a trozos:
+            \[
+            f(x) = \begin{cases} 3x - 1 & \text{si } x < 1 \\ x^2 + 1 & \text{si } x \geq 1 \end{cases}
+            \]
+            Resuelve los dos ejercicios planteados:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> Calcula los límites laterales cuando \(x \to 1\) y determina si \(\lim_{x \to 1} f(x)\) existe. Justifica.
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> Calcula los límites laterales cuando \(x \to 3\) y determina si \(\lim_{x \to 3} f(x)\) existe.
+            </div>
+        </li>
+
+        <!-- PREGUNTA 3: FACTORIZACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Indeterminación \(\frac{0}{0}\) (Factorización).</strong> Calcula los siguientes límites aplicando factorización:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \(\displaystyle \lim_{x \to 2} \frac{x^2 - 4}{x^2 - x - 2}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \(\displaystyle \lim_{x \to 1} \frac{x^3 - 1}{x^2 - 1}\)
+            </div>
+        </li>
+
+        <!-- PREGUNTA 4: RACIONALIZACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Indeterminación \(\frac{0}{0}\) (Racionalización).</strong> Calcula los límites aplicando el conjugado:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \(\displaystyle \lim_{x \to 0} \frac{\sqrt{x + 4} - 2}{x}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \(\displaystyle \lim_{x \to 9} \frac{x - 9}{\sqrt{x} - 3}\)
+            </div>
+        </li>
+
+        <!-- PREGUNTA 5: LÍMITES AL INFINITO Y CONTINUIDAD -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Límites al infinito y Continuidad.</strong>
+            <div class="sub-ejercicio">
+                <strong>a) Límite al infinito:</strong> Calcula \(\displaystyle \lim_{x \to \infty} \frac{5x^3 + 2x - 1}{2x^3 - x^2 + 4}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b) Continuidad:</strong> Sea \(g(x) = \begin{cases} \frac{x^2 - 9}{x - 3} & \text{si } x \neq 3 \\ k & \text{si } x = 3 \end{cases}\). Encuentra el valor de \(k\) para que la función sea continua en \(x=3\).
+            </div>
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ================== PRE-PARCIAL 2 (TIPO B) ================== -->
+    <!-- ============================================================ -->
+    <h2>Pre-parcial 2 (Tipo B)</h2>
+
+    <ol class="lista-preguntas">
+        <!-- PREGUNTA 1: GRAFICACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Graficación, Dominio y Rango.</strong> Dada la función elemental:
+            \[
+            f(x) = \sqrt{x + 2}
+            \]
+            a) Realiza la gráfica de la función en el plano cartesiano.
+            b) Determina su dominio y su rango.
+            <div style="display: flex; justify-content: center;">
+                <div class="eje-cartesiano"></div>
+            </div>
+        </li>
+
+        <!-- PREGUNTA 2: LÍMITES LATERALES -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Límites laterales y existencia.</strong> Dada la función a trozos:
+            \[
+            f(x) = \begin{cases} 2x + 1 & \text{si } x < 2 \\ x^2 - 3 & \text{si } x \geq 2 \end{cases}
+            \]
+            Resuelve los dos ejercicios planteados:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> Calcula los límites laterales cuando \(x \to 2\) y determina si \(\lim_{x \to 2} f(x)\) existe. Justifica.
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> Calcula los límites laterales cuando \(x \to 0\) y determina si \(\lim_{x \to 0} f(x)\) existe.
+            </div>
+        </li>
+
+        <!-- PREGUNTA 3: FACTORIZACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Indeterminación \(\frac{0}{0}\) (Factorización).</strong> Calcula los siguientes límites aplicando factorización:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \(\displaystyle \lim_{x \to -3} \frac{x^2 - 9}{x^2 + x - 6}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \(\displaystyle \lim_{x \to 2} \frac{x^3 - 8}{x^2 - 4}\)
+            </div>
+        </li>
+
+        <!-- PREGUNTA 4: RACIONALIZACIÓN -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Indeterminación \(\frac{0}{0}\) (Racionalización).</strong> Calcula los límites aplicando el conjugado:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \(\displaystyle \lim_{x \to 0} \frac{\sqrt{x + 9} - 3}{x}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \(\displaystyle \lim_{x \to 4} \frac{x - 4}{\sqrt{x} - 2}\)
+            </div>
+        </li>
+
+        <!-- PREGUNTA 5: LÍMITES AL INFINITO Y CONTINUIDAD -->
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Límites al infinito y Continuidad.</strong>
+            <div class="sub-ejercicio">
+                <strong>a) Límite al infinito:</strong> Calcula \(\displaystyle \lim_{x \to \infty} \frac{4x^2 - 3x + 2}{2x^2 + 5x}\)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b) Continuidad:</strong> Sea \(g(x) = \begin{cases} \frac{x^2 - 1}{x - 1} & \text{si } x \neq 1 \\ c & \text{si } x = 1 \end{cases}\). Encuentra el valor de \(c\) para que la función sea continua en \(x=1\).
+            </div>
+        </li>
+    </ol>
+
+    <div style="text-align: center;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="ejercicios.html">Ejercicios</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
+</div>
+</body>
+</html>
