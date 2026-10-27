@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Límites y Continuidad</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 10px 0; padding: 12px; border-left: 3px solid green; background: #e8f0e8; border-radius: 0 4px 4px 0; line-height: 1.6;}
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; border-radius: 4px;}
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; border: none; cursor: pointer;}
+        @media print { .btn-pdf { display: none; } .password-box { display: none; } .contenido-protegido { display: block !important; } }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Límites y Continuidad</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        
+        <h3>A. Límites por sustitución directa</h3>
+        <div class="solucion-item">1. \(\lim_{x\to 3}(2x^2 - 5x + 1) = 2(3)^2 - 5(3) + 1 = 18 - 15 + 1 = 4\)</div>
+        <div class="solucion-item">2. \(\lim_{x\to -1}(x^3 + 2x^2 - x + 4) = (-1)^3 + 2(-1)^2 - (-1) + 4 = -1 + 2 + 1 + 4 = 6\)</div>
+        <div class="solucion-item">3. \(\lim_{x\to 4}\sqrt{2x + 1} = \sqrt{2(4) + 1} = \sqrt{9} = 3\)</div>
+        <div class="solucion-item">4. \(\lim_{x\to 2}\frac{3x^2 - x + 1}{x + 3} = \frac{3(2)^2 - 2 + 1}{2 + 3} = \frac{12 - 2 + 1}{5} = \frac{11}{5}\)</div>
+        <div class="solucion-item">5. \(\lim_{x\to 0}\frac{\sin x + \cos x}{2 - x} = \frac{0 + 1}{2 - 0} = \frac{1}{2}\)</div>
+
+        <h3>B. Indeterminación 0/0 (Factorización)</h3>
+        <div class="solucion-item">6. \(\lim_{x\to 2}\frac{x^2 - 4}{x - 2} = \lim_{x\to 2}\frac{(x-2)(x+2)}{x-2} = \lim_{x\to 2}(x+2) = 4\)</div>
+        <div class="solucion-item">7. \(\lim_{x\to -3}\frac{x^2 - 9}{x + 3} = \lim_{x\to -3}\frac{(x-3)(x+3)}{x+3} = \lim_{x\to -3}(x-3) = -6\)</div>
+        <div class="solucion-item">8. \(\lim_{x\to 1}\frac{x^3 - 1}{x - 1} = \lim_{x\to 1}\frac{(x-1)(x^2+x+1)}{x-1} = 1^2+1+1 = 3\)</div>
+        <div class="solucion-item">9. \(\lim_{x\to 2}\frac{x^2 - 5x + 6}{x^2 - 4} = \lim_{x\to 2}\frac{(x-2)(x-3)}{(x-2)(x+2)} = \frac{2-3}{2+2} = -\frac{1}{4}\)</div>
+        <div class="solucion-item">10. \(\lim_{x\to -1}\frac{x^4 - 1}{x^3 + 1} = \lim_{x\to -1}\frac{(x^2-1)(x^2+1)}{(x+1)(x^2-x+1)} = \lim_{x\to -1}\frac{(x-1)(x+1)(x^2+1)}{(x+1)(x^2-x+1)} = \frac{(-2)(2)}{1+1+1} = -\frac{4}{3}\)</div>
+
+        <h3>B. Indeterminación 0/0 (Racionalización)</h3>
+        <div class="solucion-item">11. \(\lim_{x\to 0}\frac{\sqrt{x+4}-2}{x} \cdot \frac{\sqrt{x+4}+2}{\sqrt{x+4}+2} = \lim_{x\to 0}\frac{x+4-4}{x(\sqrt{x+4}+2)} = \frac{1}{\sqrt{4}+2} = \frac{1}{4}\)</div>
+        <div class="solucion-item">12. \(\lim_{x\to 9}\frac{\sqrt{x}-3}{x-9} \cdot \frac{\sqrt{x}+3}{\sqrt{x}+3} = \lim_{x\to 9}\frac{x-9}{(x-9)(\sqrt{x}+3)} = \frac{1}{\sqrt{9}+3} = \frac{1}{6}\)</div>
+        <div class="solucion-item">13. \(\lim_{x\to 0}\frac{\sqrt{1+x}-\sqrt{1-x}}{x} \cdot \frac{\sqrt{1+x}+\sqrt{1-x}}{\sqrt{1+x}+\sqrt{1-x}} = \lim_{x\to 0}\frac{1+x-(1-x)}{x(\sqrt{1+x}+\sqrt{1-x})} = \lim_{x\to 0}\frac{2x}{x(...)} = \frac{2}{1+1} = 1\)</div>
+        <div class="solucion-item">14. \(\lim_{x\to 5}\frac{\sqrt{x+4}-3}{x-5} \cdot \frac{\sqrt{x+4}+3}{\sqrt{x+4}+3} = \lim_{x\to 5}\frac{x+4-9}{(x-5)(\sqrt{x+4}+3)} = \frac{1}{\sqrt{9}+3} = \frac{1}{6}\)</div>
+        <div class="solucion-item">15. \(\lim_{x\to 1}\frac{\sqrt[3]{x}-1}{x-1}\). Cambio \(u=\sqrt[3]{x} \implies x=u^3\). \(\lim_{u\to 1}\frac{u-1}{u^3-1} = \lim_{u\to 1}\frac{u-1}{(u-1)(u^2+u+1)} = \frac{1}{3}\)</div>
+
+        <h3>C. Indeterminación ∞/∞</h3>
+        <div class="solucion-item">16. \(\lim_{x\to\infty}\frac{3x+1}{2x-5} = \lim_{x\to\infty}\frac{3 + 1/x}{2 - 5/x} = \frac{3}{2}\)</div>
+        <div class="solucion-item">17. \(\lim_{x\to\infty}\frac{5x^2-2x+1}{3x^2+x} = \frac{5}{3}\) (Mismo grado, coeficientes principales)</div>
+        <div class="solucion-item">18. \(\lim_{x\to\infty}\frac{4x^3-x}{2x^2+7} = \infty\) (Grado numerador > denominador)</div>
+        <div class="solucion-item">19. \(\lim_{x\to\infty}\frac{2x^2+x-1}{x^3+5} = 0\) (Grado numerador < denominador)</div>
+        <div class="solucion-item">20. \(\lim_{x\to\infty}\frac{\sqrt{4x^2+3x}}{x+2} = \lim_{x\to\infty}\frac{x\sqrt{4+3/x}}{x(1+2/x)} = \frac{\sqrt{4}}{1} = 2\)</div>
+
+        <h3>D. Indeterminación ∞ - ∞</h3>
+        <div class="solucion-item">21. \(\lim_{x\to\infty}(\sqrt{x^2+x}-x) \cdot \frac{\sqrt{x^2+x}+x}{\sqrt{x^2+x}+x} = \lim_{x\to\infty}\frac{x}{\sqrt{x^2+x}+x} = \frac{1}{2}\)</div>
+        <div class="solucion-item">22. \(\lim_{x\to\infty}(\sqrt{x^2+5x}-x) = \frac{5}{2}\) (Mismo procedimiento que el 21)</div>
+        <div class="solucion-item">23. \(\lim_{x\to\infty}(\sqrt{x^2+3x}-\sqrt{x^2-x}) = \lim_{x\to\infty}\frac{x^2+3x - (x^2-x)}{\sqrt{...}+\sqrt{...}} = \frac{4x}{2x} = 2\)</div>
+        <div class="solucion-item">24. \(\lim_{x\to 1}\left(\frac{1}{x-1} - \frac{2}{x^2-1}\right) = \lim_{x\to 1}\frac{x+1-2}{x^2-1} = \lim_{x\to 1}\frac{x-1}{(x-1)(x+1)} = \frac{1}{2}\)</div>
+        <div class="solucion-item">25. \(\lim_{x\to 2}\left(\frac{3}{x-2} - \frac{6}{x^2-4}\right) = \lim_{x\to 2}\frac{3(x+2)-6}{x^2-4} = \lim_{x\to 2}\frac{3x}{x^2-4} = \infty\)</div>
+
+        <h3>E. Indeterminación 0 · ∞</h3>
+        <div class="solucion-item">26. \(\lim_{x\to 0^+} x\ln x = \lim_{x\to 0^+}\frac{\ln x}{1/x}\). Por L'Hôpital (o crecimiento): \(\lim_{x\to 0^+}\frac{1/x}{-1/x^2} = \lim_{x\to 0^+}(-x) = 0\)</div>
+        <div class="solucion-item">27. \(\lim_{x\to\infty} x \sin(1/x)\). Cambio \(u=1/x\): \(\lim_{u\to 0}\frac{\sin u}{u} = 1\)</div>
+        <div class="solucion-item">28. \(\lim_{x\to\infty} x(e^{1/x}-1)\). Cambio \(u=1/x\): \(\lim_{u\to 0}\frac{e^u-1}{u} = 1\) (límite notable)</div>
+        <div class="solucion-item">29. \(\lim_{x\to 0^+} x^2\ln x = \lim_{x\to 0^+}\frac{\ln x}{1/x^2} = \lim_{x\to 0^+}\frac{1/x}{-2/x^3} = \lim_{x\to 0^+}\frac{-x^2}{2} = 0\)</div>
+        <div class="solucion-item">30. \(\lim_{x\to\infty} x(\sqrt{1+1/x}-1)\). Multiplicando por el conjugado: \(x \cdot \frac{1/x}{\sqrt{1+1/x}+1} = \frac{1}{\sqrt{1}+1} = \frac{1}{2}\)</div>
+
+        <h3>F. Indeterminaciones 1^∞, 0^0, ∞^0</h3>
+        <div class="solucion-item">31. \(\lim_{x\to\infty}(1+1/x)^x = e\)</div>
+        <div class="solucion-item">32. \(\lim_{x\to\infty}(1+3/x)^x = e^3\)</div>
+        <div class="solucion-item">33. \(\lim_{x\to 0^+} x^x\). Sea \(y=x^x \implies \ln y = x\ln x\). Como \(\lim x\ln x = 0\), \(\ln y \to 0 \implies y \to e^0 = 1\)</div>
+        <div class="solucion-item">34. \(\lim_{x\to 0^+}(1+x)^{1/x} = e\) (límite notable)</div>
+        <div class="solucion-item">35. \(\lim_{x\to\infty} x^{1/x}\). Sea \(y=x^{1/x} \implies \ln y = \frac{\ln x}{x}\). Aplicando L'Hôpital: \(\lim \frac{1/x}{1} = 0\). Por lo tanto \(y \to e^0 = 1\)</div>
+
+        <h3>G. Continuidad</h3>
+        <div class="solucion-item">36. \(f(x) = \frac{x^2-9}{x-3}\) en \(x=3\). \(\lim_{x\to 3} f(x) = 6\), pero \(f(3)\) no está definida. <strong>Discontinuidad evitable.</strong></div>
+        <div class="solucion-item">37. \(f(x)\) a trozos en \(x=1\). Límite izq = \(2(1)+1=3\), Límite der = \((1)^2+3=4\). Como \(3 \neq 4\), <strong>discontinuidad de salto</strong>.</div>
+        <div class="solucion-item">38. \(f(x) = \frac{\sin x}{x}\) con \(f(0)=0\). \(\lim_{x\to 0}\frac{\sin x}{x} = 1 \neq f(0)\). <strong>Discontinuidad evitable.</strong></div>
+        <div class="solucion-item">39. <strong>G.2.1:</strong> a) \(f(2)=1\); b) Límite = 4; c) No es continua, discont. evitable; d) Se redefine \(f(2)=4\).</div>
+        <div class="solucion-item">40. <strong>G.2.2:</strong> a) Límite izq = 4, Límite der = 3; b) No existe el límite; c) Discontinuidad de salto.</div>
+        <div class="solucion-item">41. <strong>G.2.3:</strong> a) Límite izq = \(-\infty\), Límite der = \(+\infty\); b) No existe; c) Discontinuidad infinita; d) Asíntota \(x=3\).</div>
+        <div class="solucion-item">42. <strong>G.2.4:</strong> a) \(f(0)=5\); b) Límite izq = 1, Límite der = 1 (coinciden); c) Límite = 1; d) No es continua, discont. evitable; e) \(f(0)\) debería ser \(1\).</div>
+
+        <h2>📝 Soluciones - Pre-parciales</h2>
+        
+        <h3>Pre-parcial 1 (Tipo A)</h3>
+        <div class="solucion-item"><strong>1. Graficación \(f(x) = |x-2|\):</strong> Es una "V" con vértice en \((2,0)\). Dominio: \(\mathbb{R}\). Rango: \([0, +\infty)\).</div>
+        <div class="solucion-item"><strong>2. Laterales:</strong> a) \(x\to 1\): Límite izq = \(3(1)-1 = 2\), Límite der = \(1^2+1 = 2\). Como coinciden, el límite existe y es 2. b) \(x\to 3\): \(3 \geq 1\), aplica la 2da rama. \(\lim_{x\to 3}(x^2+1) = 10\).</div>
+        <div class="solucion-item"><strong>3. Factorización:</strong> a) \(\lim_{x\to 2}\frac{(x-2)(x+2)}{(x-2)(x+1)} = \frac{4}{3}\). b) \(\lim_{x\to 1}\frac{(x-1)(x^2+x+1)}{(x-1)(x+1)} = \frac{3}{2}\).</div>
+        <div class="solucion-item"><strong>4. Racionalización:</strong> a) \(\lim_{x\to 0}\frac{x+4-4}{x(\sqrt{x+4}+2)} = \frac{1}{4}\). b) Multiplicando por conjugado: \(\lim_{x\to 9}\frac{(x-9)(\sqrt{x}+3)}{x-9} = 6\).</div>
+        <div class="solucion-item"><strong>5. Infinito y Continuidad:</strong> a) \(\lim_{x\to\infty}\frac{5x^3+...}{2x^3+...} = \frac{5}{2}\). b) \(\lim_{x\to 3}\frac{x^2-9}{x-3} = 6\). Para que sea continua, \(k=6\).</div>
+
+        <h3>Pre-parcial 2 (Tipo B)</h3>
+        <div class="solucion-item"><strong>1. Graficación \(f(x) = \sqrt{x+2}\):</strong> Curva que empieza en \((-2,0)\) y va hacia la derecha. Dominio: \([-2, +\infty)\). Rango: \([0, +\infty)\).</div>
+        <div class="solucion-item"><strong>2. Laterales:</strong> a) \(x\to 2\): Límite izq = \(2(2)+1 = 5\), Límite der = \(2^2-3 = 1\). Como \(5 \neq 1\), el límite no existe. b) \(x\to 0\): \(0 < 2\), aplica la 1ra rama. \(\lim_{x\to 0}(2x+1) = 1\).</div>
+        <div class="solucion-item"><strong>3. Factorización:</strong> a) \(\lim_{x\to -3}\frac{(x-3)(x+3)}{(x+3)(x-2)} = \frac{-6}{-5} = \frac{6}{5}\). b) \(\lim_{x\to 2}\frac{(x-2)(x^2+2x+4)}{(x-2)(x+2)} = \frac{12}{4} = 3\).</div>
+        <div class="solucion-item"><strong>4. Racionalización:</strong> a) \(\lim_{x\to 0}\frac{x+9-9}{x(\sqrt{x+9}+3)} = \frac{1}{6}\). b) Multiplicando por conjugado: \(\lim_{x\to 4}\frac{(x-4)(\sqrt{x}+2)}{x-4} = 4\).</div>
+        <div class="solucion-item"><strong>5. Infinito y Continuidad:</strong> a) \(\lim_{x\to\infty}\frac{4x^2+...}{2x^2+...} = \frac{4}{2} = 2\). b) \(\lim_{x\to 1}\frac{x^2-1}{x-1} = 2\). Para que sea continua, \(c=2\).</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
