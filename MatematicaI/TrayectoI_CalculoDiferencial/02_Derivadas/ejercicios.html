@@ -15,34 +15,29 @@
         .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
         .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
 
-        /* Lista de ejercicios */
+        /* Lista de ejercicios corregida (sin flex, una sola columna para evitar cortes) */
         ol.lista-ejercicios {
             counter-reset: ej;
             list-style: none;
             padding-left: 0;
             margin: 15px 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-            gap: 15px;
         }
         ol.lista-ejercicios > li {
             counter-increment: ej;
-            margin: 0;
+            margin: 12px 0;
             padding: 12px 16px 12px 55px;
             position: relative;
             background: #fafafa;
             border: 1px solid #e5e5e5;
             border-radius: 6px;
             line-height: 1.6;
-            display: flex;
-            align-items: center;
+            font-size: 16px;
         }
         ol.lista-ejercicios > li::before {
             content: counter(ej) ".";
             position: absolute;
             left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 12px;
             font-weight: bold;
             color: #1a3e6f;
             font-size: 16px;
@@ -60,7 +55,6 @@
             border-radius: 10px;
             margin-right: 8px;
             font-weight: bold;
-            flex-shrink: 0;
         }
         .menor    { background: #d4edda; color: #155724; }
         .intermedio { background: #fff3cd; color: #856404; }
@@ -76,9 +70,7 @@
         @media print {
             .latex-container { margin: 0; padding: 20px; box-shadow: none; }
             .btn-pdf, .nav-footer { display: none; }
-            ol.lista-ejercicios { display: block; }
-            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; margin-bottom: 10px; display: block; padding-left: 45px;}
-            ol.lista-ejercicios > li::before { top: 15px; transform: none; }
+            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -234,16 +226,16 @@
     <!-- ============================================================ -->
     <h2>E. Orden Superior, Rectas Tangentes y Aplicaciones</h2>
     <ol class="lista-ejercicios">
-        <li><span class="nivel menor">🟢</span> Dada \(f(x) = x^4 - 2x^3 + x\), hallar \(f''(x)\).</li>
-        <li><span class="nivel menor">🟢</span> Dada \(f(x) = e^{2x}\), hallar \(f''(0)\).</li>
-        <li><span class="nivel intermedio">🟡</span> Dada \(f(x) = \sin x\), hallar la cuarta derivada \(f^{(4)}(x)\).</li>
-        <li><span class="nivel intermedio">🟡</span> Encontrar la ecuación de la recta tangente a \(y = x^2 - 3x + 1\) en \(x=2\).</li>
-        <li><span class="nivel intermedio">🟡</span> Encontrar la ecuación de la recta normal a \(y = x^2\) en \(x=1\).</li>
-        <li><span class="nivel intermedio">🟡</span> Un móvil se desplaza según \(s(t) = 2t^3 - 3t^2 + 4t\). Hallar su velocidad y aceleración en \(t=1\).</li>
-        <li><span class="nivel mayor">🔴</span> Encontrar los puntos donde la recta tangente a \(f(x) = x^3 - 3x^2 + 1\) es horizontal.</li>
-        <li><span class="nivel mayor">🔴</span> Encontrar el punto donde la tangente a \(y = \frac{1}{x}\) es paralela a la recta \(x + 4y = 0\).</li>
-        <li><span class="nivel mayor">🔴</span> Un globo esférico se infla y su radio crece a razón de \(2 \, \text{cm/s}\). ¿A qué razón crece su volumen cuando el radio es \(5 \, \text{cm}\)? (Fórmula: \(V = \frac{4}{3}\pi r^3\)).</li>
-        <li><span class="nivel mayor">🔴</span> Determinar los valores de \(a\) y \(b\) para que la función \(f(x) = ax^3 + bx^2\) tenga un punto de tangencia horizontal en \((1, 4)\).</li>
+        <li><span class="nivel menor">🟢</span> Dada \( f(x) = x^4 - 2x^3 + x \), hallar su segunda derivada \( f''(x) \).</li>
+        <li><span class="nivel menor">🟢</span> Dada \( f(x) = e^{2x} \), hallar el valor de \( f''(0) \).</li>
+        <li><span class="nivel intermedio">🟡</span> Dada \( f(x) = \sin x \), hallar la cuarta derivada \( f^{(4)}(x) \).</li>
+        <li><span class="nivel intermedio">🟡</span> Encontrar la ecuación de la recta tangente a \( y = x^2 - 3x + 1 \) en el punto \( x=2 \).</li>
+        <li><span class="nivel intermedio">🟡</span> Encontrar la ecuación de la recta normal a \( y = x^2 \) en el punto \( x=1 \).</li>
+        <li><span class="nivel intermedio">🟡</span> Un móvil se desplaza según \( s(t) = 2t^3 - 3t^2 + 4t \). Hallar su velocidad y aceleración en \( t=1 \).</li>
+        <li><span class="nivel mayor">🔴</span> Encontrar los puntos donde la recta tangente a \( f(x) = x^3 - 3x^2 + 1 \) es horizontal.</li>
+        <li><span class="nivel mayor">🔴</span> Encontrar el punto donde la tangente a \( y = \frac{1}{x} \) es paralela a la recta \( x + 4y = 0 \).</li>
+        <li><span class="nivel mayor">🔴</span> Un globo esférico se infla y su radio crece a razón de \( 2 \, \text{cm/s} \). ¿A qué razón crece su volumen cuando el radio es \( 5 \, \text{cm} \)? (Fórmula: \( V = \frac{4}{3}\pi r^3 \)).</li>
+        <li><span class="nivel mayor">🔴</span> Determinar los valores de \( a \) y \( b \) para que la función \( f(x) = ax^3 + bx^2 \) tenga un punto de tangencia horizontal en \( (1, 4) \).</li>
     </ol>
 
     <div style="text-align: center; margin-top: 30px;">
