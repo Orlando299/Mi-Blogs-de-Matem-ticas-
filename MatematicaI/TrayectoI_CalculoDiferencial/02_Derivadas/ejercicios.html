@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicios: Derivadas</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em;}
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        /* Lista de ejercicios */
+        ol.lista-ejercicios {
+            counter-reset: ej;
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 15px;
+        }
+        ol.lista-ejercicios > li {
+            counter-increment: ej;
+            margin: 0;
+            padding: 12px 16px 12px 55px;
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+        }
+        ol.lista-ejercicios > li::before {
+            content: counter(ej) ".";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: #1a3e6f;
+            font-size: 16px;
+        }
+        ol.lista-ejercicios > li:hover {
+            background: #f3f7fd;
+            border-color: #c9d8ec;
+        }
+
+        /* Etiquetas de dificultad */
+        .nivel {
+            display: inline-block;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 8px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .menor    { background: #d4edda; color: #155724; }
+        .intermedio { background: #fff3cd; color: #856404; }
+        .mayor    { background: #f8d7da; color: #721c24; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
+        .nav-footer a:hover { background: #2a5a9a; }
+
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            ol.lista-ejercicios { display: block; }
+            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; margin-bottom: 10px; display: block; padding-left: 45px;}
+            ol.lista-ejercicios > li::before { top: 15px; transform: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Ejercicios: Derivadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <div class="intro">
+        <strong>Instrucciones.</strong> Deriva cada una de las siguientes funciones. Muestra claramente el procedimiento aplicando las reglas correspondientes (potencia, producto, cociente, cadena, etc.).
+        <br><br>
+        <strong>Dificultad:</strong>
+        <span class="nivel menor">🟢 Menor</span>
+        <span class="nivel intermedio">🟡 Intermedio</span>
+        <span class="nivel mayor">🔴 Mayor</span>
+    </div>
+
+    <div class="nota">
+        Las soluciones detalladas están en <strong>soluciones.html</strong> (contraseña requerida). Puedes consultar la <a href="anexo_tabla_derivadas.html" target="_blank" style="color: #2e7d32; font-weight: bold;">Tabla de Derivadas aquí</a>.
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== A. REGLAS BÁSICAS ========== -->
+    <!-- ============================================================ -->
+    <h2>A. Reglas Básicas de Derivación</h2>
+
+    <h3>A.1 Suma y Resta</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = 4x^3 - 2x^2 + 5x - 7\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \frac{1}{2}x^4 + \frac{2}{3}x^3 - x + 10\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = 3\sqrt{x} + \frac{4}{x} - x^2\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{x^4 - 3x^2 + 1}{x}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = (x+1)^2 + (x-1)^2\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{3x^2 - 2x + 1}{\sqrt{x}}\)</li>
+    </ol>
+
+    <h3>A.2 Regla del Producto</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = (x^2)(3x + 1)\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = (2x - 1)(x^3 + 2)\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = (x^2 + 1)(x^3 - x)\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = (x^2 + 3x)(x^2 - 2x)\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = (x^3 - 4x)(\sqrt{x} + 1)\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = (x^2 + 1)(x^3 + 1)(x^4 + 1)\)</li>
+    </ol>
+
+    <h3>A.3 Regla del Cociente</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = \frac{x+1}{x-1}\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \frac{2x}{x^2+1}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{x^2+1}{x^2-1}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{3x^2 - 1}{x+2}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{x^3 - 1}{x^2 + 1}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{x}{\sqrt{x} + 1}\)</li>
+    </ol>
+
+    <h3>A.4 Potencias, Raíces y 1/x</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = x^{10}\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = x^{-3}\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \sqrt{x}\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \sqrt[3]{x}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{1}{x^2}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{1}{\sqrt{x}}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = x^{3/2}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = x^{-2/3}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sqrt{x^3}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{1}{x\sqrt{x}}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sqrt[4]{x^3}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{5}{x^4}\)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== B. FUNCIONES ELEMENTALES ========== -->
+    <!-- ============================================================ -->
+    <h2>B. Funciones Elementales</h2>
+
+    <h3>B.1 Exponenciales y Logarítmicas</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = e^x + x^2\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \ln(x) + 3x\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = x^2 e^x\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{\ln x}{x}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = x \ln(x) - x\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = a^x \ln(x)\)</li>
+    </ol>
+
+    <h3>B.2 Trigonométricas</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = \sin x + \cos x\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \tan x - x\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = x \sin x\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{\cos x}{x}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sec x + \csc x\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \cot x \cdot \sin x\)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== C. REGLA DE LA CADENA ========== -->
+    <!-- ============================================================ -->
+    <h2>C. Regla de la Cadena</h2>
+
+    <h3>C.1 Cadena Básica</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = (3x + 1)^5\)</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = \sqrt{4x^2 + 1}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = e^{3x^2}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \ln(5x + 2)\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sin(x^3)\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \cos(e^x)\)</li>
+    </ol>
+
+    <h3>C.2 Cadena Combinada (Producto y Cociente)</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = x^2 (x+1)^4\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = e^x \sqrt{x+1}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \frac{(x+1)^2}{x}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = (x^2+1)^3 \ln x\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \frac{e^x}{(x+1)^2}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sin x (x^2+1)^5\)</li>
+    </ol>
+
+    <h3>C.3 Cadena Anidada</h3>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \sqrt{(x^2+1)^3}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = e^{\sin x}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \ln(\cos(x^2))\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sin^2(3x)\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \sqrt{\ln(x)}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(f(x) = \cos^2(\sqrt{x})\)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== D. DERIVACIÓN IMPLÍCITA ========== -->
+    <!-- ============================================================ -->
+    <h2>D. Derivación Implícita</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(x^2 + y^2 = 25\)</li>
+        <li><span class="nivel menor">🟢</span> \(xy = 1\)</li>
+        <li><span class="nivel menor">🟢</span> \(x^2 + y^2 = 4xy\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(x^3 + y^3 = 8\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(x^2 y + y^2 x = 3\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y^2 = x^3\)</li>
+        <li><span class="nivel mayor">🔴</span> \(\sin y = x^2 y\)</li>
+        <li><span class="nivel mayor">🔴</span> \(e^y = x + y\)</li>
+        <li><span class="nivel mayor">🔴</span> \(\ln(x+y) = y\)</li>
+        <li><span class="nivel mayor">🔴</span> \(x \cos y = y \sin x\)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ========== E. ORDEN SUPERIOR Y APLICACIONES ========== -->
+    <!-- ============================================================ -->
+    <h2>E. Orden Superior, Rectas Tangentes y Aplicaciones</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(f(x) = x^4 - 2x^3 + x\). Hallar \(f''(x)\).</li>
+        <li><span class="nivel menor">🟢</span> \(f(x) = e^{2x}\). Hallar \(f''(0)\).</li>
+        <li><span class="nivel intermedio">🟡</span> \(f(x) = \sin x\). Hallar la cuarta derivada \(f^{(4)}(x)\).</li>
+        <li><span class="nivel intermedio">🟡</span> Encontrar la recta tangente a \(y = x^2 - 3x + 1\) en \(x=2\).</li>
+        <li><span class="nivel intermedio">🟡</span> Encontrar la recta normal a \(y = x^2\) en \(x=1\).</li>
+        <li><span class="nivel intermedio">🟡</span> \(s(t) = 2t^3 - 3t^2 + 4t\). Hallar velocidad y aceleración en \(t=1\).</li>
+        <li><span class="nivel mayor">🔴</span> Encontrar los puntos donde la recta tangente de \(f(x) = x^3 - 3x^2 + 1\) es horizontal.</li>
+        <li><span class="nivel mayor">🔴</span> Encontrar el punto donde la tangente a \(y = \frac{1}{x}\) es paralela a la recta \(x + 4y = 0\).</li>
+        <li><span class="nivel mayor">🔴</span> Un globo esférico se infla y su radio crece a razón de \(2 \, \text{cm/s}\). ¿A qué razón crece su volumen cuando el radio es \(5 \, \text{cm}\)? (\(V = \frac{4}{3}\pi r^3\)).</li>
+        <li><span class="nivel mayor">🔴</span> Determinar \(a\) y \(b\) para que la función \(f(x) = ax^3 + bx^2\) tenga un punto de tangencia horizontal en \((1, 4)\).</li>
+    </ol>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
+</div>
+</body>
+</html>
