@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Soluciones - Derivadas</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #1a3e6f; }
+        .author { text-align: center; }
+        .solucion-item { margin: 10px 0; padding: 12px; border-left: 3px solid green; background: #e8f0e8; border-radius: 0 4px 4px 0; line-height: 1.6;}
+        .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
+        .password-box input { padding: 8px; margin-right: 10px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; border-radius: 4px;}
+        .contenido-protegido { display: none; }
+        .error { color: red; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; border: none; cursor: pointer;}
+        @media print { 
+            .btn-pdf, .password-box { display: none !important; } 
+            .contenido-protegido { display: block !important; } 
+            .latex-container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Soluciones: Derivadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <p>Ingrese la contraseña para ver las soluciones.</p>
+
+    <div class="password-box">
+        <input type="password" id="passwordInput" placeholder="Contraseña">
+        <button onclick="verificarPassword()">Acceder</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+
+    <div id="soluciones" class="contenido-protegido">
+        <h2>📝 Soluciones - Ejercicios</h2>
+        
+        <!-- ================= A. REGLAS BÁSICAS ================= -->
+        <h3>A.1 Suma y Resta</h3>
+        <div class="solucion-item">1. \(f'(x) = 12x^2 - 4x + 5\)</div>
+        <div class="solucion-item">2. \(f'(x) = 2x^3 + 2x^2 - 1\)</div>
+        <div class="solucion-item">3. \(f'(x) = \frac{3}{2\sqrt{x}} - \frac{4}{x^2} - 2x\)</div>
+        <div class="solucion-item">4. \(f(x) = x^3 - 3x + x^{-1} \implies f'(x) = 3x^2 - 3 - \frac{1}{x^2}\)</div>
+        <div class="solucion-item">5. \(f(x) = 2x^2 + 2 \implies f'(x) = 4x\)</div>
+        <div class="solucion-item">6. \(f(x) = 3x^{3/2} - 2x^{1/2} + x^{-1/2} \implies f'(x) = \frac{9}{2}x^{1/2} - x^{-1/2} - \frac{1}{2}x^{-3/2}\)</div>
+
+        <h3>A.2 Regla del Producto</h3>
+        <div class="solucion-item">7. \(f'(x) = (2x)(3x+1) + (x^2)(3) = 6x^2 + 2x + 3x^2 = 9x^2 + 2x\)</div>
+        <div class="solucion-item">8. \(f'(x) = (2)(x^3+2) + (2x-1)(3x^2) = 2x^3 + 4 + 6x^3 - 3x^2 = 8x^3 - 3x^2 + 4\)</div>
+        <div class="solucion-item">9. \(f'(x) = (2x)(x^3-x) + (x^2+1)(3x^2-1) = 2x^4 - 2x^2 + 3x^4 + 2x^2 - 1 = 5x^4 - 1\)</div>
+        <div class="solucion-item">10. \(f'(x) = (2x+3)(x^2-2x) + (x^2+3x)(2x-2) = 2x^3 - 4x^2 + 3x^2 - 6x + 2x^3 - 2x^2 + 6x^2 - 6x = 4x^3 + 3x^2 - 12x\)</div>
+        <div class="solucion-item">11. \(f'(x) = (3x^2-4)(\sqrt{x}+1) + (x^3-4x)\left(\frac{1}{2\sqrt{x}}\right) = 3x^{5/2} + 3x^2 - 4\sqrt{x} - 4 + \frac{1}{2}x^{5/2} - 2\sqrt{x} = \frac{7}{2}x^{5/2} + 3x^2 - 6\sqrt{x} - 4\)</div>
+        <div class="solucion-item">12. Usando producto doble o expandiendo: \(f(x) = (x^5 + x^3 + x^2 + 1)(x^4+1) = x^9 + x^7 + x^6 + x^4 + x^5 + x^3 + x^2 + 1\). \(f'(x) = 9x^8 + 7x^6 + 6x^5 + 5x^4 + 4x^3 + 3x^2 + 2x\)</div>
+
+        <h3>A.3 Regla del Cociente</h3>
+        <div class="solucion-item">13. \(f'(x) = \frac{(1)(x-1) - (x+1)(1)}{(x-1)^2} = \frac{-2}{(x-1)^2}\)</div>
+        <div class="solucion-item">14. \(f'(x) = \frac{(2)(x^2+1) - (2x)(2x)}{(x^2+1)^2} = \frac{2x^2+2-4x^2}{(x^2+1)^2} = \frac{2-2x^2}{(x^2+1)^2}\)</div>
+        <div class="solucion-item">15. \(f'(x) = \frac{(2x)(x^2-1) - (x^2+1)(2x)}{(x^2-1)^2} = \frac{2x^3-2x-2x^3-2x}{(x^2-1)^2} = \frac{-4x}{(x^2-1)^2}\)</div>
+        <div class="solucion-item">16. \(f'(x) = \frac{(6x)(x+2) - (3x^2-1)(1)}{(x+2)^2} = \frac{6x^2+12x-3x^2+1}{(x+2)^2} = \frac{3x^2+12x+1}{(x+2)^2}\)</div>
+        <div class="solucion-item">17. \(f'(x) = \frac{(3x^2)(x^2+1) - (x^3-1)(2x)}{(x^2+1)^2} = \frac{3x^4+3x^2-2x^4+2x}{(x^2+1)^2} = \frac{x^4+3x^2+2x}{(x^2+1)^2}\)</div>
+        <div class="solucion-item">18. \(f'(x) = \frac{(1)(\sqrt{x}+1) - (x)(\frac{1}{2\sqrt{x}})}{(\sqrt{x}+1)^2} = \frac{\sqrt{x}+1 - \frac{1}{2}\sqrt{x}}{(\sqrt{x}+1)^2} = \frac{\frac{1}{2}\sqrt{x}+1}{(\sqrt{x}+1)^2}\)</div>
+
+        <h3>A.4 Potencias, Raíces y 1/x</h3>
+        <div class="solucion-item">19. \(f'(x) = 10x^9\)</div>
+        <div class="solucion-item">20. \(f'(x) = -3x^{-4} = -\frac{3}{x^4}\)</div>
+        <div class="solucion-item">21. \(f'(x) = \frac{1}{2\sqrt{x}}\)</div>
+        <div class="solucion-item">22. \(f(x) = x^{1/3} \implies f'(x) = \frac{1}{3}x^{-2/3} = \frac{1}{3\sqrt[3]{x^2}}\)</div>
+        <div class="solucion-item">23. \(f(x) = x^{-2} \implies f'(x) = -2x^{-3} = -\frac{2}{x^3}\)</div>
+        <div class="solucion-item">24. \(f(x) = x^{-1/2} \implies f'(x) = -\frac{1}{2}x^{-3/2} = -\frac{1}{2x\sqrt{x}}\)</div>
+        <div class="solucion-item">25. \(f'(x) = \frac{3}{2}x^{1/2} = \frac{3}{2}\sqrt{x}\)</div>
+        <div class="solucion-item">26. \(f'(x) = -\frac{2}{3}x^{-5/3} = -\frac{2}{3\sqrt[3]{x^5}}\)</div>
+        <div class="solucion-item">27. \(f(x) = x^{3/2} \implies f'(x) = \frac{3}{2}x^{1/2} = \frac{3}{2}\sqrt{x}\)</div>
+        <div class="solucion-item">28. \(f(x) = x^{-3/2} \implies f'(x) = -\frac{3}{2}x^{-5/2} = -\frac{3}{2x^2\sqrt{x}}\)</div>
+        <div class="solucion-item">29. \(f(x) = x^{3/4} \implies f'(x) = \frac{3}{4}x^{-1/4} = \frac{3}{4\sqrt[4]{x}}\)</div>
+        <div class="solucion-item">30. \(f(x) = 5x^{-4} \implies f'(x) = -20x^{-5} = -\frac{20}{x^5}\)</div>
+
+        <!-- ================= B. ELEMENTALES ================= -->
+        <h3>B.1 Exponenciales y Logarítmicas</h3>
+        <div class="solucion-item">31. \(f'(x) = e^x + 2x\)</div>
+        <div class="solucion-item">32. \(f'(x) = \frac{1}{x} + 3\)</div>
+        <div class="solucion-item">33. \(f'(x) = 2x e^x + x^2 e^x = e^x(2x + x^2)\)</div>
+        <div class="solucion-item">34. \(f'(x) = \frac{\frac{1}{x}(x) - \ln x (1)}{x^2} = \frac{1 - \ln x}{x^2}\)</div>
+        <div class="solucion-item">35. \(f'(x) = 1 \cdot \ln x + x \cdot \frac{1}{x} - 1 = \ln x + 1 - 1 = \ln x\)</div>
+        <div class="solucion-item">36. \(f'(x) = (a^x \ln a)\ln x + a^x \frac{1}{x} = a^x \left( \ln a \ln x + \frac{1}{x} \right)\)</div>
+
+        <h3>B.2 Trigonométricas</h3>
+        <div class="solucion-item">37. \(f'(x) = \cos x - \sin x\)</div>
+        <div class="solucion-item">38. \(f'(x) = \sec^2 x - 1 = \tan^2 x\)</div>
+        <div class="solucion-item">39. \(f'(x) = \sin x + x \cos x\)</div>
+        <div class="solucion-item">40. \(f'(x) = \frac{-\sin x (x) - \cos x (1)}{x^2} = \frac{-x\sin x - \cos x}{x^2}\)</div>
+        <div class="solucion-item">41. \(f'(x) = \sec x \tan x - \csc x \cot x\)</div>
+        <div class="solucion-item">42. \(f(x) = \frac{\cos x}{\sin x} \cdot \sin x = \cos x \implies f'(x) = -\sin x\)</div>
+
+        <!-- ================= C. CADENA ================= -->
+        <h3>C.1 Cadena Básica</h3>
+        <div class="solucion-item">43. \(f'(x) = 5(3x+1)^4 \cdot 3 = 15(3x+1)^4\)</div>
+        <div class="solucion-item">44. \(f'(x) = \frac{1}{2\sqrt{4x^2+1}} \cdot 8x = \frac{4x}{\sqrt{4x^2+1}}\)</div>
+        <div class="solucion-item">45. \(f'(x) = e^{3x^2} \cdot 6x = 6x e^{3x^2}\)</div>
+        <div class="solucion-item">46. \(f'(x) = \frac{1}{5x+2} \cdot 5 = \frac{5}{5x+2}\)</div>
+        <div class="solucion-item">47. \(f'(x) = \cos(x^3) \cdot 3x^2 = 3x^2 \cos(x^3)\)</div>
+        <div class="solucion-item">48. \(f'(x) = -\sin(e^x) \cdot e^x = -e^x \sin(e^x)\)</div>
+
+        <h3>C.2 Cadena Combinada</h3>
+        <div class="solucion-item">49. \(f'(x) = 2x(x+1)^4 + x^2 \cdot 4(x+1)^3 \cdot 1 = 2x(x+1)^3 [ (x+1) + 2x ] = 2x(x+1)^3(3x+1)\)</div>
+        <div class="solucion-item">50. \(f'(x) = e^x \sqrt{x+1} + e^x \frac{1}{2\sqrt{x+1}} = e^x \left( \sqrt{x+1} + \frac{1}{2\sqrt{x+1}} \right)\)</div>
+        <div class="solucion-item">51. \(f'(x) = \frac{2(x+1)(1)(x) - (x+1)^2(1)}{x^2} = \frac{(x+1)[2x - (x+1)]}{x^2} = \frac{(x+1)(x-1)}{x^2}\)</div>
+        <div class="solucion-item">52. \(f'(x) = 3(x^2+1)^2(2x)\ln x + (x^2+1)^3 \frac{1}{x} = (x^2+1)^2 \left[ 6x\ln x + \frac{x^2+1}{x} \right]\)</div>
+        <div class="solucion-item">53. \(f'(x) = \frac{e^x(x+1)^2 - e^x(2)(x+1)}{(x+1)^4} = \frac{e^x(x+1) - 2e^x}{(x+1)^3} = \frac{e^x(x-1)}{(x+1)^3}\)</div>
+        <div class="solucion-item">54. \(f'(x) = \cos x(x^2+1)^5 + \sin x \cdot 5(x^2+1)^4(2x) = (x^2+1)^4 [ \cos x(x^2+1) + 10x\sin x ]\)</div>
+
+        <h3>C.3 Cadena Anidada</h3>
+        <div class="solucion-item">55. \(f(x) = (x^2+1)^{3/2} \implies f'(x) = \frac{3}{2}(x^2+1)^{1/2}(2x) = 3x\sqrt{x^2+1}\)</div>
+        <div class="solucion-item">56. \(f'(x) = e^{\sin x} \cdot \cos x\)</div>
+        <div class="solucion-item">57. \(f'(x) = \frac{1}{\cos(x^2)} \cdot (-\sin(x^2)) \cdot 2x = -2x \tan(x^2)\)</div>
+        <div class="solucion-item">58. \(f'(x) = 2\sin(3x) \cdot \cos(3x) \cdot 3 = 6\sin(3x)\cos(3x) = 3\sin(6x)\)</div>
+        <div class="solucion-item">59. \(f'(x) = \frac{1}{2\sqrt{\ln x}} \cdot \frac{1}{x} = \frac{1}{2x\sqrt{\ln x}}\)</div>
+        <div class="solucion-item">60. \(f'(x) = 2\cos(\sqrt{x}) \cdot (-\sin(\sqrt{x})) \cdot \frac{1}{2\sqrt{x}} = -\frac{\sin(2\sqrt{x})}{2\sqrt{x}}\)</div>
+
+        <!-- ================= D. IMPLÍCITAS ================= -->
+        <h3>D. Derivación Implícita</h3>
+        <div class="solucion-item">61. \(2x + 2y y' = 0 \implies y' = -\frac{x}{y}\)</div>
+        <div class="solucion-item">62. \(y + x y' = 0 \implies y' = -\frac{y}{x}\)</div>
+        <div class="solucion-item">63. \(2x + 2y y' = 4y + 4x y' \implies y'(2y - 4x) = 4y - 2x \implies y' = \frac{2y - x}{y - 2x}\)</div>
+        <div class="solucion-item">64. \(3x^2 + 3y^2 y' = 0 \implies y' = -\frac{x^2}{y^2}\)</div>
+        <div class="solucion-item">65. \(2xy + x^2 y' + 2y y' x + y^2 = 0 \implies y'(x^2+2xy) = -2xy-y^2 \implies y' = -\frac{2xy+y^2}{x^2+2xy}\)</div>
+        <div class="solucion-item">66. \(2y y' = 3x^2 \implies y' = \frac{3x^2}{2y}\)</div>
+        <div class="solucion-item">67. \(\cos y \cdot y' = 2xy + x^2 y' \implies y'(\cos y - x^2) = 2xy \implies y' = \frac{2xy}{\cos y - x^2}\)</div>
+        <div class="solucion-item">68. \(e^y y' = 1 + y' \implies y'(e^y - 1) = 1 \implies y' = \frac{1}{e^y - 1}\)</div>
+        <div class="solucion-item">69. \(\frac{1+y'}{x+y} = y' \implies 1+y' = y'(x+y) \implies 1 = y'(x+y-1) \implies y' = \frac{1}{x+y-1}\)</div>
+        <div class="solucion-item">70. \(\cos y - xy'\sin y = y'\sin x + y\cos x \implies y'(-x\sin y - \sin x) = y\cos x - \cos y \implies y' = \frac{y\cos x - \cos y}{-x\sin y - \sin x}\)</div>
+
+        <!-- ================= E. ORDEN SUPERIOR ================= -->
+        <h3>E. Orden Superior y Aplicaciones</h3>
+        <div class="solucion-item">71. \(f'(x) = 4x^3 - 6x^2 + 1 \implies f''(x) = 12x^2 - 12x\)</div>
+        <div class="solucion-item">72. \(f'(x) = 2e^{2x} \implies f''(x) = 4e^{2x} \implies f''(0) = 4\)</div>
+        <div class="solucion-item">73. \(f'(x)=\cos x, f''(x)=-\sin x, f'''(x)=-\cos x, f^{(4)}(x)=\sin x\)</div>
+        <div class="solucion-item">74. En \(x=2\), \(y= -1\). \(f'(x) = 2x-3 \implies m = f'(2) = 1\). Recta: \(y + 1 = 1(x - 2) \implies y = x - 3\)</div>
+        <div class="solucion-item">75. En \(x=1\), \(y=1\). \(f'(x) = 2x \implies m = 2\). Pendiente normal: \(m_n = -1/2\). Recta: \(y - 1 = -1/2(x - 1) \implies y = -x/2 + 3/2\)</div>
+        <div class="solucion-item">76. \(v(t) = 6t^2 - 6t + 4\), \(a(t) = 12t - 6\). En \(t=1\): \(v(1) = 4\), \(a(1) = 6\)</div>
+        <div class="solucion-item">77. \(f'(x) = 3x^2 - 6x = 0 \implies 3x(x-2) = 0 \implies x=0, x=2\). Puntos: \((0,1)\) y \((2, -3)\)</div>
+        <div class="solucion-item">78. Pendiente de recta dada: \(m = -1/4\). Igualamos \(f'(x) = -1/x^2 = -1/4 \implies x^2 = 4 \implies x = \pm 2\). Puntos: \((2, 1/2)\) y \((-2, -1/2)\)</div>
+        <div class="solucion-item">79. \(V = \frac{4}{3}\pi r^3 \implies \frac{dV}{dt} = 4\pi r^2 \frac{dr}{dt}\). Con \(r=5\) y \(dr/dt=2\), \(\frac{dV}{dt} = 4\pi(25)(2) = 200\pi \, \text{cm}^3\text{/s}\)</div>
+        <div class="solucion-item">80. \(f(1) = a+b = 4\). \(f'(x) = 3ax^2 + 2bx \implies f'(1) = 3a+2b = 0\). Resolviendo: \(a = -8, b = 12\)</div>
+
+        <!-- ================= PRE-PARCIALES ================= -->
+        <h2>📝 Soluciones - Pre-parciales</h2>
+        
+        <h3>Pre-parcial 1 (Tipo A)</h3>
+        <div class="solucion-item"><strong>1. Reglas Básicas:</strong> <br>a) \(f'(x) = 20x^3 - 6x + 2\)<br>b) \(f'(x) = 4x(3x-4) + 3(2x^2+1) = 12x^2 - 16x + 6x^2 + 3 = 18x^2 - 16x + 3\)<br>c) \(f'(x) = \frac{2x(x-1) - (x^2+2)(1)}{(x-1)^2} = \frac{x^2-2x-2}{(x-1)^2}\)</div>
+        <div class="solucion-item"><strong>2. Elementales:</strong> <br>a) \(f'(x) = 2xe^x + x^2e^x = e^x(x^2+2x)\)<br>b) \(f'(x) = \frac{\frac{1}{x}(x) - \ln x}{x^2} = \frac{1-\ln x}{x^2}\)</div>
+        <div class="solucion-item"><strong>3. Cadena:</strong> <br>a) \(f'(x) = 4(3x^2+2)^3(6x) = 24x(3x^2+2)^3\)<br>b) \(f'(x) = \cos(4x) \cdot 4 = 4\cos(4x)\)<br>c) \(f'(x) = e^{\sqrt{x}} \cdot \frac{1}{2\sqrt{x}} = \frac{e^{\sqrt{x}}}{2\sqrt{x}}\)</div>
+        <div class="solucion-item"><strong>4. Implícita:</strong> \(2x + 6yy' = 0 \implies y' = -\frac{x}{3y}\)</div>
+        <div class="solucion-item"><strong>5. Tangente:</strong> En \(x=2\), \(y=5\). \(f'(x)=3x^2-2 \implies m = 10\). Recta: \(y-5 = 10(x-2) \implies y = 10x - 15\)</div>
+
+        <h3>Pre-parcial 2 (Tipo B)</h3>
+        <div class="solucion-item"><strong>1. Reglas Básicas:</strong> <br>a) \(f'(x) = 12x^2 - 4x + 5\)<br>b) \(f'(x) = 3x^2(2x+1) + 2(x^3-2) = 6x^3 + 3x^2 + 2x^3 - 4 = 8x^3 + 3x^2 - 4\)<br>c) \(f'(x) = \frac{4x(x+3) - (2x^2-1)(1)}{(x+3)^2} = \frac{2x^2+12x+1}{(x+3)^2}\)</div>
+        <div class="solucion-item"><strong>2. Elementales:</strong> <br>a) \(f'(x) = 3x^2\ln x + x^3\frac{1}{x} = 3x^2\ln x + x^2 = x^2(3\ln x + 1)\)<br>b) \(f'(x) = \frac{e^x(x^2) - e^x(2x)}{x^4} = \frac{e^x(x-2)}{x^3}\)</div>
+        <div class="solucion-item"><strong>3. Cadena:</strong> <br>a) \(f'(x) = 3(5x^3-1)^2(15x^2) = 45x^2(5x^3-1)^2\)<br>b) \(f'(x) = -\sin(3x) \cdot 3 = -3\sin(3x)\)<br>c) \(f'(x) = \frac{1}{x^2+1} \cdot 2x = \frac{2x}{x^2+1}\)</div>
+        <div class="solucion-item"><strong>4. Implícita:</strong> \(3x^2 + 3y^2y' = 6y + 6xy' \implies y'(3y^2-6x) = 6y-3x^2 \implies y' = \frac{6y-3x^2}{3y^2-6x} = \frac{2y-x^2}{y^2-2x}\)</div>
+        <div class="solucion-item"><strong>5. Tangente:</strong> En \(x=1\), \(y=0\). \(f'(x)=3x^2-3 \implies m = 0\). Recta: \(y - 0 = 0(x-1) \implies y = 0\)</div>
+
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+</div>
+<script>
+    function verificarPassword() {
+        const pwd = document.getElementById('passwordInput').value;
+        if (pwd === 'pnfe2026') {
+            document.getElementById('soluciones').style.display = 'block';
+            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('errorMsg').innerHTML = '';
+        } else {
+            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
+        }
+    }
+</script>
+</body>
+</html>
