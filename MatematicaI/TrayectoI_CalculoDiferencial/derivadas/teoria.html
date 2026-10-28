@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Unidad 2: Derivadas - Teoría</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3, h4 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 1.8em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .definicion, .teorema, .ejemplo, .nota { margin: 20px 0; padding: 10px 14px; border-left: 4px solid #1a3e6f; background: #f5f5f5; border-radius: 0 4px 4px 0; }
+        .teorema { border-left-color: #c96b1a; }
+        .ejemplo { border-left-color: #2e7d32; }
+        .nota { border-left-color: #e07a8f; background: #fef9f9; }
+        .formula { text-align: center; margin: 12px 0; font-family: monospace; background: #f9f2e0; padding: 10px; border-radius: 5px; font-size: 1.1em;}
+        .pasos { background: #f0f7ff; border: 1px solid #d0e0f0; border-radius: 8px; padding: 12px 18px; margin: 12px 0; }
+        .pasos ol { margin: 6px 0; padding-left: 20px; }
+        .pasos li { margin: 8px 0; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        
+        /* Contenedores de gráficos */
+        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 15px; }
+        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; background: white; border-radius: 4px; }
+        .controls { margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-items: center; }
+        .controls label { font-weight: bold; color: #1a3e6f; }
+        .controls input[type="range"] { width: 180px; }
+        
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
+        .nav-footer a:hover { background: #2a5a9a; }
+        
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer, .controls { display: none; }
+            canvas { display: none !important; }
+            .canvas-container { display: none; } /* Ocultar gráficos en PDF para no romper la hoja */
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Unidad 2: Derivadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 0. PRELIMINARES ========== -->
+    <!-- ============================================================ -->
+    <h2>0. Preliminares: Tasa de cambio promedio</h2>
+
+    <div class="definicion">
+        Antes de definir la derivada, recordemos el concepto de <strong>tasa de cambio promedio</strong>. Si una cantidad \(y\) depende de \(x\) mediante una función \(y = f(x)\), el cambio promedio de \(y\) cuando \(x\) cambia de \(x_1\) a \(x_2\) es:
+        \[
+        \text{Tasa de cambio promedio} = \frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1}
+        \]
+        Geométricamente, esto representa la <strong>pendiente de la recta secante</strong> que pasa por los puntos \((x_1, f(x_1))\) y \((x_2, f(x_2))\).
+    </div>
+    
+    <div class="nota">
+        <strong>Motivación.</strong> En física, si \(f(t)\) es la posición de un móvil en el tiempo \(t\), la tasa de cambio promedio es la <em>velocidad media</em>. La derivada nos dará la <em>velocidad instantánea</em> (la tasa de cambio en un instante exacto).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 1. DEFINICIÓN DE LA DERIVADA ========== -->
+    <!-- ============================================================ -->
+    <h2>1. Definición de la Derivada</h2>
+
+    <div class="definicion">
+        La <strong>derivada</strong> de una función \(f\) en un punto \(x\), denotada como \(f'(x)\), es el límite de la tasa de cambio promedio cuando el incremento en \(x\) tiende a cero:
+        \[
+        f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+        \]
+        Siempre que este límite exista.
+    </div>
+
+    <h3>1.1 Interpretación geométrica</h3>
+    <p>La derivada \(f'(x)\) es la <strong>pendiente de la recta tangente</strong> a la curva \(y = f(x)\) en el punto \((x, f(x))\). El límite hace que la distancia \(h\) entre los dos puntos de la secante se vuelva prácticamente cero, convirtiéndola en tangente.</p>
+
+    <div class="canvas-container">
+        <canvas id="gSecante" width="500" height="350"></canvas>
+        <div class="controls">
+            <label>Distancia \(h\): <input type="range" id="hSlider" min="0.1" max="3" step="0.1" value="2"></label>
+        </div>
+        <p style="font-size: 0.9rem; color: #555;">Mueve el deslizador para ver cómo la recta secante (azul) se convierte en la recta tangente (roja) cuando \(h \to 0\).</p>
+    </div>
+
+    <h3>1.2 Notaciones</h3>
+    <p>Existen varias formas de denotar la derivada de \(y = f(x)\) respecto a \(x\):</p>
+    <ul>
+        <li>Notación de Lagrange: \(f'(x)\) o \(y'\)</li>
+        <li>Notación de Leibniz: \(\frac{dy}{dx}\) o \(\frac{df}{dx}\) (muy útil en la regla de la cadena)</li>
+        <li>Notación de Euler: \(D_x f(x)\)</li>
+    </ul>
+
+    <h3>1.3 Ejemplo usando la definición</h3>
+    <div class="ejemplo">
+        <strong>Ejemplo 1.1.</strong> Calcula la derivada de \(f(x) = x^2\) usando la definición de límite.
+        <div class="pasos">
+            <ol>
+                <li>Planteamos el límite:
+                    \[
+                    f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h}
+                    \]
+                </li>
+                <li>Desarrollamos el binomio al cuadrado:
+                    \[
+                    = \lim_{h \to 0} \frac{x^2 + 2xh + h^2 - x^2}{h}
+                    \]
+                </li>
+                <li>Simplificamos (se cancelan las \(x^2\)):
+                    \[
+                    = \lim_{h \to 0} \frac{2xh + h^2}{h}
+                    \]
+                </li>
+                <li>Factorizamos \(h\) en el numerador:
+                    \[
+                    = \lim_{h \to 0} \frac{h(2x + h)}{h}
+                    \]
+                </li>
+                <li>Cancelamos \(h\) (válido porque \(h \to 0\) pero \(h \neq 0\)):
+                    \[
+                    = \lim_{h \to 0} (2x + h)
+                    \]
+                </li>
+                <li>Evaluamos el límite cuando \(h = 0\):
+                    \[
+                    f'(x) = 2x
+                    \]
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 2. REGLAS BÁSICAS DE DERIVACIÓN ========== -->
+    <!-- ============================================================ -->
+    <h2>2. Reglas Básicas de Derivación</h2>
+    <p>Calcular derivadas usando el límite es laborioso. Por eso, usamos las siguientes reglas que se deducen de la definición.</p>
+
+    <div class="teorema">
+        <strong>2.1 Regla de la constante.</strong> La derivada de una constante es cero:
+        \[
+        \frac{d}{dx}(c) = 0
+        \]
+    </div>
+
+    <div class="teorema">
+        <strong>2.2 Regla de la potencia.</strong> Si \(n\) es cualquier número real:
+        \[
+        \frac{d}{dx}(x^n) = n x^{n-1}
+        \]
+        <em>Ejemplo: \(\frac{d}{dx}(x^5) = 5x^4\) ; \(\frac{d}{dx}(\sqrt{x}) = \frac{d}{dx}(x^{1/2}) = \frac{1}{2}x^{-1/2} = \frac{1}{2\sqrt{x}}\)</em>
+    </div>
+
+    <div class="teorema">
+        <strong>2.3 Regla del múltiplo constante.</strong>
+        \[
+        \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)
+        \]
+    </div>
+
+    <div class="teorema">
+        <strong>2.4 Regla de la suma y resta.</strong>
+        \[
+        \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x)
+        \]
+    </div>
+
+    <h3>2.5 Regla del producto (interpretación geométrica)</h3>
+    <div class="teorema">
+        Si \(u = f(x)\) y \(v = g(x)\), la derivada del producto es:
+        \[
+        (u \cdot v)' = u'v + uv'
+        \]
+    </div>
+    
+    <div class="canvas-container">
+        <canvas id="gProducto" width="450" height="300"></canvas>
+        <div class="controls">
+            <label>Incremento \(dx\): <input type="range" id="dxSlider" min="0.1" max="2" step="0.1" value="1"></label>
+        </div>
+        <p style="font-size: 0.9rem; color: #555;">Área = \(u \cdot v\). Al crecer \(u\) y \(v\), el área total añadida es \(u \cdot dv + v \cdot du + du \cdot dv\). El último término es despreciable, por eso la regla es \(u'v + uv'\).</p>
+    </div>
+
+    <h3>2.6 Regla del cociente</h3>
+    <div class="teorema">
+        Si \(u = f(x)\) y \(v = g(x)\) (con \(v \neq 0\)), la derivada del cociente es:
+        \[
+        \left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}
+        \]
+        <em>Regla mnemotécnica: "Bajo d'Alto, menos Alto d'Bajo, sobre Bajo al cuadrado".</em>
+    </div>
+
+    <h3>2.7 Regla de la cadena</h3>
+    <div class="teorema">
+        Si \(y = f(u)\) y \(u = g(x)\) son funciones diferenciables, entonces la derivada de la función compuesta \(y = f(g(x))\) es:
+        \[
+        \frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx} \quad \text{o} \quad [f(g(x))]' = f'(g(x)) \cdot g'(x)
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo 2.1.</strong> Deriva \(f(x) = (3x^2 + 1)^4\).
+        <div class="pasos">
+            <ol>
+                <li>Identificamos la función externa \(u^4\) y la interna \(u = 3x^2 + 1\).</li>
+                <li>Derivamos la externa: \(4u^3\).</li>
+                <li>Multiplicamos por la derivada de la interna: \(u' = 6x\).</li>
+                <li>Resultado: \(4(3x^2 + 1)^3 \cdot 6x = 24x(3x^2 + 1)^3\).</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 3. DERIVADAS DE FUNCIONES ELEMENTALES ========== -->
+    <!-- ============================================================ -->
+    <h2>3. Derivadas de Funciones Elementales</h2>
+
+    <div class="teorema">
+        <strong>Funciones Trigonométricas:</strong>
+        \[
+        \frac{d}{dx}(\sin x) = \cos x \qquad \frac{d}{dx}(\cos x) = -\sin x \qquad \frac{d}{dx}(\tan x) = \sec^2 x
+        \]
+        \[
+        \frac{d}{dx}(\cot x) = -\csc^2 x \qquad \frac{d}{dx}(\sec x) = \sec x \tan x \qquad \frac{d}{dx}(\csc x) = -\csc x \cot x
+        \]
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="gTrig" width="500" height="300"></canvas>
+        <div class="controls">
+            <label>Punto \(x\): <input type="range" id="xTrigSlider" min="0" max="6.28" step="0.1" value="1.5"></label>
+        </div>
+        <p style="font-size: 0.9rem; color: #555;">Observa cómo la pendiente de \(\sin(x)\) (azul) coincide con el valor de \(\cos(x)\) (verde). Donde el seno tiene un máximo (pendiente 0), el coseno es cero.</p>
+    </div>
+
+    <div class="teorema">
+        <strong>Funciones Exponenciales y Logarítmicas:</strong>
+        \[
+        \frac{d}{dx}(e^x) = e^x \qquad \frac{d}{dx}(a^x) = a^x \ln a
+        \]
+        \[
+        \frac{d}{dx}(\ln x) = \frac{1}{x} \qquad \frac{d}{dx}(\log_a x) = \frac{1}{x \ln a}
+        \]
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 4. DERIVACIÓN IMPLÍCITA ========== -->
+    <!-- ============================================================ -->
+    <h2>4. Derivación Implícita</h2>
+
+    <div class="definicion">
+        Hasta ahora hemos derivado funciones explícitas donde \(y = f(x)\) está despejada (ej. \(y = x^2 + 3x\)). En una <strong>función implícita</strong>, la relación entre \(x\) e \(y\) está dada por una ecuación donde \(y\) no está despejada, por ejemplo:
+        \[
+        x^2 + y^2 = 25
+        \]
+    </div>
+
+    <div class="teorema">
+        <strong>Método de derivación implícita.</strong>
+        <ol>
+            <li>Derivar ambos lados de la ecuación respecto a \(x\).</li>
+            <li>Al derivar términos que contengan \(y\), aplicar la <strong>regla de la cadena</strong> (recordando que \(y\) es una función de \(x\), por lo que la derivada de \(y^2\) es \(2y \cdot \frac{dy}{dx}\)).</li>
+            <li>Despejar algebraica mente \(\frac{dy}{dx}\).</li>
+        </ol>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4.1.</strong> Hallar \(\frac{dy}{dx}\) para \(x^2 + y^2 = 25\).
+        <div class="pasos">
+            <ol>
+                <li>Derivamos ambos lados: \(\frac{d}{dx}(x^2) + \frac{d}{dx}(y^2) = \frac{d}{dx}(25)\)</li>
+                <li>Aplicamos reglas: \(2x + 2y \frac{dy}{dx} = 0\)</li>
+                <li>Despejamos: \(2y \frac{dy}{dx} = -2x \implies \frac{dy}{dx} = -\frac{x}{y}\)</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="gCircunferencia" width="400" height="400"></canvas>
+        <p style="font-size: 0.9rem; color: #555;">La circunferencia \(x^2 + y^2 = 25\) y su recta tangente en el punto \((3, 4)\). La pendiente de la tangente es \(-\frac{3}{4}\), calculada mediante derivación implícita.</p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 5. DERIVADAS DE ORDEN SUPERIOR ========== -->
+    <!-- ============================================================ -->
+    <h2>5. Derivadas de Orden Superior</h2>
+
+    <div class="definicion">
+        Si \(f'(x)\) es la primera derivada, la <strong>segunda derivada</strong> (denotada \(f''(x)\) o \(\frac{d^2y}{dx^2}\)) es la derivada de \(f'(x)\). Así sucesivamente, la n-ésima derivada se denota \(f^{(n)}(x)\).
+    </div>
+
+    <div class="nota">
+        <strong>Interpretación física:</strong> En cinemática, si \(s(t)\) es la posición de un objeto en el tiempo \(t\):
+        <ul>
+            <li>Velocidad: \(v(t) = s'(t) = \frac{ds}{dt}\)</li>
+            <li>Aceleración: \(a(t) = v'(t) = s''(t) = \frac{d^2s}{dt^2}\)</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5.1.</strong> Sea \(s(t) = t^3 - 3t^2 + 4t\). Encuentra velocidad y aceleración.
+        <div class="pasos">
+            <ol>
+                <li>Velocidad: \(v(t) = s'(t) = 3t^2 - 6t + 4\)</li>
+                <li>Aceleración: \(a(t) = v'(t) = 6t - 6\)</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ========== 6. APLICACIONES EN INGENIERÍA ========== -->
+    <!-- ============================================================ -->
+    <h2>6. Aplicaciones en Ingeniería Eléctrica</h2>
+    
+    <div class="ejemplo">
+        <ul>
+            <li><strong>Inductores:</strong> El voltaje inducido es proporcional a la tasa de cambio de la corriente: \(v(t) = L \frac{di}{dt}\). Si conocemos cómo varía la corriente con el tiempo, derivamos para hallar el voltaje.</li>
+            <li><strong>Capacitores:</strong> La corriente es proporcional a la tasa de cambio del voltaje: \(i(t) = C \frac{dv}{dt}\).</li>
+            <li><strong>Optimización de circuitos:</strong> Encontrar el punto de máxima transferencia de potencia requiere igualar a cero la derivada de la función de potencia.</li>
+        </ul>
+    </div>
+
+    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    <div class="nav-footer">
+        <a href="ejercicios.html">➡️ Ejercicios</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// ===== UTILIDADES DE DIBUJO =====
+// ============================================================
+function crearDibujante(canvasId, xmin, xmax, ymin, ymax) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return null;
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width, h = canvas.height;
+    const pad = 25;
+    const X = (x) => pad + ((x - xmin) / (xmax - xmin)) * (w - 2*pad);
+    const Y = (y) => h - pad - ((y - ymin) / (ymax - ymin)) * (h - 2*pad);
+    
+    // Ejes
+    ctx.strokeStyle = "#aaa"; ctx.lineWidth = 1.2;
+    if (ymin <= 0 && ymax >= 0) { ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(w - pad, Y(0)); ctx.stroke(); }
+    if (xmin <= 0 && xmax >= 0) { ctx.beginPath(); ctx.moveTo(X(0), pad); ctx.lineTo(X(0), h - pad); ctx.stroke(); }
+    return { ctx, X, Y, w, h, pad };
+}
+
+// ===== G1: Secante a Tangente =====
+const ctxG1 = document.getElementById('gSecante').getContext('2d');
+const wG1 = 500, hG1 = 350;
+const padG1 = 30;
+const xminG1 = -1, xmaxG1 = 4, yminG1 = -1, ymaxG1 = 8;
+const XG1 = x => padG1 + ((x - xminG1) / (xmaxG1 - xminG1)) * (wG1 - 2*padG1);
+const YG1 = y => hG1 - padG1 - ((y - yminG1) / (ymaxG1 - yminG1)) * (hG1 - 2*padG1);
+
+function dibujarSecante(h) {
+    ctxG1.clearRect(0, 0, wG1, hG1);
+    // Ejes
+    ctxG1.strokeStyle = "#ddd"; ctxG1.lineWidth = 1;
+    ctxG1.beginPath(); ctxG1.moveTo(0, YG1(0)); ctxG1.lineTo(wG1, YG1(0)); ctxG1.stroke();
+    ctxG1.beginPath(); ctxG1.moveTo(XG1(0), 0); ctxG1.lineTo(XG1(0), hG1); ctxG1.stroke();
+
+    // Parábola f(x) = x^2/2
+    ctxG1.beginPath();
+    for (let x = 0; x <= 4; x += 0.05) {
+        const y = (x*x) / 2;
+        if (x === 0) ctxG1.moveTo(XG1(x), YG1(y));
+        else ctxG1.lineTo(XG1(x), YG1(y));
+    }
+    ctxG1.strokeStyle = "#333"; ctxG1.lineWidth = 2; ctxG1.stroke();
+
+    const x0 = 1.5;
+    const y0 = (x0*x0)/2;
+    const x1 = x0 + h;
+    const y1 = (x1*x1)/2;
+
+    // Punto fijo
+    ctxG1.beginPath(); ctxG1.arc(XG1(x0), YG1(y0), 5, 0, 2*Math.PI);
+    ctxG1.fillStyle = "#2e7d32"; ctxG1.fill();
+
+    // Punto móvil
+    ctxG1.beginPath(); ctxG1.arc(XG1(x1), YG1(y1), 4, 0, 2*Math.PI);
+    ctxG1.fillStyle = "#1a3e6f"; ctxG1.fill();
+
+    // Secante
+    const m = (y1 - y0) / (x1 - x0);
+    const b = y0 - m*x0;
+    ctxG1.beginPath();
+    ctxG1.moveTo(XG1(0), YG1(b));
+    ctxG1.lineTo(XG1(4), YG1(m*4 + b));
+    ctxG1.strokeStyle = "#1a3e6f"; ctxG1.lineWidth = 1.5; ctxG1.stroke();
+
+    // Tangente (derivada de x^2/2 es x, pendiente en x0 es x0)
+    const mTang = x0;
+    const bTang = y0 - mTang*x0;
+    ctxG1.beginPath();
+    ctxG1.moveTo(XG1(0), YG1(bTang));
+    ctxG1.lineTo(XG1(4), YG1(mTang*4 + bTang));
+    ctxG1.strokeStyle = "#e07a8f"; ctxG1.lineWidth = 2; ctxG1.stroke();
+}
+
+document.getElementById('hSlider').addEventListener('input', (e) => {
+    dibujarSecante(parseFloat(e.target.value));
+});
+dibujarSecante(2);
+
+// ===== G2: Regla del Producto =====
+const ctxG2 = document.getElementById('gProducto').getContext('2d');
+function dibujarProducto(dx) {
+    const w = 450, h = 300;
+    ctxG2.clearRect(0, 0, w, h);
+    const baseX = 50, baseY = 250;
+    const u = 100; // base fija
+    const v = 60;  // altura fija
+    const du = dx * 20;
+    const dv = dx * 15;
+
+    // Rectángulo original u*v
+    ctxG2.fillStyle = "rgba(78, 205, 196, 0.2)"; // Teal claro
+    ctxG2.fillRect(baseX, baseY - v, u, v);
+    ctxG2.strokeStyle = "#4ecdc4"; ctxG2.lineWidth = 2;
+    ctxG2.strokeRect(baseX, baseY - v, u, v);
+
+    // Franja u*dv
+    ctxG2.fillStyle = "rgba(201, 168, 76, 0.3)"; // Dorado
+    ctxG2.fillRect(baseX, baseY - v - dv, u, dv);
+    ctxG2.strokeStyle = "#c9a84c"; ctxG2.strokeRect(baseX, baseY - v - dv, u, dv);
+
+    // Franja v*du
+    ctxG2.fillStyle = "rgba(224, 122, 143, 0.3)"; // Rosa
+    ctxG2.fillRect(baseX + u, baseY - v, du, v);
+    ctxG2.strokeStyle = "#e07a8f"; ctxG2.strokeRect(baseX + u, baseY - v, du, v);
+
+    // Esquina du*dv
+    ctxG2.fillStyle = "rgba(0, 0, 0, 0.2)";
+    ctxG2.fillRect(baseX + u, baseY - v - dv, du, dv);
+
+    // Etiquetas
+    ctxG2.fillStyle = "#333"; ctxG2.font = "14px sans-serif";
+    ctxG2.fillText("u", baseX + u/2 - 5, baseY + 20);
+    ctxG2.fillText("v", baseX - 20, baseY - v/2 + 5);
+    ctxG2.fillText("u·dv", baseX + u/2 - 15, baseY - v - dv/2 + 5);
+    ctxG2.fillText("v·du", baseX + u + du/2 - 15, baseY - v/2 + 5);
+}
+document.getElementById('dxSlider').addEventListener('input', (e) => {
+    dibujarProducto(parseFloat(e.target.value));
+});
+dibujarProducto(1);
+
+// ===== G3: Trigonométricas =====
+const ctxG3 = document.getElementById('gTrig').getContext('2d');
+const wG3 = 500, hG3 = 300;
+const padG3 = 30;
+function dibujarTrig(xPunto) {
+    ctxG3.clearRect(0, 0, wG3, hG3);
+    const X = x => padG3 + (x / (2*Math.PI)) * (wG3 - 2*padG3);
+    const Y = y => hG3/2 - y * 80;
+
+    // Eje X
+    ctxG3.beginPath(); ctxG3.moveTo(0, Y(0)); ctxG3.lineTo(wG3, Y(0)); ctxG3.strokeStyle = "#ccc"; ctxG3.lineWidth = 1; ctxG3.stroke();
+
+    // Seno (azul)
+    ctxG3.beginPath();
+    for (let x = 0; x <= 2*Math.PI; x += 0.05) {
+        const y = Math.sin(x);
+        if (x === 0) ctxG3.moveTo(X(x), Y(y));
+        else ctxG3.lineTo(X(x), Y(y));
+    }
+    ctxG3.strokeStyle = "#1a3e6f"; ctxG3.lineWidth = 2; ctxG3.stroke();
+
+    // Coseno (verde)
+    ctxG3.beginPath();
+    for (let x = 0; x <= 2*Math.PI; x += 0.05) {
+        const y = Math.cos(x);
+        if (x === 0) ctxG3.moveTo(X(x), Y(y));
+        else ctxG3.lineTo(X(x), Y(y));
+    }
+    ctxG3.strokeStyle = "#2e7d32"; ctxG3.lineWidth = 2; ctxG3.stroke();
+
+    // Punto en movimiento y su pendiente
+    const yS = Math.sin(xPunto);
+    const pendiente = Math.cos(xPunto);
+    
+    // Dibujar punto en el seno
+    ctxG3.beginPath(); ctxG3.arc(X(xPunto), Y(yS), 5, 0, 2*Math.PI);
+    ctxG3.fillStyle = "#1a3e6f"; ctxG3.fill();
+
+    // Dibujar valor del coseno (pendiente) como un punto
+    ctxG3.beginPath(); ctxG3.arc(X(xPunto), Y(pendiente), 5, 0, 2*Math.PI);
+    ctxG3.fillStyle = "#2e7d32"; ctxG3.fill();
+    
+    // Etiquetas
+    ctxG3.fillStyle = "#1a3e6f"; ctxG3.font = "12px sans-serif"; ctxG3.fillText("y = sin(x)", 10, 20);
+    ctxG3.fillStyle = "#2e7d32"; ctxG3.fillText("y = cos(x)", 10, 40);
+}
+document.getElementById('xTrigSlider').addEventListener('input', (e) => {
+    dibujarTrig(parseFloat(e.target.value));
+});
+dibujarTrig(1.5);
+
+// ===== G4: Circunferencia Implícita =====
+const ctxG4 = document.getElementById('gCircunferencia').getContext('2d');
+const wG4 = 400, hG4 = 400;
+const cxG4 = 200, cyG4 = 200, rG4 = 100;
+function dibujarCircunferencia() {
+    ctxG4.clearRect(0, 0, wG4, hG4);
+    
+    // Ejes
+    ctxG4.beginPath(); ctxG4.moveTo(0, cyG4); ctxG4.lineTo(wG4, cyG4); ctxG4.strokeStyle = "#ccc"; ctxG4.stroke();
+    ctxG4.beginPath(); ctxG4.moveTo(cxG4, 0); ctxG4.lineTo(cxG4, hG4); ctxG4.stroke();
+
+    // Circunferencia
+    ctxG4.beginPath(); ctxG4.arc(cxG4, cyG4, rG4, 0, 2*Math.PI);
+    ctxG4.strokeStyle = "#1a3e6f"; ctxG4.lineWidth = 2; ctxG4.stroke();
+
+    // Punto (3, 4) en la circunferencia (escala 1 unidad = 20px)
+    // En el gráfico, x=3 se dibuja a la derecha, y=4 hacia arriba.
+    const px = cxG4 + (3 * 20);
+    const py = cyG4 - (4 * 20);
+    
+    ctxG4.beginPath(); ctxG4.arc(px, py, 5, 0, 2*Math.PI);
+    ctxG4.fillStyle = "#2e7d32"; ctxG4.fill();
+
+    // Recta tangente: pendiente m = -x/y = -3/4
+    // Ecuación: y - 4 = -3/4 (x - 3)
+    // Si x va de 0 a 6, y varía.
+    const m = -3/4;
+    ctxG4.beginPath();
+    // Punto inicial (x=0) -> y = 4 - 3/4(0 - 3) = 4 + 9/4 = 6.25
+    // Punto final (x=6) -> y = 4 - 3/4(6 - 3) = 4 - 9/4 = 1.75
+    ctxG4.moveTo(cxG4 + (0 * 20), cyG4 - (6.25 * 20));
+    ctxG4.lineTo(cxG4 + (6 * 20), cyG4 - (1.75 * 20));
+    ctxG4.strokeStyle = "#e07a8f"; ctxG4.lineWidth = 2; ctxG4.stroke();
+    
+    // Etiqueta
+    ctxG4.fillStyle = "#333"; ctxG4.font = "14px sans-serif";
+    ctxG4.fillText("(3, 4)", px + 10, py - 10);
+    ctxG4.fillText("m = -3/4", cxG4 + 50, cyG4 - 120);
+}
+dibujarCircunferencia();
+
+</script>
+</body>
+</html>
