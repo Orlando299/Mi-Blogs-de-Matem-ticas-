@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pre-parciales: Derivadas</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
+        .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a3e6f; text-align: center; font-size: 28px; margin-bottom: 5px; }
+        h2 { color: #1a3e6f; border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; page-break-before: always; }
+        h2:first-of-type { page-break-before: avoid; }
+        
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; color: #555; }
+        
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 20px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        ol.lista-preguntas {
+            list-style: none;
+            counter-reset: pregunta;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+        ol.lista-preguntas > li {
+            counter-increment: pregunta;
+            margin: 25px 0;
+            padding: 15px 15px 15px 55px;
+            position: relative;
+            background: #fafafa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            line-height: 1.6;
+            page-break-inside: avoid;
+        }
+        ol.lista-preguntas > li::before {
+            content: counter(pregunta) ".";
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-weight: bold;
+            color: #1a3e6f;
+            font-size: 18px;
+        }
+        .puntos {
+            float: right;
+            font-weight: bold;
+            color: #c96b1a;
+            font-size: 14px;
+            background: #f9f2e0;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .sub-ejercicio { margin-top: 15px; padding-left: 10px; border-left: 2px solid #ccc; }
+
+        .btn-pdf { display: inline-block; margin-top: 40px; background: #c9a84c; color: #0a0c10; padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; font-size: 16px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        
+        .nav-footer { margin-top: 40px; text-align: center; padding-top: 20px; border-top: 1px solid #ccc; }
+        .nav-footer a { color: #1a3e6f; text-decoration: none; font-weight: bold; margin: 0 10px;}
+        
+        @media print { 
+            .btn-pdf, .nav-footer { display: none; } 
+            .latex-container { box-shadow: none; padding: 0; margin: 0; max-width: 100%; }
+            body { background: white; }
+            h2 { page-break-before: always; }
+            h2:first-of-type { page-break-before: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="latex-container">
+    <h1>Pre-parciales: Derivadas</h1>
+    <div class="author">MSc. Orlando Silva</div>
+    <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
+
+    <div class="nota">
+        Las soluciones están en <strong>soluciones.html</strong> (contraseña requerida).
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ================== PRE-PARCIAL 1 (TIPO A) ================== -->
+    <!-- ============================================================ -->
+    <h2>Pre-parcial 1 (Tipo A)</h2>
+
+    <ol class="lista-preguntas">
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Reglas Básicas.</strong> Deriva las siguientes funciones aplicando las reglas de potencia, producto y cociente según corresponda:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = 5x^4 - 3x^2 + 2x - 7 \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = (2x^2 + 1)(3x - 4) \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>c)</strong> \( f(x) = \frac{x^2 + 2}{x - 1} \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Funciones Elementales.</strong> Deriva las siguientes funciones:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = x^2 e^x \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = \frac{\ln x}{x} \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Regla de la Cadena.</strong> Deriva aplicando la regla de la cadena:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = (3x^2 + 2)^4 \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = \sin(4x) \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>c)</strong> \( f(x) = e^{\sqrt{x}} \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Derivación Implícita.</strong> Halla \( \frac{dy}{dx} \) para la curva:
+            \[
+            x^2 + 3y^2 = 12
+            \]
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Aplicación (Recta Tangente).</strong> Encuentra la ecuación de la recta tangente a la curva \( f(x) = x^3 - 2x + 1 \) en el punto donde \( x = 2 \).
+        </li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <!-- ================== PRE-PARCIAL 2 (TIPO B) ================== -->
+    <!-- ============================================================ -->
+    <h2>Pre-parcial 2 (Tipo B)</h2>
+
+    <ol class="lista-preguntas">
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Reglas Básicas.</strong> Deriva las siguientes funciones aplicando las reglas de potencia, producto y cociente según corresponda:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = 4x^3 - 2x^2 + 5x + 1 \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = (x^3 - 2)(2x + 1) \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>c)</strong> \( f(x) = \frac{2x^2 - 1}{x + 3} \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Funciones Elementales.</strong> Deriva las siguientes funciones:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = x^3 \ln x \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = \frac{e^x}{x^2} \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Regla de la Cadena.</strong> Deriva aplicando la regla de la cadena:
+            <div class="sub-ejercicio">
+                <strong>a)</strong> \( f(x) = (5x^3 - 1)^3 \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>b)</strong> \( f(x) = \cos(3x) \)
+            </div>
+            <div class="sub-ejercicio">
+                <strong>c)</strong> \( f(x) = \ln(x^2 + 1) \)
+            </div>
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Derivación Implícita.</strong> Halla \( \frac{dy}{dx} \) para la curva:
+            \[
+            x^3 + y^3 = 6xy
+            \]
+        </li>
+
+        <li>
+            <span class="puntos">(10 puntos)</span>
+            <strong>Aplicación (Recta Tangente).</strong> Encuentra la ecuación de la recta tangente a la curva \( f(x) = x^3 - 3x + 2 \) en el punto donde \( x = 1 \).
+        </li>
+    </ol>
+
+    <div style="text-align: center;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="ejercicios.html">Ejercicios</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
+</div>
+</body>
+</html>
