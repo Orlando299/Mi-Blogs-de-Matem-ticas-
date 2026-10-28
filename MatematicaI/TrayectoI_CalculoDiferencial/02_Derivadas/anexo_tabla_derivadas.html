@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Anexo: Tabla de Derivadas</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: #f4f4f4; color: black; margin: 0; padding: 0; }
+        .page { max-width: 800px; margin: 30px auto; background: white; padding: 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; min-height: 1000px; display: flex; flex-direction: column; justify-content: space-between;}
+        
+        h1 { color: #1a3e6f; text-align: center; font-size: 24px; margin-bottom: 5px; border-bottom: 2px solid #1a3e6f; padding-bottom: 10px;}
+        .subtitle { text-align: center; color: #555; font-size: 14px; margin-bottom: 30px; }
+        
+        /* Estilos de la tabla */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background: #1a3e6f; color: white; padding: 10px; text-align: center; font-size: 16px; }
+        td { border: 1px solid #ddd; padding: 12px; text-align: center; font-size: 15px; }
+        td:nth-child(1) { background: #f9f9f9; font-weight: bold; color: #333; width: 50%; }
+        td:nth-child(2) { font-family: monospace; font-size: 16px; color: #1a3e6f; width: 50%; }
+        
+        /* Separadores de categoría */
+        .category-row td { background: #e8f0e8; color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; padding: 6px; text-align: left; }
+        
+        /* Pie de página */
+        .footer-print { 
+            margin-top: 40px; 
+            padding-top: 15px; 
+            border-top: 2px solid #ccc; 
+            font-size: 12px; 
+            color: #666; 
+            text-align: center; 
+            line-height: 1.5;
+        }
+        .footer-print strong { color: #1a3e6f; }
+
+        /* Botones */
+        .actions-bar { text-align: center; margin-bottom: 20px; }
+        .btn { 
+            background: #c9a84c; color: #0a0c10; border: none; padding: 10px 24px; 
+            border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 16px;
+            font-family: inherit; transition: 0.2s;
+        }
+        .btn:hover { background: #e8c97a; }
+
+        @media print {
+            body { background: white; }
+            .page { box-shadow: none; margin: 0; padding: 0; width: 100%; max-width: 100%; min-height: auto; }
+            .actions-bar { display: none; }
+            table { page-break-inside: avoid; }
+            td { padding: 8px; font-size: 14px; }
+            .footer-print { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding-bottom: 20px;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div>
+        <h1>Anexo: Formulario de Derivadas</h1>
+        <div class="subtitle">Matemática I · Cálculo Diferencial · PNF Electricidad</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Función Original</th>
+                    <th>Derivada</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Reglas Básicas -->
+                <tr class="category-row"><td colspan="2">Reglas Básicas de Derivación</td></tr>
+                <tr><td>Constante: \(f(x) = c\)</td><td>\(f'(x) = 0\)</td></tr>
+                <tr><td>Potencia: \(f(x) = x^n\)</td><td>\(f'(x) = n x^{n-1}\)</td></tr>
+                <tr><td>Múltiplo constante: \(c \cdot f(x)\)</td><td>\(c \cdot f'(x)\)</td></tr>
+                <tr><td>Suma/Resta: \(f(x) \pm g(x)\)</td><td>\(f'(x) \pm g'(x)\)</td></tr>
+                <tr><td>Producto: \(f(x) \cdot g(x)\)</td><td>\(f'(x)g(x) + f(x)g'(x)\)</td></tr>
+                <tr><td>Cociente: \(\frac{f(x)}{g(x)}\)</td><td>\(\frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}\)</td></tr>
+                <tr><td>Regla de la cadena: \(f(g(x))\)</td><td>\(f'(g(x)) \cdot g'(x)\)</td></tr>
+
+                <!-- Trigonométricas -->
+                <tr class="category-row"><td colspan="2">Funciones Trigonométricas</td></tr>
+                <tr><td>\(f(x) = \sin x\)</td><td>\(f'(x) = \cos x\)</td></tr>
+                <tr><td>\(f(x) = \cos x\)</td><td>\(f'(x) = -\sin x\)</td></tr>
+                <tr><td>\(f(x) = \tan x\)</td><td>\(f'(x) = \sec^2 x\)</td></tr>
+                <tr><td>\(f(x) = \cot x\)</td><td>\(f'(x) = -\csc^2 x\)</td></tr>
+                <tr><td>\(f(x) = \sec x\)</td><td>\(f'(x) = \sec x \tan x\)</td></tr>
+                <tr><td>\(f(x) = \csc x\)</td><td>\(f'(x) = -\csc x \cot x\)</td></tr>
+
+                <!-- Exponenciales y Logarítmicas -->
+                <tr class="category-row"><td colspan="2">Exponenciales y Logarítmicas</td></tr>
+                <tr><td>\(f(x) = e^x\)</td><td>\(f'(x) = e^x\)</td></tr>
+                <tr><td>\(f(x) = a^x\)</td><td>\(f'(x) = a^x \ln a\)</td></tr>
+                <tr><td>\(f(x) = \ln x\)</td><td>\(f'(x) = \frac{1}{x}\)</td></tr>
+                <tr><td>\(f(x) = \log_a x\)</td><td>\(f'(x) = \frac{1}{x \ln a}\)</td></tr>
+
+                <!-- Trigonométricas Inversas -->
+                <tr class="category-row"><td colspan="2">Funciones Trigonométricas Inversas</td></tr>
+                <tr><td>\(f(x) = \arcsin x\)</td><td>\(f'(x) = \frac{1}{\sqrt{1 - x^2}}\)</td></tr>
+                <tr><td>\(f(x) = \arccos x\)</td><td>\(f'(x) = -\frac{1}{\sqrt{1 - x^2}}\)</td></tr>
+                <tr><td>\(f(x) = \arctan x\)</td><td>\(f'(x) = \frac{1}{1 + x^2}\)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- PIE DE PÁGINA REFERENCIADO -->
+    <div class="footer-print">
+        <strong>Elaborado por:</strong> MSc. Orlando Silva<br>
+        <strong>Institución:</strong> PNF Electricidad · Matemática I<br>
+        <strong>Sitio Web:</strong> https://orlando299.github.io/Mi-Blogs-de-Matem-ticas-/<br>
+        <em>Material de estudio y consulta académica.</em>
+    </div>
+</div>
+
+<div class="actions-bar">
+    <button class="btn" onclick="window.print()">🖨️ Descargar Tabla en PDF</button>
+</div>
+
+</body>
+</html>
