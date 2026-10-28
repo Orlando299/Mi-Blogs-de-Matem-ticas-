@@ -24,11 +24,12 @@
         .btn-pdf:hover { background: #e8c97a; }
         
         /* Contenedores de gráficos */
-        .canvas-container { text-align: center; margin: 20px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 15px; }
-        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; background: white; border-radius: 4px; }
-        .controls { margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-items: center; }
+        .canvas-container { text-align: center; margin: 25px 0; background: #fafafa; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+        canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; background: white; border-radius: 4px; border: 1px solid #eee;}
+        .controls { margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; align-items: center; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #eee;}
         .controls label { font-weight: bold; color: #1a3e6f; }
-        .controls input[type="range"] { width: 180px; }
+        .controls input[type="range"] { width: 200px; }
+        .explicacion-grafico { font-size: 0.95rem; color: #333; text-align: justify; line-height: 1.6; margin-top: 15px; background: #fff; padding: 15px; border-left: 3px solid #4ecdc4; border-radius: 0 4px 4px 0;}
         
         .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
         .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
@@ -38,7 +39,7 @@
             .latex-container { margin: 0; padding: 20px; box-shadow: none; }
             .btn-pdf, .nav-footer, .controls { display: none; }
             canvas { display: none !important; }
-            .canvas-container { display: none; } /* Ocultar gráficos en PDF para no romper la hoja */
+            .canvas-container { display: none; }
         }
     </style>
 </head>
@@ -47,23 +48,6 @@
     <h1>Unidad 2: Derivadas</h1>
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Matemática I · PNF Electricidad · Trayecto I</div>
-
-    <!-- ============================================================ -->
-    <!-- ========== 0. PRELIMINARES ========== -->
-    <!-- ============================================================ -->
-    <h2>0. Preliminares: Tasa de cambio promedio</h2>
-
-    <div class="definicion">
-        Antes de definir la derivada, recordemos el concepto de <strong>tasa de cambio promedio</strong>. Si una cantidad \(y\) depende de \(x\) mediante una función \(y = f(x)\), el cambio promedio de \(y\) cuando \(x\) cambia de \(x_1\) a \(x_2\) es:
-        \[
-        \text{Tasa de cambio promedio} = \frac{\Delta y}{\Delta x} = \frac{f(x_2) - f(x_1)}{x_2 - x_1}
-        \]
-        Geométricamente, esto representa la <strong>pendiente de la recta secante</strong> que pasa por los puntos \((x_1, f(x_1))\) y \((x_2, f(x_2))\).
-    </div>
-    
-    <div class="nota">
-        <strong>Motivación.</strong> En física, si \(f(t)\) es la posición de un móvil en el tiempo \(t\), la tasa de cambio promedio es la <em>velocidad media</em>. La derivada nos dará la <em>velocidad instantánea</em> (la tasa de cambio en un instante exacto).
-    </div>
 
     <!-- ============================================================ -->
     <!-- ========== 1. DEFINICIÓN DE LA DERIVADA ========== -->
@@ -78,7 +62,7 @@
         Siempre que este límite exista.
     </div>
 
-    <h3>1.1 Interpretación geométrica</h3>
+    <h3>1.1 Interpretación geométrica y gráfico interactivo</h3>
     <p>La derivada \(f'(x)\) es la <strong>pendiente de la recta tangente</strong> a la curva \(y = f(x)\) en el punto \((x, f(x))\). El límite hace que la distancia \(h\) entre los dos puntos de la secante se vuelva prácticamente cero, convirtiéndola en tangente.</p>
 
     <div class="canvas-container">
@@ -86,7 +70,18 @@
         <div class="controls">
             <label>Distancia \(h\): <input type="range" id="hSlider" min="0.1" max="3" step="0.1" value="2"></label>
         </div>
-        <p style="font-size: 0.9rem; color: #555;">Mueve el deslizador para ver cómo la recta secante (azul) se convierte en la recta tangente (roja) cuando \(h \to 0\).</p>
+        
+        <div class="explicacion-grafico">
+            <strong>¿Cómo interpretar esta simulación?</strong><br>
+            En la gráfica se muestra la función \(f(x) = \frac{x^2}{2}\). 
+            <ul>
+                <li>El <strong>punto verde</strong> es nuestro punto fijo de referencia (donde queremos calcular la derivada).</li>
+                <li>El <strong>punto azul</strong> es un segundo punto que se encuentra a una distancia horizontal \(h\) del punto verde.</li>
+                <li>La <strong>recta azul</strong> es la <em>recta secante</em> que une ambos puntos. Su pendiente representa la tasa de cambio promedio.</li>
+                <li>La <strong>recta rosa</strong> es la <em>recta tangente</em>, cuya pendiente es exactamente la derivada en ese punto.</li>
+            </ul>
+            Mueve el deslizador para acercar el punto azul al verde (haciendo que \(h \to 0\)). Observa cómo la recta secante azul gira y termina fusionándose con la recta tangente rosa. Ese instante exacto de "fusión" es el límite que define a la derivada.
+        </div>
     </div>
 
     <h3>1.2 Notaciones</h3>
@@ -171,7 +166,7 @@
         \]
     </div>
 
-    <h3>2.5 Regla del producto (interpretación geométrica)</h3>
+    <h3>2.5 Regla del producto</h3>
     <div class="teorema">
         Si \(u = f(x)\) y \(v = g(x)\), la derivada del producto es:
         \[
@@ -182,9 +177,20 @@
     <div class="canvas-container">
         <canvas id="gProducto" width="450" height="300"></canvas>
         <div class="controls">
-            <label>Incremento \(dx\): <input type="range" id="dxSlider" min="0.1" max="2" step="0.1" value="1"></label>
+            <label>Incremento \(du\) y \(dv\): <input type="range" id="dxSlider" min="0.1" max="2" step="0.1" value="1"></label>
         </div>
-        <p style="font-size: 0.9rem; color: #555;">Área = \(u \cdot v\). Al crecer \(u\) y \(v\), el área total añadida es \(u \cdot dv + v \cdot du + du \cdot dv\). El último término es despreciable, por eso la regla es \(u'v + uv'\).</p>
+        
+        <div class="explicacion-grafico">
+            <strong>Interpretación geométrica de la Regla del Producto</strong><br>
+            Imaginemos que \(u\) y \(v\) son los lados de un rectángulo. El área total del rectángulo es el producto \(u \cdot v\). 
+            Cuando \(u\) y \(v\) crecen (aumentan en \(du\) y \(dv\)), el área total añadida se compone de tres partes:
+            <ul>
+                <li>Una franja dorada que representa el crecimiento de \(u\) multiplicado por \(v\) (\(v \cdot du\)).</li>
+                <li>Una franja rosa que representa el crecimiento de \(v\) multiplicado por \(u\) (\(u \cdot dv\)).</li>
+                <li>Un pequeño cuadradito en la esquina que representa \(du \cdot dv\).</li>
+            </ul>
+            Cuando los incrementos son infinitesimalmente pequeños (tienden a cero), el pequeño cuadrado \(du \cdot dv\) es <strong>despreciable</strong> comparado con las franjas. Por lo tanto, el cambio total del área es simplemente la suma de las dos franjas: \(u'v + uv'\).
+        </div>
     </div>
 
     <h3>2.6 Regla del cociente</h3>
@@ -233,9 +239,19 @@
     <div class="canvas-container">
         <canvas id="gTrig" width="500" height="300"></canvas>
         <div class="controls">
-            <label>Punto \(x\): <input type="range" id="xTrigSlider" min="0" max="6.28" step="0.1" value="1.5"></label>
+            <label>Mover punto \(x\): <input type="range" id="xTrigSlider" min="0" max="6.28" step="0.1" value="1.5"></label>
         </div>
-        <p style="font-size: 0.9rem; color: #555;">Observa cómo la pendiente de \(\sin(x)\) (azul) coincide con el valor de \(\cos(x)\) (verde). Donde el seno tiene un máximo (pendiente 0), el coseno es cero.</p>
+        
+        <div class="explicacion-grafico">
+            <strong>La relación entre el seno y su derivada (coseno)</strong><br>
+            Esta gráfica muestra la función \(f(x) = \sin(x)\) en color azul, y su derivada \(f'(x) = \cos(x)\) en color verde. 
+            <ul>
+                <li>El <strong>punto azul</strong> se mueve a lo largo de la curva del seno. La pendiente de la recta tangente en ese punto es exactamente el valor de la derivada.</li>
+                <li>El <strong>punto verde</strong> indica el valor numérico de esa pendiente. Nota que el punto verde siempre se mueve dibujando exactamente la curva del coseno.</li>
+                <li>Cuando el seno está en su punto más alto (un máximo, en \(x = \pi/2\)), su recta tangente es completamente horizontal (pendiente cero). En ese mismo instante, el punto verde (el coseno) está exactamente en cero.</li>
+                <li>Cuando el seno va subiendo, el coseno es positivo. Cuando el seno va bajando, el coseno es negativo.</li>
+            </ul>
+        </div>
     </div>
 
     <div class="teorema">
@@ -265,7 +281,7 @@
         <ol>
             <li>Derivar ambos lados de la ecuación respecto a \(x\).</li>
             <li>Al derivar términos que contengan \(y\), aplicar la <strong>regla de la cadena</strong> (recordando que \(y\) es una función de \(x\), por lo que la derivada de \(y^2\) es \(2y \cdot \frac{dy}{dx}\)).</li>
-            <li>Despejar algebraica mente \(\frac{dy}{dx}\).</li>
+            <li>Despejar algebraicamente \(\frac{dy}{dx}\).</li>
         </ol>
     </div>
 
@@ -282,7 +298,15 @@
 
     <div class="canvas-container">
         <canvas id="gCircunferencia" width="400" height="400"></canvas>
-        <p style="font-size: 0.9rem; color: #555;">La circunferencia \(x^2 + y^2 = 25\) y su recta tangente en el punto \((3, 4)\). La pendiente de la tangente es \(-\frac{3}{4}\), calculada mediante derivación implícita.</p>
+        <div class="explicacion-grafico">
+            <strong>Visualización de la Derivada Implícita</strong><br>
+            En esta gráfica vemos la circunferencia definida implícitamente por \(x^2 + y^2 = 25\). 
+            Hemos seleccionado el punto \((3, 4)\) sobre la curva (marcado en verde). 
+            Al calcular la derivada implícita, obtuvimos la fórmula \(\frac{dy}{dx} = -\frac{x}{y}\). 
+            Si evaluamos esta fórmula en el punto \((3, 4)\), obtenemos \(m = -\frac{3}{4}\), que es exactamente la pendiente de la recta tangente rosa que toca a la circunferencia en ese punto. 
+            <br><br>
+            <em>Observación clave:</em> Date cuenta de que la tangente es perpendicular al radio de la circunferencia que va desde el origen \((0,0)\) hasta \((3,4)\). Las pendientes de rectas perpendiculares son inversas y de signo opuesto, lo cual confirma que nuestro cálculo es correcto.
+        </div>
     </div>
 
     <!-- ============================================================ -->
@@ -326,8 +350,8 @@
     </div>
 
     <div class="nota" style="margin-top: 40px; border-left-color: #2e7d32; background: #f1f8f1;">
-    <strong>Anexo Descargable:</strong> Te invitamos a descargar la <a href="anexo_tabla_derivadas.html" target="_blank" style="color: #2e7d32; font-weight: bold; text-decoration: underline;">Tabla de Derivadas en PDF</a> para tenerla siempre a mano mientras resuelves los ejercicios.
-</div>
+        <strong>Anexo Descargable:</strong> Te invitamos a descargar la <a href="anexo_tabla_derivadas.html" target="_blank" style="color: #2e7d32; font-weight: bold; text-decoration: underline;">Tabla de Derivadas en PDF</a> para tenerla siempre a mano mientras resuelves los ejercicios.
+    </div>
 
     <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
     <div class="nav-footer">
@@ -526,7 +550,6 @@ function dibujarCircunferencia() {
     ctxG4.strokeStyle = "#1a3e6f"; ctxG4.lineWidth = 2; ctxG4.stroke();
 
     // Punto (3, 4) en la circunferencia (escala 1 unidad = 20px)
-    // En el gráfico, x=3 se dibuja a la derecha, y=4 hacia arriba.
     const px = cxG4 + (3 * 20);
     const py = cyG4 - (4 * 20);
     
@@ -534,12 +557,8 @@ function dibujarCircunferencia() {
     ctxG4.fillStyle = "#2e7d32"; ctxG4.fill();
 
     // Recta tangente: pendiente m = -x/y = -3/4
-    // Ecuación: y - 4 = -3/4 (x - 3)
-    // Si x va de 0 a 6, y varía.
     const m = -3/4;
     ctxG4.beginPath();
-    // Punto inicial (x=0) -> y = 4 - 3/4(0 - 3) = 4 + 9/4 = 6.25
-    // Punto final (x=6) -> y = 4 - 3/4(6 - 3) = 4 - 9/4 = 1.75
     ctxG4.moveTo(cxG4 + (0 * 20), cyG4 - (6.25 * 20));
     ctxG4.lineTo(cxG4 + (6 * 20), cyG4 - (1.75 * 20));
     ctxG4.strokeStyle = "#e07a8f"; ctxG4.lineWidth = 2; ctxG4.stroke();
