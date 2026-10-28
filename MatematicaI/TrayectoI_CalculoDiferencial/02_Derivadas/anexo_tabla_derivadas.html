@@ -9,22 +9,22 @@
         .page { max-width: 850px; margin: 30px auto; background: white; padding: 30px 40px; box-shadow: 0 0 10px rgba(0,0,0,0.1); position: relative; }
         
         h1 { color: #1a3e6f; text-align: center; font-size: 22px; margin-top: 0; margin-bottom: 5px; border-bottom: 2px solid #1a3e6f; padding-bottom: 8px;}
-        .subtitle { text-align: center; color: #555; font-size: 13px; margin-bottom: 20px; }
+        .subtitle { text-align: center; color: #555; font-size: 13px; margin-bottom: 15px; }
         
-        /* Estilos de la tabla */
-        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-        th { background: #1a3e6f; color: white; padding: 8px; text-align: center; font-size: 14px; }
-        td { border: 1px solid #ddd; padding: 8px 10px; text-align: center; font-size: 14px; }
+        /* Estilos de la tabla compactados para que quepan en 1 hoja */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        th { background: #1a3e6f; color: white; padding: 6px; text-align: center; font-size: 14px; }
+        td { border: 1px solid #ddd; padding: 4px 8px; text-align: center; font-size: 13px; line-height: 1.4; }
         td:nth-child(1) { background: #f9f9f9; width: 50%; text-align: left;}
         td:nth-child(2) { width: 50%; color: #1a3e6f; }
         
         /* Separadores de categoría */
-        .category-row td { background: #e8f0e8; color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; padding: 5px; text-align: left; }
+        .category-row td { background: #e8f0e8; color: #2e7d32; font-weight: bold; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; padding: 4px; text-align: left; }
         
         /* Pie de página */
         .footer-print { 
-            margin-top: 25px; 
-            padding-top: 10px; 
+            margin-top: 15px; 
+            padding-top: 8px; 
             border-top: 1px solid #ccc; 
             font-size: 11px; 
             color: #555; 
@@ -34,7 +34,7 @@
         .footer-print strong { color: #1a3e6f; }
 
         /* Botones */
-        .actions-bar { text-align: center; margin-bottom: 20px; }
+        .actions-bar { text-align: center; margin-top: 20px; }
         .btn { 
             background: #c9a84c; color: #0a0c10; border: none; padding: 10px 24px; 
             border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 16px;
@@ -44,12 +44,17 @@
 
         /* Ajustes específicos para impresión/PDF */
         @media print {
-            @page { margin: 1.5cm; size: letter; }
+            @page { 
+                margin: 0.5cm; /* Márgenes mínimos para que el navegador no empuje a otra página */
+                size: letter; 
+            }
             body { background: white; }
             .page { box-shadow: none; margin: 0; padding: 0; width: 100%; max-width: 100%; }
             .actions-bar { display: none; }
-            table { page-break-inside: avoid; }
-            td { padding: 6px 8px; font-size: 13px; }
+            
+            /* Forzar que todo se mantenga en una sola página */
+            table, tr, td, th { page-break-inside: avoid; }
+            h1 { page-break-before: avoid; page-break-after: avoid; }
         }
     </style>
 </head>
@@ -114,7 +119,7 @@
 </div>
 
 <script>
-    // Función para asegurar que MathJax termine de renderizar antes de abrir la ventana de impresión
+    // Función para asegurar que MathJax termine de renderizar antes de imprimir
     function imprimirPDF() {
         if (window.MathJax && window.MathJax.typesetPromise) {
             MathJax.typesetPromise().then(() => {
@@ -124,7 +129,6 @@
                 window.print();
             });
         } else {
-            // Si MathJax no cargó, imprimir de todos modos
             window.print();
         }
     }
