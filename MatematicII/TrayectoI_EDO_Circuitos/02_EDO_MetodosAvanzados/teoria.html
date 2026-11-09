@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unidad 2: EDO - Métodos Avanzados de Primer Orden</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     <style>
@@ -9,14 +10,42 @@
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
         h1 { text-align: center; font-size: 28px; }
-        h2 { border-bottom: 1px solid #ccc; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
         .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
-        .definicion, .teorema, .ejemplo { margin: 20px 0; padding: 10px; border-left: 4px solid #1a3e6f; background: #f5f5f5; }
-        .teorema { border-left-color: #c96b1a; }
-        .ejemplo { border-left-color: #2e7d32; }
+
+        .definicion, .teorema, .ejemplo, .nota, .propiedad, .resumen-box {
+            margin: 20px 0; padding: 12px 16px; border-radius: 0 4px 4px 0;
+        }
+        .definicion { border-left: 4px solid #1a3e6f; background: #f5f5f5; }
+        .teorema    { border-left: 4px solid #c96b1a; background: #fef4e8; }
+        .ejemplo    { border-left: 4px solid #2e7d32; background: #e8f0e8; }
+        .nota       { border-left: 4px solid #e07a8f; background: #fef9f9; }
+        .propiedad  { border-left: 4px solid #6b46c1; background: #f3eefa; }
+        .resumen-box{ border-left: 4px solid #c9a84c; background: #fdf8e8; }
+
         .formula { text-align: center; margin: 10px 0; font-family: monospace; background: #f9f2e0; padding: 8px; border-radius: 5px; }
-        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; }
-        @media print { .latex-container { margin: 0; padding: 20px; box-shadow: none; } .btn-pdf { display: none; } }
+
+        table.tabla-formulas { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 15px; }
+        table.tabla-formulas th, table.tabla-formulas td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; vertical-align: top; }
+        table.tabla-formulas th { background: #1a3e6f; color: white; }
+        table.tabla-formulas tr:nth-child(even) { background: #f7f7f7; }
+
+        ul.lista-propiedades { margin: 8px 0; padding-left: 22px; }
+        ul.lista-propiedades li { margin: 5px 0; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
+        .nav-footer a:hover { background: #2a5a9a; }
+
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            h2 { page-break-after: avoid; }
+            .definicion, .teorema, .ejemplo, .nota, .propiedad, .resumen-box { page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -25,106 +54,650 @@
     <div class="author">MSc. Orlando Silva</div>
     <div class="date">Matemática II · PNF Electricidad · Trayecto I</div>
 
-    <h2>1. Ecuaciones Lineales de Primer Orden</h2>
-    <div class="definicion">
-        Una EDO lineal de primer orden tiene la forma:
-        \[
-        \frac{dy}{dx} + P(x)y = Q(x)
-        \]
-        donde \(P(x)\) y \(Q(x)\) son funciones continuas en un intervalo.
+    <div class="nota">
+        <strong>Nota previa.</strong> En la <strong>Unidad 1</strong> se estudiaron la definición de EDO, las variables separables, las exactas y las lineales básicas. En esta unidad profundizamos en <strong>métodos avanzados</strong> de primer orden: factor integrante, homogéneas, factores integrantes generales, Bernoulli, Riccati, Lagrange y Clairaut. Las <strong>aplicaciones a circuitos eléctricos</strong> (RL, RC, RLC) se estudian y evalúan en la <strong>Unidad 4</strong>; aquí solo las usamos como ejemplo ilustrativo.
     </div>
 
-    <h3>Método del factor integrante</h3>
+    <!-- ============================================================ -->
+    <h2>1. EDO lineales de primer orden y factor integrante</h2>
+
+    <div class="definicion">
+        Una EDO lineal de primer orden tiene la forma estándar:
+        \[
+        \frac{dy}{dx} + P(x)\,y = Q(x)
+        \]
+        donde \(P(x)\) y \(Q(x)\) son funciones continuas en un intervalo \(I\). Si \(Q(x)\equiv 0\), la ecuación es <strong>homogénea</strong> (no confundir con las EDO homogéneas de la Sección 2); si \(Q(x)\not\equiv 0\), es <strong>no homogénea</strong>.
+    </div>
+
     <div class="teorema">
-        El <strong>factor integrante</strong> es:
+        <strong>Método del factor integrante.</strong> El <em>factor integrante</em> de la EDO lineal es:
         \[
         \mu(x) = e^{\int P(x)\,dx}
         \]
-        Multiplicando la EDO por \(\mu(x)\), obtenemos:
+        Multiplicando ambos lados por \(\mu(x)\), el lado izquierdo se convierte en la derivada de un producto:
         \[
-        \frac{d}{dx}\left(\mu(x) y\right) = \mu(x) Q(x)
+        \frac{d}{dx}\big(\mu(x)\,y\big) = \mu(x)\,Q(x)
         \]
-        Integrando:
+        Integrando y despejando \(y\):
         \[
-        y = \frac{1}{\mu(x)} \left(\int \mu(x) Q(x)\,dx + C\right)
+        y(x) = \frac{1}{\mu(x)}\left(\int \mu(x)\,Q(x)\,dx + C\right)
         \]
-    </div>
-    <div class="ejemplo">
-        <strong>Ejemplo:</strong> Resolver \(y' + 2xy = x\).<br>
-        \(P(x) = 2x\) → \(\mu = e^{\int 2x dx} = e^{x^2}\).<br>
-        Multiplicando: \(e^{x^2}y' + 2xe^{x^2}y = x e^{x^2}\) → \(\frac{d}{dx}(e^{x^2}y) = x e^{x^2}\).<br>
-        Integrando: \(e^{x^2}y = \int x e^{x^2}dx = \frac{1}{2}e^{x^2} + C\).<br>
-        Solución: \(y = \frac{1}{2} + C e^{-x^2}\).
     </div>
 
-    <h2>2. Ecuación de Bernoulli</h2>
+    <div class="propiedad">
+        <strong>Demostración.</strong> Sea \(\mu=e^{\int P\,dx}\). Entonces \(\mu' = P\mu\). Al multiplicar la EDO:
+        \[
+        \mu y' + \mu P y = \mu Q \;\Longrightarrow\; \mu y' + \mu' y = \mu Q \;\Longrightarrow\; (\mu y)' = \mu Q.
+        \]
+        Integrando: \(\mu y = \int \mu Q\,dx + C\). Despejando \(y\) se obtiene la fórmula. \(\blacksquare\)
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1.</strong> Resolver \(y' + 2xy = x\).
+        <br>
+        \(P(x)=2x \Rightarrow \mu = e^{\int 2x\,dx}=e^{x^2}\). Multiplicando:
+        \[
+        e^{x^2}y' + 2xe^{x^2}y = xe^{x^2} \;\Longrightarrow\; \frac{d}{dx}\big(e^{x^2}y\big) = xe^{x^2}.
+        \]
+        Integrando: \(e^{x^2}y = \tfrac12 e^{x^2} + C\). Por tanto:
+        \[
+        y = \tfrac12 + C e^{-x^2}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2.</strong> Resolver \(y' - y = e^{2x}\).
+        <br>
+        \(P(x)=-1 \Rightarrow \mu = e^{\int -1\,dx}=e^{-x}\). Multiplicando:
+        \[
+        e^{-x}y' - e^{-x}y = e^{x} \;\Longrightarrow\; \frac{d}{dx}\big(e^{-x}y\big) = e^{x}.
+        \]
+        Integrando: \(e^{-x}y = e^{x} + C\). Por tanto:
+        \[
+        y = e^{2x} + C e^{x}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3 (forma no estándar).</strong> Resolver \(x y' + y = x^3\), \(x>0\).
+        <br>
+        Dividiendo entre \(x\): \(y' + \tfrac1x y = x^2\). Aquí \(P(x)=\tfrac1x \Rightarrow \mu = e^{\int \frac1x dx}=e^{\ln x}=x\). Multiplicando:
+        \[
+        xy' + y = x^3 \;\Longrightarrow\; (xy)' = x^3.
+        \]
+        Integrando: \(xy = \tfrac14 x^4 + C\). Por tanto:
+        \[
+        y = \tfrac14 x^3 + \frac{C}{x}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4 (PVI).</strong> Resolver \(y' + 2y = 4x\), con \(y(0)=1\).
+        <br>
+        \(P(x)=2 \Rightarrow \mu=e^{2x}\). Multiplicando:
+        \[
+        e^{2x}y'+2e^{2x}y=4xe^{2x} \;\Longrightarrow\; (e^{2x}y)'=4xe^{2x}.
+        \]
+        Integrando por partes (\(\int 4xe^{2x}dx=2xe^{2x}-e^{2x}\)):
+        \[
+        e^{2x}y=2xe^{2x}-e^{2x}+C \;\Longrightarrow\; y=2x-1+Ce^{-2x}.
+        \]
+        Condición inicial: \(y(0)=1 \Rightarrow 1=0-1+C \Rightarrow C=2\). Por tanto:
+        \[
+        \boxed{y = 2x-1+2e^{-2x}}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 5 (PVI con forma no estándar).</strong> Resolver \(x y' + y = x^3\), con \(y(1)=2\), \(x>0\).
+        <br>
+        Del Ejemplo 3, la solución general es \(y=\tfrac14 x^3+\dfrac{C}{x}\). Aplicando \(y(1)=2\):
+        \[
+        2=\tfrac14 + C \;\Longrightarrow\; C=\tfrac74.
+        \]
+        Por tanto:
+        \[
+        \boxed{y = \tfrac14 x^3 + \frac{7}{4x}}.
+        \]
+    </div>
+
+    <div class="nota">
+        <strong>Error común.</strong> Aplicar el factor integrante sin haber llevado la EDO a la forma estándar \(y'+P(x)y=Q(x)\). Si el coeficiente de \(y'\) no es 1, hay que dividir primero.
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>2. EDO homogéneas (sustitución \(y=vx\))</h2>
+
+    <div class="definicion">
+        Una EDO de primer orden \(y'=f(x,y)\) es <strong>homogénea</strong> si \(f\) es homogénea de grado 0, es decir:
+        \[
+        f(tx,ty)=f(x,y) \quad \text{para todo } t>0.
+        \]
+        Equivalentemente, \(f(x,y)\) se puede escribir como una función del cociente \(y/x\): \(f(x,y)=g(y/x)\).
+    </div>
+
+    <div class="teorema">
+        <strong>Método de solución.</strong> Se introduce la sustitución:
+        \[
+        y = vx \quad\Longrightarrow\quad y' = v + x v'.
+        \]
+        Al sustituir en la EDO se obtiene una ecuación <strong>separable</strong> en \(v\) y \(x\):
+        \[
+        v + x v' = g(v) \;\Longrightarrow\; x v' = g(v)-v \;\Longrightarrow\; \frac{dv}{g(v)-v} = \frac{dx}{x}.
+        \]
+        Se integra, se despeja \(v\) y se reemplaza \(v=y/x\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1.</strong> Resolver \(y' = \dfrac{y+x}{x}\).
+        <br>
+        \(f(x,y)=\dfrac{y}{x}+1=g(y/x)\). Sustituyendo \(y=vx\), \(y'=v+xv'\):
+        \[
+        v+xv' = v+1 \;\Longrightarrow\; xv'=1 \;\Longrightarrow\; v'=\frac1x.
+        \]
+        Integrando: \(v=\ln|x|+C\). Volviendo a \(y=vx\):
+        \[
+        y = x\ln|x| + Cx.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2 (forma diferencial).</strong> Resolver \((x^2+y^2)\,dx - xy\,dy = 0\).
+        <br>
+        Reescribiendo: \(y'=\dfrac{x^2+y^2}{xy}=\dfrac{x}{y}+\dfrac{y}{x}\). Con \(y=vx\):
+        \[
+        v+xv' = \frac{1}{v}+v \;\Longrightarrow\; xv'=\frac1v \;\Longrightarrow\; v\,dv=\frac{dx}{x}.
+        \]
+        Integrando: \(\tfrac12 v^2=\ln|x|+C\). Volviendo a \(v=y/x\):
+        \[
+        \frac{y^2}{2x^2}=\ln|x|+C \;\Longrightarrow\; y^2 = 2x^2\ln|x| + Cx^2.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3 (PVI).</strong> Resolver \(y'=\dfrac{y}{x}+1\), con \(y(1)=0\), \(x>0\).
+        <br>
+        Del ejemplo anterior, la solución general es \(y=x\ln|x|+Cx\). Aplicando \(y(1)=0\):
+        \[
+        0 = 1\cdot\ln 1 + C\cdot 1 = 0 + C \;\Longrightarrow\; C=0.
+        \]
+        Por tanto:
+        \[
+        \boxed{y = x\ln x}.
+        \]
+        <em>Verificación:</em> \(y'=\ln x+1\), y \(\dfrac{y}{x}+1=\ln x+1\). ✓
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4 (PVI con condición en \(x=2\)).</strong> Resolver \(y'=\dfrac{x^2+y^2}{xy}\), con \(y(2)=4\).
+        <br>
+        Del ejemplo anterior (forma diferencial), la solución general es:
+        \[
+        y^2 = 2x^2\ln|x| + Cx^2.
+        \]
+        Aplicando \(y(2)=4\):
+        \[
+        16 = 2\cdot 4\cdot\ln 2 + 4C = 8\ln 2 + 4C \;\Longrightarrow\; C = 4-2\ln 2.
+        \]
+        Por tanto:
+        \[
+        \boxed{y^2 = 2x^2\ln x + (4-2\ln 2)x^2}.
+        \]
+    </div>
+
+    <div class="nota">
+        <strong>Error común.</strong> Confundir "EDO homogénea" (grado 0 en \(x,y\)) con "EDO lineal homogénea" (\(Q(x)=0\)). Son conceptos distintos: la primera se refiere a la estructura de \(f(x,y)\); la segunda, a que el término independiente de una lineal sea nulo.
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>3. Factores integrantes</h2>
+
+    <div class="definicion">
+        Recordemos de la Unidad 1 que una EDO en forma diferencial
+        \[
+        M(x,y)\,dx + N(x,y)\,dy = 0
+        \]
+        es <strong>exacta</strong> si \(\dfrac{\partial M}{\partial y}=\dfrac{\partial N}{\partial x}\). Cuando no lo es, buscamos un <strong>factor integrante</strong> \(\mu(x,y)\) tal que:
+        \[
+        \mu M\,dx + \mu N\,dy = 0
+        \]
+        sea exacta, es decir, \(\dfrac{\partial(\mu M)}{\partial y}=\dfrac{\partial(\mu N)}{\partial x}\).
+    </div>
+
+    <div class="teorema">
+        <strong>Reglas prácticas para hallar \(\mu\):</strong>
+        <ul class="lista-propiedades">
+            <li>Si \(\dfrac{1}{N}\left(\dfrac{\partial M}{\partial y}-\dfrac{\partial N}{\partial x}\right)=f(x)\) depende solo de \(x\), entonces:
+            \[
+            \mu(x)=e^{\int f(x)\,dx}.
+            \]
+            </li>
+            <li>Si \(\dfrac{1}{M}\left(\dfrac{\partial N}{\partial x}-\dfrac{\partial M}{\partial y}\right)=g(y)\) depende solo de \(y\), entonces:
+            \[
+            \mu(y)=e^{\int g(y)\,dy}.
+            \]
+            </li>
+            <li>Si \(\dfrac{\partial M/\partial y-\partial N/\partial x}{xN-yM}=h(xy)\) depende solo del producto \(xy\), entonces \(\mu(xy)=e^{\int h(xy)\,d(xy)}\) (caso menos frecuente).</li>
+        </ul>
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1 (\(\mu\) depende solo de \(x\)).</strong> Resolver \((2y)\,dx + (x)\,dy = 0\).
+        <br>
+        \(M=2y,\;N=x\). \(\partial_y M=2,\;\partial_x N=1\), no exacta. Calculamos:
+        \[
+        \frac{\partial_y M-\partial_x N}{N}=\frac{2-1}{x}=\frac1x=f(x).
+        \]
+        Entonces \(\mu(x)=e^{\int \frac1x dx}=x\). Multiplicando:
+        \[
+        2xy\,dx + x^2\,dy=0.
+        \]
+        Verificamos: \(\partial_y(2xy)=2x=\partial_x(x^2)\) ✓. La función potencial es \(F(x,y)=x^2 y\), y la solución es:
+        \[
+        x^2 y = C.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2 (\(\mu\) depende solo de \(y\)).</strong> Resolver \((y)\,dx + (x+y^2)\,dy = 0\).
+        <br>
+        \(M=y,\;N=x+y^2\). \(\partial_y M=1,\;\partial_x N=1\) — ¡es exacta! La solución es \(F(x,y)=xy+\tfrac13 y^3=C\).
+        <br>
+        <em>Variante no exacta:</em> \((y)\,dx + (2x+y^2)\,dy=0\). \(\partial_y M=1,\;\partial_x N=2\). Calculamos \(\dfrac{\partial_x N-\partial_y M}{M}=\dfrac{2-1}{y}=\dfrac1y=g(y)\), entonces \(\mu(y)=e^{\int \frac1y dy}=y\). Multiplicando: \(y^2\,dx+(2xy+y^3)\,dy=0\), que ya es exacta.
+    </div>
+
+    <div class="nota">
+        <strong>Nota.</strong> En la práctica, si ninguna de las dos reglas funciona, se prueba \(\mu=\mu(x+y)\), \(\mu=\mu(xy)\), etc. No siempre existe un factor integrante elemental; en ese caso se recurre a otros métodos.
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>4. Ecuación de Bernoulli</h2>
+
     <div class="definicion">
         La ecuación de Bernoulli tiene la forma:
         \[
-        \frac{dy}{dx} + P(x)y = Q(x)y^n
+        \frac{dy}{dx} + P(x)\,y = Q(x)\,y^n, \quad n\neq 0,1.
         \]
-        donde \(n \neq 0,1\). Se resuelve mediante el cambio de variable:
+        Si \(n=0\) es lineal; si \(n=1\) es separable. Para \(n\neq 0,1\) se resuelve con la sustitución:
         \[
-        z = y^{1-n}
+        z = y^{1-n}.
         \]
-        que transforma la ecuación en una EDO lineal de primer orden.
-    </div>
-    <div class="ejemplo">
-        <strong>Ejemplo:</strong> Resolver \(y' + y = xy^2\).<br>
-        \(n=2\) → \(z = y^{-1}\) → \(y = z^{-1}\).<br>
-        \(y' = -z^{-2}z'\). Sustituyendo: \(-z^{-2}z' + z^{-1} = x z^{-2}\).<br>
-        Multiplicando por \(-z^2\): \(z' - z = -x\).<br>
-        Resolviendo la lineal: \(z' - z = -x\). Factor integrante: \(\mu = e^{-x}\).<br>
-        \(e^{-x}z' - e^{-x}z = -xe^{-x}\) → \(\frac{d}{dx}(e^{-x}z) = -xe^{-x}\).<br>
-        Integrando: \(e^{-x}z = e^{-x}(x+1) + C\) → \(z = x+1 + C e^{x}\).<br>
-        Solución: \(y = \frac{1}{x+1 + C e^{x}}\).
     </div>
 
-    <h2>3. Aplicación a Circuitos RL</h2>
+    <div class="teorema">
+        <strong>Reducción a lineal.</strong> Derivando \(z=y^{1-n}\):
+        \[
+        z' = (1-n)y^{-n}y'.
+        \]
+        Multiplicando la EDO de Bernoulli por \((1-n)y^{-n}\):
+        \[
+        (1-n)y^{-n}y' + (1-n)P(x)y^{1-n} = (1-n)Q(x).
+        \]
+        Es decir:
+        \[
+        z' + (1-n)P(x)\,z = (1-n)Q(x),
+        \]
+        que es una EDO lineal en \(z\). Se resuelve con factor integrante y se vuelve a \(y=z^{1/(1-n)}\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 1.</strong> Resolver \(y' + y = xy^2\).
+        <br>
+        \(n=2\), \(z=y^{-1}\). Entonces \(z'=-y^{-2}y'\). Multiplicando la EDO por \(-y^{-2}\):
+        \[
+        -y^{-2}y' - y^{-1} = -x \;\Longrightarrow\; z' - z = -x.
+        \]
+        Lineal en \(z\) con \(P=-1\), \(Q=-x\). Factor integrante \(\mu=e^{-x}\):
+        \[
+        e^{-x}z' - e^{-x}z = -xe^{-x} \;\Longrightarrow\; (e^{-x}z)'=-xe^{-x}.
+        \]
+        Integrando (por partes): \(e^{-x}z = e^{-x}(x+1)+C\), luego \(z = x+1+Ce^{x}\). Volviendo a \(y=1/z\):
+        \[
+        y = \frac{1}{x+1+Ce^{x}}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 2.</strong> Resolver \(y' + \dfrac{1}{x}y = y^2\), \(x>0\).
+        <br>
+        \(n=2\), \(z=y^{-1}\), \(z'=-y^{-2}y'\). Multiplicando por \(-y^{-2}\):
+        \[
+        z' - \frac{1}{x}z = -1.
+        \]
+        Lineal con \(P=-\frac1x\), \(Q=-1\). Factor integrante \(\mu=e^{\int -1/x\,dx}=e^{-\ln x}=\frac1x\):
+        \[
+        \frac1x z' - \frac{1}{x^2}z = -\frac1x \;\Longrightarrow\; \left(\frac{z}{x}\right)'=-\frac1x.
+        \]
+        Integrando: \(\dfrac{z}{x}=-\ln x + C\), luego \(z=x(C-\ln x)\). Volviendo a \(y=1/z\):
+        \[
+        y = \frac{1}{x(C-\ln x)}.
+        \]
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 3 (PVI).</strong> Resolver \(y'+y=xy^2\), con \(y(0)=1\).
+        <br>
+        Del Ejemplo 1, la solución general es \(y=\dfrac{1}{x+1+Ce^{x}}\). Aplicando \(y(0)=1\):
+        \[
+        1 = \frac{1}{0+1+C} = \frac{1}{1+C} \;\Longrightarrow\; 1+C=1 \;\Longrightarrow\; C=0.
+        \]
+        Por tanto:
+        \[
+        \boxed{y = \frac{1}{x+1}}.
+        \]
+        <em>Verificación:</em> \(y'=-\dfrac{1}{(x+1)^2}\), y \(xy^2-y=-\dfrac{1}{(x+1)^2}\). ✓
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo 4 (PVI con \(n=3\)).</strong> Resolver \(y'+2xy=2xy^3\), con \(y(0)=1\).
+        <br>
+        Del Ejercicio resuelto 2 de la Sección 9, la solución general es:
+        \[
+        y = \frac{1}{\sqrt{2+Ce^{2x^2}}}.
+        \]
+        Aplicando \(y(0)=1\):
+        \[
+        1 = \frac{1}{\sqrt{2+C}} \;\Longrightarrow\; 2+C=1 \;\Longrightarrow\; C=-1.
+        \]
+        Por tanto:
+        \[
+        \boxed{y = \frac{1}{\sqrt{2-e^{2x^2}}}}.
+        \]
+        <em>Dominio:</em> se requiere \(2-e^{2x^2}>0\), es decir, \(x^2<\ln 2\), o sea \(|x|<\sqrt{\ln 2}\).
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>5. Ecuación de Riccati</h2>
+
     <div class="definicion">
-        Un circuito RL (resistencia-inductor) satisface la EDO:
+        La ecuación de Riccati tiene la forma:
         \[
-        L\frac{di}{dt} + Ri = v(t)
+        y' = P(x) + Q(x)\,y + R(x)\,y^2.
         \]
-        donde \(L\) es la inductancia, \(R\) la resistencia, \(i(t)\) la corriente y \(v(t)\) la tensión aplicada.
-    </div>
-    <div class="ejemplo">
-        <strong>Ejemplo:</strong> Circuito RL con \(v(t) = V_0\) constante.<br>
-        \(L\frac{di}{dt} + Ri = V_0\). Dividiendo entre \(L\): \(\frac{di}{dt} + \frac{R}{L}i = \frac{V_0}{L}\).<br>
-        Es una EDO lineal de primer orden con \(P(t) = \frac{R}{L}\), \(Q(t) = \frac{V_0}{L}\).<br>
-        Factor integrante: \(\mu = e^{\int \frac{R}{L}dt} = e^{Rt/L}\).<br>
-        Solución: \(i(t) = \frac{V_0}{R} + C e^{-Rt/L}\).<br>
-        Si \(i(0) = 0\): \(C = -\frac{V_0}{R}\) → \(i(t) = \frac{V_0}{R}(1 - e^{-Rt/L})\).
+        No es lineal en \(y\), pero si se conoce <strong>una solución particular</strong> \(y_1(x)\), la sustitución:
+        \[
+        y = y_1 + \frac{1}{v}
+        \]
+        la reduce a una EDO lineal en \(v\).
     </div>
 
-    <h2>4. Aplicación a Circuitos RC</h2>
+    <div class="teorema">
+        <strong>Reducción a lineal.</strong> Sea \(y_1\) solución particular de la Riccati. Con \(y=y_1+\frac1v\):
+        \[
+        y' = y_1' - \frac{v'}{v^2}.
+        \]
+        Sustituyendo en la Riccati y usando que \(y_1'=P+Qy_1+Ry_1^2\), se obtiene:
+        \[
+        v' + (Q+2Ry_1)\,v = -R,
+        \]
+        que es una EDO lineal en \(v\). Se resuelve con factor integrante y se vuelve a \(y=y_1+\frac1v\).
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> Resolver \(y' = 1 - y^2\), sabiendo que \(y_1=1\) es solución particular.
+        <br>
+        Verificación: \(y_1'=0 = 1-1^2\) ✓. Con \(y=1+\frac1v\), \(y'=-\frac{v'}{v^2}\). Sustituyendo:
+        \[
+        -\frac{v'}{v^2} = 1-\left(1+\frac1v\right)^2 = -\frac{2}{v}-\frac{1}{v^2}.
+        \]
+        Multiplicando por \(-v^2\):
+        \[
+        v' = 2v+1 \;\Longrightarrow\; v' - 2v = 1.
+        \]
+        Lineal con \(P=-2\), \(Q=1\). Factor integrante \(\mu=e^{-2x}\):
+        \[
+        (e^{-2x}v)'=e^{-2x} \;\Longrightarrow\; e^{-2x}v = -\tfrac12 e^{-2x}+C \;\Longrightarrow\; v = -\tfrac12 + Ce^{2x}.
+        \]
+        Volviendo a \(y=1+\frac1v\):
+        \[
+        y = 1 + \frac{1}{-\frac12+Ce^{2x}} = 1 + \frac{2}{2Ce^{2x}-1}.
+        \]
+    </div>
+
+    <div class="nota">
+        <strong>Error común.</strong> Usar la sustitución \(y=y_1+\frac1v\) sin haber verificado que \(y_1\) es realmente solución. Si \(y_1\) no lo es, la reducción falla.
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>6. Ecuaciones de Lagrange y Clairaut</h2>
+
     <div class="definicion">
-        Un circuito RC (resistencia-condensador) satisface la EDO:
+        <strong>Ecuación de Lagrange:</strong>
         \[
-        RC\frac{dv_c}{dt} + v_c = v(t)
+        y = x\,f(y') + g(y').
         \]
-        donde \(v_c(t)\) es la tensión en el condensador.
+        <strong>Ecuación de Clairaut:</strong> caso particular con \(f(y')=y'\):
+        \[
+        y = x\,y' + g(y').
+        \]
+        Ambas se resuelven introduciendo el parámetro \(p=y'\) y derivando respecto de \(x\).
+    </div>
+
+    <div class="teorema">
+        <strong>Método para Clairaut.</strong> Con \(p=y'\), la ecuación es \(y=xp+g(p)\). Derivando respecto de \(x\):
+        \[
+        p = p + x p' + g'(p)\,p' \;\Longrightarrow\; p'\,(x+g'(p))=0.
+        \]
+        De aquí surgen dos casos:
+        <ul class="lista-propiedades">
+            <li>\(p'=0 \Rightarrow p=C\) constante. Entonces \(y=Cx+g(C)\), que es la <strong>familia de rectas</strong> solución general.</li>
+            <li>\(x+g'(p)=0\): junto con \(y=xp+g(p)\) da una solución <strong>singular</strong>, que es la <strong>envolvente</strong> de la familia de rectas.</li>
+        </ul>
+    </div>
+
+    <div class="teorema">
+        <strong>Método para Lagrange.</strong> Con \(p=y'\), \(y=xf(p)+g(p)\). Derivando respecto de \(x\):
+        \[
+        p = f(p) + \big[x f'(p)+g'(p)\big]p'.
+        \]
+        Se considera \(x\) como función de \(p\): \(\dfrac{dx}{dp}=\dfrac{1}{p'}\). Se obtiene una EDO lineal en \(x(p)\), cuya solución junto con \(y=xf(p)+g(p)\) da la solución paramétrica.
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo (Clairaut).</strong> Resolver \(y = xy' + (y')^2\).
+        <br>
+        Con \(p=y'\): \(y=xp+p^2\). Derivando respecto de \(x\):
+        \[
+        p = p + xp' + 2p\,p' \;\Longrightarrow\; p'(x+2p)=0.
+        \]
+        Caso 1: \(p'=0 \Rightarrow p=C \Rightarrow y=Cx+C^2\) (familia de rectas).
+        <br>
+        Caso 2: \(x+2p=0 \Rightarrow p=-\tfrac{x}{2}\). Sustituyendo en \(y=xp+p^2\):
+        \[
+        y = x\left(-\tfrac{x}{2}\right)+\tfrac{x^2}{4} = -\tfrac{x^2}{4}.
+        \]
+        La solución singular es la parábola \(y=-\tfrac{x^2}{4}\), envolvente de las rectas.
+    </div>
+
+    <div class="ejemplo">
+        <strong>Ejemplo (Lagrange).</strong> Resolver \(y = 2xy' + (y')^2\).
+        <br>
+        Con \(p=y'\): \(y=2xp+p^2\). Derivando: \(p = 2p + 2xp' + 2pp'\), es decir:
+        \[
+        -p = 2(x+p)p' \;\Longrightarrow\; \frac{dx}{dp} = -\frac{2(x+p)}{p} = -\frac{2}{p}x - 2.
+        \]
+        Lineal en \(x(p)\): \(x' + \frac{2}{p}x = -2\). Factor integrante \(\mu=p^2\):
+        \[
+        (p^2 x)' = -2p^2 \;\Longrightarrow\; p^2 x = -\tfrac{2}{3}p^3 + C \;\Longrightarrow\; x = -\tfrac{2}{3}p + \frac{C}{p^2}.
+        \]
+        Junto con \(y=2xp+p^2\), la solución es paramétrica. Sustituyendo \(x\):
+        \[
+        y = 2p\left(-\tfrac{2}{3}p+\frac{C}{p^2}\right)+p^2 = -\tfrac43 p^2 + \frac{2C}{p} + p^2 = -\tfrac13 p^2 + \frac{2C}{p}.
+        \]
+    </div>
+
+    <div class="nota">
+        <strong>Error común.</strong> En Clairaut, olvidar la solución singular (la envolvente). La solución general es la familia de rectas, pero la solución singular también es válida y a menudo es la que aparece en aplicaciones geométricas.
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>7. Aplicaciones: circuitos RL/RC, mezclas y enfriamiento</h2>
+
+    <div class="nota">
+        <strong>Nota.</strong> Las aplicaciones a circuitos eléctricos (RL, RC, RLC) se estudian y <strong>evalúan en la Unidad 4</strong>. Aquí las presentamos solo como ejemplo ilustrativo de EDO lineales de primer orden.
+    </div>
+
+    <h3>7.1 Circuito RL</h3>
+    <div class="definicion">
+        Un circuito RL (resistencia-inductor) satisface:
+        \[
+        L\frac{di}{dt} + Ri = v(t).
+        \]
     </div>
     <div class="ejemplo">
-        <strong>Ejemplo:</strong> Circuito RC con \(v(t) = V_0\) constante.<br>
-        \(RC\frac{dv_c}{dt} + v_c = V_0\). Dividiendo entre \(RC\): \(\frac{dv_c}{dt} + \frac{1}{RC}v_c = \frac{V_0}{RC}\).<br>
-        Factor integrante: \(\mu = e^{t/(RC)}\).<br>
-        Solución: \(v_c(t) = V_0 + C e^{-t/(RC)}\).<br>
-        Si \(v_c(0) = 0\): \(C = -V_0\) → \(v_c(t) = V_0(1 - e^{-t/(RC)})\).
+        <strong>Ejemplo (RL con \(v(t)=V_0\) constante).</strong> \(Li'+Ri=V_0 \Rightarrow i'+\frac{R}{L}i=\frac{V_0}{L}\). Factor integrante \(\mu=e^{Rt/L}\):
+        \[
+        i(t)=\frac{V_0}{R}+Ce^{-Rt/L}.
+        \]
+        Con \(i(0)=0\): \(i(t)=\frac{V_0}{R}\big(1-e^{-Rt/L}\big)\).
     </div>
 
-    <h2>5. Resumen de métodos</h2>
-    <ul>
-        <li><strong>EDO lineal de primer orden:</strong> \(y' + P(x)y = Q(x)\) → factor integrante \(\mu = e^{\int P dx}\).</li>
-        <li><strong>Bernoulli:</strong> \(y' + P(x)y = Q(x)y^n\) → cambio \(z = y^{1-n}\).</li>
-        <li><strong>Circuito RL:</strong> \(L i' + R i = v(t)\) → lineal en \(i\).</li>
-        <li><strong>Circuito RC:</strong> \(RC v_c' + v_c = v(t)\) → lineal en \(v_c\).</li>
-    </ul>
+    <h3>7.2 Circuito RC</h3>
+    <div class="definicion">
+        Un circuito RC (resistencia-condensador) satisface:
+        \[
+        RC\frac{dv_C}{dt} + v_C = v(t).
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo (RC con \(v(t)=V_0\) constante).</strong> \(RC\,v_C'+v_C=V_0 \Rightarrow v_C'+\frac{1}{RC}v_C=\frac{V_0}{RC}\). Factor integrante \(\mu=e^{t/(RC)}\):
+        \[
+        v_C(t)=V_0+Ce^{-t/(RC)}.
+        \]
+        Con \(v_C(0)=0\): \(v_C(t)=V_0\big(1-e^{-t/(RC)}\big)\).
+    </div>
 
-    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-    <div>
-        <a href="ejercicios.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px;">➡️ Ejercicios</a>
-        <a href="preparciales.html" style="background: #1a3e6f; color: white; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-left: 10px;">📝 Pre‑parciales</a>
+    <h3>7.3 Mezclas</h3>
+    <div class="definicion">
+        En un tanque con volumen \(V(t)\) y concentración \(c(t)\) de soluto, la cantidad \(Q(t)=V(t)c(t)\) satisface:
+        \[
+        \frac{dQ}{dt} = (\text{entrada}) - (\text{salida}) = r_{\text{in}}c_{\text{in}} - r_{\text{out}}\frac{Q}{V}.
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> Tanque con 100 L de agua, entra salmuera a 2 L/min con 0.1 kg/L, y sale a 2 L/min. Si \(Q(0)=0\):
+        \[
+        \frac{dQ}{dt}=0.2-0.02\,Q \;\Longrightarrow\; Q'+0.02Q=0.2.
+        \]
+        Factor integrante \(e^{0.02t}\): \(Q(t)=10+Ce^{-0.02t}\). Con \(Q(0)=0\): \(Q(t)=10(1-e^{-0.02t})\).
+    </div>
+
+    <h3>7.4 Ley de enfriamiento de Newton</h3>
+    <div class="definicion">
+        La temperatura \(T(t)\) de un cuerpo en un medio a temperatura \(T_m\) satisface:
+        \[
+        \frac{dT}{dt}=-k\,(T-T_m), \quad k>0.
+        \]
+    </div>
+    <div class="ejemplo">
+        <strong>Ejemplo.</strong> Un cuerpo a \(90°C\) se enfría en un ambiente a \(20°C\) con \(k=0.1\,\text{min}^{-1}\). Entonces \(T(t)=20+70e^{-0.1t}\).
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>8. Resumen, formulario y errores comunes</h2>
+
+    <div class="resumen-box">
+        <strong>Tabla de métodos:</strong>
+        <table class="tabla-formulas">
+            <tr><th>Tipo de EDO</th><th>Forma</th><th>Método</th></tr>
+            <tr><td>Lineal de 1er orden</td><td>\(y'+P(x)y=Q(x)\)</td><td>Factor integrante \(\mu=e^{\int P\,dx}\)</td></tr>
+            <tr><td>Homogénea</td><td>\(y'=f(y/x)\)</td><td>Sustitución \(y=vx\)</td></tr>
+            <tr><td>No exacta</td><td>\(M\,dx+N\,dy=0\)</td><td>Factor integrante \(\mu(x)\) o \(\mu(y)\)</td></tr>
+            <tr><td>Bernoulli</td><td>\(y'+P y=Q y^n\)</td><td>\(z=y^{1-n}\)</td></tr>
+            <tr><td>Riccati</td><td>\(y'=P+Qy+Ry^2\)</td><td>\(y=y_1+\frac1v\) (con \(y_1\) particular)</td></tr>
+            <tr><td>Lagrange</td><td>\(y=xf(y')+g(y')\)</td><td>\(p=y'\), derivar respecto de \(x\)</td></tr>
+            <tr><td>Clairaut</td><td>\(y=xy'+g(y')\)</td><td>\(p=y'\), solución general + singular</td></tr>
+        </table>
+    </div>
+
+    <div class="resumen-box">
+        <strong>Errores comunes:</strong>
+        <ul class="lista-propiedades">
+            <li>No llevar la EDO lineal a la forma estándar antes de calcular \(\mu\).</li>
+            <li>Confundir EDO homogénea (grado 0) con EDO lineal homogénea (\(Q=0\)).</li>
+            <li>En Bernoulli, olvidar multiplicar por \((1-n)y^{-n}\) antes de sustituir \(z\).</li>
+            <li>En Riccati, no verificar que \(y_1\) es solución particular.</li>
+            <li>En Clairaut, olvidar la solución singular (envolvente).</li>
+            <li>En factores integrantes, no verificar que la nueva EDO es exacta.</li>
+        </ul>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>9. Ejercicios resueltos integrados</h2>
+
+    <h3>Ejercicio resuelto 1: EDO homogénea</h3>
+    <div class="ejemplo">
+        <strong>Enunciado.</strong> Resolver \(y'=\dfrac{y^2+xy}{x^2}\).
+        <br><br>
+        <strong>Paso 1.</strong> Reescribimos: \(y'=\dfrac{y^2}{x^2}+\dfrac{y}{x}=\left(\dfrac{y}{x}\right)^2+\dfrac{y}{x}\).
+        <br><br>
+        <strong>Paso 2.</strong> Sustitución \(y=vx\), \(y'=v+xv'\):
+        \[
+        v+xv'=v^2+v \;\Longrightarrow\; xv'=v^2 \;\Longrightarrow\; \frac{dv}{v^2}=\frac{dx}{x}.
+        \]
+        <strong>Paso 3.</strong> Integrando: \(-\dfrac1v=\ln|x|+C \Rightarrow v=-\dfrac{1}{\ln|x|+C}\).
+        <br><br>
+        <strong>Paso 4.</strong> Volviendo a \(y=vx\):
+        \[
+        \boxed{y = -\frac{x}{\ln|x|+C}}.
+        \]
+    </div>
+
+    <h3>Ejercicio resuelto 2: Bernoulli</h3>
+    <div class="ejemplo">
+        <strong>Enunciado.</strong> Resolver \(y'+2xy=2xy^3\).
+        <br><br>
+        <strong>Paso 1.</strong> \(n=3\), \(z=y^{1-3}=y^{-2}\), \(z'=-2y^{-3}y'\). Multiplicando la EDO por \(-2y^{-3}\):
+        \[
+        -2y^{-3}y' - 4x y^{-2} = -4x \;\Longrightarrow\; z' - 4xz = -4x.
+        \]
+        <strong>Paso 2.</strong> Lineal con \(P=-4x\), \(Q=-4x\). Factor integrante \(\mu=e^{-2x^2}\):
+        \[
+        e^{-2x^2}z' - 4xe^{-2x^2}z = -4xe^{-2x^2} \;\Longrightarrow\; (e^{-2x^2}z)'=-4xe^{-2x^2}.
+        \]
+        <strong>Paso 3.</strong> Integrando: \(e^{-2x^2}z=2e^{-2x^2}+C \Rightarrow z=2+Ce^{2x^2}\).
+        <br><br>
+        <strong>Paso 4.</strong> Volviendo a \(y=z^{-1/2}\):
+        \[
+        \boxed{y = \frac{1}{\sqrt{2+Ce^{2x^2}}}}.
+        \]
+    </div>
+
+    <h3>Ejercicio resuelto 3: Riccati</h3>
+    <div class="ejemplo">
+        <strong>Enunciado.</strong> Resolver \(y'=y^2-y-2\), sabiendo que \(y_1=2\) es solución particular.
+        <br><br>
+        <strong>Paso 1.</strong> Verificación: \(y_1'=0\), \(y_1^2-y_1-2=4-2-2=0\) ✓.
+        <br><br>
+        <strong>Paso 2.</strong> Con \(y_1=2\), \(y=2+\frac1v\), \(y'=-\frac{v'}{v^2}\). Sustituyendo en \(y'=y^2-y-2\):
+        \[
+        -\frac{v'}{v^2}=\left(2+\frac1v\right)^2-\left(2+\frac1v\right)-2 = \frac{3}{v}+\frac{1}{v^2}.
+        \]
+        Multiplicando por \(-v^2\): \(v'=-3v-1\), es decir, \(v'+3v=-1\).
+        <br><br>
+        <strong>Paso 3.</strong> Lineal con \(P=3\), \(Q=-1\). Factor integrante \(\mu=e^{3x}\):
+        \[
+        (e^{3x}v)'=-e^{3x} \;\Longrightarrow\; e^{3x}v=-\tfrac13 e^{3x}+C \;\Longrightarrow\; v=-\tfrac13+Ce^{-3x}.
+        \]
+        <strong>Paso 4.</strong> Volviendo a \(y=2+\frac1v\):
+        \[
+        \boxed{y = 2 + \frac{1}{-\tfrac13+Ce^{-3x}}}.
+        \]
+    </div>
+
+    <div class="nota">
+        <strong>Nota.</strong> El tercer ejercicio ilustra que en Riccati es imprescindible verificar que la solución particular propuesta efectivamente satisface la ecuación.
+    </div>
+
+    <!-- ============================================================ -->
+    <div style="text-align: center; margin-top: 40px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="ejercicios.html">➡️ Ejercicios</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
     </div>
 </div>
 </body>
