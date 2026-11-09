@@ -2,71 +2,455 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soluciones - Valores y Vectores Propios</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
     <style>
-        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; margin: 0; padding: 0; }
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #1a3e6f; }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
         .author { text-align: center; }
-        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+
         .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
-        .password-box input { padding: 8px; margin-right: 10px; }
-        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .password-box input { padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; border-radius: 4px; }
         .contenido-protegido { display: none; }
-        .error { color: red; }
-        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
-        @media print { .btn-pdf { display: none; } }
+        .error { color: red; margin-top: 8px; }
+
+        /* Cajas de colores del solucionario */
+        .sol-ejercicio { margin: 25px 0; padding: 15px; border-radius: 8px; background: #fafafa; border: 1px solid #e0e0e0; }
+        .sol-titulo { font-weight: bold; color: #1a3e6f; font-size: 17px; margin-bottom: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        .planteo { border-left: 4px solid #1a3e6f; background: #f0f4fa; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+        .calculo { border-left: 4px solid #c96b1a; background: #fef4e8; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+        .respuesta { border-left: 4px solid #2e7d32; background: #e8f0e8; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; font-weight: bold; }
+        .nota-sol { border-left: 4px solid #e07a8f; background: #fef9f9; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; border: none; cursor: pointer; }
+        @media print {
+            .btn-pdf, .password-box { display: none !important; }
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .sol-ejercicio { page-break-inside: avoid; }
+        }
     </style>
 </head>
 <body>
 <div class="latex-container">
     <h1>Soluciones: Valores y Vectores Propios</h1>
     <div class="author">MSc. Orlando Silva</div>
-    <p>Ingrese la contraseña para ver las soluciones.</p>
+    <p style="text-align:center;">Ingrese la contraseña para ver las soluciones.</p>
 
-    <div class="password-box">
+    <div class="password-box" id="passwordBox">
         <input type="password" id="passwordInput" placeholder="Contraseña">
         <button onclick="verificarPassword()">Acceder</button>
         <div id="errorMsg" class="error"></div>
     </div>
 
     <div id="soluciones" class="contenido-protegido">
-        <h2>📝 Soluciones - Ejercicios</h2>
-        <div class="solucion-item"><strong>1.</strong> \(\lambda_1 = 1, \lambda_2 = 3\)</div>
-        <div class="solucion-item"><strong>2.</strong> \(p(\lambda) = \lambda^2 - 5\lambda - 2\), valores propios: \(\lambda = \frac{5 \pm \sqrt{33}}{2}\)</div>
-        <div class="solucion-item"><strong>3.</strong> \(p(\lambda) = \lambda^2 + 3\lambda + 2 = (\lambda+1)(\lambda+2)\) → \(\lambda_1 = -1, \lambda_2 = -2\)</div>
-        <div class="solucion-item"><strong>4.</strong> \(p(\lambda) = \lambda^3 - 6\lambda^2 + 10\lambda - 4 = (\lambda-2)(\lambda^2-4\lambda+2)\) → \(\lambda = 2, 2 \pm \sqrt{2}\)</div>
-        <div class="solucion-item"><strong>5.</strong> Para \(\lambda=1\): \(v_1 = (1,-1)\). Para \(\lambda=3\): \(v_2 = (1,1)\).</div>
-        <div class="solucion-item"><strong>6.</strong> Para \(\lambda_1 = \frac{5+\sqrt{33}}{2}\): \(v_1 = (2, \frac{1+\sqrt{33}}{4})\). Para \(\lambda_2 = \frac{5-\sqrt{33}}{2}\): \(v_2 = (2, \frac{1-\sqrt{33}}{4})\).</div>
-        <div class="solucion-item"><strong>7.</strong> Para \(\lambda=-1\): \(v_1 = (1,-1)\). Para \(\lambda=-2\): \(v_2 = (1,-2)\).</div>
-        <div class="solucion-item"><strong>8.</strong> \(P = \begin{pmatrix}1&1\\-1&1\end{pmatrix}\), \(D = \begin{pmatrix}1&0\\0&3\end{pmatrix}\)</div>
-        <div class="solucion-item"><strong>9.</strong> \(P = \begin{pmatrix}2 & 2 \\ \frac{1+\sqrt{33}}{4} & \frac{1-\sqrt{33}}{4} \end{pmatrix}\), \(D = \begin{pmatrix}\frac{5+\sqrt{33}}{2} & 0 \\ 0 & \frac{5-\sqrt{33}}{2} \end{pmatrix}\)</div>
-        <div class="solucion-item"><strong>10.</strong> \(P\) con columnas \((1,-1,1), (1,0,-1), (1,2,1)\) (vectores propios), \(D = \begin{pmatrix}2-\sqrt{2}&0&0\\0&2&0\\0&0&2+\sqrt{2}\end{pmatrix}\)</div>
-        <div class="solucion-item"><strong>11.</strong> Para \(D = \text{diag}(d_1,\dots,d_n)\), \(D-\lambda I\) es diagonal con \(d_i-\lambda\) en la diagonal, el producto es \(\prod(d_i-\lambda)\), raíces \(d_i\).</div>
-        <div class="solucion-item"><strong>12.</strong> Las matrices simétricas reales son diagonalizables ortogonalmente; los valores propios son reales.</div>
-        <div class="solucion-item"><strong>13.</strong> Valores propios: \(-1, -2\) (ambos negativos) → sistema estable.</div>
-        <div class="solucion-item"><strong>14.</strong> \(p(\lambda) = \lambda^2 + 2\lambda + 1 = (\lambda+1)^2\) → \(\lambda = -1\) (doble). Parte real negativa → estable.</div>
-        <div class="solucion-item"><strong>15.</strong> \(\lambda_1 \approx 3.618, \lambda_2 \approx 0.382\). En PCA, la varianza se distribuye en estas direcciones.</div>
 
-        <h2>📝 Soluciones - Pre‑parciales</h2>
-        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(\lambda=1,3\); 2. \(v_1=(1,-1), v_2=(1,1)\); 3. \(P = \begin{pmatrix}2 & 2 \\ \frac{1+\sqrt{33}}{4} & \frac{1-\sqrt{33}}{4} \end{pmatrix}\), \(D = \begin{pmatrix}\frac{5+\sqrt{33}}{2} & 0 \\ 0 & \frac{5-\sqrt{33}}{2} \end{pmatrix}\); 4. \(\lambda=-1\) (doble) → estable; 5. \(\lambda = \frac{5 \pm \sqrt{5}}{2}\).</div>
-        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(\lambda = \frac{5 \pm \sqrt{33}}{2}\); 2. \(v_1 = (2, \frac{1+\sqrt{33}}{4}), v_2 = (2, \frac{1-\sqrt{33}}{4})\); 3. \(P = \begin{pmatrix}1 & 1 & 1 \\ -1 & 0 & 2 \\ 1 & -1 & 1 \end{pmatrix}\), \(D = \begin{pmatrix}2-\sqrt{2}&0&0\\0&2&0\\0&0&2+\sqrt{2}\end{pmatrix}\); 4. Sí, \(\lambda=-1,-2\) negativos; 5. Teorema espectral.</div>
+    <!-- ============================================================ -->
+    <h2>A. Cálculo de valores propios</h2>
 
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 1. \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p(\lambda) = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3)\).</div>
+        <div class="respuesta">\(\lambda_1 = 1, \quad \lambda_2 = 3\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 2. \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} 1-\lambda & 2 \\ 3 & 4-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p(\lambda) = (1-\lambda)(4-\lambda) - 6 = \lambda^2 - 5\lambda - 2\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Fórmula cuadrática: \(\lambda = \frac{5 \pm \sqrt{25 + 8}}{2} = \frac{5 \pm \sqrt{33}}{2}\).</div>
+        <div class="respuesta">\(\lambda_1 = \frac{5+\sqrt{33}}{2} \approx 5.372, \quad \lambda_2 = \frac{5-\sqrt{33}}{2} \approx -0.372\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 3. \(A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} -\lambda & 1 \\ -2 & -3-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p(\lambda) = (-\lambda)(-3-\lambda) - (1)(-2) = \lambda^2 + 3\lambda + 2 = (\lambda+1)(\lambda+2)\).</div>
+        <div class="respuesta">\(\lambda_1 = -1, \quad \lambda_2 = -2\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 4. \(A = \begin{pmatrix} 4 & -2 \\ 1 & 1 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} 4-\lambda & -2 \\ 1 & 1-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p(\lambda) = (4-\lambda)(1-\lambda) - (-2)(1) = \lambda^2 - 5\lambda + 4 + 2 = \lambda^2 - 5\lambda + 6 = (\lambda-2)(\lambda-3)\).</div>
+        <div class="respuesta">\(\lambda_1 = 2, \quad \lambda_2 = 3\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 5. \(A = \begin{pmatrix} 3 & 0 \\ 0 & -1 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Matriz diagonal; sus valores propios son los elementos de la diagonal.</div>
+        <div class="calculo"><strong>Verificación.</strong> \(p(\lambda) = (3-\lambda)(-1-\lambda) = 0\).</div>
+        <div class="respuesta">\(\lambda_1 = 3, \quad \lambda_2 = -1\). Coinciden con la diagonal. \(\checkmark\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 6. \(A = \begin{pmatrix} a & 1 \\ 1 & a \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} a-\lambda & 1 \\ 1 & a-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p(\lambda) = (a-\lambda)^2 - 1 = (a-\lambda-1)(a-\lambda+1)\).</div>
+        <div class="respuesta">\(\lambda_1 = a-1, \quad \lambda_2 = a+1\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 7. \(A = \begin{pmatrix} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} 2-\lambda & -1 & 0 \\ -1 & 2-\lambda & -1 \\ 0 & -1 & 2-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> Desarrollando por la primera fila:
+        \[
+        p(\lambda) = (2-\lambda)\big[(2-\lambda)^2 - 1\big] + 1\cdot[-1(2-\lambda)] = (2-\lambda)(\lambda^2 - 4\lambda + 2)
+        \]</div>
+        <div class="respuesta">\(\lambda_1 = 2, \quad \lambda_2 = 2+\sqrt{2}, \quad \lambda_3 = 2-\sqrt{2}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 8. \(A = \begin{pmatrix} 1 & 2 & 0 \\ 0 & 3 & 1 \\ 0 & 0 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Matriz triangular superior; sus valores propios son los elementos de la diagonal.</div>
+        <div class="respuesta">\(\lambda_1 = 1, \quad \lambda_2 = 3, \quad \lambda_3 = 2\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 9. \(A = \begin{pmatrix} 2 & 0 & 0 \\ 1 & 2 & 0 \\ 0 & 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Matriz triangular inferior; los valores propios son la diagonal.</div>
+        <div class="respuesta">\(\lambda = 2\) con multiplicidad algebraica 3.</div>
+        <div class="nota-sol"><strong>Nota.</strong> Aunque λ = 2 tiene multiplicidad algebraica 3, su multiplicidad geométrica se calcula en el Ejercicio 18 y resulta ser 1. Por tanto, esta matriz no es diagonalizable.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 10. \(A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & -3 & 3 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(A - \lambda I = \begin{pmatrix} -\lambda & 1 & 0 \\ 0 & -\lambda & 1 \\ 1 & -3 & 3-\lambda \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> Desarrollando:
+        \[
+        p(\lambda) = -\lambda\big[(-\lambda)(3-\lambda)+3\big] - 1\cdot[0\cdot(3-\lambda) - 1\cdot 1] = -\lambda(\lambda^2 - 3\lambda + 3) + 1
+        \]
+        Reordenando: \(p(\lambda) = -\lambda^3 + 3\lambda^2 - 3\lambda + 1 = -(\lambda-1)^3\).</div>
+        <div class="respuesta">\(\lambda = 1\) con multiplicidad algebraica 3.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>B. Cálculo de vectores propios</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 11. \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ₁ = 1.</strong> \((A-I)v = \begin{pmatrix}1&1\\1&1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=0 \Rightarrow x+y=0 \Rightarrow y=-x\).</div>
+        <div class="respuesta">\(v_1 = (1,-1)\).</div>
+        <div class="planteo"><strong>λ₂ = 3.</strong> \((A-3I)v = \begin{pmatrix}-1&1\\1&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=0 \Rightarrow -x+y=0 \Rightarrow y=x\).</div>
+        <div class="respuesta">\(v_2 = (1,1)\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 12. \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ₁ = (5+√33)/2.</strong> \((A-\lambda_1 I)v = 0\). De la primera fila: \((1-\lambda_1)x + 2y = 0 \Rightarrow y = \frac{\lambda_1-1}{2}x\).</div>
+        <div class="calculo">\(\frac{\lambda_1-1}{2} = \frac{3+\sqrt{33}}{4}\). Tomando \(x=2\): \(y = \frac{3+\sqrt{33}}{2}\).</div>
+        <div class="respuesta">\(v_1 = \left(2, \frac{3+\sqrt{33}}{2}\right)\).</div>
+        <div class="planteo"><strong>λ₂ = (5−√33)/2.</strong> Análogamente: \(y = \frac{\lambda_2-1}{2}x = \frac{3-\sqrt{33}}{4}x\).</div>
+        <div class="respuesta">\(v_2 = \left(2, \frac{3-\sqrt{33}}{2}\right)\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Cualquier múltiplo escalar no nulo de estos vectores también es vector propio. La elección de \(x=2\) es arbitraria para evitar fracciones.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 13. \(A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ₁ = -1.</strong> \((A+I)v = \begin{pmatrix}1&1\\-2&-2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=0 \Rightarrow x+y=0 \Rightarrow y=-x\).</div>
+        <div class="respuesta">\(v_1 = (1,-1)\).</div>
+        <div class="planteo"><strong>λ₂ = -2.</strong> \((A+2I)v = \begin{pmatrix}2&1\\-2&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=0 \Rightarrow 2x+y=0 \Rightarrow y=-2x\).</div>
+        <div class="respuesta">\(v_2 = (1,-2)\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 14. Verificar \(v=(1,1)^T\) para \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="calculo">\(Av = \begin{pmatrix}2&1\\1&2\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix} = \begin{pmatrix}3\\3\end{pmatrix} = 3\begin{pmatrix}1\\1\end{pmatrix}\).</div>
+        <div class="respuesta">\(v=(1,1)\) es vector propio con valor propio \(\lambda = 3\). \(\checkmark\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 15. \(A = \begin{pmatrix} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ₁ = 2.</strong> \((A-2I)v = \begin{pmatrix}0&-1&0\\-1&0&-1\\0&-1&0\end{pmatrix}\begin{pmatrix}x\\y\\z\end{pmatrix}=0\). De la primera fila: \(-y=0 \Rightarrow y=0\). De la segunda: \(-x-z=0 \Rightarrow z=-x\).</div>
+        <div class="respuesta">\(v_1 = (1,0,-1)\).</div>
+        <div class="planteo"><strong>λ₂ = 2+√2.</strong> \((A-\lambda_2 I)v = 0\). De la primera fila: \((2-\lambda_2)x - y = 0 \Rightarrow y = (2-\lambda_2)x = -\sqrt{2}x\). De la segunda: \(-x + (2-\lambda_2)y - z = 0 \Rightarrow z = -x -\sqrt{2}y = -x + 2x = x\).</div>
+        <div class="respuesta">\(v_2 = (1, -\sqrt{2}, 1)\).</div>
+        <div class="planteo"><strong>λ₃ = 2−√2.</strong> Análogamente: \(y = (2-\lambda_3)x = \sqrt{2}x\); \(z = -x -\sqrt{2}y = -x - 2x = -3x\)... verificando: de la segunda fila: \(-x + (2-\lambda_3)y - z = 0 \Rightarrow z = -x + \sqrt{2}\cdot\sqrt{2}x = -x+2x = x\).</div>
+        <div class="respuesta">\(v_3 = (1, \sqrt{2}, 1)\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 16. \(A = \begin{pmatrix} 3 & 0 \\ 0 & 3 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ = 3 (doble).</strong> \((A-3I)v = \begin{pmatrix}0&0\\0&0\end{pmatrix}v = 0\), que se cumple para todo \(v \in \mathbb{R}^2\).</div>
+        <div class="respuesta">\(E_3 = \mathbb{R}^2\), dimensión 2. Cualquier vector no nulo es vector propio. Multiplicidad geométrica = 2 = algebraica ⇒ diagonalizable (de hecho ya es diagonal).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 17. \(A = \begin{pmatrix} 1 & 2 & 0 \\ 0 & 3 & 1 \\ 0 & 0 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ₁ = 1.</strong> \((A-I)v = \begin{pmatrix}0&2&0\\0&2&1\\0&0&1\end{pmatrix}v=0\). De la tercera fila: \(z=0\). De la primera: \(2y=0 \Rightarrow y=0\). \(x\) libre.</div>
+        <div class="respuesta">\(v_1 = (1,0,0)\).</div>
+        <div class="planteo"><strong>λ₂ = 3.</strong> \((A-3I)v = \begin{pmatrix}-2&2&0\\0&0&1\\0&0&-1\end{pmatrix}v=0\). De la segunda: \(z=0\). De la primera: \(-2x+2y=0 \Rightarrow y=x\).</div>
+        <div class="respuesta">\(v_2 = (1,1,0)\).</div>
+        <div class="planteo"><strong>λ₃ = 2.</strong> \((A-2I)v = \begin{pmatrix}-1&2&0\\0&1&1\\0&0&0\end{pmatrix}v=0\). De la segunda: \(y+z=0 \Rightarrow z=-y\). De la primera: \(-x+2y=0 \Rightarrow x=2y\).</div>
+        <div class="respuesta">\(v_3 = (2,1,-1)\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Los tres vectores propios son LI, así que la matriz es diagonalizable (tiene 3 valores propios distintos).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 18. \(A = \begin{pmatrix} 2 & 0 & 0 \\ 1 & 2 & 0 \\ 0 & 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>λ = 2 (triple).</strong> \((A-2I)v = \begin{pmatrix}0&0&0\\1&0&0\\0&1&0\end{pmatrix}v=0\). De la segunda fila: \(x=0\). De la tercera: \(y=0\). \(z\) libre.</div>
+        <div class="respuesta">\(E_2 = \text{gen}\{(0,0,1)\}\), dimensión 1. Solo hay 1 vector propio LI (frente a multiplicidad algebraica 3). Por tanto, <strong>no existen 3 vectores LI</strong> y la matriz <strong>no es diagonalizable</strong>.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>C. Diagonalización</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 19. \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Del Ej. 1: \(\lambda_1 = 1\), \(\lambda_2 = 3\). Vectores propios (Ej. 11): \(v_1 = (1,-1)\), \(v_2 = (1,1)\).</div>
+        <div class="calculo"><strong>Matrices.</strong> \(P = \begin{pmatrix}1&1\\-1&1\end{pmatrix}\), \(D = \begin{pmatrix}1&0\\0&3\end{pmatrix}\). \(\det(P) = 2\), \(P^{-1} = \frac{1}{2}\begin{pmatrix}1&-1\\1&1\end{pmatrix}\).</div>
+        <div class="calculo"><strong>Verificación.</strong> \(PD = \begin{pmatrix}1&3\\-1&3\end{pmatrix}\); \(PDP^{-1} = \frac{1}{2}\begin{pmatrix}1&3\\-1&3\end{pmatrix}\begin{pmatrix}1&-1\\1&1\end{pmatrix} = \frac{1}{2}\begin{pmatrix}4&2\\2&4\end{pmatrix} = \begin{pmatrix}2&1\\1&2\end{pmatrix} = A\). \(\checkmark\)</div>
+        <div class="respuesta">\(P = \begin{pmatrix}1&1\\-1&1\end{pmatrix}, \quad D = \begin{pmatrix}1&0\\0&3\end{pmatrix}, \quad P^{-1} = \frac{1}{2}\begin{pmatrix}1&-1\\1&1\end{pmatrix}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 20. \(A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Del Ej. 2: \(\lambda_{1,2} = \frac{5\pm\sqrt{33}}{2}\). Vectores propios (Ej. 12): \(v_1 = (2, \frac{3+\sqrt{33}}{2})\), \(v_2 = (2, \frac{3-\sqrt{33}}{2})\).</div>
+        <div class="respuesta">\(P = \begin{pmatrix} 2 & 2 \\ \frac{3+\sqrt{33}}{2} & \frac{3-\sqrt{33}}{2} \end{pmatrix}, \quad D = \begin{pmatrix} \frac{5+\sqrt{33}}{2} & 0 \\ 0 & \frac{5-\sqrt{33}}{2} \end{pmatrix}\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Como λ₁ ≠ λ₂, la matriz es diagonalizable. Se puede verificar \(AP = PD\) para comprobar.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 21. \(A = \begin{pmatrix} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores y vectores propios.</strong> Del Ej. 7 y Ej. 15: \(\lambda_1=2, v_1=(1,0,-1)\); \(\lambda_2=2+\sqrt{2}, v_2=(1,-\sqrt{2},1)\); \(\lambda_3=2-\sqrt{2}, v_3=(1,\sqrt{2},1)\).</div>
+        <div class="respuesta">\(P = \begin{pmatrix} 1 & 1 & 1 \\ 0 & -\sqrt{2} & \sqrt{2} \\ -1 & 1 & 1 \end{pmatrix}, \quad D = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 2+\sqrt{2} & 0 \\ 0 & 0 & 2-\sqrt{2} \end{pmatrix}\).</div>
+        <div class="calculo"><strong>Verificación (columna 1).</strong> \(AP = \) columna 1: \(A(1,0,-1)^T = (2,0,-2)^T = 2(1,0,-1)^T\). \(\checkmark\)</div>
+        <div class="nota-sol"><strong>Nota.</strong> Los tres valores propios son distintos ⇒ diagonalizable. Se verifica \(AP = PD\) columna a columna.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 22. \(A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Triangular ⇒ \(\lambda = 1\) (doble, mult. algebraica 2).</div>
+        <div class="calculo"><strong>Espacio propio.</strong> \((A-I)v = \begin{pmatrix}0&1\\0&0\end{pmatrix}v=0 \Rightarrow y=0\). \(E_1 = \text{gen}\{(1,0)\}\), dimensión 1.</div>
+        <div class="respuesta"><strong>No es diagonalizable.</strong> Multiplicidad geométrica (1) < multiplicidad algebraica (2). No existen 2 vectores propios LI.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 23. \(A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}\) (diagonalización ortogonal)</div>
+        <div class="planteo"><strong>Valores propios.</strong> \(p(\lambda) = (3-\lambda)^2 - 1 = (\lambda-2)(\lambda-4)\) ⇒ \(\lambda_1=2, \lambda_2=4\).</div>
+        <div class="calculo"><strong>λ₁ = 2.</strong> \((A-2I)v = \begin{pmatrix}1&1\\1&1\end{pmatrix}v=0 \Rightarrow v_1 = (1,-1)\). Norma \(\sqrt{2}\) ⇒ \(q_1 = \frac{1}{\sqrt{2}}(1,-1)\).</div>
+        <div class="calculo"><strong>λ₂ = 4.</strong> \((A-4I)v = \begin{pmatrix}-1&1\\1&-1\end{pmatrix}v=0 \Rightarrow v_2 = (1,1)\). Norma \(\sqrt{2}\) ⇒ \(q_2 = \frac{1}{\sqrt{2}}(1,1)\).</div>
+        <div class="respuesta">\(Q = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\-1&1\end{pmatrix}, \quad \Lambda = \begin{pmatrix}2&0\\0&4\end{pmatrix}\). Se verifica \(Q^TQ = I\) y \(A = Q\Lambda Q^T\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Como \(v_1 \cdot v_2 = 1\cdot1 + (-1)\cdot1 = 0\), los vectores ya eran ortogonales; solo hubo que normalizar.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 24. \(A = \begin{pmatrix} 3 & 0 \\ 0 & -1 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Ya es diagonal.</strong> \(\lambda_1 = 3\), \(\lambda_2 = -1\). Vectores propios: \(e_1=(1,0)\), \(e_2=(0,1)\).</div>
+        <div class="respuesta">\(P = I, \quad D = A = \begin{pmatrix}3&0\\0&-1\end{pmatrix}\). Trivialmente \(A = I \cdot A \cdot I^{-1}\).</div>
+        <div class="nota-sol"><strong>Comentario.</strong> Toda matriz diagonal ya está diagonalizada; sus vectores propios son los vectores canónicos.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 25. Calcular \(A^{10}\) para \(A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Diagonalización.</strong> Del Ej. 19: \(P = \begin{pmatrix}1&1\\-1&1\end{pmatrix}\), \(D = \begin{pmatrix}1&0\\0&3\end{pmatrix}\), \(P^{-1} = \frac{1}{2}\begin{pmatrix}1&-1\\1&1\end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 1.</strong> \(D^{10} = \begin{pmatrix}1^{10}&0\\0&3^{10}\end{pmatrix} = \begin{pmatrix}1&0\\0&59049\end{pmatrix}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(A^{10} = P D^{10} P^{-1} = \begin{pmatrix}1&1\\-1&1\end{pmatrix}\begin{pmatrix}1&0\\0&59049\end{pmatrix}\frac{1}{2}\begin{pmatrix}1&-1\\1&1\end{pmatrix}\).
+        \[
+        = \frac{1}{2}\begin{pmatrix}1&59049\\-1&59049\end{pmatrix}\begin{pmatrix}1&-1\\1&1\end{pmatrix} = \frac{1}{2}\begin{pmatrix}59050 & 59048 \\ 59048 & 59050\end{pmatrix}
+        \]</div>
+        <div class="respuesta">\(A^{10} = \begin{pmatrix}29525 & 29524 \\ 29524 & 29525\end{pmatrix}\).</div>
+        <div class="nota-sol"><strong>Verificación rápida.</strong> \(A^{10}\) debe ser simétrica (lo es) y \(\text{traza} = 59050 = 1^{10} + 3^{10} = 1 + 59049\). \(\checkmark\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 26. \(A = \begin{pmatrix} 1 & 2 & 0 \\ 0 & 3 & 1 \\ 0 & 0 & 2 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Triangular ⇒ \(\lambda_1=1, \lambda_2=3, \lambda_3=2\) (tres distintos). Vectores propios del Ej. 17: \(v_1=(1,0,0)\), \(v_2=(1,1,0)\), \(v_3=(2,1,-1)\).</div>
+        <div class="respuesta">\(P = \begin{pmatrix}1&1&2\\0&1&1\\0&0&-1\end{pmatrix}, \quad D = \begin{pmatrix}1&0&0\\0&3&0\\0&0&2\end{pmatrix}\). Diagonalizable porque tiene 3 valores propios distintos.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>D. Matrices especiales y propiedades teóricas</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 27. Valores propios de una matriz diagonal</div>
+        <div class="planteo">Sea \(D = \text{diag}(d_1,\dots,d_n)\). Entonces \(D - \lambda I = \text{diag}(d_1-\lambda, \dots, d_n-\lambda)\).</div>
+        <div class="calculo">\(p(\lambda) = \prod_{i=1}^n (d_i - \lambda)\), cuyas raíces son \(\lambda_i = d_i\).</div>
+        <div class="respuesta">Los valores propios son exactamente los elementos de la diagonal. Los vectores propios son los vectores canónicos \(e_i\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 28. \(\text{traza}(A) = \lambda_1 + \lambda_2\) para \(2\times2\)</div>
+        <div class="planteo">Sea \(A = \begin{pmatrix}a&b\\c&d\end{pmatrix}\). Entonces \(p(\lambda) = \lambda^2 - (a+d)\lambda + (ad-bc)\).</div>
+        <div class="calculo">Por otro lado, \(p(\lambda) = (\lambda-\lambda_1)(\lambda-\lambda_2) = \lambda^2 - (\lambda_1+\lambda_2)\lambda + \lambda_1\lambda_2\).</div>
+        <div class="respuesta">Igualando coeficientes: \(a+d = \lambda_1+\lambda_2\), es decir, \(\text{traza}(A) = \lambda_1+\lambda_2\). \(\blacksquare\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 29. \(\det(A) = \lambda_1\lambda_2\) para \(2\times2\)</div>
+        <div class="planteo">Del desarrollo del Ej. 28, el término independiente de \(p(\lambda)\) es \(ad-bc = \det(A)\).</div>
+        <div class="calculo">En la forma factorizada, el término independiente es \(\lambda_1\lambda_2\).</div>
+        <div class="respuesta">\(\det(A) = \lambda_1\lambda_2\). \(\blacksquare\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 30. Matriz simétrica real ⇒ λ reales</div>
+        <div class="planteo">Sea \(A = A^T\) real y \(Av = \lambda v\) con \(v \neq 0\) posiblemente complejo. Tomando conjugado traspuesto: \(v^* A = \bar{\lambda} v^*\) (usando \(A^T = A\)).</div>
+        <div class="calculo">Multiplicando \(Av = \lambda v\) por \(v^*\) a la izquierda: \(v^* A v = \lambda v^* v\). Multiplicando \(v^* A = \bar{\lambda} v^*\) por \(v\) a la derecha: \(v^* A v = \bar{\lambda} v^* v\).</div>
+        <div class="respuesta">Igualando: \(\lambda v^* v = \bar{\lambda} v^* v\). Como \(v \neq 0\), \(v^* v = \|v\|^2 > 0\), luego \(\lambda = \bar{\lambda}\) ⇒ \(\lambda\) es real. \(\blacksquare\)</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 31. \(N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\) (nilpotente)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Triangular ⇒ \(\lambda = 0\) (doble).</div>
+        <div class="calculo"><strong>Espacio propio.</strong> \((N-0I)v = \begin{pmatrix}0&1\\0&0\end{pmatrix}v=0 \Rightarrow y=0\). \(E_0 = \text{gen}\{(1,0)\}\), dimensión 1.</div>
+        <div class="respuesta">\(\lambda = 0\) (mult. algebraica 2), mult. geométrica 1 ⇒ <strong>no es diagonalizable</strong>. Es nilpotente: \(N^2 = 0\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 32. \(P = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\) (proyección)</div>
+        <div class="planteo">Diagonal ⇒ \(\lambda_1 = 1\), \(\lambda_2 = 0\). Vectores propios: \(e_1=(1,0)\) para λ=1, \(e_2=(0,1)\) para λ=0.</div>
+        <div class="respuesta">Valores propios 0 y 1. <strong>Interpretación geométrica:</strong> proyecta el plano sobre el eje \(x\). El vector \(e_1\) (sobre el eje) queda fijo (λ=1); el vector \(e_2\) (perpendicular) se anula (λ=0).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 33. Rotación \(R(\theta) = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (\cos\theta-\lambda)^2 + \sin^2\theta = \lambda^2 - 2\cos\theta\,\lambda + 1\).</div>
+        <div class="calculo">Raíces: \(\lambda = \cos\theta \pm \sqrt{\cos^2\theta - 1} = \cos\theta \pm i\sin\theta = e^{\pm i\theta}\).</div>
+        <div class="respuesta">\(\lambda = e^{\pm i\theta}\) (complejos conjugados de módulo 1). Para \(\theta = 90°\): \(\lambda = \pm i\), <strong>no hay valores propios reales</strong>; geométricamente, una rotación de 90° no deja ninguna dirección fija.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 34. Base ortonormal para \(A = \begin{pmatrix} 2 & 1 & 0 \\ 1 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix}\)</div>
+        <div class="planteo"><strong>Valores propios.</strong> Por bloques: el bloque \(2\times2\) superior da \(\lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3)\); el elemento (3,3) da \(\lambda_3 = 3\). Así, \(\lambda_1=1\), \(\lambda_2=3\) (doble).</div>
+        <div class="calculo"><strong>λ₁ = 1.</strong> \((A-I)v=0\): \(\begin{pmatrix}1&1&0\\1&1&0\\0&0&2\end{pmatrix}v=0 \Rightarrow x+y=0, z=0\). \(v_1 = (1,-1,0)/\sqrt{2}\).</div>
+        <div class="calculo"><strong>λ₂ = 3 (doble).</strong> \((A-3I)v=0\): \(\begin{pmatrix}-1&1&0\\1&-1&0\\0&0&0\end{pmatrix}v=0 \Rightarrow x=y\). Espacio propio: \(\text{gen}\{(1,1,0), (0,0,1)\}\). Ortonormalizamos: \(q_2 = (1,1,0)/\sqrt{2}\), \(q_3 = (0,0,1)\) (ya ortogonal a \(q_2\)).</div>
+        <div class="respuesta">Base ortonormal: \(\left\{\frac{1}{\sqrt{2}}(1,-1,0),\ \frac{1}{\sqrt{2}}(1,1,0),\ (0,0,1)\right\}\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Como \(A\) es simétrica, los vectores propios de λ distintos son ortogonales; dentro del espacio propio de λ=3 aplicamos Gram-Schmidt (aquí ya eran ortogonales).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 35. Valores propios de \(A^{-1}\)</div>
+        <div class="planteo">Si \(Av = \lambda v\) con \(\lambda \neq 0\) (A invertible), multiplicamos por \(A^{-1}\) a la izquierda: \(v = \lambda A^{-1} v\), es decir, \(A^{-1}v = \frac{1}{\lambda}v\).</div>
+        <div class="respuesta">Los valores propios de \(A^{-1}\) son \(1/\lambda_i\), con los <strong>mismos</strong> vectores propios que \(A\).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>E. Aplicaciones en ingeniería eléctrica</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 36. \(A = \begin{pmatrix} -1 & 0 \\ 0 & -2 \end{pmatrix}\)</div>
+        <div class="planteo">Diagonal ⇒ \(\lambda_1 = -1\), \(\lambda_2 = -2\).</div>
+        <div class="respuesta">Ambos valores propios tienen parte real negativa ⇒ el sistema es <strong>asintóticamente estable</strong>.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 37. \(A = \begin{pmatrix} -2 & -1 \\ 1 & 0 \end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (-2-\lambda)(-\lambda) - (-1)(1) = \lambda^2 + 2\lambda + 1 = (\lambda+1)^2\).</div>
+        <div class="calculo">\(\lambda = -1\) (doble). \((A+I)v = \begin{pmatrix}-1&-1\\1&1\end{pmatrix}v=0 \Rightarrow x+y=0\). \(E_{-1} = \text{gen}\{(1,-1)\}\), dim 1.</div>
+        <div class="respuesta">\(\lambda = -1\) con parte real negativa ⇒ <strong>estable</strong>. Pero no es diagonalizable (mult. geométrica 1 < 2).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 38. Circuito RLC: \(A = \begin{pmatrix} 0 & 1 \\ -1 & -2 \end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (-\lambda)(-2-\lambda) - (1)(-1) = \lambda^2 + 2\lambda + 1 = (\lambda+1)^2\).</div>
+        <div class="respuesta">\(\lambda = -1\) (doble, parte real negativa) ⇒ el circuito es <strong>estable</strong>. Corresponde a un <strong>amortiguamiento crítico</strong> (raíz doble).</div>
+        <div class="nota-sol"><strong>Interpretación física.</strong> Con \(R = 2\sqrt{L/C}\), el sistema está en el límite entre régimen subamortiguado (oscilatorio) y sobreamortiguado (no oscilatorio).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 39. \(A = \begin{pmatrix} -1 & 0 & 0 \\ 0 & -2 & 0 \\ 0 & 0 & -3 \end{pmatrix}\)</div>
+        <div class="planteo">Diagonal ⇒ \(\lambda_1=-1, \lambda_2=-2, \lambda_3=-3\).</div>
+        <div class="respuesta">Todos con parte real negativa ⇒ <strong>asintóticamente estable</strong>.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 40. \(A = \begin{pmatrix} -1 & 2 \\ -2 & -1 \end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (-1-\lambda)^2 - (2)(-2) = \lambda^2 + 2\lambda + 1 + 4 = \lambda^2 + 2\lambda + 5\).</div>
+        <div class="calculo">\(\lambda = \frac{-2 \pm \sqrt{4-20}}{2} = -1 \pm 2i\).</div>
+        <div class="respuesta">\(\lambda = -1 \pm 2i\). La parte real es \(-1 < 0\) ⇒ <strong>estable</strong> (con oscilaciones amortiguadas de frecuencia 2 rad/s).</div>
+      </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 41. PCA: \(A = \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (3-\lambda)(2-\lambda) - 1 = \lambda^2 - 5\lambda + 5\).</div>
+        <div class="calculo">\(\lambda = \frac{5 \pm \sqrt{25-20}}{2} = \frac{5 \pm \sqrt{5}}{2}\).</div>
+        <div class="respuesta">\(\lambda_1 = \frac{5+\sqrt{5}}{2} \approx 3.618\), \(\lambda_2 = \frac{5-\sqrt{5}}{2} \approx 1.382\). Varianza total = 5. La primera componente explica \(\frac{3.618}{5} \approx 72.4\%\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 42. PCA con datos (1,1),(2,2),(3,3),(4,4)</div>
+        <div class="planteo"><strong>Media.</strong> \(\bar{x} = \bar{y} = 2.5\).</div>
+        <div class="calculo"><strong>Covarianza.</strong> \(\text{Var}(x) = \frac{1}{4}\sum(x_i-2.5)^2 = \frac{1}{4}(2.25+0.25+0.25+2.25) = 1.25\). Análogamente \(\text{Var}(y) = 1.25\). \(\text{Cov}(x,y) = 1.25\). Matriz: \(C = \begin{pmatrix}1.25&1.25\\1.25&1.25\end{pmatrix}\).</div>
+        <div class="calculo"><strong>Valores propios.</strong> \(p(\lambda) = (1.25-\lambda)^2 - 1.25^2 = \lambda^2 - 2.5\lambda = \lambda(\lambda-2.5)\).</div>
+        <div class="respuesta">\(\lambda_1 = 2.5\), \(\lambda_2 = 0\). El vector propio de λ₁=2.5 es \((1,1)/\sqrt{2}\), que es la <strong>dirección principal</strong> (la recta \(y=x\)); toda la varianza está en esa dirección.</div>
+        <div class="nota-sol"><strong>Interpretación.</strong> λ₂=0 indica que no hay variación en la dirección perpendicular: los datos están perfectamente alineados sobre \(y=x\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 43. Oscilador acoplado \(A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}\)</div>
+        <div class="planteo">\(p(\lambda) = (2-\lambda)^2 - 1 = (\lambda-1)(\lambda-3)\). \(\lambda_1 = 1\), \(\lambda_2 = 3\).</div>
+        <div class="calculo">\(\omega_1 = \sqrt{1} = 1\) rad/s, \(\omega_2 = \sqrt{3} \approx 1.732\) rad/s.</div>
+        <div class="respuesta">\(\omega_1 = 1\) rad/s, \(\omega_2 = \sqrt{3}\) rad/s. Los vectores propios dan los modos de vibración: \((1,1)\) (movimiento simétrico) y \((1,-1)\) (movimiento antisimétrico).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 44. \(A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}\) (red de potencia)</div>
+        <div class="planteo">\(p(\lambda) = (1-\lambda)^2 - 1 = \lambda^2 - 2\lambda = \lambda(\lambda-2)\).</div>
+        <div class="calculo">\(\lambda_1 = 0\), \(v_1 = (1,-1)\); \(\lambda_2 = 2\), \(v_2 = (1,1)\).</div>
+        <div class="respuesta">Valores propios 0 y 2. El <strong>valor propio nulo</strong> indica que existe un modo (dirección \((1,-1)\)) en el que no hay flujo de potencia neto: los dos nodos tienen el mismo potencial y no circula corriente entre ellos. El modo \((1,1)\) con λ=2 corresponde al flujo máximo (ambos nodos al mismo potencial respecto de la referencia).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 45. \(A = \begin{pmatrix} -1 & 1 \\ 0 & -1 \end{pmatrix}\)</div>
+        <div class="planteo">Triangular ⇒ \(\lambda = -1\) (doble). \((A+I)v = \begin{pmatrix}0&1\\0&0\end{pmatrix}v=0 \Rightarrow y=0\). \(E_{-1} = \text{gen}\{(1,0)\}\), dim 1.</div>
+        <div class="respuesta"><strong>Estable</strong> (\(\text{Re}(-1)=-1<0\)), pero <strong>no diagonalizable</strong> (mult. geométrica 1 < algebraica 2). La solución incluye un término \(t e^{-t}\), que también tiende a 0.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>📝 Soluciones - Pre-parciales</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Pre-parcial 1</div>
+        <div class="planteo"><strong>1. (10 pts) Valores propios de \(A = \begin{pmatrix}2&1\\1&2\end{pmatrix}\).</strong> \(p(\lambda) = \lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3)\).</div>
+        <div class="respuesta">\(\lambda_1 = 1, \lambda_2 = 3\).</div>
+        <div class="planteo"><strong>2. (10 pts) Vectores propios.</strong> Para λ=1: \(v_1 = (1,-1)\). Para λ=3: \(v_2 = (1,1)\).</div>
+        <div class="planteo"><strong>3. (10 pts) Diagonalizar \(A = \begin{pmatrix}1&2\\3&4\end{pmatrix}\).</strong> Del Ej. 20: \(P = \begin{pmatrix}2&2\\\frac{3+\sqrt{33}}{2}&\frac{3-\sqrt{33}}{2}\end{pmatrix}\), \(D = \begin{pmatrix}\frac{5+\sqrt{33}}{2}&0\\0&\frac{5-\sqrt{33}}{2}\end{pmatrix}\).</div>
+        <div class="planteo"><strong>4. (10 pts) Estabilidad de \(A = \begin{pmatrix}-2&-1\\1&0\end{pmatrix}\).</strong> Del Ej. 37: \(\lambda = -1\) (doble), parte real negativa ⇒ estable.</div>
+        <div class="planteo"><strong>5. (10 pts) Valores propios de \(A = \begin{pmatrix}3&1\\1&2\end{pmatrix}\).</strong> \(p(\lambda) = \lambda^2 - 5\lambda + 5\).</div>
+        <div class="respuesta">\(\lambda = \frac{5 \pm \sqrt{5}}{2}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Pre-parcial 2</div>
+        <div class="planteo"><strong>1. (10 pts) Valores propios de \(A = \begin{pmatrix}1&2\\3&4\end{pmatrix}\).</strong> \(p(\lambda) = \lambda^2 - 5\lambda - 2\).</div>
+        <div class="respuesta">\(\lambda = \frac{5 \pm \sqrt{33}}{2}\).</div>
+        <div class="planteo"><strong>2. (10 pts) Vectores propios.</strong> Del Ej. 12: \(v_1 = (2, \frac{3+\sqrt{33}}{2})\), \(v_2 = (2, \frac{3-\sqrt{33}}{2})\).</div>
+        <div class="planteo"><strong>3. (10 pts) Diagonalizar \(A = \begin{pmatrix}2&-1&0\\-1&2&-1\\0&-1&2\end{pmatrix}\).</strong> Del Ej. 21: \(P = \begin{pmatrix}1&1&1\\0&-\sqrt{2}&\sqrt{2}\\-1&1&1\end{pmatrix}\), \(D = \text{diag}(2, 2+\sqrt{2}, 2-\sqrt{2})\).</div>
+        <div class="planteo"><strong>4. (10 pts) Estabilidad de \(A = \begin{pmatrix}-1&0\\0&-2\end{pmatrix}\).</strong> λ = -1, -2, ambas negativas ⇒ <strong>estable</strong>.</div>
+        <div class="planteo"><strong>5. (10 pts) ¿Por qué los λ de una matriz simétrica son reales?</strong> Del Ej. 30: tomando \(Av = \lambda v\) y \(v^* A = \bar{\lambda} v^*\), se obtiene \(\lambda v^*v = \bar{\lambda} v^*v\), y como \(v^*v > 0\), \(\lambda = \bar{\lambda}\) ⇒ λ real.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <div style="text-align: center; margin-top: 30px;">
         <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
     </div>
+
+    </div><!-- fin contenido-protegido -->
 </div>
+
 <script>
     function verificarPassword() {
         const pwd = document.getElementById('passwordInput').value;
         if (pwd === 'pnfe2026') {
             document.getElementById('soluciones').style.display = 'block';
-            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('passwordBox').style.display = 'none';
             document.getElementById('errorMsg').innerHTML = '';
         } else {
             document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
         }
     }
+    // Permite presionar Enter
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') verificarPassword();
+    });
 </script>
 </body>
 </html>
+            
