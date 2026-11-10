@@ -2,45 +2,158 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Pre‑parcial - EDO: Métodos Avanzados de Primer Orden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-parcial: EDO - Métodos Avanzados de Primer Orden</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
     <style>
-        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; margin: 0; padding: 0; }
         .latex-container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #1a3e6f; }
-        .author { text-align: center; }
-        .examen { margin-bottom: 50px; border-top: 2px solid #ccc; padding-top: 20px; }
-        .pregunta { margin: 15px 0; }
-        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
-        @media print { .btn-pdf { display: none; } }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .examen { margin-bottom: 60px; border-top: 2px solid #ccc; padding-top: 20px; page-break-inside: avoid; }
+        .pregunta { margin: 15px 0; padding: 10px 14px; background: #fafafa; border-left: 4px solid #1a3e6f; border-radius: 0 4px 4px 0; }
+        .pregunta .pts { float: right; font-weight: bold; color: #c96b1a; font-size: 13px; }
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+        .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
+        .nav-footer a:hover { background: #2a5a9a; }
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            .pregunta { page-break-inside: avoid; }
+            h2 { page-break-after: avoid; }
+        }
     </style>
 </head>
 <body>
 <div class="latex-container">
-    <h1>Pre‑parcial: EDO - Métodos Avanzados de Primer Orden</h1>
+    <h1>Pre-parcial: EDO - Métodos Avanzados de Primer Orden</h1>
     <div class="author">MSc. Orlando Silva</div>
-    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto I</div>
 
-    <div class="examen">
-        <h2>Pre‑parcial 1</h2>
-        <div class="pregunta"><strong>1. (12 puntos)</strong> Resuelve usando factor integrante: \(y' + 2y = 4x\)</div>
-        <div class="pregunta"><strong>2. (12 puntos)</strong> Resuelve la ecuación de Bernoulli: \(y' + y = xy^2\)</div>
-        <div class="pregunta"><strong>3. (10 puntos)</strong> Resuelve el PVI: \(y' - y = e^{2x}\), \(y(0)=0\)</div>
-        <div class="pregunta"><strong>4. (10 puntos)</strong> En un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante, encuentra \(i(t)\) si \(i(0)=0\).</div>
-        <div class="pregunta"><strong>5. (6 puntos)</strong> Enuncia el método del factor integrante para una EDO lineal de primer orden.</div>
+    <div class="intro">
+        <strong>Instrucciones.</strong> Resuelva cada uno de los siguientes ejercicios mostrando claramente el procedimiento. Identifique el tipo de EDO, aplique el método correspondiente y, en la pregunta con condición inicial, determine la constante. Cada pregunta tiene una puntuación indicada; el total es de <strong>20 puntos</strong> por examen.
+        <br><br>
+        Las soluciones detalladas están en <strong>soluciones.html</strong> (contraseña requerida).
     </div>
 
-    <div class="examen">
-        <h2>Pre‑parcial 2</h2>
-        <div class="pregunta"><strong>1. (12 puntos)</strong> Resuelve usando factor integrante: \(x\frac{dy}{dx} + y = x^3\)</div>
-        <div class="pregunta"><strong>2. (12 puntos)</strong> Resuelve la ecuación de Bernoulli: \(y' + \frac{1}{x}y = y^2\)</div>
-        <div class="pregunta"><strong>3. (10 puntos)</strong> Resuelve el PVI: \(y' + 2y = 4x\), \(y(0)=1\)</div>
-        <div class="pregunta"><strong>4. (10 puntos)</strong> En un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante, encuentra \(v_c(t)\) si \(v_c(0)=0\).</div>
-        <div class="pregunta"><strong>5. (6 puntos)</strong> Explica el cambio de variable para resolver la ecuación de Bernoulli.</div>
+    <div class="nota">
+        <strong>Contenido evaluado:</strong> EDO lineales de primer orden (factor integrante), homogéneas, factores integrantes, Bernoulli y un PVI de cualquiera de estos tipos. <strong>No se evalúan aplicaciones de circuitos eléctricos</strong> (corresponden a la Unidad 4), <strong>ni Riccati, ni Clairaut</strong>.
     </div>
 
-    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-    <div><a href="teoria.html">← Teoría</a> | <a href="ejercicios.html">📝 Ejercicios</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+    <!-- ============================================================ -->
+    <div class="examen">
+        <h2>Pre-parcial Tipo A</h2>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>1. (Lineal)</strong> Resuelva:
+            \[
+            \frac{dy}{dx} + 2y = 4x
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>2. (Homogénea)</strong> Resuelva:
+            \[
+            y' = \frac{y}{x} + 1, \quad x>0
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>3. (Factor integrante)</strong> Halle un factor integrante y resuelva:
+            \[
+            (2y)\,dx + (x)\,dy = 0
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>4. (Bernoulli)</strong> Resuelva:
+            \[
+            y' + y = xy^2
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>5. (PVI)</strong> Resuelva el problema de valor inicial:
+            \[
+            y' + 2y = 4x, \quad y(0)=1
+            \]
+        </div>
+
+        <div class="nota">
+            <strong>Total Tipo A:</strong> 20 puntos.
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <div class="examen">
+        <h2>Pre-parcial Tipo B</h2>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>1. (Lineal)</strong> Resuelva:
+            \[
+            \frac{dy}{dx} - 3y = e^{2x}
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>2. (Homogénea)</strong> Resuelva:
+            \[
+            y' = \frac{x^2+y^2}{xy}, \quad x>0
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>3. (Factor integrante)</strong> Halle un factor integrante y resuelva:
+            \[
+            (y)\,dx + (2x+y^2)\,dy = 0
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>4. (Bernoulli)</strong> Resuelva:
+            \[
+            y' + \frac{1}{x}y = y^2, \quad x>0
+            \]
+        </div>
+
+        <div class="pregunta">
+            <span class="pts">4 pts</span>
+            <strong>5. (PVI)</strong> Resuelva el problema de valor inicial:
+            \[
+            y' + y = xy^2, \quad y(0)=1
+            \]
+        </div>
+
+        <div class="nota">
+            <strong>Total Tipo B:</strong> 20 puntos.
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="ejercicios.html">📝 Ejercicios</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
 </div>
 </body>
 </html>
