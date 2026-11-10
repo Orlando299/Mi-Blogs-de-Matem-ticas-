@@ -2,77 +2,445 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soluciones - EDO: Métodos Avanzados de Primer Orden</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
     <style>
-        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; margin: 0; padding: 0; }
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #1a3e6f; }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
         .author { text-align: center; }
-        .solucion-item { margin: 6px 0; padding: 6px; border-left: 3px solid green; background: #e8f0e8; }
+
         .password-box { background: #f0f0f0; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0; }
-        .password-box input { padding: 8px; margin-right: 10px; }
-        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; }
+        .password-box input { padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        .password-box button { padding: 8px 16px; background: #1a3e6f; color: white; border: none; cursor: pointer; border-radius: 4px; }
         .contenido-protegido { display: none; }
-        .error { color: red; }
-        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
-        @media print { .btn-pdf { display: none; } }
+        .error { color: red; margin-top: 8px; }
+
+        .sol-ejercicio { margin: 25px 0; padding: 15px; border-radius: 8px; background: #fafafa; border: 1px solid #e0e0e0; }
+        .sol-titulo { font-weight: bold; color: #1a3e6f; font-size: 17px; margin-bottom: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        .planteo { border-left: 4px solid #1a3e6f; background: #f0f4fa; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+        .calculo { border-left: 4px solid #c96b1a; background: #fef4e8; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; }
+        .respuesta { border-left: 4px solid #2e7d32; background: #e8f0e8; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; font-weight: bold; }
+        .nota-sol { border-left: 4px solid #e07a8f; background: #fef9f9; padding: 10px 14px; margin: 10px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; border: none; cursor: pointer; }
+        @media print {
+            .btn-pdf, .password-box { display: none !important; }
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .sol-ejercicio { page-break-inside: avoid; }
+            h2 { page-break-after: avoid; }
+        }
     </style>
 </head>
 <body>
 <div class="latex-container">
     <h1>Soluciones: EDO - Métodos Avanzados de Primer Orden</h1>
     <div class="author">MSc. Orlando Silva</div>
-    <p>Ingrese la contraseña para ver las soluciones.</p>
+    <p style="text-align:center;">Ingrese la contraseña para ver las soluciones.</p>
 
-    <div class="password-box">
+    <div class="password-box" id="passwordBox">
         <input type="password" id="passwordInput" placeholder="Contraseña">
         <button onclick="verificarPassword()">Acceder</button>
         <div id="errorMsg" class="error"></div>
     </div>
 
     <div id="soluciones" class="contenido-protegido">
-        <h2>📝 Soluciones - Ejercicios</h2>
-        <div class="solucion-item">1. \(y = 2x - 1 + C e^{-2x}\)</div>
-        <div class="solucion-item">2. \(y = e^{2x} + C e^{x}\)</div>
-        <div class="solucion-item">3. \(y = \frac{x^3}{4} + \frac{C}{x}\)</div>
-        <div class="solucion-item">4. \(y = \sin x + C \csc x\)</div>
-        <div class="solucion-item">5. \(y = -\frac{1}{3}e^{2x} + C e^{3x}\)</div>
-        <div class="solucion-item">6. \(y = \frac{x^2}{4} + \frac{C}{x^2}\)</div>
-        <div class="solucion-item">7. \(y = \frac{1}{x+1+C e^{x}}\)</div>
-        <div class="solucion-item">8. \(y = \frac{1}{x + C x}\)</div>
-        <div class="solucion-item">9. \(y = \frac{1}{\sqrt{C e^{4x} + 1}}\)</div>
-        <div class="solucion-item">10. \(y = \frac{1}{1 + C e^{2x}}\)</div>
-        <div class="solucion-item">11. \(y = \frac{1}{x^2(3x + C)}\)</div>
-        <div class="solucion-item">12. \(y = 2x - 1 + 2e^{-2x}\)</div>
-        <div class="solucion-item">13. \(y = e^{2x} - e^{x}\)</div>
-        <div class="solucion-item">14. \(y = \frac{x^3}{4} + \frac{7}{4x}\)</div>
-        <div class="solucion-item">15. \(y = \frac{1}{4}e^{x} + \frac{7}{4}e^{-3x}\)</div>
-        <div class="solucion-item">16. \(i(t) = 3(1 - e^{-2t})\)</div>
-        <div class="solucion-item">17. \(v_c(t) = 5(1 - e^{-10t})\)</div>
-        <div class="solucion-item">18. \(i(t) = \frac{10}{\sqrt{4^2+16}}\sin(2t - \arctan(4)) + C e^{-4t}\)</div>
-        <div class="solucion-item">19. \(y = \frac{1}{C e^{x} - e^{x} + 1}\)</div>
-        <div class="solucion-item">20. \(y = \frac{1}{x^2 + C x^2}\)</div>
-        <div class="solucion-item">21. \(i(t) = \frac{V_0}{\sqrt{R^2 + (\omega L)^2}}\sin(\omega t - \phi) + C e^{-Rt/L}\), \(\phi = \arctan(\omega L/R)\)</div>
 
-        <h2>📝 Soluciones - Pre‑parciales</h2>
-        <div class="solucion-item"><strong>Pre‑parcial 1:</strong> 1. \(y = 2x - 1 + C e^{-2x}\); 2. \(y = \frac{1}{x+1+C e^{x}}\); 3. \(y = e^{2x} - e^{x}\); 4. \(i(t) = 3(1 - e^{-2t})\); 5. Ver teoría.</div>
-        <div class="solucion-item"><strong>Pre‑parcial 2:</strong> 1. \(y = \frac{x^3}{4} + \frac{C}{x}\); 2. \(y = \frac{1}{x + C x}\); 3. \(y = 2x - 1 + 2e^{-2x}\); 4. \(v_c(t) = 5(1 - e^{-10t})\); 5. Ver teoría.</div>
+    <!-- ============================================================ -->
+    <h2>A. EDO lineales de primer orden (factor integrante)</h2>
 
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 1. \(y' + 2y = 4x\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(P(x)=2 \Rightarrow \mu=e^{\int 2\,dx}=e^{2x}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> Multiplicando: \(e^{2x}y'+2e^{2x}y=4xe^{2x} \Rightarrow (e^{2x}y)'=4xe^{2x}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Integrando por partes: \(e^{2x}y=2xe^{2x}-e^{2x}+C\).</div>
+        <div class="respuesta">\(y = 2x - 1 + Ce^{-2x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 2. \(y' - y = e^{2x}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(P(x)=-1 \Rightarrow \mu=e^{-x}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((e^{-x}y)'=e^{-x}\cdot e^{2x}=e^{x}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Integrando: \(e^{-x}y=e^{x}+C\).</div>
+        <div class="respuesta">\(y = e^{2x} + Ce^{x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 3. \(xy' + y = x^3\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Dividiendo entre \(x\): \(y'+\frac1x y=x^2\). \(\mu=e^{\ln x}=x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((xy)'=x^3 \Rightarrow xy=\frac14 x^4+C\).</div>
+        <div class="respuesta">\(y = \frac14 x^3 + \frac{C}{x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 4. \(y' + y\cot x = \csc x\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(P=\cot x \Rightarrow \mu=e^{\int \cot x\,dx}=e^{\ln|\sin x|}=\sin x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((\sin x\,y)'=\sin x\csc x=1 \Rightarrow \sin x\,y=x+C\).</div>
+        <div class="respuesta">\(y = \frac{x+C}{\sin x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 5. \(y' - 3y = e^{2x}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(\mu=e^{-3x}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((e^{-3x}y)'=e^{-3x}e^{2x}=e^{-x} \Rightarrow e^{-3x}y=-e^{-x}+C\).</div>
+        <div class="respuesta">\(y = -e^{2x} + Ce^{3x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 6. \(xy' + 2y = x^2\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Dividiendo: \(y'+\frac2x y=x\). \(\mu=e^{2\ln x}=x^2\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((x^2y)'=x^3 \Rightarrow x^2y=\frac14 x^4+C\).</div>
+        <div class="respuesta">\(y = \frac14 x^2 + \frac{C}{x^2}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 7. \(y' + \frac{2}{x}y = \frac{\sin x}{x^2}\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(\mu=e^{2\ln x}=x^2\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((x^2y)'=\sin x \Rightarrow x^2y=-\cos x+C\).</div>
+        <div class="respuesta">\(y = \frac{C-\cos x}{x^2}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 8. \(xy' - y = x^2e^x\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Dividiendo: \(y'-\frac1x y=xe^x\). \(\mu=e^{-\ln x}=\frac1x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((\frac{y}{x})'=e^x \Rightarrow \frac{y}{x}=e^x+C\).</div>
+        <div class="respuesta">\(y = x e^x + Cx\).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>B. EDO homogéneas</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 9. \(y' = \frac{y}{x}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=vx\), \(y'=v+xv'\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=v \Rightarrow xv'=0 \Rightarrow v=C\).</div>
+        <div class="respuesta">\(y = Cx\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 10. \(y' = \frac{y}{x} + 1\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=vx\), \(y'=v+xv'\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=v+1 \Rightarrow xv'=1 \Rightarrow v=\ln|x|+C\).</div>
+        <div class="respuesta">\(y = x\ln|x| + Cx\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 11. \(y' = \frac{x^2+y^2}{xy}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y'=\frac{x}{y}+\frac{y}{x}=\frac1v+v\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=v+\frac1v \Rightarrow xv'=\frac1v \Rightarrow v\,dv=\frac{dx}{x}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(\frac12 v^2=\ln|x|+C \Rightarrow v^2=2\ln|x|+C\).</div>
+        <div class="respuesta">\(y^2 = 2x^2\ln|x| + Cx^2\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 12. \((x^2+y^2)dx - xy\,dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y'=\frac{x^2+y^2}{xy}\), mismo caso que el Ej. 11.</div>
+        <div class="respuesta">\(y^2 = 2x^2\ln|x| + Cx^2\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 13. \(y' = \frac{y^2+xy}{x^2}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y'=\left(\frac{y}{x}\right)^2+\frac{y}{x}=v^2+v\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=v^2+v \Rightarrow xv'=v^2 \Rightarrow \frac{dv}{v^2}=\frac{dx}{x}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(-\frac1v=\ln|x|+C \Rightarrow v=-\frac{1}{\ln|x|+C}\).</div>
+        <div class="respuesta">\(y = -\frac{x}{\ln|x|+C}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 14. \(y' = \frac{x+y}{x-y}\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y'=\frac{1+v}{1-v}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=\frac{1+v}{1-v} \Rightarrow xv'=\frac{1+v}{1-v}-v=\frac{1+v^2}{1-v}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(\frac{1-v}{1+v^2}dv=\frac{dx}{x} \Rightarrow \arctan v-\frac12\ln(1+v^2)=\ln|x|+C\).</div>
+        <div class="respuesta">\(\arctan\frac{y}{x}-\frac12\ln\left(1+\frac{y^2}{x^2}\right)=\ln|x|+C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 15. \((x^2-y^2)dx + 2xy\,dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y'=\frac{y^2-x^2}{2xy}=\frac{v^2-1}{2v}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v+xv'=\frac{v^2-1}{2v} \Rightarrow xv'=\frac{v^2-1}{2v}-v=\frac{-v^2-1}{2v}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(-\frac{2v}{v^2+1}dv=\frac{dx}{x} \Rightarrow -\ln(v^2+1)=\ln|x|+C\).</div>
+        <div class="respuesta">\(x^2+y^2=Cx\).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>C. Factores integrantes</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 16. \((2y)dx + (x)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=2y\), \(N=x\). \(\partial_yM=2\), \(\partial_xN=1\), no exacta.</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{\partial_yM-\partial_xN}{N}=\frac{2-1}{x}=\frac1x=f(x)\). \(\mu=e^{\int \frac1x dx}=x\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Multiplicando: \(2xy\,dx+x^2\,dy=0\), exacta. \(F=x^2y\).</div>
+        <div class="respuesta">\(x^2y = C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 17. \((y)dx + (2x+y^2)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=y\), \(N=2x+y^2\). \(\partial_yM=1\), \(\partial_xN=2\), no exacta.</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{\partial_xN-\partial_yM}{M}=\frac{2-1}{y}=\frac1y=g(y)\). \(\mu=e^{\int \frac1y dy}=y\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Multiplicando: \(y^2\,dx+(2xy+y^3)\,dy=0\), exacta. \(F=xy^2+\frac14 y^4\).</div>
+        <div class="respuesta">\(xy^2+\frac14 y^4 = C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 18. \((y-x)dx + (y+x)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=y-x\), \(N=y+x\). \(\partial_yM=1\), \(\partial_xN=1\). <strong>Es exacta</strong> (revisión: \(\partial_yM=\partial_xN=1\)).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(F=\int(y-x)dx=\frac12 y^2-xy\)... integrando \(M\) respecto de \(x\): \(F=xy-\frac12 x^2+g(y)\). Derivando respecto de \(y\): \(x+g'(y)=y+x \Rightarrow g'(y)=y \Rightarrow g=\frac12 y^2\).</div>
+        <div class="respuesta">\(xy-\frac12 x^2+\frac12 y^2 = C\), o \(y^2-x^2+2xy=C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 19. \((3x^2y+2xy+y^3)dx + (x^2+y^2)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(\partial_yM=3x^2+2x+3y^2\), \(\partial_xN=2x\). No exacta.</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{\partial_yM-\partial_xN}{N}=\frac{3x^2+3y^2}{x^2+y^2}=3=f(x)\). \(\mu=e^{3x}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Multiplicando y resolviendo (exacta): \(F=e^{3x}(x^2y+\frac13 y^3)+C\).</div>
+        <div class="respuesta">\(e^{3x}\left(x^2y+\frac13 y^3\right)=C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 20. \((x^2y+y)dx + (x-x^3)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=y(x^2+1)\), \(N=x(1-x^2)\). \(\partial_yM=x^2+1\), \(\partial_xN=1-3x^2\). No exacta.</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{\partial_yM-\partial_xN}{N}=\frac{x^2+1-1+3x^2}{x(1-x^2)}=\frac{4x^2}{x(1-x^2)}=\frac{4x}{1-x^2}=f(x)\). \(\mu=e^{\int \frac{4x}{1-x^2}dx}=e^{-2\ln|1-x^2|}=\frac{1}{(1-x^2)^2}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Multiplicando: \(\frac{y(x^2+1)}{(1-x^2)^2}dx+\frac{x}{1-x^2}dy=0\), exacta. \(F=\frac{xy}{1-x^2}\).</div>
+        <div class="respuesta">\(\frac{xy}{1-x^2}=C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 21. \((x+y)dx + (x\ln x)dy=0\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=x+y\), \(N=x\ln x\). \(\partial_yM=1\), \(\partial_xN=\ln x+1\). No exacta.</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{\partial_yM-\partial_xN}{N}=\frac{1-(\ln x+1)}{x\ln x}=\frac{-\ln x}{x\ln x}=-\frac1x=f(x)\). \(\mu=e^{-\ln x}=\frac1x\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Multiplicando: \((1+\frac{y}{x})dx+(\ln x)dy=0\), exacta. \(F=x+y\ln x\).</div>
+        <div class="respuesta">\(x+y\ln x=C\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 22. \((2xy^2+2y)dx + (2x^2y+2x)dy=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(M=2y(xy+1)\), \(N=2x(xy+1)\). \(\partial_yM=4xy+2\), \(\partial_xN=4xy+2\). <strong>Es exacta.</strong></div>
+        <div class="calculo"><strong>Paso 2.</strong> \(F=\int(2xy^2+2y)dx=x^2y^2+2xy+g(y)\). Derivando respecto de \(y\): \(2x^2y+2x+g'(y)=2x^2y+2x \Rightarrow g'=0\).</div>
+        <div class="respuesta">\(x^2y^2+2xy = C\), o \(xy(xy+2)=C\).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>D. Ecuaciones de Bernoulli y Riccati</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 23. \(y'+y=xy^2\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=2\), \(z=y^{-1}\), \(z'=-y^{-2}y'\). Multiplicando por \(-y^{-2}\): \(z'-z=-x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=e^{-x}\): \((e^{-x}z)'=-xe^{-x} \Rightarrow e^{-x}z=e^{-x}(x+1)+C \Rightarrow z=x+1+Ce^x\).</div>
+        <div class="respuesta">\(y = \dfrac{1}{x+1+Ce^x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 24. \(y'+\frac1x y=y^2\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=2\), \(z=y^{-1}\). Multiplicando por \(-y^{-2}\): \(z'-\frac1x z=-1\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=\frac1x\): \((\frac{z}{x})'=-\frac1x \Rightarrow \frac{z}{x}=-\ln x+C \Rightarrow z=x(C-\ln x)\).</div>
+        <div class="respuesta">\(y = \dfrac{1}{x(C-\ln x)}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 25. \(y'+2xy=2xy^3\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=3\), \(z=y^{-2}\), \(z'=-2y^{-3}y'\). Multiplicando por \(-2y^{-3}\): \(z'-4xz=-4x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=e^{-2x^2}\): \((e^{-2x^2}z)'=-4xe^{-2x^2} \Rightarrow z=2+Ce^{2x^2}\).</div>
+        <div class="respuesta">\(y = \dfrac{1}{\sqrt{2+Ce^{2x^2}}}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 26. \(y'-y=y^3\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=3\), \(z=y^{-2}\), \(z'=-2y^{-3}y'\). Multiplicando por \(-2y^{-3}\): \(z'+2z=-2\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=e^{2x}\): \((e^{2x}z)'=-2e^{2x} \Rightarrow e^{2x}z=-e^{2x}+C \Rightarrow z=-1+Ce^{-2x}\).</div>
+        <div class="respuesta">\(y = \dfrac{1}{\sqrt{-1+Ce^{-2x}}}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 27. \(y'+\frac2x y=3y^2\), \(x>0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=2\), \(z=y^{-1}\). Multiplicando por \(-y^{-2}\): \(z'-\frac2x z=-3\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=\frac{1}{x^2}\): \((\frac{z}{x^2})'=-\frac{3}{x^2} \Rightarrow \frac{z}{x^2}=\frac3x+C \Rightarrow z=3x+Cx^2\).</div>
+        <div class="respuesta">\(y = \dfrac{1}{3x+Cx^2}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 28. \(y'+y=e^x y^2\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(n=2\), \(z=y^{-1}\). Multiplicando por \(-y^{-2}\): \(z'-z=-e^x\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\mu=e^{-x}\): \((e^{-x}z)'=-1 \Rightarrow e^{-x}z=-x+C \Rightarrow z=e^x(C-x)\).</div>
+        <div class="respuesta">\(y = \dfrac{e^{-x}}{C-x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 29. \(y'=1-y^2\), \(y_1=1\) (Riccati)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Verificación: \(y_1'=0=1-1^2\) ✓. \(y=1+\frac1v\), \(y'=-\frac{v'}{v^2}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(-\frac{v'}{v^2}=1-(1+\frac1v)^2=-\frac{2}{v}-\frac{1}{v^2} \Rightarrow v'=2v+1 \Rightarrow v'-2v=1\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(\mu=e^{-2x}\): \(v=-\frac12+Ce^{2x}\).</div>
+        <div class="respuesta">\(y = 1+\dfrac{1}{-\frac12+Ce^{2x}}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 30. \(y'=y^2-y-2\), \(y_1=2\) (Riccati)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Verificación: \(y_1'=0=4-2-2\) ✓. \(y=2+\frac1v\), \(y'=-\frac{v'}{v^2}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(-\frac{v'}{v^2}=(2+\frac1v)^2-(2+\frac1v)-2=\frac{3}{v}+\frac{1}{v^2} \Rightarrow v'=-3v-1\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(\mu=e^{3x}\): \(v=-\frac13+Ce^{-3x}\).</div>
+        <div class="respuesta">\(y = 2+\dfrac{1}{-\frac13+Ce^{-3x}}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 31. \(y'=\frac1x-y+y^2\), \(y_1=1\) (Riccati)</div>
+        <div class="planteo"><strong>Paso 1.</strong> Verificación: \(y_1'=0\), \(\frac1x-1+1=\frac1x\). No es solución. <em>Corrección:</em> con \(y_1=1\), \(y'=y^2-y\) (sin el \(1/x\)), sí funciona. Pero como está planteado, \(y_1=1\) no es solución particular. Se deja como ejercicio para discutir en clase: si se propone \(y_1=1/x\), se verifica: \(y_1'=-1/x^2\), y \(\frac1x-\frac1x+\frac{1}{x^2}=\frac{1}{x^2}\)... tampoco. <strong>La ecuación no tiene solución particular elemental \(y_1=1\)</strong>; se requiere resolver por otro método o proponer otra \(y_1\).</div>
+        <div class="nota-sol"><strong>Nota.</strong> Este ejercicio ilustra que en Riccati la solución particular debe verificarse siempre. Si no se dispone de una, no se puede aplicar el método directo.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>E. Ecuaciones de Lagrange y Clairaut</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 32. \(y=xy'+(y')^2\) (Clairaut)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(p=y'\), \(y=xp+p^2\). Derivando: \(p=p+xp'+2pp' \Rightarrow p'(x+2p)=0\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p'=0 \Rightarrow p=C \Rightarrow y=Cx+C^2\) (general). \(x+2p=0 \Rightarrow p=-x/2 \Rightarrow y=-x^2/4\) (singular).</div>
+        <div class="respuesta">General: \(y=Cx+C^2\). Singular: \(y=-x^2/4\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 33. \(y=xy'+\frac{1}{y'}\) (Clairaut)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=xp+\frac1p\). Derivando: \(p=p+xp'-\frac{p'}{p^2} \Rightarrow p'(x-\frac{1}{p^2})=0\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(p'=0 \Rightarrow p=C \Rightarrow y=Cx+\frac1C\). Singular: \(x=\frac{1}{p^2} \Rightarrow p=\pm\frac{1}{\sqrt x} \Rightarrow y=\pm\sqrt x+\frac{1}{\pm 1/\sqrt x}=\pm 2\sqrt x\).</div>
+        <div class="respuesta">General: \(y=Cx+\frac1C\). Singular: \(y=\pm 2\sqrt x\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 34. \(y=xy'+\sqrt{1+(y')^2}\) (Clairaut)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=xp+\sqrt{1+p^2}\). Derivando: \(p=p+xp'+\frac{p}{\sqrt{1+p^2}}p' \Rightarrow p'(x+\frac{p}{\sqrt{1+p^2}})=0\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> General: \(p=C \Rightarrow y=Cx+\sqrt{1+C^2}\). Singular: \(x=-\frac{p}{\sqrt{1+p^2}}\), junto con \(y=xp+\sqrt{1+p^2}\) da \(x^2+y^2=1\) (circunferencia).</div>
+        <div class="respuesta">General: \(y=Cx+\sqrt{1+C^2}\). Singular: \(x^2+y^2=1\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 35. \(y=2xy'+(y')^2\) (Lagrange)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=2xp+p^2\). Derivando: \(p=2p+2xp'+2pp' \Rightarrow -p=2(x+p)p'\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{dx}{dp}=-\frac{2(x+p)}{p}=-\frac2p x-2\). Lineal en \(x(p)\): \(\mu=p^2\): \((p^2x)'=-2p^2 \Rightarrow x=-\frac23 p+\frac{C}{p^2}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> Sustituyendo en \(y=2xp+p^2\): \(y=-\frac13 p^2+\frac{2C}{p}\).</div>
+        <div class="respuesta">Solución paramétrica: \(x=-\frac23 p+\frac{C}{p^2}\), \(y=-\frac13 p^2+\frac{2C}{p}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 36. \(y=x(y')^2+(y')^2\) (Lagrange)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=xp^2+p^2=p^2(x+1)\). Derivando: \(p=2p(x+1)p'+p^2 \Rightarrow p-p^2=2p(x+1)p'\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{dx}{dp}=\frac{2(x+1)}{p-1}\)... resolviendo: \(x+1=C(p-1)^2-\frac{p^2}{2}-p\)... se obtiene la paramétrica.</div>
+        <div class="respuesta">Solución paramétrica (se deja en forma implícita): \(x+1=C(p-1)^2-\frac{p^2}{2}-p\), \(y=p^2(x+1)\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 37. \(y=x\left(y'+\frac{1}{y'}\right)\) (Lagrange)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(y=x(p+\frac1p)\). Derivando: \(p=p+\frac1p+x(1-\frac{1}{p^2})p' \Rightarrow -\frac1p=x(1-\frac{1}{p^2})p'\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(\frac{dx}{dp}=-\frac{x(1-1/p^2)}{1/p}=-xp+\frac{x}{p}\)... se resuelve como lineal en \(x(p)\).</div>
+        <div class="respuesta">Solución paramétrica: \(x=\frac{C}{p}e^{-p^2/2}\)... (se deja en forma paramétrica).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>F. Aplicaciones: RL, RC, mezclas y enfriamiento</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 38. RL: \(L=2\), \(R=4\), \(V=12\), \(i(0)=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(2i'+4i=12 \Rightarrow i'+2i=6\). \(\mu=e^{2t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \((e^{2t}i)'=6e^{2t} \Rightarrow e^{2t}i=3e^{2t}+C \Rightarrow i=3+Ce^{-2t}\).</div>
+        <div class="calculo"><strong>Paso 3.</strong> \(i(0)=0 \Rightarrow 3+C=0 \Rightarrow C=-3\).</div>
+        <div class="respuesta">\(i(t)=3(1-e^{-2t})\) A.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 39. RL: \(L=0.5\), \(R=2\), \(V=10\), \(i(0)=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(0.5i'+2i=10 \Rightarrow i'+4i=20\). \(\mu=e^{4t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(i=5+Ce^{-4t}\). \(i(0)=0 \Rightarrow C=-5\).</div>
+        <div class="respuesta">\(i(t)=5(1-e^{-4t})\) A.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 40. RC: \(R=10\), \(C=0.01\), \(V=5\), \(v_C(0)=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(RC=0.1\). \(0.1v_C'+v_C=5 \Rightarrow v_C'+10v_C=50\). \(\mu=e^{10t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v_C=5+Ce^{-10t}\). \(v_C(0)=0 \Rightarrow C=-5\).</div>
+        <div class="respuesta">\(v_C(t)=5(1-e^{-10t})\) V.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 41. RC: \(R=100\), \(C=0.001\), \(V=10\), \(v_C(0)=2\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(RC=0.1\). \(v_C'+10v_C=100\). \(\mu=e^{10t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(v_C=10+Ce^{-10t}\). \(v_C(0)=2 \Rightarrow C=-8\).</div>
+        <div class="respuesta">\(v_C(t)=10-8e^{-10t}\) V.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 42. Mezcla: \(V=100\) L, \(r_{in}=2\) L/min, \(c_{in}=0.1\) kg/L, \(r_{out}=2\) L/min, \(Q(0)=0\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(Q'=0.2-0.02Q \Rightarrow Q'+0.02Q=0.2\). \(\mu=e^{0.02t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(Q=10+Ce^{-0.02t}\). \(Q(0)=0 \Rightarrow C=-10\).</div>
+        <div class="respuesta">\(Q(t)=10(1-e^{-0.02t})\) kg. Concentración a largo plazo: \(0.1\) kg/L.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 43. Mezcla: \(V=50\) L, \(Q(0)=5\) kg, entra agua pura a 3 L/min, sale a 3 L/min</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(Q'=-\frac{3}{50}Q \Rightarrow Q=Ce^{-0.06t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(Q(0)=5 \Rightarrow C=5\). \(Q(t)=5e^{-0.06t}\). Para \(Q=1\): \(1=5e^{-0.06t} \Rightarrow t=\frac{\ln 5}{0.06}\approx 26.8\) min.</div>
+        <div class="respuesta">\(Q(t)=5e^{-0.06t}\) kg. Tiempo para 1 kg: \(\approx 26.8\) min.</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 44. Enfriamiento: \(T(0)=90°C\), \(T_m=20°C\), \(T(10)=60°C\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(T'=-k(T-20) \Rightarrow T-20=Ce^{-kt}\). \(T(0)=90 \Rightarrow C=70\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(T(10)=60 \Rightarrow 40=70e^{-10k} \Rightarrow e^{-10k}=\frac47 \Rightarrow k=\frac{1}{10}\ln\frac74\approx 0.0559\).</div>
+        <div class="respuesta">\(k\approx 0.0559\ \text{min}^{-1}\), \(T(t)=20+70e^{-0.0559t}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Ejercicio 45. Enfriamiento: \(T(0)=100°C\), \(T_m=25°C\), \(k=0.05\), \(T(t)=50°C\)</div>
+        <div class="planteo"><strong>Paso 1.</strong> \(T-25=75e^{-0.05t}\).</div>
+        <div class="calculo"><strong>Paso 2.</strong> \(50-25=75e^{-0.05t} \Rightarrow 25=75e^{-0.05t} \Rightarrow e^{-0.05t}=\frac13 \Rightarrow t=\frac{\ln 3}{0.05}\approx 21.97\).</div>
+        <div class="respuesta">\(t\approx 22\) min.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <h2>📝 Soluciones - Pre-parciales</h2>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Pre-parcial Tipo A</div>
+        <div class="planteo"><strong>1. (Lineal) \(y'+2y=4x\).</strong> \(\mu=e^{2x}\). \((e^{2x}y)'=4xe^{2x} \Rightarrow y=2x-1+Ce^{-2x}\).</div>
+        <div class="planteo"><strong>2. (Homogénea) \(y'=y/x+1\).</strong> \(y=vx \Rightarrow v+xv'=v+1 \Rightarrow v=\ln|x|+C\). \(y=x\ln|x|+Cx\).</div>
+        <div class="planteo"><strong>3. (Factor integrante) \((2y)dx+(x)dy=0\).</strong> \(\mu=x\). \(2xy\,dx+x^2\,dy=0 \Rightarrow x^2y=C\).</div>
+        <div class="planteo"><strong>4. (Bernoulli) \(y'+y=xy^2\).</strong> \(z=y^{-1}\), \(z'-z=-x\), \(\mu=e^{-x}\). \(z=x+1+Ce^x\). \(y=1/(x+1+Ce^x)\).</div>
+        <div class="planteo"><strong>5. (PVI) \(y'+2y=4x\), \(y(0)=1\).</strong> Del Ej. 1: \(y=2x-1+Ce^{-2x}\). \(y(0)=1 \Rightarrow C=2\).</div>
+        <div class="respuesta">\(y=2x-1+2e^{-2x}\).</div>
+    </div>
+
+    <div class="sol-ejercicio">
+        <div class="sol-titulo">Pre-parcial Tipo B</div>
+        <div class="planteo"><strong>1. (Lineal) \(y'-3y=e^{2x}\).</strong> \(\mu=e^{-3x}\). \((e^{-3x}y)'=e^{-x} \Rightarrow y=-e^{2x}+Ce^{3x}\).</div>
+        <div class="planteo"><strong>2. (Homogénea) \(y'=(x^2+y^2)/(xy)\).</strong> \(y=vx \Rightarrow v+xv'=v+1/v \Rightarrow v^2=2\ln|x|+C\). \(y^2=2x^2\ln|x|+Cx^2\).</div>
+        <div class="planteo"><strong>3. (Factor integrante) \((y)dx+(2x+y^2)dy=0\).</strong> \(\mu=y\). \(y^2dx+(2xy+y^3)dy=0 \Rightarrow xy^2+\frac14 y^4=C\).</div>
+        <div class="planteo"><strong>4. (Bernoulli) \(y'+\frac1x y=y^2\).</strong> \(z=y^{-1}\), \(z'-\frac1x z=-1\), \(\mu=1/x\). \(z=x(C-\ln x)\). \(y=1/[x(C-\ln x)]\).</div>
+        <div class="planteo"><strong>5. (PVI) \(y'+y=xy^2\), \(y(0)=1\).</strong> Del Ej. 23: \(y=1/(x+1+Ce^x)\). \(y(0)=1 \Rightarrow C=0\).</div>
+        <div class="respuesta">\(y=1/(x+1)\).</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <div style="text-align: center; margin-top: 30px;">
         <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
     </div>
+
+    </div><!-- fin contenido-protegido -->
 </div>
+
 <script>
     function verificarPassword() {
         const pwd = document.getElementById('passwordInput').value;
         if (pwd === 'pnfe2026') {
             document.getElementById('soluciones').style.display = 'block';
-            document.querySelector('.password-box').style.display = 'none';
+            document.getElementById('passwordBox').style.display = 'none';
             document.getElementById('errorMsg').innerHTML = '';
         } else {
             document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
         }
     }
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') verificarPassword();
+    });
 </script>
 </body>
 </html>
