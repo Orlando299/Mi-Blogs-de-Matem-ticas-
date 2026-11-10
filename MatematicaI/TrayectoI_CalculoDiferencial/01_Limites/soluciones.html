@@ -111,17 +111,6 @@
         <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
     </div>
 </div>
-<script>
-    function verificarPassword() {
-        const pwd = document.getElementById('passwordInput').value;
-        if (pwd === 'pnfe2026') {
-            document.getElementById('soluciones').style.display = 'block';
-            document.querySelector('.password-box').style.display = 'none';
-            document.getElementById('errorMsg').innerHTML = '';
-        } else {
-            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
-        }
-    }
-</script>
+<script src="/Mi-Blogs-de-Matem-ticas-/auth.js"></script>
 </body>
 </html>

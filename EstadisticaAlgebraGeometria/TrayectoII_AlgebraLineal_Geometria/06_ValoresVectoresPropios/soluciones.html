@@ -435,22 +435,7 @@
     </div><!-- fin contenido-protegido -->
 </div>
 
-<script>
-    function verificarPassword() {
-        const pwd = document.getElementById('passwordInput').value;
-        if (pwd === 'pnfe2026') {
-            document.getElementById('soluciones').style.display = 'block';
-            document.getElementById('passwordBox').style.display = 'none';
-            document.getElementById('errorMsg').innerHTML = '';
-        } else {
-            document.getElementById('errorMsg').innerHTML = 'Contraseña incorrecta. Intente de nuevo.';
-        }
-    }
-    // Permite presionar Enter
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') verificarPassword();
-    });
-</script>
+<script src="/Mi-Blogs-de-Matem-ticas-/auth.js"></script>
 </body>
 </html>
             
