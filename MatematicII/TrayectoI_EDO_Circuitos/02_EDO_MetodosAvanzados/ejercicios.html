@@ -2,57 +2,154 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicios - EDO: Métodos Avanzados de Primer Orden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios: EDO - Métodos Avanzados de Primer Orden</title>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     <style>
-        body { font-family: 'Latin Modern Roman', serif; background: white; margin: 0; padding: 0; }
+        body { font-family: 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif; background: white; color: black; margin: 0; padding: 0; }
         .latex-container { max-width: 1000px; margin: 40px auto; padding: 40px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #1a3e6f; }
-        .author { text-align: center; }
-        .ejercicio { margin: 15px 0; padding: 10px; border: 1px solid #ccc; background: #fef9e6; border-radius: 5px; }
-        .btn-pdf { display: inline-block; margin: 30px 0; background: #c9a84c; padding: 8px 20px; border-radius: 30px; text-decoration: none; color: black; font-weight: bold; }
-        @media print { .btn-pdf { display: none; } }
+        h1, h2, h3 { color: #1a3e6f; margin-top: 1.5em; }
+        h1 { text-align: center; font-size: 28px; }
+        h2 { border-bottom: 2px solid #1a3e6f; padding-bottom: 8px; margin-top: 2.5em; }
+        h3 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 2em; }
+        .author, .date { text-align: center; font-size: 14px; margin: 5px 0; }
+        .intro { background: #f5f5f5; border-left: 4px solid #1a3e6f; padding: 12px 16px; margin: 25px 0; border-radius: 0 4px 4px 0; }
+        .nota { background: #fef9f9; border-left: 4px solid #e07a8f; padding: 10px 14px; margin: 15px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+
+        ol.lista-ejercicios { counter-reset: ej; list-style: none; padding-left: 0; margin: 15px 0; }
+        ol.lista-ejercicios > li {
+            counter-increment: ej; margin: 12px 0; padding: 12px 16px 12px 55px; position: relative;
+            background: #fafafa; border: 1px solid #e5e5e5; border-radius: 6px; line-height: 1.6; font-size: 16px;
+        }
+        ol.lista-ejercicios > li::before {
+            content: counter(ej) "."; position: absolute; left: 15px; top: 12px;
+            font-weight: bold; color: #1a3e6f; font-size: 16px;
+        }
+        ol.lista-ejercicios > li:hover { background: #f3f7fd; border-color: #c9d8ec; }
+
+        .nivel { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 10px; margin-right: 8px; font-weight: bold; }
+        .menor { background: #d4edda; color: #155724; }
+        .intermedio { background: #fff3cd; color: #856404; }
+        .mayor { background: #f8d7da; color: #721c24; }
+
+        .btn-pdf { display: inline-block; margin-top: 30px; background: #c9a84c; color: #0a0c10; padding: 8px 20px; text-decoration: none; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-pdf:hover { background: #e8c97a; }
+        .nav-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; }
+        .nav-footer a { display: inline-block; background: #1a3e6f; color: white; padding: 8px 18px; text-decoration: none; border-radius: 5px; margin: 5px; font-size: 14px; }
+        .nav-footer a:hover { background: #2a5a9a; }
+
+        @media print {
+            .latex-container { margin: 0; padding: 20px; box-shadow: none; }
+            .btn-pdf, .nav-footer { display: none; }
+            ol.lista-ejercicios > li { background: white; border: 1px solid #ccc; page-break-inside: avoid; }
+            h2 { page-break-after: avoid; }
+        }
     </style>
 </head>
 <body>
 <div class="latex-container">
     <h1>Ejercicios: EDO - Métodos Avanzados de Primer Orden</h1>
     <div class="author">MSc. Orlando Silva</div>
-    <p>Las soluciones están en <a href="soluciones.html">soluciones.html</a> (contraseña requerida).</p>
+    <div class="date">Matemática II · PNF Electricidad · Trayecto I</div>
 
-    <h2>1. Factor integrante (EDO lineales de primer orden)</h2>
-    <div class="ejercicio">1. \(\frac{dy}{dx} + 2y = 4x\)</div>
-    <div class="ejercicio">2. \(\frac{dy}{dx} - y = e^{2x}\)</div>
-    <div class="ejercicio">3. \(x\frac{dy}{dx} + y = x^3\)</div>
-    <div class="ejercicio">4. \(\frac{dy}{dx} + y\cot x = \csc x\)</div>
-    <div class="ejercicio">5. \(\frac{dy}{dx} - 3y = e^{2x}\)</div>
-    <div class="ejercicio">6. \(x\frac{dy}{dx} + 2y = x^2\)</div>
+    <div class="intro">
+        <strong>Instrucciones.</strong> Resuelve cada una de las siguientes EDO mostrando claramente el procedimiento: identifica el tipo de ecuación, aplica el método correspondiente (factor integrante, sustitución, cambio de variable, etc.) y verifica la solución. Cuando se indique una condición inicial, determina la constante \(C\).
+        <br><br>
+        <strong>Dificultad:</strong>
+        <span class="nivel menor">🟢 Menor</span>
+        <span class="nivel intermedio">🟡 Intermedio</span>
+        <span class="nivel mayor">🔴 Mayor</span>
+    </div>
 
-    <h2>2. Ecuación de Bernoulli</h2>
-    <div class="ejercicio">7. \(y' + y = xy^2\)</div>
-    <div class="ejercicio">8. \(y' + \frac{1}{x}y = y^2\)</div>
-    <div class="ejercicio">9. \(y' + 2xy = 2xy^3\)</div>
-    <div class="ejercicio">10. \(y' - y = y^3\)</div>
-    <div class="ejercicio">11. \(y' + \frac{2}{x}y = 3y^2\)</div>
+    <div class="nota">
+        Las soluciones detalladas paso a paso están en <strong>soluciones.html</strong> (contraseña requerida). Puedes consultar la <a href="teoria.html" style="color: #2e7d32; font-weight: bold;">Teoría aquí</a>.
+    </div>
 
-    <h2>3. Problemas de Valor Inicial (PVI) con factor integrante</h2>
-    <div class="ejercicio">12. \(y' + 2y = 4x\), \(y(0) = 1\)</div>
-    <div class="ejercicio">13. \(\frac{dy}{dx} - y = e^{2x}\), \(y(0) = 0\)</div>
-    <div class="ejercicio">14. \(x\frac{dy}{dx} + y = x^3\), \(y(1) = 2\)</div>
-    <div class="ejercicio">15. \(y' + 3y = e^x\), \(y(0) = 2\)</div>
+    <!-- ============================================================ -->
+    <h2>A. EDO lineales de primer orden (factor integrante)</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(\dfrac{dy}{dx} + 2y = 4x\)</li>
+        <li><span class="nivel menor">🟢</span> \(\dfrac{dy}{dx} - y = e^{2x}\)</li>
+        <li><span class="nivel menor">🟢</span> \(x\dfrac{dy}{dx} + y = x^3\), \(x>0\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(\dfrac{dy}{dx} + y\cot x = \csc x\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(\dfrac{dy}{dx} - 3y = e^{2x}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(x\dfrac{dy}{dx} + 2y = x^2\), \(x>0\)</li>
+        <li><span class="nivel mayor">🔴</span> \(\dfrac{dy}{dx} + \dfrac{2}{x}y = \dfrac{\sin x}{x^2}\), \(x>0\)</li>
+        <li><span class="nivel mayor">🔴</span> \(x\dfrac{dy}{dx} - y = x^2 e^x\), \(x>0\)</li>
+    </ol>
 
-    <h2>4. Aplicaciones a circuitos</h2>
-    <div class="ejercicio">16. En un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante, encuentra \(i(t)\) si \(i(0)=0\).</div>
-    <div class="ejercicio">17. En un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante, encuentra \(v_c(t)\) si \(v_c(0)=0\).</div>
-    <div class="ejercicio">18. En un circuito RL con \(L=0.5\) H, \(R=2\ \Omega\), \(V(t)=10\sin(2t)\) V, encuentra la solución general para \(i(t)\).</div>
+    <!-- ============================================================ -->
+    <h2>B. EDO homogéneas</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> \(y' = \dfrac{y}{x}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y' = \dfrac{y}{x} + 1\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y' = \dfrac{x^2 + y^2}{xy}\)</li>
+        <li><span class="nivel intermedio">🟡</span> \((x^2 + y^2)\,dx - xy\,dy = 0\)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' = \dfrac{y^2 + xy}{x^2}\)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' = \dfrac{x+y}{x-y}\)</li>
+        <li><span class="nivel mayor">🔴</span> \((x^2 - y^2)\,dx + 2xy\,dy = 0\)</li>
+    </ol>
 
-    <h2>5. Problemas integradores</h2>
-    <div class="ejercicio">19. Resuelve \(y' + y = e^x y^2\).</div>
-    <div class="ejercicio">20. Resuelve \(y' + \frac{2}{x}y = x^2 y^2\) con \(y(1)=1\).</div>
-    <div class="ejercicio">21. Encuentra la corriente en un circuito RL con \(v(t)=V_0\sin(\omega t)\) (solución general).</div>
+    <!-- ============================================================ -->
+    <h2>C. Factores integrantes</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel intermedio">🟡</span> \((2y)\,dx + (x)\,dy = 0\)</li>
+        <li><span class="nivel intermedio">🟡</span> \((y)\,dx + (2x + y^2)\,dy = 0\)</li>
+        <li><span class="nivel intermedio">🟡</span> \((y - x)\,dx + (y + x)\,dy = 0\)</li>
+        <li><span class="nivel mayor">🔴</span> \((3x^2 y + 2xy + y^3)\,dx + (x^2 + y^2)\,dy = 0\)</li>
+        <li><span class="nivel mayor">🔴</span> \((x^2 y + y)\,dx + (x - x^3)\,dy = 0\)</li>
+        <li><span class="nivel mayor">🔴</span> \((x + y)\,dx + (x\ln x)\,dy = 0\), \(x>0\)</li>
+        <li><span class="nivel mayor">🔴</span> \((2xy^2 + 2y)\,dx + (2x^2 y + 2x)\,dy = 0\)</li>
+    </ol>
 
-    <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
-    <div><a href="teoria.html">← Volver a teoría</a> | <a href="preparciales.html">📝 Pre‑parciales</a> | <a href="soluciones.html">🔐 Soluciones</a></div>
+    <!-- ============================================================ -->
+    <h2>D. Ecuaciones de Bernoulli y Riccati</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel intermedio">🟡</span> \(y' + y = xy^2\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y' + \dfrac{1}{x}y = y^2\), \(x>0\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y' + 2xy = 2xy^3\)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y' - y = y^3\)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' + \dfrac{2}{x}y = 3y^2\), \(x>0\)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' + y = e^x y^2\)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' = 1 - y^2\), con \(y_1=1\) solución particular (Riccati)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' = y^2 - y - 2\), con \(y_1=2\) solución particular (Riccati)</li>
+        <li><span class="nivel mayor">🔴</span> \(y' = \dfrac{1}{x} - y + y^2\), con \(y_1=1\) solución particular (Riccati)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <h2>E. Ecuaciones de Lagrange y Clairaut</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel intermedio">🟡</span> \(y = xy' + (y')^2\) (Clairaut)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y = xy' + \dfrac{1}{y'}\) (Clairaut)</li>
+        <li><span class="nivel intermedio">🟡</span> \(y = xy' + \sqrt{1+(y')^2}\) (Clairaut)</li>
+        <li><span class="nivel mayor">🔴</span> \(y = 2xy' + (y')^2\) (Lagrange)</li>
+        <li><span class="nivel mayor">🔴</span> \(y = x(y')^2 + (y')^2\) (Lagrange)</li>
+        <li><span class="nivel mayor">🔴</span> \(y = x\left(y' + \dfrac{1}{y'}\right)\) (Lagrange)</li>
+    </ol>
+
+    <!-- ============================================================ -->
+    <h2>F. Aplicaciones: RL, RC, mezclas y enfriamiento</h2>
+    <ol class="lista-ejercicios">
+        <li><span class="nivel menor">🟢</span> Un circuito RL con \(L=2\) H, \(R=4\ \Omega\), \(V=12\) V constante. Encuentra \(i(t)\) si \(i(0)=0\).</li>
+        <li><span class="nivel intermedio">🟡</span> Un circuito RL con \(L=0.5\) H, \(R=2\ \Omega\), \(V=10\) V constante. Encuentra \(i(t)\) si \(i(0)=0\).</li>
+        <li><span class="nivel intermedio">🟡</span> Un circuito RC con \(R=10\ \Omega\), \(C=0.01\) F, \(V=5\) V constante. Encuentra \(v_C(t)\) si \(v_C(0)=0\).</li>
+        <li><span class="nivel intermedio">🟡</span> Un circuito RC con \(R=100\ \Omega\), \(C=0.001\) F, \(V(t)=10\) V constante. Encuentra \(v_C(t)\) si \(v_C(0)=2\) V.</li>
+        <li><span class="nivel mayor">🔴</span> Un tanque contiene 100 L de agua. Entra salmuera a 2 L/min con 0.1 kg/L, y la mezcla sale a 2 L/min. Si \(Q(0)=0\), encuentra \(Q(t)\) y la concentración a largo plazo.</li>
+        <li><span class="nivel mayor">🔴</span> Un tanque contiene 50 L de agua con 5 kg de sal disueltos. Entra agua pura a 3 L/min y sale la mezcla a 3 L/min. Encuentra \(Q(t)\) y el tiempo en que la sal se reduce a 1 kg.</li>
+        <li><span class="nivel mayor">🔴</span> Un cuerpo a \(90°C\) se enfría en un ambiente a \(20°C\). Si la temperatura a los 10 min es \(60°C\), halla la constante \(k\) y \(T(t)\).</li>
+        <li><span class="nivel mayor">🔴</span> Un cuerpo a \(100°C\) se enfría en un ambiente a \(25°C\). Si \(k=0.05\ \text{min}^{-1}\), ¿cuánto tarda en llegar a \(50°C\)?</li>
+        <li><span class="nivel mayor">🔴</span> Un circuito RL con \(L=1\) H, \(R=2\ \Omega\), \(V(t)=10\sin(2t)\) V. Encuentra la solución general para \(i(t)\).</li>
+    </ol>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-pdf" onclick="window.print()">🖨️ Guardar como PDF</button>
+    </div>
+
+    <div class="nav-footer">
+        <a href="teoria.html">← Volver a teoría</a>
+        <a href="preparciales.html">📝 Pre-parciales</a>
+        <a href="soluciones.html">🔑 Soluciones</a>
+    </div>
 </div>
 </body>
 </html>
