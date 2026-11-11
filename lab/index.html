@@ -1275,7 +1275,7 @@ function buscarOffline(pregunta, subject) {
 // 5. Llamar a DeepSeek vía Worker (solo si la base local falla)
 async function llamarDeepSeek(pregunta) {
     // URL DE TU WORKER DE CLOUDFLARE
-    const WORKER_URL = 'https://minegociopolar-proxy.osilva2503.workers.dev';
+    const WORKER_URL = 'https://mi-asistente-pnfe.osilva2503.workers.dev';
     
     try {
         const response = await fetch(WORKER_URL, {
