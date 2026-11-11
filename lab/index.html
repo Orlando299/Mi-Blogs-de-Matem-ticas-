@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PNFE | Matemáticas para Ingeniería Eléctrica (LAB)</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
 <style>
   :root {
     --bg: #0a0c10;
@@ -1389,12 +1390,21 @@ function addMessage(role, content) {
   if (welcome) welcome.remove();
   const div = document.createElement('div');
   div.className = `ai-msg ${role}`;
+  
+  // Escapamos el HTML básico para evitar inyección, pero dejamos los $ para MathJax
+  const seguro = content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  
   div.innerHTML = `
     <div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div>
-    <div class="ai-msg-bubble">${content.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>
+    <div class="ai-msg-bubble">${seguro.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>
   `;
   messagesEl.appendChild(div);
   messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  // ESTA ES LA MAGIA: Le decimos a MathJax que procese el nuevo mensaje
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    MathJax.typesetPromise([div]).catch((err) => console.log('Error MathJax:', err));
+  }
 }
 
 function showTyping() {
