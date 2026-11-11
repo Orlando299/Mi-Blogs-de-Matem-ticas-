@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PNFE | Matemáticas para Ingeniería Eléctrica</title>
+<title>PNFE | Matemáticas para Ingeniería Eléctrica (LAB)</title>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -300,277 +300,143 @@
 
   footer { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
-// ==================== BASE DE CONOCIMIENTO OFFLINE ====================
-const knowledgeBase = {
-  'general': { 
-    description: 'PNFE - Matemáticas para Ingeniería Eléctrica',
-    topics: {
-      'hola': '¡Hola! Soy el Asistente PNFE. ¿En qué puedo ayudarte hoy?',
-      'ejercicio': '✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?',
-      'gracias': '¡De nada! Estoy aquí para ayudarte con tus estudios.'
-    }
-  },
-  'Matemática de Iniciación': {
-    description: 'Matemática de Iniciación - Trayecto Inicial',
-    topics: {
-      'factorización': 'La factorización es escribir una expresión como producto de factores. Métodos: factor común, diferencia de cuadrados, trinomio cuadrado perfecto, aspa simple.',
-      'coordenadas': 'Distancia entre puntos: d = √[(x₂-x₁)²+(y₂-y₁)²]. Pendiente: m = (y₂-y₁)/(x₂-x₁).',
-      'sistemas': 'Un sistema de ecuaciones lineales se resuelve por sustitución, igualación, reducción o eliminación gaussiana.'
-    }
-  },
-  'Matemática I': {
-    description: 'Matemática I - Cálculo Diferencial e Integral',
-    topics: {
-      'límite': 'El límite de f(x) cuando x→a es L si f(x) se acerca a L.',
-      'derivada': 'La derivada mide la tasa de cambio. Reglas: d/dx[xⁿ]=nxⁿ⁻¹, d/dx[sen x]=cos x.',
-      'integral': '∫f(x)dx = F(x)+C, donde F\'=f. Teorema Fundamental: ∫ₐᵇ f(x)dx = F(b)-F(a)'
-    }
-  },
-  'Estadística, Álgebra Lineal y Geometría': {
-    description: 'Estadística, Álgebra Lineal y Geometría',
-    topics: {
-      'estadística': 'Media: Σx/n. Mediana: valor central. Moda: valor más frecuente.',
-      'matriz': 'Arreglo rectangular. Determinante 2x2: ad-bc.',
-      'vector': 'En ℝ²: (x,y). Producto escalar: u·v = |u||v|cosθ.'
-    }
-  },
-  'Matemática II': {
-    description: 'Matemática II - Ecuaciones Diferenciales',
-    topics: {
-      'edo': 'Ecuación con derivadas. Lineal: y\'+P(x)y=Q(x).',
-      'laplace': 'L{f(t)} = ∫₀^∞ e⁻ˢᵗf(t)dt. L{1}=1/s, L{eᵃᵗ}=1/(s-a).',
-      'circuito rlc': 'Circuito RLC: Lq″+Rq′+q/C = V(t).'
-    }
+  /* ===== AI PANEL (offline) ===== */
+  #ai-panel {
+    position: fixed;
+    bottom: 0; right: 0;
+    width: 420px;
+    height: 580px;
+    background: var(--surface);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-bottom: none; border-right: none;
+    border-radius: 1.25rem 0 0 0;
+    display: flex; flex-direction: column;
+    z-index: 200;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px -8px 48px rgba(0,0,0,0.6);
   }
-};
-
-// ==================== LÓGICA DE IA AHORRATIVA ====================
-
-// 1. Generar clave para caché
-function generarClaveCache(pregunta) {
-    return 'pnfe_ai_cache_' + pregunta.toLowerCase().trim().replace(/[¿?¡!.,;]/g, '').replace(/\s+/g, '_');
-}
-
-// 2. Buscar en caché local
-function buscarEnCache(pregunta) {
-    try {
-        const clave = generarClaveCache(pregunta);
-        const guardada = localStorage.getItem(clave);
-        if (!guardada) return null;
-        const { respuesta, timestamp } = JSON.parse(guardada);
-        // La caché dura 7 días (604800000 ms)
-        if (Date.now() - timestamp > 604800000) {
-            localStorage.removeItem(clave);
-            return null;
-        }
-        return respuesta;
-    } catch (e) {
-        return null;
-    }
-}
-
-// 3. Guardar en caché
-function guardarEnCache(pregunta, respuesta) {
-    try {
-        const clave = generarClaveCache(pregunta);
-        localStorage.setItem(clave, JSON.stringify({
-            respuesta: respuesta,
-            timestamp: Date.now()
-        }));
-    } catch (e) {
-        console.warn('No se pudo guardar en caché');
-    }
-}
-
-// 4. Buscar en la base de conocimiento offline (lógica mejorada)
-function buscarOffline(pregunta, subject) {
-    const q = pregunta.toLowerCase();
-    const kb = knowledgeBase[subject] || knowledgeBase['general'];
-    
-    // Buscar coincidencias en los topics
-    if (kb.topics) {
-        for (const [clave, respuesta] of Object.entries(kb.topics)) {
-            if (q.includes(clave)) {
-                return respuesta;
-            }
-        }
-    }
-    
-    // Buscar en general si no se encontró en la materia específica
-    if (subject !== 'general' && knowledgeBase['general'].topics) {
-        for (const [clave, respuesta] of Object.entries(knowledgeBase['general'].topics)) {
-            if (q.includes(clave)) {
-                return respuesta;
-            }
-        }
-    }
-    
-    return null; // No se encontró offline
-}
-
-// 5. Llamar a DeepSeek vía Worker (solo si es necesario)
-async function llamarDeepSeek(pregunta) {
-    // AQUÍ PONES LA URL DE TU WORKER DE CLOUDFLARE
-    const WORKER_URL = 'https://minegociopolar-proxy.osilva2503.workers.dev';
-    
-    try {
-        const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: pregunta })
-        });
-
-        if (!response.ok) throw new Error('Error en el servidor');
-        
-        const data = await response.json();
-        return data.respuesta || 'No pude generar una respuesta.';
-    } catch (error) {
-        console.error('❌ Error IA:', error);
-        return null; // Retorna null para que el sistema use un fallback
-    }
-}
-
-// 6. Función principal que decide qué hacer
-async function getResponse(question, subject) {
-    const q = question.trim();
-    if (!q) return 'Por favor, escribe una pregunta.';
-
-    // Paso 1: Verificar caché
-    const cache = buscarEnCache(q);
-    if (cache) {
-        console.log('✅ Respuesta desde caché local (0 tokens)');
-        return cache;
-    }
-
-    // Paso 2: Buscar en la base offline
-    const offline = buscarOffline(q, subject);
-    if (offline) {
-        console.log('✅ Respuesta desde base offline (0 tokens)');
-        // Opcional: guardar en caché también las offline para rapidez
-        guardarEnCache(q, offline);
-        return offline;
-    }
-
-    // Paso 3: Si no hay nada offline, llamar a DeepSeek
-    console.log('🤖 Consultando a DeepSeek (usando API)...');
-    const respuestaIA = await llamarDeepSeek(q);
-    
-    if (respuestaIA) {
-        guardarEnCache(q, respuestaIA);
-        return respuestaIA;
-    }
-
-    // Paso 4: Fallback final si todo falla
-    return `No tengo una respuesta específica para "${question.substring(0, 50)}...". Consulta las guías de teoría o pregúntame de otra manera.`;
-}
-
-
-// ==================== UI DEL ASISTENTE (Se mantiene igual) ====================
-const panel = document.getElementById('ai-panel');
-const fab = document.getElementById('ai-fab');
-const closeBtn = document.getElementById('ai-close');
-const messagesEl = document.getElementById('ai-messages');
-const inputEl = document.getElementById('ai-input');
-const sendBtn = document.getElementById('ai-send');
-
-let selectedSubject = 'general';
-let isLoading = false;
-
-function openPanel() { panel.classList.add('open'); fab.classList.add('panel-open'); setTimeout(() => inputEl.focus(), 400); }
-function closePanel() { panel.classList.remove('open'); fab.classList.remove('panel-open'); }
-
-fab.addEventListener('click', openPanel);
-closeBtn.addEventListener('click', closePanel);
-document.getElementById('nav-ai-open').addEventListener('click', openPanel);
-document.getElementById('hero-ai-btn').addEventListener('click', () => { openPanel(); document.getElementById('materias-label').scrollIntoView({ behavior: 'smooth' }); });
-
-document.getElementById('ai-subject-bar').addEventListener('click', e => {
-  const chip = e.target.closest('.ai-subject-chip');
-  if (!chip) return;
-  document.querySelectorAll('.ai-subject-chip').forEach(c => c.classList.remove('active'));
-  chip.classList.add('active');
-  selectedSubject = chip.dataset.subject;
-  updateQuickPrompts(selectedSubject);
-});
-
-document.querySelectorAll('.card-ask-ai').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const materia = btn.dataset.materia;
-    openPanel();
-    document.querySelectorAll('.ai-subject-chip').forEach(c => c.classList.toggle('active', c.dataset.subject === materia));
-    selectedSubject = materia;
-    updateQuickPrompts(materia);
-    inputEl.value = `¿Puedes explicarme ${materia}?`;
-    inputEl.focus();
-  });
-});
-
-function updateQuickPrompts(subject) {
-  const prompts = {
-    'general': ['¿Qué es una derivada?', 'Explica la integral', '¿Para qué sirve Laplace?', 'Propón un ejercicio'],
-    'Matemática de Iniciación': ['¿Qué es factorización?', 'Fórmula de distancia', 'Resuelve un sistema', 'Propón un ejercicio'],
-    'Matemática I': ['¿Qué es un límite?', 'Regla de la cadena', 'Teorema Fundamental', 'Propón un ejercicio'],
-    'Estadística, Álgebra Lineal y Geometría': ['¿Qué es la media?', 'Multiplica matrices', '¿Qué son eigenvalores?', 'Propón un ejercicio'],
-    'Matemática II': ['¿Qué es una EDO?', 'Transformada de Laplace', 'Circuito RLC', 'Propón un ejercicio']
-  };
-  const container = document.getElementById('ai-quick-prompts');
-  const list = prompts[subject] || prompts['general'];
-  container.innerHTML = list.map(p => `<button class="ai-quick-btn">${p}</button>`).join('');
-}
-
-inputEl.addEventListener('input', () => { inputEl.style.height = 'auto'; inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px'; });
-inputEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
-sendBtn.addEventListener('click', sendMessage);
-
-function addMessage(role, content) {
-  const welcome = messagesEl.querySelector('.ai-welcome');
-  if (welcome) welcome.remove();
-  const div = document.createElement('div');
-  div.className = `ai-msg ${role}`;
-  div.innerHTML = `
-    <div class="ai-msg-avatar">${role === 'assistant' ? '✦' : '👤'}</div>
-    <div class="ai-msg-bubble">${content.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>')}</div>
-  `;
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function showTyping() {
-  const div = document.createElement('div');
-  div.className = 'ai-msg assistant';
-  div.id = 'ai-typing-indicator';
-  div.innerHTML = `<div class="ai-msg-avatar">✦</div><div class="ai-typing"><span></span><span></span><span></span></div>`;
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function removeTyping() { const t = document.getElementById('ai-typing-indicator'); if (t) t.remove(); }
-
-// === ENVÍO DE MENSAJE ASÍNCRONO ===
-async function sendMessage() {
-  const text = inputEl.value.trim();
-  if (!text || isLoading) return;
-  
-  inputEl.value = ''; 
-  inputEl.style.height = 'auto';
-  isLoading = true; 
-  sendBtn.disabled = true;
-  
-  addMessage('user', text);
-  showTyping();
-  
-  // Aquí llamamos a la nueva función asíncrona
-  const reply = await getResponse(text, selectedSubject);
-  
-  removeTyping();
-  addMessage('assistant', reply);
-  
-  isLoading = false; 
-  sendBtn.disabled = false; 
-  inputEl.focus();
-}
-
-updateQuickPrompts('general');
+  #ai-panel.open { transform: translateY(0); }
+  .ai-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .ai-panel-title { display: flex; align-items: center; gap: 0.6rem; }
+  .ai-panel-title .ai-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .ai-panel-title .ai-name { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: var(--gold); }
+  .ai-panel-title .ai-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; display: block; }
+  .ai-panel-close { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; padding: 0.25rem 0.5rem; border-radius: 6px; }
+  .ai-panel-close:hover { color: var(--text); }
+  .ai-subject-bar {
+    display: flex; gap: 0.4rem; padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto; flex-shrink: 0;
+  }
+  .ai-subject-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.05em;
+    padding: 0.25rem 0.6rem; border-radius: 100px;
+    border: 1px solid var(--border); background: none;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
+  }
+  .ai-subject-chip:hover { border-color: var(--gold); color: var(--gold); }
+  .ai-subject-chip.active { border-color: var(--gold); background: rgba(201,168,76,0.12); color: var(--gold-soft); }
+  #ai-messages {
+    flex: 1; overflow-y: auto; padding: 1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .ai-msg { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .ai-msg.user { flex-direction: row-reverse; }
+  .ai-msg-bubble {
+    max-width: 82%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 1rem;
+    font-size: 0.85rem; line-height: 1.55;
+  }
+  .ai-msg.user .ai-msg-bubble {
+    background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.08));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 1rem 0.2rem 1rem 1rem;
+  }
+  .ai-msg.assistant .ai-msg-bubble {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 0.2rem 1rem 1rem 1rem;
+  }
+  .ai-msg-avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    flex-shrink: 0; font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ai-msg.assistant .ai-msg-avatar { background: linear-gradient(135deg, var(--gold), var(--teal)); }
+  .ai-msg.user .ai-msg-avatar { background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
+  .ai-typing { display: flex; align-items: center; gap: 4px; padding: 0.65rem 0.9rem; }
+  .ai-typing span { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; animation: typing-dot 1.2s infinite; }
+  .ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing-dot { 0%,80%,100% { transform: scale(0.7); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+  .ai-quick-prompts {
+    padding: 0 1.25rem 0.75rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .ai-quick-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; padding: 0.25rem 0.6rem;
+    border-radius: 100px;
+    border: 1px solid rgba(78,205,196,0.25);
+    background: rgba(78,205,196,0.06);
+    color: var(--teal); cursor: pointer;
+  }
+  .ai-quick-btn:hover { background: rgba(78,205,196,0.14); border-color: var(--teal); }
+  .ai-input-area {
+    display: flex; gap: 0.5rem; padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border); flex-shrink: 0;
+  }
+  #ai-input {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); border-radius: 0.75rem;
+    color: var(--text); font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem; padding: 0.6rem 0.9rem;
+    resize: none; outline: none;
+    min-height: 38px; max-height: 120px;
+  }
+  #ai-input:focus { border-color: rgba(201,168,76,0.4); }
+  #ai-send {
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    border: none; border-radius: 0.75rem;
+    width: 38px; height: 38px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0; align-self: flex-end;
+  }
+  #ai-send:hover { transform: scale(1.05); }
+  #ai-send:disabled { opacity: 0.4; cursor: not-allowed; }
+  #ai-fab {
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 54px; height: 54px;
+    background: linear-gradient(135deg, var(--gold), #a07830);
+    border: none; border-radius: 50%;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.4);
+    cursor: pointer; z-index: 199;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  #ai-fab:hover { transform: scale(1.1); }
+  #ai-fab.panel-open { transform: scale(0); pointer-events: none; }
+  .ai-welcome {
+    text-align: center; padding: 1.5rem 1rem;
+    color: var(--muted); font-size: 0.82rem; line-height: 1.6;
+  }
+  .ai-welcome .welcome-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+  .ai-welcome strong { color: var(--gold); display: block; margin-bottom: 0.4rem; font-family: 'EB Garamond', serif; font-size: 1.05rem; }
 
   /* ===== VIDEO PANEL ===== */
   #video-panel {
@@ -801,30 +667,30 @@ updateQuickPrompts('general');
         <div class="tema-bloque">
           <span class="tema-titulo">📐 Factorización</span>
           <div class="tema-links">
-            <a href="MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
-            <a href="MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
-            <a href="MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
-            <a href="MatematicaIniciacion/soluciones_factorizacion.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            <a href="../MatematicaIniciacion/teoria_factorizacion.html" target="_blank">📘 Teoría</a>
+            <a href="../MatematicaIniciacion/ejercicios_factorizacion.html" target="_blank">📝 Ejercicios</a>
+            <a href="../MatematicaIniciacion/preparciales_factorizacion.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="../MatematicaIniciacion/soluciones_factorizacion.html" target="_blank" class="sol-link">🔐 Soluciones</a>
           </div>
         </div>
 
         <div class="tema-bloque">
           <span class="tema-titulo">📌 Sistema de Coordenadas</span>
           <div class="tema-links">
-            <a href="MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
-            <a href="MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
-            <a href="MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
-            <a href="MatematicaIniciacion/soluciones_coordenadas.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            <a href="../MatematicaIniciacion/teoria_coordenadas.html" target="_blank">📘 Teoría</a>
+            <a href="../MatematicaIniciacion/ejercicios_coordenadas.html" target="_blank">📝 Ejercicios</a>
+            <a href="../MatematicaIniciacion/preparciales_coordenadas.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="../MatematicaIniciacion/soluciones_coordenadas.html" target="_blank" class="sol-link">🔐 Soluciones</a>
           </div>
         </div>
 
         <div class="tema-bloque">
           <span class="tema-titulo">🔢 Sistemas de Ecuaciones Lineales</span>
           <div class="tema-links">
-            <a href="MatematicaIniciacion/teoria_ecuaciones.html" target="_blank">📘 Teoría</a>
-            <a href="MatematicaIniciacion/ejercicios_ecuaciones.html" target="_blank">📝 Ejercicios</a>
-            <a href="MatematicaIniciacion/preparciales_ecuaciones.html" target="_blank">📋 Pre‑parciales</a>
-            <a href="MatematicaIniciacion/soluciones_ecuaciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+            <a href="../MatematicaIniciacion/teoria_ecuaciones.html" target="_blank">📘 Teoría</a>
+            <a href="../MatematicaIniciacion/ejercicios_ecuaciones.html" target="_blank">📝 Ejercicios</a>
+            <a href="../MatematicaIniciacion/preparciales_ecuaciones.html" target="_blank">📋 Pre‑parciales</a>
+            <a href="../MatematicaIniciacion/soluciones_ecuaciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
           </div>
         </div>
 
@@ -856,40 +722,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Límites y Continuidad</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/01_Limites/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Derivadas</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/02_Derivadas/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Aplicaciones de la Derivada</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/03_AplicacionesDerivada/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Estudio completo de funciones</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoI_CalculoDiferencial/04_EstudioFunciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -901,40 +767,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Integral indefinida</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/01_IntegralIndefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Métodos de integración</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/02_MetodosIntegracion/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Integral definida y aplicaciones</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/03_IntegralDefinida/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Series infinitas</span>
             <div class="tema-links">
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicaI/TrayectoII_CalculoIntegral/04_Series/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/04_Series/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/04_Series/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/04_Series/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicaI/TrayectoII_CalculoIntegral/04_Series/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -968,40 +834,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: Estadística Descriptiva y Probabilidad</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/01_EstadisticaDescriptiva/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: Matrices y Operaciones</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/02_Matrices_Operaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: Sistemas de Ecuaciones Lineales (Gauss-Jordan)</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/03_SistemasEcuaciones_GaussJordan/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 4: Determinantes y Regla de Cramer</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoI_Estadistica_AlgebraLineal/04_Determinantes_Cramer/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -1013,40 +879,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 5: Espacios Vectoriales y Transformaciones Lineales</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/05_EspaciosVectoriales_Transformaciones/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 6: Valores y Vectores Propios</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/06_ValoresVectoresPropios/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 7: Geometría Analítica con Enfoque Vectorial en el Plano</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/07_GeometriaAnalitica_Plano/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 8: Geometría Analítica con Enfoque Vectorial en el Espacio</span>
             <div class="tema-links">
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../EstadisticaAlgebraGeometria/TrayectoII_AlgebraLineal_Geometria/08_GeometriaAnalitica_Espacio/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -1082,40 +948,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 1: EDO - Definición y Métodos Básicos</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/01_EDO_Definicion_MetodosBasicos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 2: EDO - Métodos Avanzados de 1er Orden</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/02_EDO_MetodosAvanzados/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 3: EDO de Segundo Orden</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/03_EDO_SegundoOrden/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">⚡ Unidad 4: Aplicaciones a Circuitos Eléctricos</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoI_EDO_Circuitos/04_Circuitos/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -1127,40 +993,40 @@ updateQuickPrompts('general');
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 5: Transformada de Laplace</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/05_Laplace/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 6: Ecuaciones Diferenciales Parciales</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/06_EDP/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 7: Series de Fourier</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/07_Fourier/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
 
           <div class="tema-bloque" style="margin: 3px 0; padding: 4px 8px;">
             <span class="tema-titulo" style="font-size: 0.65rem;">📌 Unidad 8: Funciones de Variable Compleja</span>
             <div class="tema-links">
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/teoria.html" target="_blank">📘 Teoría</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/ejercicios.html" target="_blank">📝 Ejercicios</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/preparciales.html" target="_blank">📋 Pre‑parciales</a>
-              <a href="MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/teoria.html" target="_blank">📘 Teoría</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/ejercicios.html" target="_blank">📝 Ejercicios</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/preparciales.html" target="_blank">📋 Pre‑parciales</a>
+              <a href="../MatematicII/TrayectoII_Laplace_Fourier_EDP_Variable/08_VariableCompleja/soluciones.html" target="_blank" class="sol-link">🔐 Soluciones</a>
             </div>
           </div>
         </div>
@@ -1186,7 +1052,7 @@ updateQuickPrompts('general');
   </footer>
 </div>
 
-<!-- ===== AI PANEL (offline) ===== -->
+<!-- ===== AI PANEL ===== -->
 <div id="ai-panel">
   <div class="ai-panel-header">
     <div class="ai-panel-title">
@@ -1211,7 +1077,7 @@ updateQuickPrompts('general');
     <div class="ai-welcome">
       <span class="welcome-icon">✦</span>
       <strong>¡Hola! Soy el Asistente PNFE</strong>
-      Puedo explicarte conceptos, resolver dudas y sugerir ejercicios de todas las materias. <strong>Funciona sin internet</strong> (versión offline). Selecciona una materia arriba o hazme una pregunta.
+      Puedo explicarte conceptos, resolver dudas y sugerir ejercicios de todas las materias. <strong>Modo híbrido</strong>: usa mi base local o consulta a la IA si es necesario. Selecciona una materia arriba o hazme una pregunta.
     </div>
   </div>
 
@@ -1300,7 +1166,14 @@ document.getElementById('logo-home').addEventListener('click', () => { window.sc
 
 // ==================== BASE DE CONOCIMIENTO OFFLINE ====================
 const knowledgeBase = {
-  'general': { description: 'PNFE - Matemáticas para Ingeniería Eléctrica' },
+  'general': { 
+    description: 'PNFE - Matemáticas para Ingeniería Eléctrica',
+    topics: {
+      'hola': '¡Hola! Soy el Asistente PNFE. ¿En qué puedo ayudarte hoy?',
+      'ejercicio': '✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?',
+      'gracias': '¡De nada! Estoy aquí para ayudarte con tus estudios.'
+    }
+  },
   'Matemática de Iniciación': {
     description: 'Matemática de Iniciación - Trayecto Inicial',
     topics: {
@@ -1335,25 +1208,123 @@ const knowledgeBase = {
   }
 };
 
-function getResponse(question, subject) {
-  const q = question.toLowerCase();
-  const kb = knowledgeBase[subject] || knowledgeBase['general'];
-  let responses = [];
+// ==================== LÓGICA DE IA HÍBRIDA (AHORRATIVA) ====================
 
-  if (q.match(/hola|buenos días|hey/i)) responses.push('¡Hola! Soy el Asistente PNFE. ¿En qué puedo ayudarte?');
-  if (q.match(/factorización|factorizar/i)) responses.push(kb.topics?.factorización || 'Factorización: expresa una suma como producto.');
-  if (q.match(/coordenadas|distancia|pendiente|recta/i)) responses.push(kb.topics?.coordenadas || 'La distancia entre puntos se calcula con Pitágoras.');
-  if (q.match(/sistemas|ecuaciones lineales/i)) responses.push(kb.topics?.sistemas || 'Los sistemas se resuelven por sustitución, igualación o reducción.');
-  if (q.match(/límite|límites|continuidad/i)) responses.push(kb.topics?.límite || 'El límite es el valor al que se acerca una función.');
-  if (q.match(/derivada|derivar|diferenciar/i)) responses.push(kb.topics?.derivada || 'La derivada mide la tasa de cambio instantánea.');
-  if (q.match(/integral|integrar|antiderivada/i)) responses.push(kb.topics?.integral || 'La integral es la operación inversa de la derivada.');
-  if (q.match(/estadística|media|mediana|moda|probabilidad/i)) responses.push(kb.topics?.estadística || 'La estadística describe y analiza datos.');
-  if (q.match(/matriz|determinante|vector|álgebra lineal/i)) responses.push(kb.topics?.matriz || 'Las matrices se suman y multiplican. El determinante es un escalar.');
-  if (q.match(/edo|ecuación diferencial|laplace|rlc|circuito/i)) responses.push(kb.topics?.edo || 'Una EDO relaciona una función con sus derivadas. Se usa para modelar circuitos.');
-  if (q.match(/ejercicio|propón|practicar/i)) responses.push('✏️ Te sugiero revisar las guías de ejercicios de la materia seleccionada. ¿Cuál te interesa más?');
+// 1. Generar clave para caché
+function generarClaveCache(pregunta) {
+    return 'pnfe_ai_cache_' + pregunta.toLowerCase().trim().replace(/[¿?¡!.,;]/g, '').replace(/\s+/g, '_');
+}
 
-  if (responses.length === 0) responses.push(`No tengo una respuesta específica para "${question.substring(0, 50)}...". Consulta las guías de teoría o pregúntame de otra manera.`);
-  return responses.join('\n\n');
+// 2. Buscar en caché local
+function buscarEnCache(pregunta) {
+    try {
+        const clave = generarClaveCache(pregunta);
+        const guardada = localStorage.getItem(clave);
+        if (!guardada) return null;
+        const { respuesta, timestamp } = JSON.parse(guardada);
+        // La caché dura 7 días (604800000 ms)
+        if (Date.now() - timestamp > 604800000) {
+            localStorage.removeItem(clave);
+            return null;
+        }
+        return respuesta;
+    } catch (e) {
+        return null;
+    }
+}
+
+// 3. Guardar en caché
+function guardarEnCache(pregunta, respuesta) {
+    try {
+        const clave = generarClaveCache(pregunta);
+        localStorage.setItem(clave, JSON.stringify({
+            respuesta: respuesta,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        console.warn('No se pudo guardar en caché');
+    }
+}
+
+// 4. Buscar en la base de conocimiento offline (búsqueda simple por palabras clave)
+function buscarOffline(pregunta, subject) {
+    const q = pregunta.toLowerCase();
+    const kb = knowledgeBase[subject] || knowledgeBase['general'];
+    
+    // Buscar coincidencias en los topics de la materia seleccionada
+    if (kb.topics) {
+        for (const [clave, respuesta] of Object.entries(kb.topics)) {
+            if (q.includes(clave)) {
+                return respuesta;
+            }
+        }
+    }
+    
+    // Si no se encontró, buscar en la base "general"
+    if (subject !== 'general' && knowledgeBase['general'].topics) {
+        for (const [clave, respuesta] of Object.entries(knowledgeBase['general'].topics)) {
+            if (q.includes(clave)) {
+                return respuesta;
+            }
+        }
+    }
+    
+    return null; // No se encontró offline
+}
+
+// 5. Llamar a DeepSeek vía Worker (solo si la base local falla)
+async function llamarDeepSeek(pregunta) {
+    // URL DE TU WORKER DE CLOUDFLARE
+    const WORKER_URL = 'https://minegociopolar-proxy.osilva2503.workers.dev';
+    
+    try {
+        const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: pregunta })
+        });
+
+        if (!response.ok) throw new Error('Error en el servidor');
+        
+        const data = await response.json();
+        return data.respuesta || 'No pude generar una respuesta.';
+    } catch (error) {
+        console.error('❌ Error IA:', error);
+        return null; // Retorna null para que el sistema use un fallback
+    }
+}
+
+// 6. Función principal que decide qué hacer
+async function getResponse(question, subject) {
+    const q = question.trim();
+    if (!q) return 'Por favor, escribe una pregunta.';
+
+    // Paso 1: Verificar si ya se preguntó antes (Caché)
+    const cache = buscarEnCache(q);
+    if (cache) {
+        console.log('✅ Respuesta desde caché local (0 tokens)');
+        return cache;
+    }
+
+    // Paso 2: Buscar en la base offline (gratis)
+    const offline = buscarOffline(q, subject);
+    if (offline) {
+        console.log('✅ Respuesta desde base offline (0 tokens)');
+        guardarEnCache(q, offline); // Lo guardamos para la próxima vez
+        return offline;
+    }
+
+    // Paso 3: Si no hay nada local, usar la API de DeepSeek (gasta tokens)
+    console.log('🤖 Consultando a DeepSeek (usando API)...');
+    const respuestaIA = await llamarDeepSeek(q);
+    
+    if (respuestaIA) {
+        guardarEnCache(q, respuestaIA);
+        return respuestaIA;
+    }
+
+    // Paso 4: Fallback final
+    return `No tengo una respuesta para "${question.substring(0, 50)}...". Consulta las guías de teoría o pregúntame de otra manera.`;
 }
 
 // ==================== UI DEL ASISTENTE ====================
@@ -1437,19 +1408,28 @@ function showTyping() {
 
 function removeTyping() { const t = document.getElementById('ai-typing-indicator'); if (t) t.remove(); }
 
-function sendMessage() {
+// === ENVÍO DE MENSAJE ASÍNCRONO ===
+async function sendMessage() {
   const text = inputEl.value.trim();
   if (!text || isLoading) return;
-  inputEl.value = ''; inputEl.style.height = 'auto';
-  isLoading = true; sendBtn.disabled = true;
+  
+  inputEl.value = ''; 
+  inputEl.style.height = 'auto';
+  isLoading = true; 
+  sendBtn.disabled = true;
+  
   addMessage('user', text);
   showTyping();
-  setTimeout(() => {
-    removeTyping();
-    const reply = getResponse(text, selectedSubject);
-    addMessage('assistant', reply);
-    isLoading = false; sendBtn.disabled = false; inputEl.focus();
-  }, 500 + Math.random() * 400);
+  
+  // Aquí llamamos a la nueva función asíncrona
+  const reply = await getResponse(text, selectedSubject);
+  
+  removeTyping();
+  addMessage('assistant', reply);
+  
+  isLoading = false; 
+  sendBtn.disabled = false; 
+  inputEl.focus();
 }
 
 updateQuickPrompts('general');
